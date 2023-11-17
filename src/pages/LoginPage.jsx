@@ -6,7 +6,7 @@ const LoginPage = ({ handleLogin, registeredUsers }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [navigate, setNavigate] = useState();
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         const currentUser = registeredUsers.find(user => user.email === email && user.password === password)

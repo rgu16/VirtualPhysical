@@ -16,8 +16,8 @@ const ForgotPasswordPage = () => {
         <div className="auth-form-container">
             <h2>Reset Password</h2>
             <form className="login-form" onSubmit={handleSubmit}>
-                <label htmlFor="email">email</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="youremail@gmail.com" id="email" name="email" />
+                <label htmlFor="email">Email</label>
+                <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="youremail@gmail.com" id="email" name="email" required/>
                 <button className='primary-button' id="reg_btn" type="submit"><span>Reset</span></button>
             </form>
             <Link to="/"><button className='link-btn'>Return to login</button></Link>
