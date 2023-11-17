@@ -2,14 +2,16 @@ import React, { useState } from 'react';
 import { Link, Navigate } from 'react-router-dom';
 import './pages.css';
 
-const LoginPage = ({ registeredUsers }) => {
+const LoginPage = ({ handleLogin, registeredUsers }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [navigate, setNavigate] = useState();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (registeredUsers.some(user => user.email === email && user.password === password)){
+        const currentUser = registeredUsers.find(user => user.email === email && user.password === password)
+        if (currentUser){
+            handleLogin(currentUser)
             setNavigate('/home')
         } else {
             alert('Incorrect Login');
@@ -21,10 +23,10 @@ const LoginPage = ({ registeredUsers }) => {
         <div className="auth-form-container">
             <h2>Login</h2>
             <form className="login-form" onSubmit={handleSubmit}>
-                <label htmlFor="email">email</label>
-                <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="youremail@gmail.com" id="email" name="email" />
-                <label htmlFor="password">password</label>
-                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="********" id="password" name="password" />
+                <label htmlFor="email">Email</label>
+                <input value={email} onChange={(e) => setEmail(e.target.value)}type="email" placeholder="youremail@gmail.com" id="email" name="email" required/>
+                <label htmlFor="password">Password</label>
+                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="********" id="password" name="password" required/>
                 <button className='primary-button' id="reg_btn" type="submit"><span>Log In</span></button>
             </form>
             <Link to="/register"><button className='link-btn'>Don't have an account? Register here</button></Link>

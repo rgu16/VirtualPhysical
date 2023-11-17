@@ -4,7 +4,7 @@ import { Link, Navigate } from 'react-router-dom'
 
 import './pages.css'
 
-const RegisterPage = ({ onRegister, registeredUsers }) => {
+const RegisterPage = ({ handleLogin, onRegister, registeredUsers }) => {
     const [newUser, setNewUser] = useState({email: '', password: '', name:''});
     const [navigate, setNavigate] = useState();
     // const bcrypt = require('bcrypt');
@@ -15,6 +15,7 @@ const RegisterPage = ({ onRegister, registeredUsers }) => {
             alert('There is already account with that email');
         } else {
             onRegister(newUser);
+            handleLogin(newUser);
             setNavigate('/home')
         }
         setNewUser({email: '', password: '', name:''});
@@ -32,12 +33,12 @@ const RegisterPage = ({ onRegister, registeredUsers }) => {
         <div className="auth-form-container">
             <h2>Register</h2>
         <form className="register-form" onSubmit={handleSubmit}>
-            <label htmlFor="name">Full name</label>
-            <input value={newUser.name} name="name" onChange={handleInputChange} id="name" placeholder="Full Name" />
-            <label htmlFor="email">email</label>
-            <input value={newUser.email} onChange={handleInputChange}type="email" placeholder="youremail@gmail.com" id="email" name="email" />
-            <label htmlFor="password">password</label>
-            <input value={newUser.password} onChange={handleInputChange} type="password" placeholder="********" id="password" name="password" />
+            <label htmlFor="name">Name</label>
+            <input value={newUser.name} name="name" onChange={handleInputChange} id="name" placeholder="John Doe" required/>
+            <label htmlFor="email">Email</label>
+            <input value={newUser.email} onChange={handleInputChange}type="email" placeholder="youremail@gmail.com" id="email" name="email" required/>
+            <label htmlFor="password">Password</label>
+            <input value={newUser.password} onChange={handleInputChange} type="password" placeholder="********" id="password" name="password" required/>
             <button className='primary-button' id="reg_btn" type="submit"><span>Register</span></button>
         </form>
         <Link to="/"><button className='link-btn'>Already have an account? Login here.</button></Link>
