@@ -2,15 +2,15 @@
 import React from 'react';
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, } from 'react-router-dom';
+// import bcrypt from 'bcryptjs';
 
-import {LoginPage, RegisterPage, ForgotPasswordPage, HomePage} from "./pages";
+import {LoginPage, RegisterPage, ForgotPasswordPage, HomePage, UploadFilePage} from "./pages";
 
 export default function App() {
-    const [registeredUsers, setRegisteredUsers] = useState([{email: 'virtualphysical23@gmail.com', password :'senior design', name: "Virtual Physical", id: "admin"},{email:'a@gmail.com',password:'a',name:'a'},]);
+    const [registeredUsers, setRegisteredUsers] = useState([{email: 'virtualphysical23@gmail.com', password :'senior design', name: "Virtual Physical", id: "admin"},]);
     const [currentUser, setCurrentUser] = React.useState(null);
 
-    console.log(registeredUsers);
-    console.log(currentUser);
+    // const bcrypt = require('bcrypt');
 
     const handleRegister = (newUser) => {
       setRegisteredUsers([...registeredUsers, newUser]);
@@ -48,9 +48,10 @@ export default function App() {
                     <Route exact path="/" element={ <LoginPage handleLogin= {handleLogin} registeredUsers={registeredUsers}/> } />
                     <Route path="/register" element={ <RegisterPage handleLogin= {handleLogin} onRegister={handleRegister} registeredUsers={registeredUsers} /> } />
                     <Route path="/forgot-password" element={ <ForgotPasswordPage registeredUsers={registeredUsers}/> } />
-                    <Route element ={<ProtectedRoute isAllowed={!!currentUser}/>}>
+                    <Route element ={<ProtectedRoute isAllowed={!!currentUser}/>}/>
                     <Route path="/home" element={ <HomePage handleLogout= {handleLogout} handleDelete={handleDelete} updatePassword={updatePassword} currentUser={currentUser} /> } />
-                    </Route>
+                    <Route path='/upload-files' element={<UploadFilePage/>}/>
+            
                 </Routes>
             </div>
         </Router>

@@ -7,7 +7,6 @@ import './pages.css'
 const RegisterPage = ({ handleLogin, onRegister, registeredUsers }) => {
     const [newUser, setNewUser] = useState({email: '', password: '', name:''});
     const [navigate, setNavigate] = useState();
-    // const bcrypt = require('bcrypt');
 
     const handleSubmit = (e) => {
         e.preventDefault();

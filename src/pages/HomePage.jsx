@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './pages.css';
 
@@ -11,6 +11,19 @@ const HomePage = ({handleLogout, handleDelete, updatePassword, currentUser}) => 
         updatePassword(password);
         setPassword('');
     };
+    const [files, setFiles] = useState([]);
+    useEffect(() => {
+        const fetchFiles = async () => {
+          try {
+            const response = await fetch('http://localhost:3001/files');
+            const data = await response.json();
+            setFiles(data.files);
+          } catch (error) {
+            console.error('Error fetching files:', error);
+          }
+        };
+        fetchFiles();
+    }, []);
 
     return (
         <div className="home">
@@ -26,6 +39,12 @@ const HomePage = ({handleLogout, handleDelete, updatePassword, currentUser}) => 
                 <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="********" id="password" name="password" required/>
                 <button className='primary-button' id="reg_btn" type="submit"><span>Update password</span></button>
             </form>
+            <h1>File List</h1>
+            <ul>
+                {files.map((fileName, index) => (
+                <li key={index}>{fileName}</li>
+                ))}
+            </ul>
         </div>
         
     );

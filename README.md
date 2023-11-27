@@ -71,6 +71,11 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 Code adapted from:
-https://github.com/ilyaszm/react-login-register-page
-https://github.com/judygab/web-dev-projects
+[https://github.com/ilyaszm/react-login-register-page](https://github.com/ilyaszm/react-login-register-page)
+[https://github.com/judygab/web-dev-projects](https://github.com/judygab/web-dev-projects)
+[https://www.freecodecamp.org/news/simplify-your-file-upload-process-in-express-js/](https://www.freecodecamp.org/news/simplify-your-file-upload-process-in-express-js/)
+[https://www.filestack.com/fileschool/react/react-file-upload/](https://www.filestack.com/fileschool/react/react-file-upload/)
+
+
+
 
