@@ -1,57 +1,33 @@
 
 import React from 'react';
-import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, } from 'react-router-dom';
-// import bcrypt from 'bcryptjs';
-
-import {LoginPage, RegisterPage, ForgotPasswordPage, HomePage, UploadFilePage} from "./pages";
+import {LoginPage, RegisterPage, ForgotPasswordPage, HomePage, UploadFilePage, UserManagementPage} from "./pages";
+import {useToken} from './components';
 
 export default function App() {
-    const [registeredUsers, setRegisteredUsers] = useState([{email: 'virtualphysical23@gmail.com', password :'senior design', name: "Virtual Physical", id: "admin"},]);
-    const [currentUser, setCurrentUser] = React.useState(null);
-
-    // const bcrypt = require('bcrypt');
-
-    const handleRegister = (newUser) => {
-      setRegisteredUsers([...registeredUsers, newUser]);
-    };
-
-    const handleLogin = (user) => {
-        setCurrentUser(user);
-    };
-
-    const handleLogout = () => {
-        console.log(currentUser)
-        setCurrentUser(null);
-    };
-
-    const handleDelete = () => {
-        const updatedUsers = registeredUsers.filter(user => user !== currentUser)
-        setRegisteredUsers(updatedUsers)
-        setCurrentUser(null);
-    };
-
-    const updatePassword = (newPassword) => {
-        setRegisteredUsers(prevUsers => {
-            const updatedUsers = prevUsers.map(user =>
-                user === currentUser ? { ...user, password: newPassword } : user
-            );
-            return updatedUsers;
-        });
-        setCurrentUser(prevUser => ({...prevUser, password: newPassword}));
-    };
-
+    const { token, removeToken, setToken} = useToken();
+    const proxy = "http://localhost:5000";
     return (
         <Router>
             <div className = 'App'>
                 <Routes>
-                    <Route exact path="/" element={ <LoginPage handleLogin= {handleLogin} registeredUsers={registeredUsers}/> } />
-                    <Route path="/register" element={ <RegisterPage handleLogin= {handleLogin} onRegister={handleRegister} registeredUsers={registeredUsers} /> } />
-                    <Route path="/forgot-password" element={ <ForgotPasswordPage registeredUsers={registeredUsers}/> } />
-                    <Route element ={<ProtectedRoute isAllowed={!!currentUser}/>}/>
-                    <Route path="/home" element={ <HomePage handleLogout= {handleLogout} handleDelete={handleDelete} updatePassword={updatePassword} currentUser={currentUser} /> } />
-                    <Route path='/upload-files' element={<UploadFilePage/>}/>
-            
+                    <Route exact path="/" element={!!token? 
+                                                <HomePage proxy={proxy} token={token} setToken={setToken} removeToken={removeToken}/>:
+                                                <LoginPage proxy={proxy} setToken={setToken}/>}/>
+                    <Route path="/register" element={ <RegisterPage proxy={proxy} setToken={setToken} /> } />
+                    <Route path="/forgot_password" element={ <ForgotPasswordPage /> } />
+                    <Route path="/upload_files"
+                        element={
+                        <ProtectedRoute isAllowed={!!token}>
+                            <UploadFilePage proxy={proxy} token={token}/>
+                        </ProtectedRoute>
+                    }/>
+                    <Route path='/user_management' 
+                        element={
+                        <ProtectedRoute isAllowed={!!token}>
+                            <UserManagementPage proxy={proxy} token={token}/>
+                        </ProtectedRoute>
+                    }/>
                 </Routes>
             </div>
         </Router>

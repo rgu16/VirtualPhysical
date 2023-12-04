@@ -1,22 +1,25 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+// import {PDFViewer} from '@react-pdf/renderer';
+// import { Worker, Viewer } from '@react-pdf-viewer/core';
 import './pages.css';
 import axios from 'axios';
 
-const UploadFilePage = () => {
+const UploadFilePage = (props) => {
     const [file, setFile] = useState();
-    const [files, setFiles] = useState([]);
+    const [fileList, setFileList] = useState([]);
     const [success, setSuccess] = useState(false);
-    const [imageList, setImageList] = useState();
+    const [imageList, setImageList] = useState([]);
+    const [pdfList, setPdfList] = useState([]);
     const [error, setError] = useState();
   
     function handleChange(event) {
       setFile(event.target.files[0]);
       setSuccess(false)
     }
-    
-    const handleFileSubmit = async (event) => {
+
+    const handleFileSubmit = (event) => {
         event.preventDefault();
 
         if (!file) {
@@ -25,32 +28,46 @@ const UploadFilePage = () => {
         }
 
         const formData = new FormData();
-        formData.append('file', file);
-
-        try {
-        const response = await axios.post('http://localhost:3001/upload', formData);
-            console.log('File uploaded successfully:', response.data);
-            setSuccess(true);
-            fetchFiles();
-        } catch (error) {
-            console.error('Error uploading file:', error);
-            setError(error);
-        }
+        formData.append('file', file, file.name);
+        axios({
+            method: "POST",
+            url: props.proxy+"/upload",
+            data: formData,
+            headers: {
+                Authorization: 'Bearer ' + props.token
+            }
+        }).then((response)=>{
+            setSuccess(true)
+        }).catch((error)=>{
+            if(error.response){
+                console.log(error.response)
+                console.log(error.response.status)
+                console.log(error.response.headers)
+                setError(error.response)
+            }
+        })
     }
-    const fetchFiles = async () => {
-        try {
-          const response = await fetch('http://localhost:3001/files');
-          const data = await response.json();
-          setFiles(data.files);
-          console.log(data.files.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file)))
-          setImageList(data.files.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file)))
-        } catch (error) {
-          console.error('Error fetching files:', error);
-        }
-      };
+    
     useEffect(() => {
+        const fetchFiles = async () => {
+            axios({
+                method: "GET",
+                url: props.proxy+'/uploaded_filelist',
+                headers: {
+                    Authorization: 'Bearer ' + props.token
+                }
+            })
+            .then(response => {
+              setFileList(response.data.files);
+              setImageList(response.data.files.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file)))
+              setPdfList(response.data.files.filter(file => /\.pdf$/i.test(file)))
+            })
+            .catch(error => {
+              console.error('Error fetching uploaded files:', error);
+            });
+          };
         fetchFiles();
-    }, []);
+    }, [props.proxy, props.token]);
 
     return (
         <div>
@@ -63,7 +80,7 @@ const UploadFilePage = () => {
             {error && <p>Error uploading file: {error.message}</p>}
             <h1>File List</h1>
             <ul>
-                {files.map((fileName, index) => (
+                {fileList.map((fileName, index) => (
                 <li key={index}>{fileName}</li>
                 ))}
             </ul>
@@ -71,11 +88,20 @@ const UploadFilePage = () => {
             {imageList? imageList.map((imageName)=> (
                     <img
                     key={imageName}
-                    src={`http://localhost:3001/image/${encodeURIComponent(imageName)}`}
+                    src={props.proxy+`/download/${encodeURIComponent(imageName)}`}
                     alt={imageName}
-                    style={{ width: '100%', height: 'auto' }}/>
+                    style={{ width: 'auto', height: 'auto' }}/>
                 )): null}
-            <Link to="/"><button className='link-btn'>Go back to login</button></Link>
+            <h1>PDF List</h1> 
+            {pdfList? pdfList.map((pdfName) => (
+                <iframe
+                key={pdfName}
+                src={props.proxy+`/download/${encodeURIComponent(pdfName)}`}
+                title={pdfName}
+                alt={pdfName}
+                style={{ width: 'auto', height: 'auto' }}/>
+            )):null}
+            <Link to="/"><button className='link-btn'>Go back to Home</button></Link>
         </div>
     )
 }

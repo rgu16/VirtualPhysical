@@ -63,6 +63,24 @@
     flex-direction: column;
 }
 
+.password-container{
+  width: 350px;
+  position: relative;
+}
+.password-container input[type="password"],
+.password-container input[type="text"]{
+  width: 100%;
+  padding: 12px 36px 12px 12px;
+  box-sizing: border-box;
+}
+.password-container button {
+  border: none;
+  outline: none;
+  position: absolute;
+  top: -10%;
+  right: 0%;
+  background: transparent;
+}
 
 #reg_btn span {
     display: inline-block;

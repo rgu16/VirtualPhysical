@@ -1,50 +1,122 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { IconEye, IconEyeInvisible} from '../components';
 import './pages.css';
+import axios from 'axios';
 
-const HomePage = ({handleLogout, handleDelete, updatePassword, currentUser}) => {
+const HomePage = (props) => {
     const [password, setPassword] = useState('');
+    const [profileData, setProfileData] = useState(null)
+    const token = props.token
+    const [showPassword, setShowPassword] = useState(false);
+    const [userId, setUserId] = useState(0);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        updatePassword(password);
-        setPassword('');
-    };
-    const [files, setFiles] = useState([]);
+    const handleToggle = () => {
+      setShowPassword(!showPassword);
+    }
+
     useEffect(() => {
-        const fetchFiles = async () => {
-          try {
-            const response = await fetch('http://localhost:3001/files');
-            const data = await response.json();
-            setFiles(data.files);
-          } catch (error) {
-            console.error('Error fetching files:', error);
-          }
-        };
-        fetchFiles();
-    }, []);
+        axios({
+            method: "GET",
+            url: props.proxy + "/profile",
+            headers: {
+            Authorization: 'Bearer ' + token
+            }
+        })
+        .then((response) => {
+            const res =response.data
+            setProfileData(({profile_name: res.name}))
+            setUserId(res.id)
+            console.log(res.id)
+        }).catch((error) => {
+            if (error.response) {
+            console.log(error.response)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+            }
+        })
+    }, [token, props.proxy]);
+
+    function logOut() {
+        axios({
+            method: "POST",
+            url: props.proxy + "/logout",
+            headers: {
+                Authorization: 'Bearer ' + props.token
+            }
+        })
+        .then((response) => {
+            props.removeToken()
+        }).catch((error) => {
+           if (error.response) {
+             console.log(error.response)
+             console.log(error.response.status)
+             console.log(error.response.headers)
+             }
+        })
+    };
+
+    function deleteAccount() {
+        axios({
+            method: "POST",
+            url: props.proxy +"/delete",
+            headers: {
+                Authorization: 'Bearer ' + props.token
+            }
+        })
+        .then((response) => {
+            props.removeToken()
+        }).catch((error) => {
+           if (error.response) {
+             console.log(error.response)
+             console.log(error.response.status)
+             console.log(error.response.headers)
+             }
+        })
+    };
+
+    const updatePassword = (e) => {
+        e.preventDefault();
+        axios({
+            method:"POST",
+            url: props.proxy +"/update_password",
+            data:{
+              password: password
+            },
+            headers: {
+                Authorization: 'Bearer ' + token
+            }
+          })
+          .then((response)=>{
+          }).catch((error)=>{
+            if(error.response){
+              console.log(error.response)
+              console.log(error.response.status)
+              console.log(error.response.headers)
+            }
+          })
+          setPassword('');
+    };
 
     return (
         <div className="home">
-            <h1 className="main-title home-page-title">Welcome {currentUser.name}</h1>
-            <Link to="/">
-                <button className="primary-button" onClick={handleLogout}><span>Log out</span></button>
-            </Link>
-            <Link to="/">
-                <button className="primary-button" onClick={handleDelete}><span>Delete account</span></button>
-            </Link>
-            <form className="login-form" onSubmit={(e) => handleSubmit(e)}>
+            <h1 className="main-title home-page-title">{profileData? "Welcome " + profileData.profile_name : "Loading..."}</h1>
+            <button className="primary-button" onClick={logOut}><span>Log out</span></button>
+            {userId === 1? <Link to="/user_management"><button className='link-btn'>User Management</button></Link> :
+                          <button className="primary-button" onClick={deleteAccount}><span>Delete account</span></button>}
+            <form className="login-form" onSubmit={(e) => updatePassword(e)}>
                 <label htmlFor="password"> New Password</label>
-                <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="********" id="password" name="password" required/>
+                {/* <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="********" id="password" name="password" required/> */}
+                <div className = 'password-container'>
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} type={showPassword? "text": "password"} placeholder="********" id="password" name="password" required/>
+                    <button onClick={handleToggle} type="button">
+                        {showPassword? <IconEye  width='32px' height='32px' color='darkgray'/> : <IconEyeInvisible width='32px' height='32px' color='darkgray'/> }
+                    </button>
+                </div>
                 <button className='primary-button' id="reg_btn" type="submit"><span>Update password</span></button>
             </form>
-            <h1>File List</h1>
-            <ul>
-                {files.map((fileName, index) => (
-                <li key={index}>{fileName}</li>
-                ))}
-            </ul>
+            <Link to="/upload_files"><button className='link-btn'>Upload files</button></Link>
         </div>
         
     );
