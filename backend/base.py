@@ -42,7 +42,7 @@ def create_default_user():
     if existing_user:
         return existing_user
     # Create a new user
-    default_user = User(name='Administrator', email='virtualphysical23@gmail.com', password=generate_password_hash('test'), type = "Admin")
+    default_user = User(name='Administrator', email='virtualphysical23@gmail.com', password=generate_password_hash('test'), type = "administrator")
     # Add the new user to the database
     db.session.add(default_user)
     db.session.commit()
@@ -58,10 +58,11 @@ def register_user():
     password = request.json.get("password", None)
     pw_hash = generate_password_hash(password)
     name = request.json.get("name", None)
+    account = request.json.get("accountType", None)
     if (User.query.filter_by(email=email).first()):
         return {"msg": "Email already registered"}, 400
     else:
-        new_user = User(email = email,password = pw_hash,name=name)
+        new_user = User(email = email,password = pw_hash,name=name,type = account)
         db.session.add(new_user)
         db.session.commit()
         response = jsonify({"msg": "registered new user"})
@@ -95,7 +96,7 @@ def delete_user():
     user = User.query.get(get_jwt_identity())
     if user:
         response = jsonify({"msg": "Account deletion successful"})
-        if user.type == "Admin":
+        if user.type == "administrator":
             user = User.query.get(request.json.get('user_id',None))
         else:
             unset_jwt_cookies(response)
@@ -142,7 +143,8 @@ def get_profile():
     user = User.query.get(get_jwt_identity())
     response_body = {
         "name": user.name,
-        "id": user.id
+        "id": user.id,
+        "type": user.type
     }
     return response_body
 
@@ -151,7 +153,7 @@ def get_profile():
 def get_all_users():
     users =  []
     for user in User.query.all():
-        users.append({'id': user.id, 'name':user.name, 'email':user.email})
+        users.append({'id': user.id, 'name':user.name, 'email':user.email, 'type':user.type})
     return jsonify(users)
 
 @api.route('/upload', methods=["POST"])

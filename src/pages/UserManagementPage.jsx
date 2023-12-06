@@ -7,8 +7,11 @@ import './pages.css';
 import axios from 'axios';
 
 const UserManagementPage = (props) => {
-    const [data, setData] = useState( [{'id': 1, 'name':"name", 'email':"email"}]);
-    const columns = [ { name: 'Name',
+    const [data, setData] = useState( [{'id': 1, 'name':"name", 'email':"email", "type":"type"}]);
+    const columns = [ { name: 'Type',
+                        selector: row => row.type,
+                        cell: (d) => <span>{d.type}</span>}, 
+                      { name: 'Name',
                         selector: row => row.name,
                         cell: (d) => <span>{d.name}</span>},    
                       { name: 'Email',
@@ -42,6 +45,22 @@ const UserManagementPage = (props) => {
              console.log(error.response.headers)
              }
         })
+        axios({
+            method: "GET",
+            url: props.proxy + "/all_users",
+            headers: {
+            Authorization: 'Bearer ' + props.token
+            }
+        })
+        .then((response) => {
+            setData(response.data)
+        }).catch((error) => {
+            if (error.response) {
+            console.log(error.response)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+            }
+        })
     };               
     useEffect(() => {
         axios({
@@ -63,10 +82,10 @@ const UserManagementPage = (props) => {
     }, [props.proxy, props.token]);
     return (
         <div> 
-            <div style={{ position: 'fixed', top: 0, left: '50%', transform: 'translateX(-50%)', width:'75%' }}>  
+            <Link to="/"> <button className="primary-button" style={{ position: 'fixed', top: 10, left: '50%', transform: 'translateX(-50%)' }}>Home</button> </Link>
+            <div style={{ position: 'fixed', top: 75, left: '50%', transform: 'translateX(-50%)', width:'75%' }}>  
                 <DataTable title= "ALL USERS" columns={columns} data={data}/>
             </div>
-            <Link to="/"> <button className="primary-button">Home</button> </Link>
         </div>
     );
 }

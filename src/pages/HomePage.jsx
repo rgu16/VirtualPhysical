@@ -10,7 +10,7 @@ const HomePage = (props) => {
     const [profileData, setProfileData] = useState(null)
     const token = props.token
     const [showPassword, setShowPassword] = useState(false);
-    const [userId, setUserId] = useState(0);
+    const [userType, setUserType] = useState('');
 
     const handleToggle = () => {
       setShowPassword(!showPassword);
@@ -27,7 +27,7 @@ const HomePage = (props) => {
         .then((response) => {
             const res =response.data
             setProfileData(({profile_name: res.name}))
-            setUserId(res.id)
+            setUserType(res.type)
             console.log(res.id)
         }).catch((error) => {
             if (error.response) {
@@ -103,7 +103,7 @@ const HomePage = (props) => {
         <div className="home">
             <h1 className="main-title home-page-title">{profileData? "Welcome " + profileData.profile_name : "Loading..."}</h1>
             <button className="primary-button" onClick={logOut}><span>Log out</span></button>
-            {userId === 1? <Link to="/user_management"><button className='link-btn'>User Management</button></Link> :
+            {userType === "administrator"? <Link to="/user_management"><button className='link-btn'>User Management</button></Link> :
                           <button className="primary-button" onClick={deleteAccount}><span>Delete account</span></button>}
             <form className="login-form" onSubmit={(e) => updatePassword(e)}>
                 <label htmlFor="password"> New Password</label>

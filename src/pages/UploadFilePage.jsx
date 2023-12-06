@@ -1,8 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// import {PDFViewer} from '@react-pdf/renderer';
-// import { Worker, Viewer } from '@react-pdf-viewer/core';
+// import {Document, Page} from 'react-pdf';
 import './pages.css';
 import axios from 'axios';
 
@@ -100,6 +99,9 @@ const UploadFilePage = (props) => {
                 title={pdfName}
                 alt={pdfName}
                 style={{ width: 'auto', height: 'auto' }}/>
+                // <Document file={props.proxy+`/download/${encodeURIComponent(pdfName)}`}>
+                //     <Page pageNumber={1} />
+                // </Document>
             )):null}
             <Link to="/"><button className='link-btn'>Go back to Home</button></Link>
         </div>

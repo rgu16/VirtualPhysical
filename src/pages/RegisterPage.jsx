@@ -6,9 +6,10 @@ import './pages.css'
 import axios from 'axios';
 
 const RegisterPage = (props) => {
-    const [newUser, setNewUser] = useState({email: '', password: '', name:''});
+    const [newUser, setNewUser] = useState({email: '', password: '', name:'', accountType:'physician'});
     const [navigate, setNavigate] = useState();
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState();
 
     const handleToggle = () => {
       setShowPassword(!showPassword);
@@ -22,7 +23,8 @@ const RegisterPage = (props) => {
           data:{
             email: newUser.email,
             password: newUser.password,
-            name: newUser.name
+            name: newUser.name,
+            accountType: newUser.accountType
           }
         })
         .then((response)=>{
@@ -33,9 +35,10 @@ const RegisterPage = (props) => {
             console.log(error.response)
             console.log(error.response.status)
             console.log(error.response.headers)
+            setError(error.response)
           }
         })
-        setNewUser({email: '', password: '', name:''});
+        setNewUser({email: '', password: '', name:'', accountType:''});
     }
 
     const handleInputChange = (e) => {
@@ -48,12 +51,13 @@ const RegisterPage = (props) => {
 
     return (
         <div className="auth-form-container">
+            {error? <p>{error.data["msg"]}</p> : null}
             <h2>Register</h2>
         <form className="register-form" onSubmit={handleSubmit}>
             <label htmlFor="name">Name</label>
-            <input value={newUser.name} name="name" onChange={handleInputChange} id="name" placeholder="John Doe" required/>
+            <input value={newUser.name} name="name" onChange={handleInputChange} id="name" placeholder="John Doe" autoComplete="off" required/>
             <label htmlFor="email">Email</label>
-            <input value={newUser.email} onChange={handleInputChange}type="email" placeholder="youremail@gmail.com" id="email" name="email" required/>
+            <input value={newUser.email} onChange={handleInputChange}type="email" placeholder="youremail@gmail.com" id="email" name="email" autoComplete="off" required/>
             <label htmlFor="password">Password</label>
             <div className = 'password-container'>
               <input value={newUser.password} onChange={handleInputChange} type={showPassword? "text": "password"} placeholder="********" id="password" name="password" required/>
@@ -63,11 +67,11 @@ const RegisterPage = (props) => {
             </div>
             <label htmlFor="account-type">Account type</label>
             <label>
-              <input type='radio' name="accountType" value='physician'/>
+              <input type='radio' name="accountType" value='physician' onChange={handleInputChange} checked={newUser.accountType === 'physician'}/>
               Specialty Physician
             </label>
             <label>
-              <input type='radio' name="accountType" value='non-physician'/>
+              <input type='radio' name="accountType" value='non-physician' onChange={handleInputChange} checked={newUser.accountType === 'non-physician'}/>
               Non-physician
             </label>
             <button className='primary-button' id="reg_btn" type="submit"><span>Register</span></button>

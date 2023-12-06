@@ -9,6 +9,7 @@ const LoginPage = (props) => {
     const [password, setPassword] = useState('');
     const [navigate, setNavigate] = useState();
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState();
 
     const handleToggle = () => {
       setShowPassword(!showPassword);
@@ -32,14 +33,17 @@ const LoginPage = (props) => {
             console.log(error.response)
             console.log(error.response.status)
             console.log(error.response.headers)
+            setError(error.response)
           }
         })
         setEmail('');
         setPassword('');
+        setError(null);
     }
 
     return (
         <div className="auth-form-container">
+            {error? <p>{error.data["msg"]}</p> : null}
             <h2>Login</h2>
             <form className="login-form" onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
