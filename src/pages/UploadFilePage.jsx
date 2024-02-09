@@ -1,10 +1,11 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-// import {Document, Page} from 'react-pdf';
+import {Document, Page} from 'react-pdf';
+import { PDFViewer } from '../components';
 import './pages.css';
 import axios from 'axios';
-
+// import pdf from "./EkoRecordingPDFExport.pdf"
 const UploadFilePage = (props) => {
     const [file, setFile] = useState();
     const [fileList, setFileList] = useState([]);
@@ -69,7 +70,7 @@ const UploadFilePage = (props) => {
     }, [props.proxy, props.token]);
 
     return (
-        <div>
+         <div>
             <form onSubmit={handleFileSubmit}>
                 <h1>React File Upload</h1>
                 <input type="file" onChange={handleChange}/>
@@ -98,14 +99,14 @@ const UploadFilePage = (props) => {
                 src={props.proxy+`/download/${encodeURIComponent(pdfName)}`}
                 title={pdfName}
                 alt={pdfName}
-                style={{ width: 'auto', height: 'auto' }}/>
-                // <Document file={props.proxy+`/download/${encodeURIComponent(pdfName)}`}>
-                //     <Page pageNumber={1} />
-                // </Document>
+                style={{ width: '200%', height: '400%' }}/>
             )):null}
+            {/* <PDFViewer/> */}
             <Link to="/"><button className='link-btn'>Go back to Home</button></Link>
-        </div>
+         </div> 
     )
 }
 
 export default UploadFilePage
+
+

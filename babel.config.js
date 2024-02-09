@@ -8,7 +8,9 @@ module.exports = function(api) {
       '@babel/plugin-transform-class-properties',
       '@babel/plugin-transform-nullish-coalescing-operator',
       '@babel/plugin-transform-numeric-separator',
-      '@babel/plugin-transform-optional-chaining'
+      '@babel/plugin-transform-optional-chaining',
+      "@babel/plugin-proposal-private-methods", 
+      "@babel/plugin-proposal-class-properties"
     ];
   
     return {
@@ -16,4 +18,3 @@ module.exports = function(api) {
       plugins
     };
   }
-  
