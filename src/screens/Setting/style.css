@@ -1,0 +1,532 @@
+.setting {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .setting .overlap-wrapper {
+    background-color: #ffffff;
+    border: 1px none;
+    height: 1561px;
+    width: 1920px;
+  }
+
+  .setting .textbox-42 {
+    font-family: Arial, sans-serif; /* Choose your preferred font */
+    font-size: 18px; /* Adjust font size as needed */
+    /* Add other styling as needed, such as border, padding, etc. */
+    /* height: 42px;
+    left: 0;
+    position: absolute;
+    top: 10px;
+    width: 90px; */
+
+    height: 42px;
+    left: 250px;
+    position: absolute;
+    top: 307px;
+    width: 467px;
+  }
+  
+  .setting .overlap {
+    height: 1561px;
+    position: relative;
+  }
+  
+  .setting .BACKGROUND {
+    background-color: #f8f8f8;
+    height: 1561px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1920px;
+  }
+  
+  .setting .profile-picture {
+    background-image: url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/placeholder-22@2x.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    border-radius: 14px;
+    height: 180px;
+    left: 846px;
+    position: relative;
+    top: 312px;
+    width: 191px;
+  }
+  
+  .setting .NAV {
+    background-color: #ffffff;
+    height: 94px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1920px;
+  }
+  
+  .setting .profile {
+    height: 61px;
+    left: 1647px;
+    position: absolute;
+    top: 23px;
+    width: 223px;
+  }
+  
+  .setting .div {
+    height: 60px;
+    left: 81px;
+    position: absolute;
+    top: 1px;
+    width: 146px;
+  }
+  
+  .setting .overlap-group {
+    height: 60px;
+    left: 0;
+    position: absolute;
+    top: -1px;
+    width: 111px;
+  }
+  
+  .setting .dr-david-ochoa {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 16px;
+    font-weight: 700;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+  }
+  
+  .setting .text-wrapper {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .setting .cardiologist {
+    color: #8f8f8f;
+    font-family: "Cairo", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: right;
+    top: 28px;
+  }
+  
+  .setting .span {
+    color: #8f8f8f;
+    font-family: "Cairo", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .setting .arrow {
+    height: 8px;
+    left: 127px;
+    position: absolute;
+    top: 24px;
+    width: 15px;
+  }
+  
+  .setting .profile-picture-2 {
+    background-image: url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/placeholder-19@2x.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    border-radius: 14px;
+    height: 57px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 57px;
+  }
+  
+  .setting .icon-groups {
+    height: 30px;
+    left: 1355px;
+    position: absolute;
+    top: 37px;
+    width: 210px;
+  }
+  
+  .setting .calendar-icon {
+    height: 30px;
+    left: 60px;
+    position: absolute;
+    top: 0;
+    width: 30px;
+  }
+  
+  .setting .settings-icon {
+    height: 30px;
+    left: 180px;
+    position: absolute;
+    top: 0;
+    width: 30px;
+  }
+  
+  .setting .chart-icon {
+    height: 30px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 30px;
+  }
+  
+  .setting .message-icon {
+    height: 30px;
+    left: 120px;
+    position: absolute;
+    top: 0;
+    width: 30px;
+  }
+  
+  .setting .separator {
+    background-color: #d1d1d1;
+    border-radius: 8px;
+    height: 56px;
+    left: 1613px;
+    position: absolute;
+    top: 23px;
+    width: 2px;
+  }
+  
+  .setting .VP-logo {
+    height: 36px;
+    left: 28px;
+    position: absolute;
+    top: 29px;
+    width: 403px;
+  }
+  
+  .setting .virtual-physical {
+    color: #000000;
+    font-family: "DM Sans", Helvetica;
+    font-size: 30px;
+    font-weight: 500;
+    left: 43px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: -1px;
+    white-space: nowrap;
+    width: 358px;
+  }
+  
+  .setting .text-wrapper-2 {
+    color: #000000;
+    font-family: "DM Sans", Helvetica;
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .setting .img {
+    height: 35px;
+    left: 0;
+    position: absolute;
+    top: 1px;
+    width: 35px;
+  }
+  
+  .setting .rectangle {
+    height: 42px;
+    left: 250px;
+    position: absolute;
+    top: 307px;
+    width: 467px;
+    font-family: "DM Sans", Helvetica;
+    font-size: 20px;
+  }
+  
+  .setting .rectangle-2 {
+    height: 42px;
+    left: 250px;
+    position: absolute;
+    top: 404px;
+    width: 467px;
+    font-family: "DM Sans", Helvetica;
+    font-size: 20px;
+  }
+  
+  .setting .rectangle-3 {
+    height: 42px;
+    left: 250px;
+    position: absolute;
+    top: 503px;
+    width: 467px;
+    font-family: "DM Sans", Helvetica;
+    font-size: 20px;
+  }
+  
+  .setting .rectangle-4 {
+    height: 42px;
+    left: 250px;
+    position: absolute;
+    top: 598px;
+    width: 467px;
+    font-family: "DM Sans", Helvetica;
+    font-size: 20px;
+  }
+  
+  .setting .rectangle-5 {
+    height: 42px;
+    left: 250px;
+    position: absolute;
+    top: 700px;
+    width: 467px;
+    font-family: "DM Sans", Helvetica;
+    font-size: 20px;
+  }
+  
+  .setting .rectangle-6 {
+    height: 42px;
+    left: 250px;
+    position: absolute;
+    top: 790px;
+    width: 467px;
+    font-family: "DM Sans", Helvetica;
+    font-size: 20px;
+  }
+  
+  .setting .frame {
+    height: 522px;
+    left: 115px;
+    position: absolute;
+    top: 307px;
+    width: 102px;
+  }
+  
+  .setting .name {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: -1px;
+  }
+  
+  .setting .text-wrapper-3 {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .setting .email {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 96px;
+  }
+  
+  .setting .clinic-name {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 193px;
+  }
+  
+  .setting .time-zone {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 290px;
+  }
+  
+  .setting .zoom-link {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 387px;
+  }
+  
+  .setting .language {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 484px;
+  }
+  
+  .setting .span-wrapper {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 700;
+    left: 882px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 269px;
+  }
+  
+  .setting .text-wrapper-4 {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .setting .user-settings {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 40px;
+    font-weight: 600;
+    left: 97px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 165px;
+  }
+  
+  .setting .text-wrapper-5 {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .setting .gallery-add {
+    height: 24px;
+    left: 879px;
+    position: absolute;
+    top: 507px;
+    width: 24px;
+  }
+  
+  .setting .edit-image {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 913px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 499px;
+  }
+  
+  .setting .p {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 260px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 313px;
+    width: 244px;
+  }
+  
+  .setting .https {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 260px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 701px;
+    width: 457px;
+  }
+  
+  .setting .dr-david-ochoa-gmail {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 260px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 406px;
+    width: 244px;
+  }
+  
+  .setting .houston-methodist {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 260px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 508px;
+    width: 244px;
+  }
+  
+  .setting .central-standard {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 260px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 600px;
+    width: 293px;
+  }
+  
+  .setting .english-united {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 600;
+    left: 260px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 791px;
+    width: 293px;
+  }
+  

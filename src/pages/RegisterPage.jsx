@@ -2,10 +2,11 @@ import './pages.css';
 import axios from 'axios';
 import React, { useState} from "react";
 import { Link, Navigate } from 'react-router-dom';
-import { Img, Input, Text, IconEye, IconEyeInvisible} from "../components";
+import { Img, Input, Text} from "../components";
+import { EyeInvisibleTwoTone, EyeTwoTone } from '@ant-design/icons';
 
 const RegisterPage = (props) => {
-    const [newUser, setNewUser] = useState({email: '', password: '', name:'', accountType:'physician', code:''});
+    const [newUser, setNewUser] = useState({email: '', password: '', name:'', accountType:''});
     const [navigate, setNavigate] = useState();
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState();
@@ -27,7 +28,7 @@ const RegisterPage = (props) => {
           }
         })
         .then((response)=>{
-          props.setToken(response.data.access_token)
+          // props.setToken(response.data.access_token)
           setNavigate('/')
         }).catch((error)=>{
           if(error.response){
@@ -140,7 +141,9 @@ const RegisterPage = (props) => {
                           required
                         ></Input>
                         <button class= "border-none outline-none absolute top-[20%] right-[5%] bg-transparent" onClick={handleToggle} >
-                        {showPassword? <IconEye  width='32px' height='32px' color='darkgray'/> : <IconEyeInvisible width='32px' height='32px' color='darkgray'/> }
+                        {showPassword? 
+                          <EyeTwoTone style={{fontSize: '32px'}} twoToneColor='#8a8a8a'/> : 
+                          <EyeInvisibleTwoTone style={{fontSize: '32px'}} twoToneColor='#8a8a8a'/> }
                         </button>
                         </div>
                       </div>
@@ -168,7 +171,7 @@ const RegisterPage = (props) => {
                             color="bg-blue-50"
                             size="xs"
                             variant="fill"
-                            value="medicaltech"
+                            value="medical-tech"
                             onChange={(e) => handleInputChange(e)} 
                             type="radio"
                             id="accountType" 

@@ -26,6 +26,7 @@ const LoginPage = (props) => {
           }
         })
         .then((response)=>{
+          console.log(response.data)
           props.setToken(response.data.access_token)
         }).catch((error)=>{
           if(error.response){

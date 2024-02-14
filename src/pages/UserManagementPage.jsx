@@ -23,7 +23,7 @@ const UserManagementPage = (props) => {
                         cell: (d) => <button onClick={handleClick.bind(this, d.id)} style= {{border: 'none'}}>
                                         <IconDelete width='24px' height='24px' color='black'/>
                                      </button>},
-                    ]
+                    ];
     const handleClick = (id) => {
         console.log(`Delete button clicked for id: ${id}`);
         axios({

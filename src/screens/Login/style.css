@@ -1,0 +1,432 @@
+.page {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .page .overlap-wrapper {
+    background-color: #ffffff;
+    border: 1px none;
+    height: 1561px;
+    width: 1920px;
+  }
+  
+  .page .overlap {
+    background-color: #f8f8f8;
+    height: 1561px;
+    position: relative;
+  }
+  
+  .page .NAV {
+    background-color: #ffffff;
+    height: 94px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1920px;
+  }
+  
+  .page .profile {
+    height: 61px;
+    left: 1647px;
+    position: absolute;
+    top: 23px;
+    width: 223px;
+  }
+  
+  .page .div {
+    height: 60px;
+    left: 81px;
+    position: absolute;
+    top: 1px;
+    width: 146px;
+  }
+  
+  .page .overlap-group {
+    height: 60px;
+    left: 0;
+    position: absolute;
+    top: -1px;
+    width: 111px;
+  }
+  
+  .page .dr-david-ochoa {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 16px;
+    font-weight: 700;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+  }
+  
+  .page .text-wrapper {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .page .cardiologist {
+    color: #8f8f8f;
+    font-family: "Cairo", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: right;
+    top: 28px;
+  }
+  
+  .page .span {
+    color: #8f8f8f;
+    font-family: "Cairo", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .page .arrow {
+    height: 8px;
+    left: 127px;
+    position: absolute;
+    top: 24px;
+    width: 15px;
+  }
+  
+  .page .profile-picture {
+    background-image: url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/placeholder-19@2x.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    border-radius: 14px;
+    height: 57px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 57px;
+  }
+  
+  .page .icon-groups {
+    height: 30px;
+    left: 1355px;
+    position: absolute;
+    top: 37px;
+    width: 210px;
+  }
+  
+  .page .calendar-icon {
+    height: 30px;
+    left: 60px;
+    position: absolute;
+    top: 0;
+    width: 30px;
+  }
+  
+  .page .settings-icon {
+    height: 30px;
+    left: 180px;
+    position: absolute;
+    top: 0;
+    width: 30px;
+  }
+  
+  .page .chart-icon {
+    height: 30px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 30px;
+  }
+  
+  .page .message-icon {
+    height: 30px;
+    left: 120px;
+    position: absolute;
+    top: 0;
+    width: 30px;
+  }
+  
+  .page .separator {
+    background-color: #d1d1d1;
+    border-radius: 8px;
+    height: 56px;
+    left: 1613px;
+    position: absolute;
+    top: 23px;
+    width: 2px;
+  }
+  
+  .page .VP-logo {
+    height: 36px;
+    left: 28px;
+    position: absolute;
+    top: 29px;
+    width: 403px;
+  }
+  
+  .page .virtual-physical {
+    color: #000000;
+    font-family: "DM Sans", Helvetica;
+    font-size: 30px;
+    font-weight: 500;
+    left: 43px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: -1px;
+    white-space: nowrap;
+    width: 358px;
+  }
+  
+  .page .text-wrapper-2 {
+    color: #000000;
+    font-family: "DM Sans", Helvetica;
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .page .img {
+    height: 35px;
+    left: 0;
+    position: absolute;
+    top: 1px;
+    width: 35px;
+  }
+  
+  .page .form {
+    background-color: #edf1ff;
+    border-radius: 20px;
+    box-shadow: 0px 10px 30px #f3ece8, 0px 1px 4px #0000001a, 0px -1px 10px #0000000d;
+    height: 628px;
+    left: 433px;
+    position: absolute;
+    top: 292px;
+    width: 1053px;
+  }
+  
+  .page .form-2 {
+    height: 129px;
+    left: 584px;
+    position: absolute;
+    top: 108px;
+    width: 388px;
+  }
+  
+  .page .email-username-input {
+    height: 68px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 388px;
+  }
+  
+  .page .input {
+    background-color: #ffffff;
+    border-radius: 20px;
+    height: 44px;
+    left: 0;
+    position: absolute;
+    top: 24px;
+    width: 388px;
+  }
+  
+  .page .span-wrapper {
+    color: #757575;
+    font-family: "Helvetica-Regular", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    height: 19px;
+    left: 11px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 12px;
+    white-space: nowrap;
+    width: 366px;
+  }
+  
+  .page .text-wrapper-3 {
+    color: #757575;
+    font-family: "Helvetica-Regular", Helvetica;
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .page .p {
+    color: #000000;
+    font-family: "Helvetica-Bold", Helvetica;
+    font-size: 16px;
+    font-weight: 700;
+    height: 20px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 23.8px;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+    width: 151px;
+  }
+  
+  .page .text-wrapper-4 {
+    color: #000000;
+    font-family: "Helvetica-Bold", Helvetica;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 23.8px;
+  }
+  
+  .page .form-3 {
+    height: 129px;
+    left: 0;
+    position: absolute;
+    top: 83px;
+    width: 388px;
+  }
+
+  .page .form-4 {
+    height: 129px;
+    left: 0;
+    position: absolute;
+    top: 83px;
+    width: 388px;
+  }
+  
+  .page .email {
+    color: #000000;
+    font-family: "Helvetica-Bold", Helvetica;
+    font-size: 16px;
+    font-weight: 700;
+    height: 20px;
+    left: 0;
+    letter-spacing: 0;
+    line-height: 23.8px;
+    position: absolute;
+    top: 91px;
+    white-space: nowrap;
+    width: 151px;
+  }
+  
+  .page .search-patient {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 40px;
+    font-weight: 700;
+    height: 24px;
+    left: 651px;
+    letter-spacing: 0;
+    line-height: 24px;
+    position: absolute;
+    text-align: center;
+    top: 48px;
+    white-space: nowrap;
+  }
+  
+  .page .text-wrapper-5 {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 24px;
+  }
+  
+  .page .untitled-design-wrapper {
+    background-color: #ffffff;
+    height: 626px;
+    left: 4px;
+    position: absolute;
+    top: 2px;
+    width: 502px;
+  }
+  
+  .page .untitled-design {
+    height: 607px;
+    left: 36px;
+    object-fit: cover;
+    position: absolute;
+    top: 8px;
+    width: 429px;
+  }
+  
+  .page .e-g-john-widgetco-wrapper {
+    background-color: #ffffff;
+    border-radius: 20px;
+    height: 44px;
+    left: 584px;
+    position: absolute;
+    top: 303px;
+    width: 388px;
+  }
+  
+  .page .search-wrapper {
+    background-color: #545ff8;
+    border-radius: 20px;
+    height: 40px;
+    left: 584px;
+    position: absolute;
+    top: 413px;
+    width: 388px;
+  }
+  
+  .page .search {
+    color: #ffffff;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 700;
+    height: 40px;
+    left: 94px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    text-align: center;
+    top: -1px;
+    width: 200px;
+  }
+  
+  .page .span-2 {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: 20px;
+    padding: 0;
+  }
+  
+  .page .good-morning-dr {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 40px;
+    font-weight: 600;
+    left: 129px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 167px;
+  }
+  
+  .page .text-wrapper-6 {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  

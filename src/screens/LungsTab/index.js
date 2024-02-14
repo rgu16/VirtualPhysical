@@ -1,0 +1,1 @@
+export { LungsTab } from "./LungsTab";

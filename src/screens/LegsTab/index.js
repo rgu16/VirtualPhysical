@@ -1,0 +1,1 @@
+export { LegsTab } from "./LegsTab";

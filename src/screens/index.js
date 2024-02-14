@@ -1,0 +1,11 @@
+export { SummaryFlagged } from "./SummaryFlagged/SummaryFlagged";
+export { Summary } from "./Summary/Summary";
+export { LegsTabClicked } from "./LegsTabClicked/LegsTabClicked";
+export { LegsTabClickedScreen } from "./LegsTabClickedScreen/LegsTabClickedScreen";
+export { LegsTab } from "./LegsTab/LegsTab";
+export { GeneralTab } from "./GeneralTab/GeneralTab";
+export { PulsesTab } from "./PulsesTab/PulsesTab";
+export { LungsTab } from "./LungsTab/LungsTab";
+export { Appointments } from "./Appointment/AppoTab";
+export { Messages } from "./Messages/Messages";
+export { Setting } from "./Setting/Setting";

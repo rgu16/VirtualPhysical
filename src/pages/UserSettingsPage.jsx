@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useState, useEffect, useRef } from "react";
 import { Img, Input, Text} from "../components";
 import NavBar from "../components/NavBar";
+import { jwtDecode } from 'jwt-decode';
 import { EditOutlined, EyeInvisibleTwoTone, EyeTwoTone } from '@ant-design/icons';
 const UserSettingsPage = (props) => {
   const token = props.token
@@ -13,7 +14,6 @@ const UserSettingsPage = (props) => {
   const [originalUser, setOriginalUser] = useState({name:'David Ochoa', email:'dr.david.ochoa@gmail.com', workplace:'Houston Methodist',timezone:'Central Standard Time (GMT-6)',zoomlink:'https://houstonmethodist.zoom.us/my/davidochoa'});
   const fileInputRef = useRef(null);
   const [profilePic, setProfilePic] = useState()
-  const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
@@ -33,6 +33,7 @@ const UserSettingsPage = (props) => {
         console.log(error.response.status)
         console.log(error.response.headers)
     })
+    console.log(jwtDecode(token).type)
   }, [token, props.proxy]);
 
   const handleCancel = () => {

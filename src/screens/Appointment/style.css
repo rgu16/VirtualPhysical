@@ -1,0 +1,1356 @@
+.appointments {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .appointments .overlap-wrapper {
+    background-color: #ffffff;
+    border: 1px none;
+    height: 1561px;
+    overflow: hidden;
+    width: 1920px;
+  }
+  
+  .appointments .overlap {
+    height: 1561px;
+    position: relative;
+    width: 1922px;
+  }
+  
+  .appointments .BACKGROUND {
+    height: 1561px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1922px;
+  }
+  
+  .appointments .overlap-group {
+    background-color: #f8f8f8;
+    height: 1561px;
+    position: relative;
+    width: 1920px;
+  }
+  
+  .appointments .span-wrapper {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 40px;
+    font-weight: 600;
+    left: 164px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 158px;
+  }
+  
+  .appointments .text-wrapper {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 40px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .appointments .legend {
+    height: 30px;
+    left: 1062px;
+    position: absolute;
+    top: 291px;
+    width: 548px;
+  }
+  
+  .appointments .tags {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 30px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 180px;
+  }
+  
+  .appointments .regular-tag {
+    color: #585757;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    left: 4px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 2px;
+    white-space: nowrap;
+  }
+  
+  .appointments .span {
+    color: #585757;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .appointments .frame-wrapper {
+    background-color: #ff3b3b1a;
+    border-radius: 4px;
+    height: 30px;
+    left: 208px;
+    position: absolute;
+    top: 0;
+    width: 158px;
+  }
+  
+  .appointments .frame {
+    height: 24px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 150px;
+  }
+  
+  .appointments .red-tag {
+    color: #e82c2c;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: -1px;
+    white-space: nowrap;
+  }
+  
+  .appointments .text-wrapper-2 {
+    color: #e82c2c;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .appointments .div-wrapper {
+    background-color: #00ba341a;
+    border-radius: 4px;
+    height: 30px;
+    left: 394px;
+    position: absolute;
+    top: 0;
+    width: 154px;
+  }
+  
+  .appointments .green-tag-wrapper {
+    height: 24px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 146px;
+  }
+  
+  .appointments .green-tag {
+    color: #00ba34;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: -1px;
+    white-space: nowrap;
+  }
+  
+  .appointments .text-wrapper-3 {
+    color: #00ba34;
+    font-family: "Inter", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .appointments .calendar {
+    box-shadow: 0px 1px 1px #0000001f;
+    height: 1067px;
+    left: 315px;
+    position: absolute;
+    top: 290px;
+    width: 1295px;
+  }
+  
+  .appointments .month-year {
+    height: 61px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 167px;
+  }
+  
+  .appointments .may {
+    color: #585757;
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: 700;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: -1px;
+  }
+  
+  .appointments .text-wrapper-4 {
+    color: #585757;
+    font-family: "Inter", Helvetica;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .appointments .arrow-down {
+    height: 24px;
+    left: 133px;
+    position: absolute;
+    top: 0;
+    width: 24px;
+  }
+  
+  .appointments .days-of-week {
+    background-color: #fafafa;
+    height: 43px;
+    left: 0;
+    position: absolute;
+    top: 61px;
+    width: 1295px;
+  }
+  
+  .appointments .div {
+    height: 45px;
+    left: -1px;
+    position: relative;
+    top: -1px;
+    width: 1297px;
+  }
+  
+  .appointments .SUN-wrapper {
+    background-color: #ffffff;
+    border-radius: 8px 0px 0px 0px;
+    height: 45px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .p {
+    color: #959595;
+    font-family: "Inter", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    left: 12px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 12px;
+    white-space: nowrap;
+  }
+  
+  .appointments .text-wrapper-5 {
+    color: #959595;
+    font-family: "Inter", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .appointments .MON-wrapper {
+    background-color: #ffffff;
+    height: 45px;
+    left: 185px;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .TUE-wrapper {
+    background-color: #ffffff;
+    height: 45px;
+    left: 370px;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .WED-wrapper {
+    background-color: #ffffff;
+    height: 45px;
+    left: 555px;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .THUR-wrapper {
+    background-color: #ffffff;
+    height: 45px;
+    left: 740px;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .FRI-wrapper {
+    background-color: #ffffff;
+    height: 45px;
+    left: 925px;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .SAT-wrapper {
+    background-color: #ffffff;
+    border-radius: 0px 8px 0px 0px;
+    height: 45px;
+    left: 1110px;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .element-row {
+    height: 193px;
+    left: 0;
+    position: absolute;
+    top: 104px;
+    width: 1295px;
+  }
+  
+  .appointments .overlap-2 {
+    height: 195px;
+    left: -1px;
+    position: relative;
+    top: -1px;
+    width: 1297px;
+  }
+  
+  .appointments .frame-2 {
+    background-color: #ffffff;
+    height: 195px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .element {
+    color: #959595;
+    font-family: "Inter", Helvetica;
+    font-size: 21px;
+    font-weight: 500;
+    left: 12px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 12px;
+    white-space: nowrap;
+  }
+  
+  .appointments .text-wrapper-6 {
+    color: #959595;
+    font-family: "Inter", Helvetica;
+    font-size: 21px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .appointments .tags-wrapper {
+    height: 27px;
+    left: 12px;
+    position: absolute;
+    top: 154px;
+    width: 161px;
+  }
+  
+  .appointments .regular-tag-wrapper {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: relative;
+    top: 2px;
+    width: 80px;
+  }
+  
+  .appointments .regular-tag-2 {
+    color: #585757;
+    font-family: "Inter", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    left: 4px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 2px;
+  }
+  
+  .appointments .text-wrapper-7 {
+    color: #585757;
+    font-family: "Inter", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .appointments .frame-3 {
+    background-color: #ffffff;
+    height: 195px;
+    left: 185px;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .frame-4 {
+    height: 56px;
+    left: 12px;
+    position: absolute;
+    top: 125px;
+    width: 161px;
+  }
+  
+  .appointments .tags-2 {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    width: 80px;
+  }
+  
+  .appointments .tags-3 {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 31px;
+    width: 96px;
+  }
+  
+  .appointments .frame-5 {
+    background-color: #ffffff;
+    height: 195px;
+    left: 370px;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .tags-4 {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: relative;
+    top: 2px;
+    width: 106px;
+  }
+  
+  .appointments .frame-6 {
+    background-color: #ffffff;
+    height: 195px;
+    left: 555px;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .frame-7 {
+    background-color: #ffffff;
+    height: 195px;
+    left: 740px;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .tags-5 {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    width: 107px;
+  }
+  
+  .appointments .tags-6 {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 31px;
+    width: 120px;
+  }
+  
+  .appointments .frame-8 {
+    background-color: #ffffff;
+    height: 195px;
+    left: 925px;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .tags-7 {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: relative;
+    top: 2px;
+    width: 81px;
+  }
+  
+  .appointments .frame-9 {
+    background-color: #ffffff;
+    height: 195px;
+    left: 1110px;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .element-nd-row {
+    height: 193px;
+    left: 0;
+    position: absolute;
+    top: 297px;
+    width: 1295px;
+  }
+  
+  .appointments .tags-8 {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    width: 116px;
+  }
+  
+  .appointments .tags-9 {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 31px;
+    width: 91px;
+  }
+  
+  .appointments .tags-10 {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: relative;
+    top: 2px;
+    width: 114px;
+  }
+  
+  .appointments .tags-11 {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    width: 119px;
+  }
+  
+  .appointments .tags-12 {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 31px;
+    width: 168px;
+  }
+  
+  .appointments .tags-13 {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    width: 121px;
+  }
+  
+  .appointments .tags-14 {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 31px;
+    width: 107px;
+  }
+  
+  .appointments .tags-15 {
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: relative;
+    top: 2px;
+    width: 95px;
+  }
+  
+  .appointments .element-rd-row {
+    height: 193px;
+    left: 0;
+    position: absolute;
+    top: 489px;
+    width: 1295px;
+  }
+  
+  .appointments .tags-16 {
+    background-color: #ff3b3b1a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    width: 127px;
+  }
+  
+  .appointments .red-tag-wrapper {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 119px;
+  }
+  
+  .appointments .red-tag-2 {
+    color: #e82c2c;
+    font-family: "Inter", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: -1px;
+  }
+  
+  .appointments .text-wrapper-8 {
+    color: #e82c2c;
+    font-family: "Inter", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .appointments .tags-17 {
+    background-color: #00ba341a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 31px;
+    width: 112px;
+  }
+  
+  .appointments .frame-10 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 104px;
+  }
+  
+  .appointments .green-tag-2 {
+    color: #00ba34;
+    font-family: "Inter", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: -1px;
+  }
+  
+  .appointments .text-wrapper-9 {
+    color: #00ba34;
+    font-family: "Inter", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .appointments .tags-18 {
+    background-color: #ff3b3b1a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    width: 88px;
+  }
+  
+  .appointments .frame-11 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 80px;
+  }
+  
+  .appointments .tags-19 {
+    background-color: #00ba341a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 31px;
+    width: 143px;
+  }
+  
+  .appointments .frame-12 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 135px;
+  }
+  
+  .appointments .frame-13 {
+    height: 85px;
+    left: 12px;
+    position: absolute;
+    top: 96px;
+    width: 161px;
+  }
+  
+  .appointments .tags-20 {
+    background-color: #00ba341a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    width: 74px;
+  }
+  
+  .appointments .frame-14 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 66px;
+  }
+  
+  .appointments .tags-21 {
+    background-color: #ff3b3b1a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 31px;
+    width: 120px;
+  }
+  
+  .appointments .frame-15 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 112px;
+  }
+  
+  .appointments .tags-22 {
+    background-color: #00ba341a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 60px;
+    width: 153px;
+  }
+  
+  .appointments .frame-16 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 145px;
+  }
+  
+  .appointments .tags-23 {
+    background-color: #00ba341a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: relative;
+    top: 2px;
+    width: 109px;
+  }
+  
+  .appointments .frame-17 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 101px;
+  }
+  
+  .appointments .tags-24 {
+    background-color: #00ba341a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    width: 80px;
+  }
+  
+  .appointments .frame-18 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 72px;
+  }
+  
+  .appointments .tags-25 {
+    background-color: #ff3b3b1a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 31px;
+    width: 132px;
+  }
+  
+  .appointments .frame-19 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 124px;
+  }
+  
+  .appointments .frame-20 {
+    height: 17px;
+    left: 12px;
+    position: absolute;
+    top: 87px;
+    width: 7px;
+  }
+  
+  .appointments .span-wrapper-2 {
+    color: #e7e7e7;
+    font-family: "Inter", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: -1px;
+  }
+  
+  .appointments .text-wrapper-10 {
+    color: #e7e7e7;
+    font-family: "Inter", Helvetica;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .appointments .tags-26 {
+    background-color: #ff3b3b1a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: relative;
+    top: 2px;
+    width: 42px;
+  }
+  
+  .appointments .frame-21 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 34px;
+  }
+  
+  .appointments .element-th-row {
+    height: 193px;
+    left: 0;
+    position: absolute;
+    top: 682px;
+    width: 1295px;
+  }
+  
+  .appointments .tags-27 {
+    background-color: #ff3b3b1a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    width: 84px;
+  }
+  
+  .appointments .frame-22 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 76px;
+  }
+  
+  .appointments .tags-28 {
+    background-color: #00ba341a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 31px;
+    width: 76px;
+  }
+  
+  .appointments .frame-23 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 68px;
+  }
+  
+  .appointments .tags-29 {
+    background-color: #ff3b3b1a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    width: 141px;
+  }
+  
+  .appointments .frame-24 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 133px;
+  }
+  
+  .appointments .tags-30 {
+    background-color: #00ba341a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 31px;
+    width: 106px;
+  }
+  
+  .appointments .frame-25 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 98px;
+  }
+  
+  .appointments .tags-31 {
+    background-color: #00ba341a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 60px;
+    width: 111px;
+  }
+  
+  .appointments .frame-26 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 103px;
+  }
+  
+  .appointments .tags-32 {
+    background-color: #00ba341a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: relative;
+    top: 2px;
+    width: 103px;
+  }
+  
+  .appointments .frame-27 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 95px;
+  }
+  
+  .appointments .tags-33 {
+    background-color: #00ba341a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 2px;
+    width: 93px;
+  }
+  
+  .appointments .frame-28 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 85px;
+  }
+  
+  .appointments .tags-34 {
+    background-color: #00ba341a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: absolute;
+    top: 31px;
+    width: 107px;
+  }
+  
+  .appointments .frame-29 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 99px;
+  }
+  
+  .appointments .tags-35 {
+    background-color: #ff3b3b1a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: relative;
+    top: 2px;
+    width: 88px;
+  }
+  
+  .appointments .element-wrapper {
+    background-color: #ffffff;
+    border-radius: 0px 0px 8px 0px;
+    height: 195px;
+    left: 1110px;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .overlap-group-wrapper {
+    height: 193px;
+    left: 0;
+    position: absolute;
+    top: 874px;
+    width: 740px;
+  }
+  
+  .appointments .overlap-3 {
+    height: 195px;
+    left: -1px;
+    position: relative;
+    top: -1px;
+    width: 742px;
+  }
+  
+  .appointments .frame-30 {
+    background-color: #ffffff;
+    border-radius: 0px 0px 0px 8px;
+    height: 195px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .tags-36 {
+    background-color: #00ba341a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: relative;
+    top: 2px;
+    width: 89px;
+  }
+  
+  .appointments .frame-31 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 81px;
+  }
+  
+  .appointments .tags-37 {
+    background-color: #ff3b3b1a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: relative;
+    top: 2px;
+    width: 92px;
+  }
+  
+  .appointments .frame-32 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 84px;
+  }
+  
+  .appointments .frame-33 {
+    background-color: #ffffff;
+    border-radius: 0px 0px 8px 0px;
+    height: 195px;
+    left: 555px;
+    position: absolute;
+    top: 0;
+    width: 187px;
+  }
+  
+  .appointments .tags-38 {
+    background-color: #00ba341a;
+    border-radius: 4px;
+    height: 23px;
+    left: 2px;
+    position: relative;
+    top: 2px;
+    width: 108px;
+  }
+  
+  .appointments .frame-34 {
+    height: 17px;
+    left: 4px;
+    position: relative;
+    top: 3px;
+    width: 100px;
+  }
+  
+  .appointments .NAV {
+    background-color: #ffffff;
+    height: 94px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 1920px;
+  }
+  
+  .appointments .profile {
+    height: 61px;
+    left: 1647px;
+    position: absolute;
+    top: 23px;
+    width: 223px;
+  }
+  
+  .appointments .profile-2 {
+    height: 60px;
+    left: 81px;
+    position: absolute;
+    top: 1px;
+    width: 146px;
+  }
+  
+  .appointments .overlap-group-2 {
+    height: 60px;
+    left: 0;
+    position: absolute;
+    top: -1px;
+    width: 111px;
+  }
+  
+  .appointments .dr-david-ochoa {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 16px;
+    font-weight: 700;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 0;
+  }
+  
+  .appointments .text-wrapper-11 {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .appointments .cardiologist {
+    color: #8f8f8f;
+    font-family: "Cairo", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: right;
+    top: 28px;
+  }
+  
+  .appointments .text-wrapper-12 {
+    color: #8f8f8f;
+    font-family: "Cairo", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .appointments .arrow {
+    height: 8px;
+    left: 127px;
+    position: absolute;
+    top: 24px;
+    width: 15px;
+  }
+  
+  .appointments .profile-picture {
+    background-image: url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/placeholder-19@2x.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    border-radius: 14px;
+    height: 57px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 57px;
+  }
+  
+  .appointments .icon-groups {
+    height: 30px;
+    left: 1355px;
+    position: absolute;
+    top: 37px;
+    width: 210px;
+  }
+  
+  .appointments .calendar-icon {
+    height: 30px;
+    left: 60px;
+    position: absolute;
+    top: 0;
+    width: 30px;
+  }
+  
+  .appointments .settings-icon {
+    height: 30px;
+    left: 180px;
+    position: absolute;
+    top: 0;
+    width: 30px;
+  }
+  
+  .appointments .chart-icon {
+    height: 30px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 30px;
+  }
+  
+  .appointments .message-icon {
+    height: 30px;
+    left: 120px;
+    position: absolute;
+    top: 0;
+    width: 30px;
+  }
+  
+  .appointments .separator {
+    background-color: #d1d1d1;
+    border-radius: 8px;
+    height: 56px;
+    left: 1613px;
+    position: absolute;
+    top: 23px;
+    width: 2px;
+  }
+  
+  .appointments .VP-logo {
+    height: 36px;
+    left: 28px;
+    position: absolute;
+    top: 29px;
+    width: 403px;
+  }
+  
+  .appointments .virtual-physical {
+    color: #000000;
+    font-family: "DM Sans", Helvetica;
+    font-size: 30px;
+    font-weight: 500;
+    left: 43px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: -1px;
+    white-space: nowrap;
+    width: 358px;
+  }
+  
+  .appointments .text-wrapper-13 {
+    color: #000000;
+    font-family: "DM Sans", Helvetica;
+    font-size: 30px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .appointments .img {
+    height: 35px;
+    left: 0;
+    position: absolute;
+    top: 1px;
+    width: 35px;
+  }
+  

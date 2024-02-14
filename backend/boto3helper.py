@@ -27,7 +27,6 @@ def find_objects_with_prefix(bucket_name,s3, prefix):
         # Extract the keys of the objects found
         keys = [obj['Key'] for obj in response['Contents']]
         return keys
-    
     # Return None if no objects are found with the specified prefix
     return None
 

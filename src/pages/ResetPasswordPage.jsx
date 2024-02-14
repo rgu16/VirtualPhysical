@@ -1,7 +1,7 @@
 import './pages.css';
 import axios from 'axios';
 import React, { useState} from "react";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, Navigate } from 'react-router-dom';
 import { Img, Input, Text} from "../components";
 import { EyeInvisibleTwoTone, EyeTwoTone } from '@ant-design/icons';
 
@@ -11,6 +11,7 @@ const ResetPasswordPage = (props) => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const token = searchParams.get('token');
+    const [navigate, setNavigate] = useState();
 
     const handleToggle = () => {
       setShowPassword(!showPassword);
@@ -26,6 +27,7 @@ const ResetPasswordPage = (props) => {
             },
           })
           .then((response)=>{
+            setNavigate('/')
           }).catch((error)=>{
             if(error.response){
               console.log(error.response)
@@ -54,7 +56,6 @@ const ResetPasswordPage = (props) => {
             </Text>
           </div>
         </header>
-    
           <div className="bg-gray-50 flex flex-col justify-start pb-[641px] w-full">
             <div className="bg-blue-50 flex flex-col font-cairo items-start justify-start mt-11 mx-auto pt-0.5 px-0.5 md:px-5 rounded-[20px] shadow-bs2 w-[55%] md:w-full">
               <div className="flex md:flex-col flex-row md:gap-10 gap-[78px] items-start justify-start ml-0.5 md:ml-[0] w-[93%] md:w-full">
@@ -106,6 +107,7 @@ const ResetPasswordPage = (props) => {
                     </Text>
                   </button>
                   <Link to="/"><button className='border-none bg-none text-blue-500 underline'>Return to login</button></Link>
+                  {navigate ? (<Navigate replace to= {navigate} />) : null}
                 </div>
               </div>
             </div>
