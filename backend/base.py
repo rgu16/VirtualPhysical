@@ -298,23 +298,6 @@ def reset_password():
     else:
         return {"msg": "User does not exist"}, 400
 
-@api.route('/upload', methods=["POST"])
-@jwt_required()
-def upload_file():
-    if 'file' not in request.files:
-        return {"error": "No file"}, 400
-    file = request.files['file']
-    if file.filename == '':
-        return {"error": "No file name"}, 400
-    if file and allowed_file(file.filename):
-        filename= secure_filename(file.filename)
-        
-        # file.save(os.path.join(api.config['UPLOAD_FOLDER'], filename))
-        # url_for('download_file',filename=filename)
-        # s3.upload_file(filename, bucket_name, create_file_name(filename))
-        return {"msg": "Succesfully Uploaded!"}
-    return {"error": "Bad filename"}, 400
-
 @api.route('/download/<filename>')
 # @jwt_required()
 def download_file(filename):
@@ -384,6 +367,24 @@ def confirm_user(token):
     else:
         return {"msg": "User does not exist"}, 400
 
+@api.route('/new_patient', methods=["POST"])
+@jwt_required()
+def create_patient_chart():
+    return {"msg": "Succesfully Created!"}
+
+@api.route('/upload', methods=["POST"])
+@jwt_required()
+def upload_file():
+    if 'file' not in request.files:
+        return {"error": "No file"}, 400
+    file = request.files['file']
+    if file.filename == '':
+        return {"error": "No file name"}, 400
+    if file and allowed_file(file.filename):
+        filename= secure_filename(file.filename)
+        # s3.upload_file(filename, bucket_name, create_file_name(filename))
+        return {"msg": "Succesfully Uploaded!"}
+    return {"error": "Bad filename"}, 400
 # with api.app_context():
 #     # Making a default account
 #     user['name'] = "Administrator"
