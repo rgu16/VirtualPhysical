@@ -142,7 +142,7 @@ const AdminHomePage = (props) => {
   return (
     <>
       <div className="bg-white-A700 flex flex-col items-center justify-start mx-auto w-full">
-      <NavBar className="bg-white-A700 flex md:flex-col flex-row font-dmsans md:gap-5 items-center justify-center md:px-5 w-full" />
+      <NavBar  proxy={props.proxy} token={props.token}></NavBar>
         <div className="bg-gray-50 flex flex-col items-center justify-start pb-[728px] w-full">
           <div className="flex flex-col justify-start w-full">
             <Text className="font-cairo font-semibold md:ml-[0] ml-[97px] mt-[77px] sm:text-4xl md:text-[38px] text-[40px] text-black-900">

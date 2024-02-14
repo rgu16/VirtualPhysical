@@ -6,7 +6,4 @@ export { Line } from "./Line";
 export { List } from "./List";
 export { ReactTable } from "./Table";
 export { Text } from "./Text";
-export {default as IconDelete} from './IconDelete';
-export {default as IconEye} from './IconEye';
-export {default as IconEyeInvisible} from './IconEyeInvisible';
 export {default as useToken} from './useToken';

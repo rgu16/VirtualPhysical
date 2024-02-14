@@ -28,6 +28,7 @@ const UserSettingsPage = (props) => {
         const res = response.data
         setOriginalUser(res.data)
         setProfilePic(res.pic)
+        console.log(res.pic)
     }).catch((error) => {
         console.log(error.response)
         console.log(error.response.status)
@@ -168,7 +169,7 @@ const UserSettingsPage = (props) => {
   return (
     <>
       <div className="bg-white-A700 flex flex-col items-center justify-start mx-auto w-full">
-      <NavBar className="bg-white-A700 flex md:flex-col flex-row font-dmsans md:gap-5 items-center justify-center md:px-5 w-full" />
+      <NavBar  proxy={props.proxy} token={props.token}></NavBar>
         <div className="bg-gray-50 flex flex-col items-center justify-start pb-[728px] w-full">
           <div className="flex flex-col justify-start w-full">
             <Text className="font-cairo font-semibold md:ml-[0] ml-[97px] mt-[77px] sm:text-4xl md:text-[38px] text-[40px] text-black-900">
@@ -291,13 +292,13 @@ const UserSettingsPage = (props) => {
                         src= {profilePic}
                         alt=""
                         onLoad ={()=> setImageLoaded(true)}
-                        style = {{display: imageLoaded? "none": "block"}}
+                        // style = {{display: imageLoaded? "none": "block"}}
                         />
                         <Img
                         className="h-auto md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
                         src= "images/img_defaultprofile.jpg"
                         alt="image"
-                        style = {{visibility: imageLoaded ? 'hidden' : 'visible'}}
+                        style = {{display: imageLoaded? "none": "block"}}
                       />
                     </div>
                     <input

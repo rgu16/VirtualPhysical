@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, } from 'react
 import {LoginPage, RegisterPage, ForgotPasswordPage, UploadFilePage, ResetPasswordPage, UserSettingsPage, AdminHomePage, Home} from "./pages";
 import {useToken} from './components';
 import { jwtDecode } from 'jwt-decode';
+import {Summary} from "./screens"
 // import {SummaryFlagged,Summary, LegsTabClicked, LegsTabClickedScreen, LegsTab, GeneralTab, PulsesTab, LungsTab, Appointments, Messages, Setting} from "./screens"
 import NotFound from "pages/NotFound";
 import AbdomenThree from "pages/AbdomenThree";
@@ -32,7 +33,7 @@ import HeartTabclicked from"pages/HeartTabclicked";
 import AbdomenTabquestionmarkclicked from "pages/AbdomenTabquestionmarkclicked";
 import PulsesTabselectedartery from "pages/PulsesTabselectedartery";
 import LungsTabselectedlungregion from "pages/LungsTabselectedlungregion";
-import Summary from"pages/Summary";
+// import Summary from"pages/Summary";
 import LegsTab from"pages/LegsTab";
 import HeartTab from"pages/HeartTab";
 import AbdomenTab from"pages/AbdomenTab";
@@ -52,7 +53,6 @@ export default function App() {
                     <Route exact path="/" element={!!token? 
                                                 jwtDecode(token).type === 'admin'? <AdminHomePage proxy={proxy} token={token} setToken={setToken} removeToken={removeToken}/>
                                                 :<UserSettingsPage proxy={proxy} token={token} setToken={setToken} removeToken={removeToken}/>:
-                                                // <HomePage proxy={proxy} token={token} setToken={setToken} removeToken={removeToken}/>:
                                                 <LoginPage proxy={proxy} setToken={setToken}/>}/>
                     <Route path="/register" element={ <RegisterPage proxy={proxy} setToken={setToken} /> } />
                     <Route path="/forgot_password" element={ <ForgotPasswordPage  proxy={proxy} /> } />

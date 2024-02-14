@@ -1,5 +1,6 @@
 import React from "react";
 import "./style.css";
+import NavBar from "components/NavBar";
 
 export const Summary = () => {
   return (
@@ -250,66 +251,7 @@ export const Summary = () => {
             </div>
 
           </div>
-          <div className="NAV-2">
-            <div className="profile-3">
-              <div className="profile-4">
-                <div className="overlap-group-3">
-                  <p className="dr-david-ochoa-2">
-                    <span className="text-wrapper-13">Dr. David Ochoa</span>
-                  </p>
-                  <p className="cardiologist-2">
-                    <span className="text-wrapper-14">Cardiologist</span>
-                  </p>
-                </div>
-                <img className="arrow-2" alt="Arrow" src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/arrow-19@2x.png" />
-              </div>
-              <div className="profile-picture-2" />
-            </div>
-            <div className="icon-groups-2">
-            <a href="/appointment">
-                <img
-                  className="calendar-icon-2"
-                  alt="Calendar icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/calendar-icon-21@2x.png"
-                />
-              </a>
-
-              <a href="/setting">
-                <img
-                  className="settings-icon-2"
-                  alt="Settings icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/settings-icon-19@2x.png"
-                />
-              </a>
-
-              <a href="/chart">
-                <img
-                  className="chart-icon-2"
-                  alt="Chart icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/chart-icon-20@2x.png"
-                />
-              </a>
-
-              <a href="/messages">
-                <img
-                  className="message-icon-2"
-                  alt="Message icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/message-icon-19@2x.png"
-                />
-              </a>
-            </div>
-            <div className="separator-2" />
-            <div className="VP-logo-3">
-              {/* <p className="virtual-physical-2">
-                <span className="text-wrapper-15">Virtual Physical</span>
-              </p> */}
-              <a href="/summary" className="virtual-physical-2" style={{ textDecoration: 'none' }}>
-                <span className="text-wrapper-15">Virtual Physical</span>
-              </a>
-
-              <img className="VP-logo-4" alt="Vp logo" src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/vp-logo-2@2x.png" />
-            </div>
-          </div>
+          <NavBar></NavBar>
         </div>
       </div>
     </div>
