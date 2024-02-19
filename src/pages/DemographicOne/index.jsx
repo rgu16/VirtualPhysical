@@ -86,11 +86,11 @@ function selectAll() {
               <Button className="cursor-pointer font-medium leading-[normal] min-w-[112px] text-center text-lg" shape="round">
                 Heart </Button> </Link>
               
-              <Link to="/hands">
+              <Link to="/handsone">
               <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round">
                 Hands</Button> </Link>
 
-                <Link to="/handsone">
+                <Link to="/abdomenone">
               <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round">
   Legs</Button> </Link>
 
@@ -106,7 +106,7 @@ function selectAll() {
                       >
                        General 
                       </Text>
-                      <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '17px'}}>
+                      <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '20px'}}>
             {" "}
             Has the patient ever had any of these medical conditions? {" "}
             
@@ -131,7 +131,7 @@ function selectAll() {
         </div>
         <div style={{paddingTop: "2rem"}}>The all checked values are {selected.join(" , ")}</div>
         <div style={{paddingTop: "2rem"}}>
-        <h4  style={{paddingBottom: "1rem"}}>
+        <h4  style={{paddingBottom: "1rem", fontWeight: 'bold'}}>
             {" "}
             Adjust the head of the bed to a 45° angle, adequately expose the patient, ask if the patient has any pain before proceeding (if yes, input where) {" "}
             

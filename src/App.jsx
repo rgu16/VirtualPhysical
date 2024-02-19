@@ -4,11 +4,11 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, } from 'react
 import {LoginPage, RegisterPage, ForgotPasswordPage, UploadFilePage, ResetPasswordPage, UserSettingsPage, AdminHomePage, Home} from "./pages";
 import {useToken} from './components';
 import { jwtDecode } from 'jwt-decode';
-import {Summary} from "./screens"
-// import {SummaryFlagged,Summary, LegsTabClicked, LegsTabClickedScreen, LegsTab, GeneralTab, PulsesTab, LungsTab, Appointments, Messages, Setting} from "./screens"
+// import {Summary} from "./screens"
+import {SummaryFlagged, Summary, LegsTabClicked, LegsTabClickedScreen, LegsTab, GeneralTab, PulsesTab, LungsTab, Appointments, Messages, Setting} from "./screens"
 import NotFound from "pages/NotFound";
-import AbdomenThree from "pages/AbdomenThree";
-import AbdomenTwo from"pages/AbdomenTwo";
+// import AbdomenThree from "pages/AbdomenThree";
+// import AbdomenTwo from"pages/AbdomenTwo";
 import AbdomenOne from"pages/AbdomenOne";
 import Abdomen from"pages/Abdomen";
 import AbdomenFour from"pages/AbdomenFour";
@@ -18,30 +18,30 @@ import HandsOne from"pages/HandsOne";
 import Hands from"pages/Hands";
 import Demographic from"pages/Demographic";
 import Lungs from"pages/Lungs";
-import Calendario from"pages/Calendario";
-import Form from"pages/Form";
-import PageFour from"pages/PageFour";
-import PageThree from"pages/PageThree";
-import PageTwo from"pages/PageTwo";
-import PatientDetails from"pages/PatientDetails";
-import AppointmentsOverviewPage from "pages/AppointmentsOverviewPage";
-import LegsTabclickedOne from"pages/LegsTabclickedOne";
-import LungsTabselectedlungregionOne from "pages/LungsTabselectedlungregionOne";
-import Summaryflagged from"pages/Summaryflagged";
-import LegsTabclicked from"pages/LegsTabclicked";
-import HeartTabclicked from"pages/HeartTabclicked";
-import AbdomenTabquestionmarkclicked from "pages/AbdomenTabquestionmarkclicked";
-import PulsesTabselectedartery from "pages/PulsesTabselectedartery";
-import LungsTabselectedlungregion from "pages/LungsTabselectedlungregion";
-// import Summary from"pages/Summary";
-import LegsTab from"pages/LegsTab";
-import HeartTab from"pages/HeartTab";
-import AbdomenTab from"pages/AbdomenTab";
-import PulsesTab from"pages/PulsesTab";
-import LungsTab from"pages/LungsTab";
-import GeneralTab from"pages/GeneralTab";
-import DemographicsTab from"pages/DemographicsTab";
-import Page from"pages/Page";
+// import Calendario from"pages/Calendario";
+// import Form from"pages/Form";
+// import PageFour from"pages/PageFour";
+// import PageThree from"pages/PageThree";
+// import PageTwo from"pages/PageTwo";
+// import PatientDetails from"pages/PatientDetails";
+// import AppointmentsOverviewPage from "pages/AppointmentsOverviewPage";
+// import LegsTabclickedOne from"pages/LegsTabclickedOne";
+// import LungsTabselectedlungregionOne from "pages/LungsTabselectedlungregionOne";
+// import Summaryflagged from"pages/Summaryflagged";
+// import LegsTabclicked from"pages/LegsTabclicked";
+// import HeartTabclicked from"pages/HeartTabclicked";
+// import AbdomenTabquestionmarkclicked from "pages/AbdomenTabquestionmarkclicked";
+// import PulsesTabselectedartery from "pages/PulsesTabselectedartery";
+// import LungsTabselectedlungregion from "pages/LungsTabselectedlungregion";
+// // import Summary from"pages/Summary";
+// import LegsTab from"pages/LegsTab";
+// import HeartTab from"pages/HeartTab";
+// import AbdomenTab from"pages/AbdomenTab";
+// import PulsesTab from"pages/PulsesTab";
+// import LungsTab from"pages/LungsTab";
+// import GeneralTab from"pages/GeneralTab";
+// import DemographicsTab from"pages/DemographicsTab";
+// import Page from"pages/Page";
 
 export default function App() {
     const { token, removeToken, setToken} = useToken();
@@ -63,20 +63,21 @@ export default function App() {
                         </ProtectedRoute>
                     }/>
                     <Route path="/reset_password" element={<ResetPasswordPage proxy={proxy}/>} />
-                    {/* <Route path="/general" element={<GeneralTab />} />
+                    <Route path="/general" element={<GeneralTab />} />
                     <Route path="/summary-flagged" element={<SummaryFlagged />} />
                     <Route path="/summary" element={<Summary />} />
                     <Route path="/pulses" element={<PulsesTab />} />
-                    <Route path="/lungs" element={<LungsTab />} />
+                    {/* <Route path="/lungs" element={<LungsTab />} /> */}
                     <Route path="/legs-tab-clicked" element={<LegsTabClicked />} />
                     <Route path="/legs-tab-clicked2" element={<LegsTabClickedScreen />} />
                     <Route path="/legs" element={<LegsTab />} />
                     <Route path="/messages" element={<Messages />} />
                     <Route path="/setting" element={<Setting />} />
-                    <Route path="/appointment" element={<Appointments />} /> */}
+                    <Route path="/appointment" element={<Appointments />} />
+                    
                     <Route path="/home" element={<Home />} />
                     <Route path="*" element={<NotFound />} />
-                    <Route path="/page" element={<Page />} />
+                    {/* <Route path="/page" element={<Page />} />
                     <Route path="/demographicstab" element={<DemographicsTab />} />
                     <Route path="/generaltab" element={<GeneralTab />} />
                     <Route path="/lungstab" element={<LungsTab />} />
@@ -108,13 +109,13 @@ export default function App() {
                     <Route
                     path="/appointmentsoverviewpage"
                     element={<AppointmentsOverviewPage />}
-                    />
-                    <Route path="/patientdetails" element={<PatientDetails />} />
+                    /> */}
+                    {/* <Route path="/patientdetails" element={<PatientDetails />} />
                     <Route path="/pagetwo" element={<PageTwo />} />
                     <Route path="/pagethree" element={<PageThree />} />
                     <Route path="/pagefour" element={<PageFour />} />
                     <Route path="/form" element={<Form />} />
-                    <Route path="/calendario" element={<Calendario />} />
+                    <Route path="/calendario" element={<Calendario />} /> */}
                     <Route path="/lungs" element={<Lungs />} />
                     <Route path="/demographic" element={<Demographic />} />
                     <Route path="/hands" element={<Hands />} />
@@ -124,8 +125,8 @@ export default function App() {
                     <Route path="/abdomenfour" element={<AbdomenFour />} />
                     <Route path="/abdomen" element={<Abdomen />} />
                     <Route path="/abdomenone" element={<AbdomenOne />} />
-                    <Route path="/abdomentwo" element={<AbdomenTwo />} />
-                    <Route path="/abdomenthree" element={<AbdomenThree />} />
+                    {/* <Route path="/abdomentwo" element={<AbdomenTwo />} />
+                    <Route path="/abdomenthree" element={<AbdomenThree />} /> */}
                 </Routes>
             </div>
         </Router>

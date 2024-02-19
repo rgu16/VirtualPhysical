@@ -3,7 +3,7 @@ import os
 from flask import Flask, request, jsonify, url_for, send_from_directory, redirect
 from datetime import datetime, timedelta, timezone
 from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity, \
-                               unset_jwt_cookies, jwt_required, JWTManager
+                               unset_jwt_cookies, jwt_required, JWTManager, decode_token
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
@@ -15,6 +15,7 @@ import requests
 import base64
 import uuid
 from urllib.parse import urlparse
+from datetime import date
 
 api = Flask(__name__)
 # OAuth client credentials
@@ -94,6 +95,7 @@ REACT_APP_BASE_URL = "http://localhost:3000"
 
 s3 = boto3.client('s3')
 USER_BUCKET = 'user-info-0dd3917d-36b1-4a11-93e9-38bede536480'
+PATIENT_BUCKET = 'patient-info-f1b3f8e4-0d52-4cd4-9d41-d134b35ca1a2'
 
 user = {'name':'',
         'password': '',
@@ -135,7 +137,7 @@ def refresh_expiring_jwts(response):
         now = datetime.now(timezone.utc)
         target_timestamp = datetime.timestamp(now + timedelta(minutes=30))
         if target_timestamp > exp_timestamp:
-            access_token = create_access_token(identity=get_jwt_identity())
+            access_token = create_access_token(identity=get_jwt_identity(),additional_claims = get_jwt().get("additional_claims", {}))
             data = response.get_json()
             if type(data) is dict:
                 data["access_token"] = access_token 
@@ -298,20 +300,6 @@ def reset_password():
     else:
         return {"msg": "User does not exist"}, 400
 
-@api.route('/download/<filename>')
-# @jwt_required()
-def download_file(filename):
-    return send_from_directory(api.config['UPLOAD_FOLDER'], filename)
-
-@api.route('/uploaded_filelist')
-@jwt_required()
-def get_uploaded_files():
-    file_list = []
-    for filename in os.listdir(api.config['UPLOAD_FOLDER']):
-        if os.path.isfile(os.path.join(api.config['UPLOAD_FOLDER'], filename)):
-            file_list.append(filename)
-    return jsonify({"files": file_list})
-
 @api.route('/all_users')
 @jwt_required()
 def get_all_users():
@@ -367,24 +355,53 @@ def confirm_user(token):
     else:
         return {"msg": "User does not exist"}, 400
 
-@api.route('/new_patient', methods=["POST"])
+@api.route('/select_patient', methods=["POST"])
 @jwt_required()
-def create_patient_chart():
-    return {"msg": "Succesfully Created!"}
+def select_patient():
+    token = get_jwt()
+    email = request.json.get("email",None)
+    name = request.json.get("name",None)
+    today = str(date.today())
+    folder = email + "/" + name + "/" + today
+    additional_claims = {}
+    additional_claims['type'] = token['type']
+    additional_claims['patient'] = folder
+    access_token = create_access_token(identity=email, additional_claims=additional_claims)
+    return {"access_token":access_token}
 
-@api.route('/upload', methods=["POST"])
+@api.route('/upload_json', methods=["POST"])
+@jwt_required()
+def upload_json():
+    folder =  get_jwt().get("patient")
+    filename = request.json.get('filename', None)
+    s3.put_object(Body=json.dumps(data), Bucket= USER_BUCKET, Key= folder+filename)
+    return {"msg": "Succesfully Uploaded!"}
+
+@api.route('/upload_file', methods=["POST"])
 @jwt_required()
 def upload_file():
-    if 'file' not in request.files:
-        return {"error": "No file"}, 400
-    file = request.files['file']
-    if file.filename == '':
-        return {"error": "No file name"}, 400
-    if file and allowed_file(file.filename):
-        filename= secure_filename(file.filename)
-        # s3.upload_file(filename, bucket_name, create_file_name(filename))
-        return {"msg": "Succesfully Uploaded!"}
-    return {"error": "Bad filename"}, 400
+    folder =  get_jwt().get("patient")
+    filename = request.json.get('filename', None)
+    s3.put_object(Body=json.dumps(data), Bucket= USER_BUCKET, Key= folder+filename)
+    return {"msg": "Succesfully Uploaded!"}
+
+@api.route('/download/<tab>')
+@jwt_required()
+def download_file(tab):
+    folder = get_jwt().get("patient")
+    folder = folder + tab
+    all_files = find_objects_with_prefix(PATIENT_BUCKET,s3,folder)
+    data = {}
+    for file in all_files:
+        if ".json" in file:
+            response = s3.get_object(Bucket=PATIENT_BUCKET, Key = file)
+            data[file] = json.loads(response["Body"]).read().decode('utf-8')
+        else:
+            data[file] = s3.generate_presigned_url('get_object',
+                                                      Params={'Bucket': PATIENT_BUCKET, 'Key': file},
+                                                      ExpiresIn=60)  # URL expiration time in seconds
+    return data
+
 # with api.app_context():
 #     # Making a default account
 #     user['name'] = "Administrator"

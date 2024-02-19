@@ -13,7 +13,9 @@ import { useState } from 'react';
 
 
 const HandsPage = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHoveredOne, setIsHoveredOne] = useState(false);
+  const [isHoveredTwo, setIsHoveredTwo] = useState(false);
+  const [isHoveredThree, setIsHoveredThree] = useState(false);
   return (
     <>
       <div
@@ -53,11 +55,11 @@ const HandsPage = () => {
               <Button className="cursor-pointer font-medium leading-[normal] min-w-[112px] text-center text-lg" shape="round">
                 Heart </Button> </Link>
               
-              <Link to="/hands">
+              <Link to="/handsone">
               <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round">
                 Hands</Button> </Link>
 
-                <Link to="/handsone">
+                <Link to="/abdomenone">
               <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round">
   Legs</Button> </Link>
 
@@ -101,7 +103,8 @@ const HandsPage = () => {
 
                      </div>
               
-                     <Img
+                     <Img onMouseEnter={() => setIsHoveredOne(true)}
+                      onMouseLeave={() => setIsHoveredOne(false)}
                        className="h-[43px] w-[43px]"
                        src="images/img_profile_black_900.svg"
                        alt="profile"
@@ -109,13 +112,15 @@ const HandsPage = () => {
                      
                    </div>
                    
-                   <Img
+                   <Img onMouseEnter={() => setIsHoveredTwo(true)}
+                    onMouseLeave={() => setIsHoveredTwo(false)}
                      className="h-[43px] w-[43px]"
                      src="images/img_profile_black_900.svg"
                      alt="profile_One"
                    />
                  </div>
-                 <Img
+                 <Img onMouseEnter={() => setIsHoveredThree(true)}
+                     onMouseLeave={() => setIsHoveredThree(false)}
                      className="h-[43px] w-[43px]"
                      src="images/img_profile_black_900.svg"
                      alt="profile_One"
@@ -126,27 +131,42 @@ const HandsPage = () => {
                  </div>
                </div>
              </div>
-             <Img onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-              style = {{ opacity: isHovered ? 1 : 0, // Show the image if hovered, otherwise hide
-              transition: 'opacity 0.3s ease', width: '355px', height: '250px' }} // Add a smooth transition effect
-               className="absolute h-[300px] object-cover left-[77%] w-[27%]"
-               src="images/noyellowing.png"
-               alt="screenshot20231"
-             />
-             <Img 
-               className="absolute bottom-[17%] h-[364px] object-cover bottom-[35%] left-[77%] w-[35%]"
-               src="images/mildyellowing.png"
-               alt="screenshot20231_One"
-               style={{ width: '350px', height: '245px' }}
-             />
-            
              <Img
-               className="absolute bottom-[17%] h-[364px] object-cover top-[75%] left-[77%] w-[31%]"
-               src="images/severeyellowing.png"
-               alt="screenshot20231_One"
-               style={{ width: '365px', height: '265px' }}
-             />
+        style={{
+          opacity: isHoveredOne ? 1 : 0,
+          transition: "opacity 0.3s ease",
+          width: "355px",
+          height: "250px",
+        }}
+        className="absolute h-[300px] object-cover left-[77%] w-[27%]"
+        src="images/noyellowing.png"
+        alt="screenshot20231"
+      />
+
+      <Img
+        style={{
+          opacity: isHoveredTwo ? 1 : 0,
+          transition: "opacity 0.3s ease",
+          width: "350px",
+          height: "245px",
+        }}
+        className="absolute bottom-[17%] h-[364px] object-cover bottom-[35%] left-[77%] w-[35%]"
+        src="images/mildyellowing.png"
+        alt="screenshot20231_One"
+      />
+
+      <Img
+        style={{
+          opacity: isHoveredThree ? 1 : 0,
+          transition: "opacity 0.3s ease",
+          width: "365px",
+          height: "265px",
+        }}
+        className="absolute bottom-[17%] h-[364px] object-cover top-[75%] left-[77%] w-[31%]"
+        src="images/severeyellowing.png"
+        alt="screenshot20231_One"
+      />
+
              {/*  <div className="absolute bottom-[0] flex flex-col items-center justify-start left-[0] w-[47%]">*/}
               {/*   <div className="flex flex-col items-center justify-start w-full">*/}
                   {/* <div className="flex flex-col items-center justify-end w-full">*/}
@@ -154,7 +174,7 @@ const HandsPage = () => {
                     {/* <div className="flex sm:flex-col flex-row sm:gap-10 gap-[85px] items-start justify-end w-[99%] md:w-full">*/}
                        {/*<div className="flex flex-col gap-[47px] items-center justify-start sm:mt-0 mt-10 w-4/5 sm:w-full">*/}
                         
-                       <div style={{paddingLeft: '150px', }} className="flex w-full min-h-screen p-5">
+                       <div style={{paddingLeft: '150px', }} className="flex w-full min-h-screen p-12">
       <div className="w-full max-w-md">
       <Text
                         className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
@@ -162,25 +182,25 @@ const HandsPage = () => {
                       >
                        Eyes Inspection
                       </Text>
-        <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '17px'}}>
+        <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '22px'}}>
             {" "}
             Check for yellowing in the eyes on a 0-2 scale: {" "}
             
          </h4>
          {/*Yellowing of eye severity scale */}
          <FormControl>
-         <FormLabel style={{paddingBottom: '25px', paddingTop: '5px', color: 'black' }} id="demo-row-radio-buttons-group-label">Symptoms may include: jaundice (liver disease), opisthotonos (dramatic abnormal posture) or poor feeding</FormLabel>
+         <FormLabel style={{paddingBottom: '25px', paddingTop: '5px', fontSize: '17px', color: 'black' }} id="demo-row-radio-buttons-group-label">Symptoms may include: jaundice (liver disease), opisthotonos (dramatic abnormal posture) or poor feeding</FormLabel>
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
       >
-        <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
+        <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
         <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
         <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
         <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
         
-  <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
+  <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
       </RadioGroup>
     </FormControl>
    

@@ -52,11 +52,11 @@ const AbdomenFourPage = () => {
               <Button className="cursor-pointer font-medium leading-[normal] min-w-[112px] text-center text-lg" shape="round">
                 Heart </Button> </Link>
               
-              <Link to="/hands">
+              <Link to="/handsone">
               <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round">
                 Hands</Button> </Link>
 
-                <Link to="/handsone">
+                <Link to="/abdomenone">
               <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round">
   Legs</Button> </Link>
 
@@ -154,7 +154,7 @@ const AbdomenFourPage = () => {
                       >
                        Abdomen Palpation
                       </Text>
-        <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '17px'}}>
+        <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '19px'}}>
             {" "}
             Feel for tenderness and input grading for each region: {" "}
             

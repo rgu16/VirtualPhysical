@@ -13,7 +13,9 @@ import { useState } from 'react';
 
 
 const AbdomenPage = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHoveredOne, setIsHoveredOne] = useState(false);
+  const [isHoveredTwo, setIsHoveredTwo] = useState(false);
+  const [isHoveredThree, setIsHoveredThree] = useState(false);
   return (
     <>
       <div
@@ -53,11 +55,11 @@ const AbdomenPage = () => {
               <Button className="cursor-pointer font-medium leading-[normal] min-w-[112px] text-center text-lg" shape="round">
                 Heart </Button> </Link>
               
-              <Link to="/hands">
+              <Link to="/handsone">
               <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round">
                 Hands</Button> </Link>
 
-                <Link to="/handsone">
+                <Link to="/abdomenone">
               <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round">
   Legs</Button> </Link>
 
@@ -101,7 +103,8 @@ const AbdomenPage = () => {
 
                      </div>
               
-                     <Img
+                     <Img onMouseEnter={() => setIsHoveredOne(true)}
+                      onMouseLeave={() => setIsHoveredOne(false)}
                        className="h-[43px] w-[43px]"
                        src="images/img_profile_black_900.svg"
                        alt="profile"
@@ -109,13 +112,15 @@ const AbdomenPage = () => {
                      
                    </div>
                    
-                   <Img
+                   <Img onMouseEnter={() => setIsHoveredTwo(true)}
+                    onMouseLeave={() => setIsHoveredTwo(false)}
                      className="h-[43px] w-[43px]"
                      src="images/img_profile_black_900.svg"
                      alt="profile_One"
                    />
                  </div>
-                 <Img
+                 <Img onMouseEnter={() => setIsHoveredThree(true)}
+                     onMouseLeave={() => setIsHoveredThree(false)}
                      className="h-[43px] w-[43px]"
                      src="images/img_profile_black_900.svg"
                      alt="profile_One"
@@ -126,26 +131,27 @@ const AbdomenPage = () => {
                  </div>
                </div>
              </div>
-             <Img onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-              style = {{ opacity: isHovered ? 1 : 0, // Show the image if hovered, otherwise hide
+             <Img 
+              style = {{ opacity: isHoveredOne ? 1 : 0, // Show the image if hovered, otherwise hide
               transition: 'opacity 0.3s ease', }} // Add a smooth transition effect
                className="absolute h-[300px] object-cover left-[75%] w-[27%]"
                src="images/radial.png"
                alt="screenshot20231"
              />
-             <Img 
+             <Img  style = {{width: '370px', height: '320px', opacity: isHoveredTwo ? 1 : 0, // Show the image if hovered, otherwise hide
+              transition: 'opacity 0.3s ease', }} 
                className="absolute bottom-[17%] h-[364px] object-cover bottom-[28%] left-[74%] w-[35%]"
                src="images/brachialpulse.png"
                alt="screenshot20231_One"
-               style={{ width: '370px', height: '320px' }}
+             
              />
             
-             <Img
+             <Img style = {{width: '380px', height: '280px', opacity: isHoveredThree ? 1 : 0, // Show the image if hovered, otherwise hide
+              transition: 'opacity 0.3s ease', }} 
                className="absolute bottom-[17%] h-[364px] object-cover top-[76%] left-[76%] w-[31%]"
                src="images/carotidpulse.png"
                alt="screenshot20231_One"
-               style={{ width: '380px', height: '280px' }}
+             
              />
              {/*  <div className="absolute bottom-[0] flex flex-col items-center justify-start left-[0] w-[47%]">*/}
               {/*   <div className="flex flex-col items-center justify-start w-full">*/}
@@ -162,76 +168,76 @@ const AbdomenPage = () => {
                       >
                        Pulses and Blood Pressure
                       </Text>
-        <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '17px'}}>
+        <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '20px'}}>
             {" "}
             Check pulses at extremities and classify strength on 0-2 scale: {" "}
             
          </h4>
          {/*i. Radial pulse (wrist) */}
          <FormControl>
-         <FormLabel style={{paddingBottom: '10px', paddingTop: '15px', color: 'black' }} id="demo-row-radio-buttons-group-label">i. Radial pulse (wrist)</FormLabel>
+         <FormLabel style={{paddingBottom: '10px', paddingTop: '15px', color: 'black' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">i. Radial pulse (wrist)</FormLabel>
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
       >
-        <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
+        <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
         <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
         <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
         <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
         
-  <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
+  <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
       </RadioGroup>
     </FormControl>
       
        {/*ii. Brachial */}
        <FormControl>
-         <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">ii. Brachial</FormLabel>
+         <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">ii. Brachial</FormLabel>
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
       >
-        <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
+        <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
         <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
         <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
         <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
         
-  <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
+  <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
       </RadioGroup>
     </FormControl>
 
      {/*iii. Carotid */}
      <FormControl>
-         <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">iii. Carotid</FormLabel>
+         <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black', fontSize: '20px'}} id="demo-row-radio-buttons-group-label">iii. Carotid</FormLabel>
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
       >
-        <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
+        <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
         <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
         <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
         <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
         
-  <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
+  <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
       </RadioGroup>
     </FormControl>
 
     {/*iv. Right lumbar region */}
     <FormControl>
-         <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">iv. Dorsalis pedis pulse (foot) </FormLabel>
+         <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">iv. Dorsalis pedis pulse (foot) </FormLabel>
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
       >
-        <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
+        <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
         <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
         <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
         <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
         
-  <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
+  <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
       </RadioGroup>
     </FormControl>
  
