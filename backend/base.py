@@ -272,7 +272,6 @@ def request_reset_password():
         reset_url = reset_url._replace(path='reset_password',query=f"token={token}")
         reset_url = reset_url.geturl()
         print(reset_url)
-        encoded_url = reset_url.replace('.', '&#46;')
         msg = f"Click the link to reset your password: \n {reset_url}"
         res = send_email("Virtual Physical: Password Reset", msg, email)
         print(res)
@@ -361,7 +360,10 @@ def select_patient():
     token = get_jwt()
     email = request.json.get("email",None)
     name = request.json.get("name",None)
-    today = str(date.today())
+    if (token['type'] == 'medical-tech'):
+        today = str(date.today())
+    else:
+        today = request.json.get("date", None)
     folder = email + "/" + name + "/" + today
     additional_claims = {}
     additional_claims['type'] = token['type']
@@ -374,6 +376,7 @@ def select_patient():
 def upload_json():
     folder =  get_jwt().get("patient")
     filename = request.json.get('filename', None)
+    data = request.json.get("data", None)
     s3.put_object(Body=json.dumps(data), Bucket= USER_BUCKET, Key= folder+filename)
     return {"msg": "Succesfully Uploaded!"}
 
@@ -382,7 +385,8 @@ def upload_json():
 def upload_file():
     folder =  get_jwt().get("patient")
     filename = request.json.get('filename', None)
-    s3.put_object(Body=json.dumps(data), Bucket= USER_BUCKET, Key= folder+filename)
+    file = request.files['file']
+    s3.upload_fileobj(Fileobj=file, Bucket= USER_BUCKET, Key= folder+filename)
     return {"msg": "Succesfully Uploaded!"}
 
 @api.route('/download/<tab>')
@@ -402,6 +406,15 @@ def download_file(tab):
                                                       ExpiresIn=60)  # URL expiration time in seconds
     return data
 
+
+@api.route('/send_message')
+@jwt_required()
+def send_message():
+    email = request.json.get('email', None)
+    msg = request.json.get('msg', None)
+    send_email("Virtual Physical", msg, email)
+    return {"msg": "Message sent"}
+    
 # with api.app_context():
 #     # Making a default account
 #     user['name'] = "Administrator"

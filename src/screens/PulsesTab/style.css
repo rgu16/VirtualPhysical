@@ -852,7 +852,7 @@
     height: 40px;
     left: 100px;
     position: absolute;
-    top: 20px;
+    top: 5px;
     width: 110px;
   }
 
@@ -861,10 +861,11 @@
     font-size: 18px; /* Adjust font size as needed */
     /* Add other styling as needed, such as border, padding, etc. */
     height: 40px;
-    /* left: 6px; */
-    right: -15px;
+    left: -5px;
+    /* right: -15px; */
+    /* left: 100px; */
     position: absolute;
-    top: 20px;
+    top: 2px;
     width: 110px;
   }
 

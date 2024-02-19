@@ -420,7 +420,7 @@ export const PulsesTab = () => {
 
 
                 </div>
-                <p className="span-wrapper-2">
+                <p className="span-wrapper">
                   <span className="text-wrapper">Radial pulse:</span>
                 </p>
               </div>
