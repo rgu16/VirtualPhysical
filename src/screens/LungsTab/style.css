@@ -623,4 +623,16 @@
     top: 1px;
     width: 35px;
   }
+
+  .lungs-tab .error-popup {
+    position: absolute;
+    left: 100%; /* Adjust based on your layout */
+    top: 0;
+    background-color: white;
+    border: 1px solid #ff0000;
+    padding: 5px;
+    margin-left: 10px; /* Give some space between the input and the popup */
+    z-index: 10; /* Ensure it's above other elements */
+    white-space: nowrap; /* Prevents the text from wrapping */
+  }
   

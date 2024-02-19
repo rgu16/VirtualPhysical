@@ -1,7 +1,294 @@
 import React from "react";
 import "./style.css";
+import { useState } from 'react';
+
+// function MyComponent() {
+//   const [inputValue, setInputValue] = useState('+2');
+//   const [isOutOfRange, setIsOutOfRange] = useState(false);
+
+//   const handleInputChange = (e) => {
+//     const value = e.target.value;
+//     setInputValue(value);
+
+//     // Check if the value is out of the -3 to +3 range
+//     const numericValue = parseFloat(value);
+//     if (numericValue < -3 || numericValue > 3) {
+//       setIsOutOfRange(true);
+//     } else {
+//       setIsOutOfRange(false);
+//     }
+//   };
+
+//   return (
+//     <div className="overlap-4">
+//       <img
+//         className="textbox-42"
+//         alt="Rectangle"
+//         src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
+//       />
+//       <input
+//         type="text"
+//         className={`textbox-42 ${isOutOfRange ? 'input-error' : ''}`}
+//         value={inputValue}
+//         onChange={handleInputChange}
+//       />
+//       {isOutOfRange && (
+//         <div className="error-popup">Value must be between -3 and +3.</div>
+//       )}
+//     </div>
+//   );
+// }
+
+// export default MyComponent;
+
+
 
 export const PulsesTab = () => {
+  // State for the radial pulse value and whether it's out of range
+  // const [radialPulseValue, setRadialPulseValue] = useState('');
+  // const [isRadialOutOfRange, setIsRadialOutOfRange] = useState('');
+  const [radialPulseValue, setRadialPulseValue] = useState('');
+  const [radialStatus, setRadialStatus] = useState('');
+  const [brachialPulseValue, setBrachialPulseValue] = useState('');
+  const [brachialStatus, setBrachialStatus] = useState('');
+  const [carotidPulseValue, setCarotidPulseValue] = useState('');
+  const [carotidStatus, setCarotidStatus] = useState('');
+  const [dorsalisPulseValue, setDorsalisPulseValue] = useState('');
+  const [dorsalisStatus, setDorsalisStatus] = useState('');
+
+  const [systolicPulseValue, setSystolicPulseValue] = useState('');
+  const [systolicStatus, setSystolicStatus] = useState('');
+  const [diastolicPulseValue, setDiastolicPulseValue] = useState('');
+  const [diastolicStatus, setDiastolicStatus] = useState('');
+
+
+
+  // const [carotidPulseValue, setcarotidPulseValue] = useState('');
+  // const [iscarotidOutOfRange, setIscarotidOutOfRange] = useState(false);
+
+  // // Handler for radial pulse input changes
+  // const handlecarotidChange = (e) => {
+  //   const value = e.target.value;
+  //   setcarotidPulseValue(value);
+
+  //   // Check if the numeric value is out of the -3 to +3 range
+  //   const numericValue = parseInt(value, 10);
+  //   if (numericValue < 0 || numericValue > 4) {
+  //     setIscarotidOutOfRange(true);
+  //   } else {
+  //     setIscarotidOutOfRange(false);
+  //   }
+  // }
+  const handleRadialChange = (e) => {
+    const value = e.target.value;
+    setRadialPulseValue(value);
+
+    // Convert the value to a number for comparison
+    const numericValue = parseInt(value, 10);
+
+    // Determine the carotid pulse status
+    let status = '';
+    switch (numericValue) {
+      case 0:
+        status = 'absent';
+        break;
+      case 1:
+        status = 'weak';
+        break;
+      case 2:
+        status = 'normal';
+        break;
+      case 3:
+        status = 'increased';
+        break;
+      case 4:
+        status = 'bounding';
+        break;
+      // default:
+      //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
+    }
+
+    setRadialStatus(status);
+  };
+
+  const handleCarotidChange = (e) => {
+    const value = e.target.value;
+    setCarotidPulseValue(value);
+
+    // Convert the value to a number for comparison
+    const numericValue = parseInt(value, 10);
+
+    // Determine the carotid pulse status
+    let status = '';
+    switch (numericValue) {
+      case 0:
+        status = 'absent';
+        break;
+      case 1:
+        status = 'weak';
+        break;
+      case 2:
+        status = 'normal';
+        break;
+      case 3:
+        status = 'increased';
+        break;
+      case 4:
+        status = 'bounding';
+        break;
+      // default:
+      //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
+    }
+
+    setCarotidStatus(status);
+  };
+
+  const handleBrachialChange = (e) => {
+    const value = e.target.value;
+    setBrachialPulseValue(value);
+
+    // Convert the value to a number for comparison
+    const numericValue = parseInt(value, 10);
+
+    // Determine the carotid pulse status
+    let status = '';
+    switch (numericValue) {
+      case 0:
+        status = 'absent';
+        break;
+      case 1:
+        status = 'weak';
+        break;
+      case 2:
+        status = 'normal';
+        break;
+      case 3:
+        status = 'increased';
+        break;
+      case 4:
+        status = 'bounding';
+        break;
+      // default:
+      //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
+    }
+
+    setBrachialStatus(status);
+  };
+
+  const handleDorsalisChange = (e) => {
+    const value = e.target.value;
+    setDorsalisPulseValue(value);
+
+    // Convert the value to a number for comparison
+    const numericValue = parseInt(value, 10);
+
+    // Determine the carotid pulse status
+    let status = '';
+    switch (numericValue) {
+      case 0:
+        status = 'absent';
+        break;
+      case 1:
+        status = 'weak';
+        break;
+      case 2:
+        status = 'normal';
+        break;
+      case 3:
+        status = 'increased';
+        break;
+      case 4:
+        status = 'bounding';
+        break;
+      // default:
+      //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
+    }
+
+    setDorsalisStatus(status);
+  };
+
+  const handleSystolicChange = (e) => {
+    const value = e.target.value;
+    setSystolicPulseValue(value);
+
+    // Convert the value to a number for comparison
+    const numericValue = parseInt(value, 10);
+
+    // Determine the carotid pulse status
+    let status = '';
+    switch (numericValue) {
+      case 0:
+        status = 'absent';
+        break;
+      case 1:
+        status = 'weak';
+        break;
+      case 2:
+        status = 'normal';
+        break;
+      case 3:
+        status = 'increased';
+        break;
+      case 4:
+        status = 'bounding';
+        break;
+      // default:
+      //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
+    }
+
+    setSystolicStatus(status);
+  };
+
+
+  const handleDiastolicChange = (e) => {
+    const value = e.target.value;
+    setDiastolicPulseValue(value);
+
+    // Convert the value to a number for comparison
+    const numericValue = parseInt(value, 10);
+
+    // Determine the carotid pulse status
+    let status = '';
+    switch (numericValue) {
+      case 0:
+        status = 'absent';
+        break;
+      case 1:
+        status = 'weak';
+        break;
+      case 2:
+        status = 'normal';
+        break;
+      case 3:
+        status = 'increased';
+        break;
+      case 4:
+        status = 'bounding';
+        break;
+      // default:
+      //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
+    }
+
+    setDiastolicStatus(status);
+  };
+
+
+
+  // Handler for radial pulse input changes
+  // const handleRadialChange = (e) => {
+  //   const value = e.target.value;
+  //   setRadialPulseValue(value);
+
+  //   // Check if the numeric value is out of the -3 to +3 range
+  //   const numericValue = parseInt(value, 10);
+  //   if (numericValue < 0 || numericValue > 4) {
+  //     setIsRadialOutOfRange(true);
+  //   } else {
+  //     setIsRadialOutOfRange(false);
+  //   }
+  // };
+
+
   return (
     <div className="pulses-tab">
       <div className="overlap-wrapper">
@@ -22,11 +309,30 @@ export const PulsesTab = () => {
                   {/* <p className="element">
                     <span className="span">120</span>
                   </p> */}
-                  <input type="text" className="textbox-43" defaultValue="120" />
+
+
+                  {/* <input type="text" className="textbox-43" defaultValue="120" />
                 </div>
                 <p className="mm-hg">
                   <span className="span">mmHg</span>
+                </p> */}
+
+                <input
+                    type="text"
+                    className={`textbox-43 ${systolicStatus && systolicStatus !== 'normal' ? 'input-error' : ''}`}
+                    value={systolicPulseValue}
+                    onChange={handleSystolicChange}
+                    placeholder="Enter a value"
+                  />
+                  {systolicStatus && systolicStatus !== 'normal' && (
+                    <div className="error-popup">Abnormal systolic value: {systolicStatus}</div>
+                  )}
+                </div>
+          
+                <p className="mm-hg">
+                  <span className="span">mmHg</span>
                 </p>
+              {/* </div> */}
               </div>
               
               <div className="diastolic">
@@ -34,40 +340,35 @@ export const PulsesTab = () => {
                   <span className="text-wrapper">Diastolic:</span>
                 </p>
                 <div className="overlap-2">
-                  {/* <img
-                    className="textbox-42"
-                    alt="Rectangle"
-                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
-                  /> */}
-                  {/* <p className="p">
-                    <span className="span">80</span>
-                  </p> */}
-                  <input type="text" className="textbox-43" defaultValue="80" />
+                  {/* <input type="text" className="textbox-43" defaultValue="80" />
                 </div>
                 <p className="mm-hg-2">
                   <span className="span">mmHg</span>
+                </p> */}
+                <input
+                    type="text"
+                    className={`textbox-43 ${diastolicStatus && diastolicStatus !== 'normal' ? 'input-error' : ''}`}
+                    value={diastolicPulseValue}
+                    onChange={handleDiastolicChange}
+                    placeholder="Enter a value"
+                  />
+                  {diastolicStatus && diastolicStatus !== 'normal' && (
+                    <div className="error-popup">Abnormal diastolic value: {diastolicStatus}</div>
+                  )}
+                </div>
+          
+                <p className="mm-hg">
+                  <span className="span">mmHg</span>
                 </p>
+
               </div>
               <div className="bpm">
                 <p className="span-wrapper">
                   <span className="text-wrapper">Heart Rate:</span>
                 </p>
                 <div className="overlap-3">
-                  {/* <img
-                    className="textbox-42"
-                    alt="Rectangle"
-                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
-                  /> */}
-                  {/* <p className="p">
-                    <span className="span">88</span>
-                  </p> */}
-                  <input type="text" className="textbox-43" defaultValue="88" />
+                  <input type="text" className="textbox-43" placeholder="Enter a value" />
                 </div>
-                {/* <img
-                  className="heart"
-                  alt="Heart"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/heart-1@2x.png"
-                /> */}
                 <p className="bpm-2">
                   <span className="span">bpm</span>
                 </p>
@@ -87,6 +388,8 @@ export const PulsesTab = () => {
               <p className="pulses">
                 <span className="text-wrapper-2">Pulses</span>
               </p>
+
+
               <div className="radial">
                 <div className="overlap-4">
                   <img
@@ -94,17 +397,35 @@ export const PulsesTab = () => {
                     alt="Rectangle"
                     src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
                   />
-                  {/* <p className="element-2">
-                    <input type="text" className="textbox-42" defaultValue="+2" />
-                  </p> */}
-                  <input type="text" className="textbox-42" defaultValue="+2" />
-                  </div>
-                  <p className="span-wrapper-2">
-                    <span className="text-wrapper">Radial pulse:</span>
-                  </p>
-                  {/* <input type="text" className="textbox-42" defaultValue="+2" /> */}
+                  {/* <input
+                    type="text"
+                    className={`textbox-42 ${isRadialOutOfRange ? 'input-error' : ''}`}
+                    value={radialPulseValue}
+                    onChange={handleRadialChange}
+                    placeholder="Enter a value"
+                  />
+                  {isRadialOutOfRange && (
+                    <div className="error-popup">Value must be between 0 and +4.</div>
+                  )} */}
+                  <input
+                    type="text"
+                    className={`textbox-42 ${radialStatus && radialStatus !== 'normal' ? 'input-error' : ''}`}
+                    value={radialPulseValue}
+                    onChange={handleRadialChange}
+                    placeholder="Enter a value"
+                  />
+                  {radialStatus && radialStatus !== 'normal' && (
+                    <div className="error-popup">Abnormal radial pulse status: {radialStatus}</div>
+                  )}
+
+
+                </div>
+                <p className="span-wrapper-2">
+                  <span className="text-wrapper">Radial pulse:</span>
+                </p>
               </div>
               
+
               <div className="brachial">
                 <div className="overlap-4">
                   <img
@@ -112,15 +433,27 @@ export const PulsesTab = () => {
                     alt="Rectangle"
                     src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
                   />
-                  {/* <p className="p">
-                    <span className="span">+1</span>
-                  </p> */}
-                  <input type="text" className="textbox-42" defaultValue="+1" />
+                  {/* <input type="text" className="textbox-42" defaultValue="+1" />
                 </div>
                 <p className="brachial-pulse">
                   <span className="text-wrapper">Brachial pulse:</span>
                 </p>
-                {/* <input type="text" className="textbox-42" defaultValue="+1" /> */}
+                <input type="text" className="textbox-42" defaultValue="+1" /> */}
+                <input
+                    type="text"
+                    className={`textbox-42 ${carotidStatus && carotidStatus !== 'normal' ? 'input-error' : ''}`}
+                    value={brachialPulseValue}
+                    onChange={handleBrachialChange}
+                    placeholder="Enter a value"
+                  />
+                  {brachialStatus && brachialStatus !== 'normal' && (
+                    <div className="error-popup">Abnormal posterior tibial status: {brachialStatus}</div>
+                  )}
+                </div>
+          
+                <p className="span-wrapper">
+                  <span className="text-wrapper">Posterior tibial pulse:</span>
+                </p>
               </div>
 
               <div className="carotid">
@@ -130,11 +463,20 @@ export const PulsesTab = () => {
                     alt="Rectangle"
                     src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
                   />
-                  {/* <p className="p">
-                    <span className="span">+2</span>
-                  </p> */}
-                  <input type="text" className="textbox-42" defaultValue="+2" />
+
+                  <input
+                    type="text"
+                    className={`textbox-42 ${carotidStatus && carotidStatus !== 'normal' ? 'input-error' : ''}`}
+                    value={carotidPulseValue}
+                    onChange={handleCarotidChange}
+                    placeholder="Enter a value"
+                  />
+                  {carotidStatus && carotidStatus !== 'normal' && (
+                    <div className="error-popup">Abnormal carotid pulse status: {carotidStatus}</div>
+                  )}
                 </div>
+                
+
                 <p className="span-wrapper">
                   <span className="text-wrapper">Carotid pulse:</span>
                 </p>
@@ -148,15 +490,30 @@ export const PulsesTab = () => {
                       alt="Rectangle"
                       src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
                     />
-                    {/* <p className="element-3">
-                      <span className="span">0</span>
-                    </p> */}
-                    <input type="text" className="textbox-42" defaultValue="0" />
+                    {/* <input type="text" className="textbox-42" defaultValue="0" />
                   </div>
 
                   <p className="span-wrapper-2">
                     <span className="text-wrapper">Dorsalis pedis pulse:</span>
-                  </p>
+                  </p> */}
+
+                  <input
+                    type="text"
+                    className={`textbox-42 ${dorsalisStatus && dorsalisStatus !== 'normal' ? 'input-error' : ''}`}
+                    value={dorsalisPulseValue}
+                    onChange={handleDorsalisChange}
+                    placeholder="Enter a value"
+                  />
+                  {dorsalisStatus && dorsalisStatus !== 'normal' && (
+                    <div className="error-popup">Abnormal dorsalis pedis pulse status: {dorsalisStatus}</div>
+                  )}
+                </div>
+                
+
+                <p className="span-wrapper">
+                  <span className="text-wrapper">Dorsalis pedis pulse:</span>
+                </p>
+
                 </div>
               </div>
             </div>

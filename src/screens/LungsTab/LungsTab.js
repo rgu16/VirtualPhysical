@@ -1,7 +1,30 @@
 import React from "react";
 import "./style.css";
+import { useState } from 'react';
 
 export const LungsTab = () => {
+  const [breathingValue, setBreathingValue] = useState('');
+  const [breathingStatus, setBreathingStatus] = useState('');
+
+  const handleBreathingChange = (e) => {
+    const value = e.target.value;
+    setBreathingValue(value);
+  
+    // Convert the value to a number for comparison
+    const numericValue = parseInt(value, 10);
+  
+    // Determine the breathing status based on the specified criteria
+    let status = '';
+    if (numericValue >= 12 && numericValue <= 18) {
+      status = 'normal';
+    } else if (numericValue < 12 || numericValue > 25) {
+      status = 'abnormal';
+    }
+  
+    setBreathingStatus(status);
+  };
+
+
   return (
     <div className="lungs-tab">
       <div className="overlap-wrapper">
@@ -29,7 +52,9 @@ export const LungsTab = () => {
                 <p className="element">
                   <span className="text-wrapper">30</span>
                 </p> */}
-                <input
+
+
+                {/* <input
                 type="text"
                 className="rectangle"
                 defaultValue=""
@@ -38,14 +63,32 @@ export const LungsTab = () => {
                     height: 'same height as the image',
                     // Additional styling to make it look like a rectangle
                 }}
-                />
+                /> */}
+                <input
+                    type="text"
+                    className={`rectangle ${breathingStatus && breathingStatus !== 'normal' ? 'input-error' : ''}`}
+                    value={breathingValue}
+                    onChange={handleBreathingChange}
+                    placeholder="Enter a value"
+                    style={{
+                      width: 'same width as the image',
+                      height: 'same height as the image',
+                      // Additional styling to make it look like a rectangle
+                  }}
+                  />
+                  {breathingStatus && breathingStatus !== 'normal' && (
+                    <div className="error-popup">Abnormal breathing value: {breathingStatus}</div>
+                  )}
+                {/* </div> */}
               </div>
+
               <p className="breaths-min">
                 <span className="span">breaths/min</span>
               </p>
               <p className="breathing-rate">
                 <span className="span">Breathing rate:</span>
               </p>
+
             </div>
             {/* <div className="notes">
               <div className="specialty-physician-wrapper">

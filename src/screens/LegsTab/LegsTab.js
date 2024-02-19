@@ -1,7 +1,50 @@
 import React from "react";
 import "./style.css";
+import { useState } from 'react';
 
 export const LegsTab = () => {
+  const [L_pittingValue, setL_pittingValue] = useState('');
+  const [L_pittingStatus, setL_pittingStatus] = useState('');
+  const [R_pittingValue, setR_pittingValue] = useState('');
+  const [R_pittingStatus, setR_pittingStatus] = useState('');
+
+  const handleL_pittingChange = (e) => {
+    const value = e.target.value;
+    setL_pittingValue(value);
+  
+    // Convert the value to a number for comparison
+    const numericValue = parseInt(value, 10);
+  
+    // Determine the pitting edema status based on the specified criteria
+    let status = '';
+    if (numericValue >= 0 && numericValue <= 1) {
+      status = 'normal';
+    } else if (numericValue >= 2) {
+      status = 'abnormal';
+    }
+  
+    setL_pittingStatus(status);
+  };
+
+  const handleR_pittingChange = (e) => {
+    const value = e.target.value;
+    setR_pittingValue(value);
+  
+    // Convert the value to a number for comparison
+    const numericValue = parseInt(value, 10);
+  
+    // Determine the pitting edema status based on the specified criteria
+    let status = '';
+    if (numericValue >= 0 && numericValue <= 1) {
+      status = 'normal';
+    } else if (numericValue >= 2) {
+      status = 'abnormal';
+    }
+  
+    setR_pittingStatus(status);
+  };
+
+
   return (
     <div className="legs-tab">
       <div className="overlap-wrapper-3">
@@ -40,14 +83,36 @@ export const LegsTab = () => {
               {/* <p className="element-13">
                 <span className="text-wrapper-42">+3</span>
               </p> */}
-              <input type="text" className="textbox-42" defaultValue="+3" />
+              {/* <input type="text" className="textbox-42" defaultValue="+3" /> */}
+              <input
+                    type="text"
+                    className={`textbox-42 ${R_pittingStatus && R_pittingStatus !== 'normal' ? 'input-error' : ''}`}
+                    value={R_pittingValue}
+                    onChange={handleR_pittingChange}
+                    placeholder="Enter a value"
+                  />
+                  {R_pittingStatus && R_pittingStatus !== 'normal' && (
+                    <div className="error-popup">Abnormal pitting edema value: {R_pittingStatus}</div>
+                  )}
+
             </div>
             <div className="overlap-19">
               <img className="textbox-42" alt="Rectangle" src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png" />
               {/* <p className="element-14">
                 <span className="text-wrapper-42">0</span>
               </p> */}
-              <input type="text" className="textbox-42" defaultValue="0" />
+              {/* <input type="text" className="textbox-42" defaultValue="0" /> */}
+              <input
+                    type="text"
+                    className={`textbox-42 ${L_pittingStatus && L_pittingStatus !== 'normal' ? 'input-error' : ''}`}
+                    value={L_pittingValue}
+                    onChange={handleL_pittingChange}
+                    placeholder="Enter a value"
+                  />
+                  {L_pittingStatus && L_pittingStatus !== 'normal' && (
+                    <div className="error-popup">Abnormal pitting edema value: {L_pittingStatus}</div>
+                  )}
+
             </div>
             <img
               className="mdi-question-mark-3"
