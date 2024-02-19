@@ -63,11 +63,12 @@ export default function App() {
                         </ProtectedRoute>
                     }/>
                     <Route path="/reset_password" element={<ResetPasswordPage proxy={proxy}/>} />
+                    
                     <Route path="/general" element={<GeneralTab />} />
                     <Route path="/summary-flagged" element={<SummaryFlagged />} />
                     <Route path="/summary" element={<Summary />} />
                     <Route path="/pulses" element={<PulsesTab />} />
-                    {/* <Route path="/lungs" element={<LungsTab />} /> */}
+                    <Route path="/lungs" element={<LungsTab />} />
                     <Route path="/legs-tab-clicked" element={<LegsTabClicked />} />
                     <Route path="/legs-tab-clicked2" element={<LegsTabClickedScreen />} />
                     <Route path="/legs" element={<LegsTab />} />
@@ -116,7 +117,7 @@ export default function App() {
                     <Route path="/pagefour" element={<PageFour />} />
                     <Route path="/form" element={<Form />} />
                     <Route path="/calendario" element={<Calendario />} /> */}
-                    <Route path="/lungs" element={<Lungs />} />
+                    {/* <Route path="/lungs" element={<Lungs />} /> */}
                     <Route path="/demographic" element={<Demographic />} />
                     <Route path="/hands" element={<Hands />} />
                     <Route path="/handsone" element={<HandsOne />} />
