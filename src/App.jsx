@@ -6,18 +6,19 @@ import {useToken} from './components';
 import { jwtDecode } from 'jwt-decode';
 // import {Summary} from "./screens"
 import {SummaryFlagged, Summary, LegsTabClicked, LegsTabClickedScreen, LegsTab, GeneralTab, PulsesTab, LungsTab, Appointments, Messages, Setting} from "./screens"
+import {LegsMedPage, HandsMedPage, AbdomenMedPage, HeartMedPage, PulsesMedPage, GeneralMedPage, DemographicMedPage, EyesMedPage, LungsMedPage} from "./pages"
 import NotFound from "pages/NotFound";
 // import AbdomenThree from "pages/AbdomenThree";
 // import AbdomenTwo from"pages/AbdomenTwo";
-import AbdomenOne from"pages/AbdomenOne";
-import Abdomen from"pages/Abdomen";
-import AbdomenFour from"pages/AbdomenFour";
-import DemographicOne from"pages/DemographicOne";
-import Heart from"pages/Heart";
-import HandsOne from"pages/HandsOne";
-import Hands from"pages/Hands";
-import Demographic from"pages/Demographic";
-import Lungs from"pages/Lungs";
+// import AbdomenOne from"pages/LegsMedPage";
+// import Abdomen from"pages/PulsesMedPage";
+// import AbdomenFour from"pages/AbdomenMedPage";
+// import DemographicOne from"pages/GeneralMedPage";
+// import Heart from"pages/HeartMedPage";
+// import HandsOne from"pages/HandsMedPage";
+import Hands from"pages/EyesMedPage";
+import Demographic from"pages/DemographicMedPage";
+// import Lungs from"pages/Lungs";
 // import Calendario from"pages/Calendario";
 // import Form from"pages/Form";
 // import PageFour from"pages/PageFour";
@@ -118,14 +119,15 @@ export default function App() {
                     <Route path="/form" element={<Form />} />
                     <Route path="/calendario" element={<Calendario />} /> */}
                     {/* <Route path="/lungs" element={<Lungs />} /> */}
-                    <Route path="/demographic" element={<Demographic />} />
-                    <Route path="/hands" element={<Hands />} />
-                    <Route path="/handsone" element={<HandsOne />} />
-                    <Route path="/heart" element={<Heart />} />
-                    <Route path="/demographicone" element={<DemographicOne />} />
-                    <Route path="/abdomenfour" element={<AbdomenFour />} />
-                    <Route path="/abdomen" element={<Abdomen />} />
-                    <Route path="/abdomenone" element={<AbdomenOne />} />
+                    <Route path="/demographic" element={<DemographicMedPage />} />
+                    <Route path="/hands" element={<EyesMedPage />} />
+                    <Route path="/handsone" element={<HandsMedPage />} />
+                    <Route path="/heart" element={<HeartMedPage />} />
+                    <Route path="/demographicone" element={<GeneralMedPage />} />
+                    <Route path="/abdomenfour" element={<AbdomenMedPage />} />
+                    <Route path="/abdomen" element={<PulsesMedPage />} />
+                    <Route path="/abdomenone" element={<LegsMedPage />} />
+                    <Route path="/lungsmed" element={<LungsMedPage />} />
                     {/* <Route path="/abdomentwo" element={<AbdomenTwo />} />
                     <Route path="/abdomenthree" element={<AbdomenThree />} /> */}
                 </Routes>
