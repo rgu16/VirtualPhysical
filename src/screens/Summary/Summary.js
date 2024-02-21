@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-export const Summary = () => {
+export const Summary = (props) => {
   return (
     <div className="summary">
       <div className="overlap-group-wrapper">

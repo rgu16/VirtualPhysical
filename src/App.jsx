@@ -45,7 +45,7 @@ import Lungs from"pages/Lungs";
 
 export default function App() {
     const { token, removeToken, setToken} = useToken();
-    const proxy = "http://localhost:5000";
+    const proxy = "https://virtualphysical.pythonanywhere.com/";
     return (
         <Router>
             <div className = 'App'>
@@ -66,7 +66,7 @@ export default function App() {
                     
                     <Route path="/general" element={<GeneralTab />} />
                     <Route path="/summary-flagged" element={<SummaryFlagged />} />
-                    <Route path="/summary" element={<Summary />} />
+                    <Route path="/summary" element={<Summary proxy={proxy} />} />
                     <Route path="/pulses" element={<PulsesTab />} />
                     <Route path="/lungs" element={<LungsTab />} />
                     <Route path="/legs-tab-clicked" element={<LegsTabClicked />} />
