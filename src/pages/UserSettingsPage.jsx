@@ -1,4 +1,3 @@
-import './pages.css';
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from "react";
 import { Img, Input, Text} from "../components";
@@ -168,9 +167,9 @@ const UserSettingsPage = (props) => {
   };
   return (
     <>
-      <div className="bg-white-A700 flex flex-col items-center justify-start mx-auto w-full">
+      <div className="bg-white-A700 flex flex-col items-center justify-start mx-auto w-full h-screen">
       <NavBar  proxy={props.proxy} token={props.token}></NavBar>
-        <div className="bg-gray-50 flex flex-col items-center justify-start pb-[728px] w-full">
+        <div className="bg-gray-50 flex flex-col items-center justify-start pb-[20px] w-full">
           <div className="flex flex-col justify-start w-full">
             <Text className="font-cairo font-semibold md:ml-[0] ml-[97px] mt-[77px] sm:text-4xl md:text-[38px] text-[40px] text-black-900">
               User Profile

@@ -1,11 +1,12 @@
+import './pages.css';
 import axios from 'axios';
 import React, { useState} from "react";
 import { Link, Navigate } from 'react-router-dom';
 import { Img, Input, Text} from "../components";
 import { EyeInvisibleTwoTone, EyeTwoTone } from '@ant-design/icons';
 
-const RegisterPage = (props) => {
-    const [newUser, setNewUser] = useState({email: '', password: '', name:'', accountType:''});
+const PatientSearchPage = (props) => {
+    const [newUser, setNewUser] = useState({email: '', date: '', name:''});
     const [navigate, setNavigate] = useState();
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState();
@@ -202,5 +203,5 @@ const RegisterPage = (props) => {
     );
 }
 
-export default RegisterPage
+export default PatientSearchPage
 

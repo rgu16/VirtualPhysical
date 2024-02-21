@@ -4,45 +4,10 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, } from 'react
 import {LoginPage, RegisterPage, ForgotPasswordPage, UploadFilePage, ResetPasswordPage, UserSettingsPage, AdminHomePage, Home} from "./pages";
 import {useToken} from './components';
 import { jwtDecode } from 'jwt-decode';
-// import {Summary} from "./screens"
 import {SummaryFlagged, Summary, LegsTabClicked, LegsTabClickedScreen, LegsTab, GeneralTab, PulsesTab, LungsTab, Appointments, Messages, Setting} from "./screens"
 import {LegsMedPage, HandsMedPage, AbdomenMedPage, HeartMedPage, PulsesMedPage, GeneralMedPage, DemographicMedPage, EyesMedPage, LungsMedPage} from "./pages"
 import NotFound from "pages/NotFound";
-// import AbdomenThree from "pages/AbdomenThree";
-// import AbdomenTwo from"pages/AbdomenTwo";
-// import AbdomenOne from"pages/LegsMedPage";
-// import Abdomen from"pages/PulsesMedPage";
-// import AbdomenFour from"pages/AbdomenMedPage";
-// import DemographicOne from"pages/GeneralMedPage";
-// import Heart from"pages/HeartMedPage";
-// import HandsOne from"pages/HandsMedPage";
-import Hands from"pages/EyesMedPage";
-import Demographic from"pages/DemographicMedPage";
-// import Lungs from"pages/Lungs";
-// import Calendario from"pages/Calendario";
-// import Form from"pages/Form";
-// import PageFour from"pages/PageFour";
-// import PageThree from"pages/PageThree";
-// import PageTwo from"pages/PageTwo";
-// import PatientDetails from"pages/PatientDetails";
-// import AppointmentsOverviewPage from "pages/AppointmentsOverviewPage";
-// import LegsTabclickedOne from"pages/LegsTabclickedOne";
-// import LungsTabselectedlungregionOne from "pages/LungsTabselectedlungregionOne";
-// import Summaryflagged from"pages/Summaryflagged";
-// import LegsTabclicked from"pages/LegsTabclicked";
-// import HeartTabclicked from"pages/HeartTabclicked";
-// import AbdomenTabquestionmarkclicked from "pages/AbdomenTabquestionmarkclicked";
-// import PulsesTabselectedartery from "pages/PulsesTabselectedartery";
-// import LungsTabselectedlungregion from "pages/LungsTabselectedlungregion";
-// // import Summary from"pages/Summary";
-// import LegsTab from"pages/LegsTab";
-// import HeartTab from"pages/HeartTab";
-// import AbdomenTab from"pages/AbdomenTab";
-// import PulsesTab from"pages/PulsesTab";
-// import LungsTab from"pages/LungsTab";
-// import GeneralTab from"pages/GeneralTab";
-// import DemographicsTab from"pages/DemographicsTab";
-// import Page from"pages/Page";
+
 
 export default function App() {
     const { token, removeToken, setToken} = useToken();
@@ -65,7 +30,7 @@ export default function App() {
                     }/>
                     <Route path="/reset_password" element={<ResetPasswordPage proxy={proxy}/>} />
                     
-                    <Route path="/general" element={<GeneralTab />} />
+                    {/* <Route path="/general" element={<GeneralTab />} />
                     <Route path="/summary-flagged" element={<SummaryFlagged />} />
                     <Route path="/summary" element={<Summary proxy={proxy} />} />
                     <Route path="/pulses" element={<PulsesTab />} />
@@ -75,61 +40,19 @@ export default function App() {
                     <Route path="/legs" element={<LegsTab />} />
                     <Route path="/messages" element={<Messages />} />
                     <Route path="/setting" element={<Setting />} />
-                    <Route path="/appointment" element={<Appointments />} />
+                    <Route path="/appointment" element={<Appointments />} /> */}
                     
                     <Route path="/home" element={<Home />} />
                     <Route path="*" element={<NotFound />} />
-                    {/* <Route path="/page" element={<Page />} />
-                    <Route path="/demographicstab" element={<DemographicsTab />} />
-                    <Route path="/generaltab" element={<GeneralTab />} />
-                    <Route path="/lungstab" element={<LungsTab />} />
-                    <Route path="/pulsestab" element={<PulsesTab />} />
-                    <Route path="/abdomentab" element={<AbdomenTab />} />
-                    <Route path="/hearttab" element={<HeartTab />} />
-                    <Route path="/legstab" element={<LegsTab />} />
-                    <Route path="/summary" element={<Summary />} />
-                    <Route
-                    path="/lungstabselectedlungregion"
-                    element={<LungsTabselectedlungregion />}
-                    />
-                    <Route
-                    path="/pulsestabselectedartery"
-                    element={<PulsesTabselectedartery />}
-                    />
-                    <Route
-                    path="/abdomentabquestionmarkclicked"
-                    element={<AbdomenTabquestionmarkclicked />}
-                    />
-                    <Route path="/hearttabclicked" element={<HeartTabclicked />} />
-                    <Route path="/legstabclicked" element={<LegsTabclicked />} />
-                    <Route path="/summaryflagged" element={<Summaryflagged />} />
-                    <Route
-                    path="/lungstabselectedlungregionone"
-                    element={<LungsTabselectedlungregionOne />}
-                    />
-                    <Route path="/legstabclickedone" element={<LegsTabclickedOne />} />
-                    <Route
-                    path="/appointmentsoverviewpage"
-                    element={<AppointmentsOverviewPage />}
-                    /> */}
-                    {/* <Route path="/patientdetails" element={<PatientDetails />} />
-                    <Route path="/pagetwo" element={<PageTwo />} />
-                    <Route path="/pagethree" element={<PageThree />} />
-                    <Route path="/pagefour" element={<PageFour />} />
-                    <Route path="/form" element={<Form />} />
-                    <Route path="/calendario" element={<Calendario />} /> */}
-                    {/* <Route path="/lungs" element={<Lungs />} /> */}
-                    <Route path="/demographic" element={<DemographicMedPage />} />
-                    <Route path="/hands" element={<EyesMedPage />} />
-                    <Route path="/handsone" element={<HandsMedPage />} />
-                    <Route path="/heart" element={<HeartMedPage />} />
-                    <Route path="/demographicone" element={<GeneralMedPage />} />
-                    <Route path="/abdomenfour" element={<AbdomenMedPage />} />
-                    <Route path="/abdomen" element={<PulsesMedPage />} />
-                    <Route path="/abdomenone" element={<LegsMedPage />} />
-                    <Route path="/lungsmed" element={<LungsMedPage />} />
-                    {/* <Route path="/abdomentwo" element={<AbdomenTwo />} />
-                    <Route path="/abdomenthree" element={<AbdomenThree />} /> */}
+                    <Route path="/demographic" element={<DemographicMedPage proxy={proxy} token={token}/>} />
+                    <Route path="/general" element={<GeneralMedPage proxy={proxy} token={token}/>} />
+                    <Route path="/eyes" element={<EyesMedPage proxy={proxy} token={token}/>} />
+                    <Route path="/hands" element={<HandsMedPage proxy={proxy} token={token}/>} />
+                    <Route path="/heart" element={<HeartMedPage proxy={proxy} token={token}/>} />
+                    <Route path="/abdomen" element={<AbdomenMedPage proxy={proxy} token={token}/>} />
+                    <Route path="/pulses" element={<PulsesMedPage proxy={proxy} token={token}/>} />
+                    <Route path="/legs" element={<LegsMedPage proxy={proxy} token={token}/>} />
+                    <Route path="/lungs" element={<LungsMedPage proxy={proxy} token={token}/>} />
                 </Routes>
             </div>
         </Router>

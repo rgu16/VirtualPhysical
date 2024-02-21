@@ -1,4 +1,3 @@
-import './pages.css';
 import axios from 'axios';
 import React, { useState, useEffect} from "react";
 import {Input, Text} from "../components";

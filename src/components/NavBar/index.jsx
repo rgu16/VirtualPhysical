@@ -1,32 +1,32 @@
-import React, { useState, useEffect, useRef } from "react";
-// import "./style.css";
+import React, { useState, useEffect} from "react";
 import { jwtDecode } from 'jwt-decode';
 import { Img, Line, Text } from "../";
 import axios from 'axios';
+
 const NavBar = (props) => {
-  // const token = props.token
+  const token = props.token
   const [user, setUser] = useState({name:'', email:'', workplace:'',timezone:'',zoomlink:''});
   const [profilePic, setProfilePic] = useState()
   const [imageLoaded, setImageLoaded] = useState(false);
-  // useEffect(() => {
-  //   axios({
-  //       method: "GET",
-  //       url: props.proxy + "/profile",
-  //       headers: {
-  //       Authorization: 'Bearer ' + token
-  //       }
-  //   })
-  //   .then((response) => {
-  //       const res = response.data
-  //       setUser(res.data)
-  //       setProfilePic(res.pic)
-  //       console.log(res)
-  //   }).catch((error) => {
-  //       console.log(error.response)
-  //       console.log(error.response.status)
-  //       console.log(error.response.headers)
-  //   })
-  // }, [token, props.proxy]);
+  useEffect(() => {
+    axios({
+        method: "GET",
+        url: props.proxy + "/profile",
+        headers: {
+        Authorization: 'Bearer ' + token
+        }
+    })
+    .then((response) => {
+        const res = response.data
+        setUser(res.data)
+        setProfilePic(res.pic)
+        console.log(res)
+    }).catch((error) => {
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)
+    })
+  }, [token, props.proxy]);
   return (
     <>
       <header className={props.className}>
@@ -46,13 +46,14 @@ const NavBar = (props) => {
           </Text>
         {/* </div> */}
         <div className="flex flex row gap-5 items-center mb-[27px] md:ml-[0] ml-[900px] md:mt-0 mt-[37px]">
-        <a href="/appointment">
+        {jwtDecode(token).type === "physician" &&         
+            <a href="/appointment">
                 <img
                   className="calendar-icon-2"
                   alt="Calendar icon"
                   src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/calendar-icon-21@2x.png"
                 />
-              </a>
+              </a>}
               <a href="/setting">
                 <img
                   className="settings-icon-2"
@@ -67,13 +68,14 @@ const NavBar = (props) => {
                   src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/chart-icon-20@2x.png"
                 />
               </a>
+              {jwtDecode(token).type === "physician" &&
               <a href="/messages">
                 <img
                   className="message-icon-2"
                   alt="Message icon"
                   src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/message-icon-19@2x.png"
                 />
-              </a>
+              </a>}
               </div>
         <Line className="bg-blue_gray-100 md:h-0.5 h-14 mb-[15px] ml-12 md:ml-[0] md:mt-0 mt-[23px] rounded-[1px] w-0.5 md:w-full" />
         <div className="flex flex-row gap-6 items-center justify-center mb-[13px] ml-8 md:ml-[0] mr-[50px] md:mt-0 mt-[23px] w-[12%] md:w-full">
@@ -104,7 +106,7 @@ const NavBar = (props) => {
                   className="text-gray-500 text-right text-sm"
                   size="txtCairoRegular14"
                 >
-                  {/* {jwtDecode(token).type} */}
+                  {jwtDecode(token).type}
                 </Text>
               </div>
               <Img className="h-2" src="images/img_arrow.svg" alt="arrow" />

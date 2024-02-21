@@ -9,7 +9,7 @@ body {
   margin: 0;
   padding: 0;
   width: 148.5%; /* Compensate for the scaled width */
-  height: auto; /* Auto height */
+  height: auto; 
 }
 .dhiwise-code,
 .dhiwise-navigation {

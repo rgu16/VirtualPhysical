@@ -1,4 +1,3 @@
-import './pages.css';
 import axios from 'axios';
 import React, { useState} from "react";
 import { Link } from 'react-router-dom';
@@ -29,7 +28,7 @@ const ForgotPasswordPage = (props) => {
 
     return (
         <>
-        <div className="bg-white-A700 flex flex-col items-center justify-start mx-auto w-full">
+        <div className="bg-white-A700 flex flex-col items-center justify-start mx-auto w-full h-screen">
         <header className="bg-white-A700 flex md:flex-col flex-row font-dmsans md:gap-5 items-center justify-start md:px-5 w-full" >
           <div className="flex flex-row gap-2 items-start justify-start mb-[22px] ml-7 md:ml-[0] md:mt-0 mt-[30px] w-[14%] md:w-full">
             <Img

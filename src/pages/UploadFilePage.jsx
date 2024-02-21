@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {Document, Page} from 'react-pdf';
 import { PDFViewer } from '../components';
-import './pages.css';
 import axios from 'axios';
 // import pdf from "./EkoRecordingPDFExport.pdf"
 const UploadFilePage = (props) => {

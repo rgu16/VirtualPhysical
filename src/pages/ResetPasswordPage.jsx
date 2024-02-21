@@ -1,4 +1,3 @@
-import './pages.css';
 import axios from 'axios';
 import React, { useState} from "react";
 import { Link, useLocation, Navigate } from 'react-router-dom';

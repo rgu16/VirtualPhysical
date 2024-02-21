@@ -1,11 +1,12 @@
+import './pages.css';
 import axios from 'axios';
 import React, { useState} from "react";
 import { Link, Navigate } from 'react-router-dom';
 import { Img, Input, Text} from "../components";
 import { EyeInvisibleTwoTone, EyeTwoTone } from '@ant-design/icons';
 
-const RegisterPage = (props) => {
-    const [newUser, setNewUser] = useState({email: '', password: '', name:'', accountType:''});
+const PatientSearchPage = (props) => {
+    const [newUser, setNewUser] = useState({email: '', date: '', name:''});
     const [navigate, setNavigate] = useState();
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState();
@@ -18,17 +19,15 @@ const RegisterPage = (props) => {
         e.preventDefault();
         axios({
           method:"POST",
-          url: props.proxy + "/register",
+          url: props.proxy + "/selec_patient",
           data:{
             email: newUser.email,
-            password: newUser.password,
             name: newUser.name,
-            accountType: newUser.accountType
           }
         })
         .then((response)=>{
-          // props.setToken(response.data.access_token)
-          setNavigate('/')
+          props.setToken(response.data.access_token)
+          setNavigate('/demographics')
         }).catch((error)=>{
           if(error.response){
             console.log(error.response)
@@ -37,7 +36,7 @@ const RegisterPage = (props) => {
             setError(error.response)
           }
         })
-        setNewUser({email: '', password: '', name:'', accountType:''});
+        setNewUser({email: '', date: '', name:''});
     }
 
     const handleInputChange = (e) => {
@@ -202,5 +201,5 @@ const RegisterPage = (props) => {
     );
 }
 
-export default RegisterPage
+export default PatientSearchPage
 
