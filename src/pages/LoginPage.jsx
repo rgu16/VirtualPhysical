@@ -42,22 +42,24 @@ const LoginPage = (props) => {
 
     return (
       <>
-      <div className="bg-white-A700 flex flex-col items-center justify-start mx-auto w-full h-screen">
-      <header className="bg-white-A700 flex md:flex-col flex-row font-dmsans md:gap-5 items-center justify-start md:px-5 w-full" >
-        <div className="flex flex-row gap-2 items-start justify-start mb-[22px] ml-7 md:ml-[0] md:mt-0 mt-[30px] w-[14%] md:w-full">
+      <div className="flex flex-col h-screen">
+      <header >
+        <div className = "flex flex-row gap-5 items-start justify-start w-full bg-white-A700 h-[95px]">
           <Img
-            className="h-[35px] w-[35px]"
+            className="h-[35px] w-[35px] mt-[30px] ml-[100px]"
             src="images/img_settings.svg"
             alt="settings"
           />
           <Text
-            className="text-3xl sm:text-[26px] md:text-[28px] text-black-900"
+            className="text-3xl sm:text-[26px] md:text-[28px] text-black-900 mt-[30px]"
             size="txtDMSansMedium30"
+            style={{ whiteSpace: 'nowrap' }}
           >
             Virtual Physical
           </Text>
         </div>
       </header>
+      <div className="bg-white-A700 flex flex-col items-center justify-start mx-auto w-full h-screen">
         <div className="bg-gray-50 flex flex-col justify-start pb-[125px] w-full">
           <div className="bg-blue-50 flex flex-col font-cairo items-start justify-start mt-11 mx-auto md:px-5 rounded-[20px] shadow-bs2 w-[55%] md:w-full">
             <div className="flex md:flex-col flex-row md:gap-10 gap-[78px] items-start justify-start md:ml-[0] w-[93%] md:w-full">
@@ -135,6 +137,7 @@ const LoginPage = (props) => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </>
     );

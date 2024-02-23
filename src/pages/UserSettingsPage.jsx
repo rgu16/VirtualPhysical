@@ -1,8 +1,7 @@
 import axios from 'axios';
 import React, { useState, useEffect, useRef } from "react";
-import { Img, Input, Text} from "../components";
-import NavBar from "../components/NavBar";
-import { jwtDecode } from 'jwt-decode';
+import { Img, Input, Text, NavBar} from "../components";
+import { Navigate } from 'react-router-dom';
 import { EditOutlined, EyeInvisibleTwoTone, EyeTwoTone } from '@ant-design/icons';
 const UserSettingsPage = (props) => {
   const token = props.token
@@ -14,8 +13,15 @@ const UserSettingsPage = (props) => {
   const fileInputRef = useRef(null);
   const [profilePic, setProfilePic] = useState()
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [navigate, setNavigate] = useState(); 
 
   useEffect(() => {
+    const handleTokenExpiration = () => {
+      if (props.checkToken()) {
+        props.removeToken();
+        setNavigate("/")
+      }
+    };
     axios({
         method: "GET",
         url: props.proxy + "/profile",
@@ -27,14 +33,13 @@ const UserSettingsPage = (props) => {
         const res = response.data
         setOriginalUser(res.data)
         setProfilePic(res.pic)
-        console.log(res.pic)
     }).catch((error) => {
         console.log(error.response)
         console.log(error.response.status)
         console.log(error.response.headers)
     })
-    console.log(jwtDecode(token).type)
-  }, [token, props.proxy]);
+    handleTokenExpiration();
+  }, [token, props]);
 
   const handleCancel = () => {
     setUser({name:'', email:'', workplace:'',timezone:'',zoomlink:'',password:''});
@@ -96,7 +101,6 @@ const UserSettingsPage = (props) => {
   };
 
   const handleImageUpload = (e) => {
-    console.log("HERE")
     e.preventDefault();
     const file = e.target.files[0];
     if (!file) {
@@ -287,7 +291,7 @@ const UserSettingsPage = (props) => {
                     <Text className="font-bold text-black-900 text-xl">Profile Picture</Text>
                     <div className="flex flex-col items-center justify-start mt-1 w-full">
                         <Img
-                        className="h-auto md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
+                        className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
                         src= {profilePic}
                         alt=""
                         onLoad ={()=> setImageLoaded(true)}
@@ -367,6 +371,7 @@ const UserSettingsPage = (props) => {
                         onClick={() => logOut()}>
                         <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Log out</Text>
                       </button>
+                      {navigate ? (<Navigate replace to= {navigate} />) : null}
                   </div>
                 </div>
               </div>

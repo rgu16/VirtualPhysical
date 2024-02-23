@@ -31,12 +31,13 @@ const LungsMedPage = (props) => {
 
   return (
     <>
+    <NavBar proxy={props.proxy} token={props.token}/>
       <div
         className="bg-cover bg-no-repeat bg-white-A700 flex flex-col font-dmsans h-[1561px] items-center justify-start mx-auto pb-28 w-full"
         style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
       >
-        <div className="flex flex-col md:gap-10 gap-[92px] items-center justify-start w-full">
-          <NavBar proxy={props.proxy} token={props.token} />
+        <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
+          <div></div>
           <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
           <TabNav tab="lungs"></TabNav>
             <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full" >

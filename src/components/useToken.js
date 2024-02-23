@@ -1,5 +1,5 @@
 import { useState } from 'react';
-
+import { jwtDecode } from 'jwt-decode';
 function useToken() {
 
   function getToken() {
@@ -19,10 +19,18 @@ function useToken() {
     setToken(null);
   }
 
+  function checkToken(){
+      const token = localStorage.getItem('token');
+      if (!token) return true; // Token not found, consider it expired
+      const expiration = jwtDecode(token).exp * 1000; // Decode token
+      return Date.now() > expiration;
+  }
+
   return {
     setToken: saveToken,
     token,
-    removeToken
+    removeToken,
+    checkToken,
   }
 
 }

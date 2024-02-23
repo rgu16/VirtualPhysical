@@ -7,24 +7,22 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { useState } from 'react';
-import TextField from '@mui/material/TextField';
 
 
-const HandsMedPage = (props) => {
-  const [isHoveredOne, setIsHoveredOne] = useState(false);
-  const [isHoveredTwo, setIsHoveredTwo] = useState(false);
-  const [isHoveredThree, setIsHoveredThree] = useState(false);
+const LegsMedPage = (props) => {
+
+
   return (
     <>
+    <NavBar proxy={props.proxy} token={props.token} />
       <div
         className="bg-cover bg-no-repeat bg-white-A700 flex flex-col font-dmsans h-[1561px] items-center justify-start mx-auto pb-28 w-full"
         style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
       >
-        <div className="flex flex-col md:gap-10 gap-[92px] items-center justify-start w-full">
-          <NavBar proxy={props.proxy} token={props.token} />
+        <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
+        <div></div>
           <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
-          <TabNav tab="hands"></TabNav>
+          <TabNav tab="legs"></TabNav>
             <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full" >
                         
                    <div style={{paddingLeft: '150px', paddingTop: '50px'}} className="flex w-full min-h-screen p-5">
@@ -35,7 +33,7 @@ const HandsMedPage = (props) => {
 
 
          <div className="md:h-[1277px] sm:h-[3072px] h-[925px] relative w-[84%] md:w-full">
-          {/* <div className="absolute bottom-[3%] h-[38px] right-[0] w-[10%]">
+           <div className="absolute bottom-[3%] h-[38px] right-[0] w-[10%]">
              <div className="absolute bg-black-900 h-[35px] inset-[0] justify-center m-auto shadow-bs w-full"></div>
              <Text
                className="absolute h-full inset-[0] justify-center m-auto text-white-A700 text-xl w-max"
@@ -45,11 +43,10 @@ const HandsMedPage = (props) => {
              </Text>
 
              
-           </div>*/}
+           </div>
            <div className="absolute md:h-[1277px] sm:h-[3072px] h-[925px] inset-[0] justify-center m-auto w-[98%] md:w-full">
              <div className="absolute flex flex-col items-center justify-start left-[1%] top-[0] w-[92%]">
                <div className="flex md:flex-col flex-row gap-[23px] items-center justify-between w-full">
-                 <div className="flex md:flex-1 flex-col md:gap-10 gap-[292px] items-end justify-start w-[79%] md:w-full">
                  <div className="flex md:flex-1 flex-col md:gap-10 gap-[292px] items-end justify-start w-[79%] md:w-full">
                    <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between w-full">
                      <div className="flex flex-col items-center justify-start md:mt-0 mt-[9px]">
@@ -63,55 +60,45 @@ const HandsMedPage = (props) => {
 
                      </div>
               
-                     <Img onMouseEnter={() => setIsHoveredOne(true)}
-                      onMouseLeave={() => setIsHoveredOne(false)}
+                     <Img
                        className="h-[43px] w-[43px]"
                        src="images/img_profile_black_900.svg"
                        alt="profile"
                      />
-                     
                    </div>
-                   
-                   <Img onMouseEnter={() => setIsHoveredTwo(true)}
-                    onMouseLeave={() => setIsHoveredTwo(false)}
+                   <Img
                      className="h-[43px] w-[43px]"
                      src="images/img_profile_black_900.svg"
                      alt="profile_One"
                    />
                  </div>
-                 <Img onMouseEnter={() => setIsHoveredThree(true)}
-                     onMouseLeave={() => setIsHoveredThree(false)}
-                     className="h-[43px] w-[43px]"
-                     src="images/img_profile_black_900.svg"
-                     alt="profile_One"
-                   />
-                   </div>
                  <div className="flex flex-col md:gap-10 gap-[301px] justify-start">
-                  
+                   <Text
+                     className="md:ml-[0] ml-[18px] text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                     size="txtCairoBold24"
+                   >
+                     {" "}
+                     {" "}
+                   </Text>
+                   <Text
+                     className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                     size="txtCairoBold24"
+                   >
+                     {" "}
+                     {" "}
+                   </Text>
                  </div>
                </div>
              </div>
-             <Img 
-              style = {{ opacity: isHoveredOne ? 1 : 0, // Show the image if hovered, otherwise hide
-              transition: 'opacity 0.3s ease', }} // Add a smooth transition effect
-               className="absolute h-[300px] object-cover left-[75%] w-[27%]"
-               src="images/cynosis.png"
+             <Img
+               className="absolute h-[270px] object-cover right-[3%] top-[6%] w-[25%]"
+               src="images/pedemascore.png"
                alt="screenshot20231"
              />
-             <Img  style = {{width: '400px', height: '320px', opacity: isHoveredTwo ? 1 : 0, // Show the image if hovered, otherwise hide
-              transition: 'opacity 0.3s ease', }} 
-               className="absolute bottom-[17%] h-[364px] object-cover bottom-[28%] left-[74%] w-[35%]"
-               src="images/pallor.png"
+             <Img
+               className="absolute bottom-[10%] h-[465px] object-cover left-[73.5%] w-[31%]"
+               src="images/edema.png"
                alt="screenshot20231_One"
-             
-             />
-            
-             <Img style = {{width: '560px', height: '460px', opacity: isHoveredThree ? 1 : 0, // Show the image if hovered, otherwise hide
-              transition: 'opacity 0.3s ease', }} 
-               className="absolute bottom-[17%] h-[350px] object-cover top-[70%] left-[76%] w-[31%]"
-               src="images/capillaryrefill.png"
-               alt="screenshot20231_One"
-             
              />
              {/*  <div className="absolute bottom-[0] flex flex-col items-center justify-start left-[0] w-[47%]">*/}
               {/*   <div className="flex flex-col items-center justify-start w-full">*/}
@@ -126,16 +113,16 @@ const HandsMedPage = (props) => {
                         className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
                         size="txtCairoBold34"
                       >
-                       Hands Inspection
+                       Legs Inspection
                       </Text>
-        <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '20px'}}>
+        <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold', fontSize: '19px'}}>
             {" "}
-            Check for cynosis and pallor and classify severity: {" "}
+            Check for pitting edema and classify severity for each region: {" "}
             
          </h4>
-         {/*i. Radial pulse (wrist) */}
+         {/*i. Right calve */}
          <FormControl>
-         <FormLabel style={{paddingBottom: '10px', paddingTop: '15px', color: 'black' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">i. Cynosis </FormLabel>
+         <FormLabel style={{paddingBottom: '10px', paddingTop: '15px', color: 'black', fontSize: '20px'}} id="demo-row-radio-buttons-group-label">i. Right calve</FormLabel>
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
@@ -145,14 +132,15 @@ const HandsMedPage = (props) => {
         <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
         <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
         <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
+        <FormControlLabel value="three" labelPlacement="bottom" control={<Radio />} label="3" />
         
   <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
       </RadioGroup>
     </FormControl>
       
-       {/*ii. Brachial */}
+       {/*ii. Left calve */}
        <FormControl>
-         <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">ii. Pallor</FormLabel>
+         <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black', fontSize: '20px'}} id="demo-row-radio-buttons-group-label">ii. Left calve</FormLabel>
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
@@ -162,30 +150,12 @@ const HandsMedPage = (props) => {
         <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
         <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
         <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
+        <FormControlLabel value="three" labelPlacement="bottom" control={<Radio />} label="3" />
         
   <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
       </RadioGroup>
     </FormControl>
 
-    
-    <div style={{paddingTop: '60px'}} className="flex flex-row gap-[13px] items-center justify-between w-full" >
-                    
-                    <Text
-                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                      size="txtCairoBold24"
-                    >
-                      Enter capillary refill time (CRT):
-                    </Text>
- <TextField
-  id="outlined-number"
-  label="sec"
-  type="number"
-  InputLabelProps={{
-    shrink: true,
-  }}
-/>
-
-</div>
          {/* </div>*/}
     {/* </div>*/}
                          
@@ -214,4 +184,4 @@ const HandsMedPage = (props) => {
   );
 };
 
-export default HandsMedPage;
+export default LegsMedPage;
