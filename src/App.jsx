@@ -1,10 +1,9 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, } from 'react-router-dom';
-import {LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage, UserSettingsPage, AdminHomePage, Home, PatientSearchPage} from "./pages";
+import {LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage, UserSettingsPage, AdminHomePage, PatientSearchPage, CameraPage} from "./pages";
 import {useToken} from './components';
 import { jwtDecode } from 'jwt-decode';
-// import {SummaryFlagged, Summary, LegsTabClicked, LegsTabClickedScreen, LegsTab, GeneralTab, PulsesTab, LungsTab, Appointments, Messages, Setting} from "./screens"
 import {AbdomenPage, AppointmentPage, DemographicPage, EyesPage, GeneralPage, HandsPage, HeartPage, LegsPage, LungsPage, MessagesPage, PulsesPage, SummaryPage} from "./physician"
 import {LegsMedPage, HandsMedPage, AbdomenMedPage, HeartMedPage, PulsesMedPage, GeneralMedPage, DemographicMedPage, EyesMedPage, LungsMedPage, PatientChartPage} from "./technician"
 import NotFound from "pages/NotFound";
@@ -136,47 +135,26 @@ export default function App() {
                             <LungsMedPage proxy={proxy} token={token}/>}
                         </ProtectedRoute>
                     }/>
-
-                    {/* {userType === 'physician' &&  */}
                     <Route path="/summary"
                     element={
                     <ProtectedRoute isAllowed={!!token && userType === 'physician'}>
                         <SummaryPage proxy={proxy} token={token}/> 
                     </ProtectedRoute>
                     }/>
-
                     <Route path="/messages"
                     element={
                     <ProtectedRoute isAllowed={!!token && userType === 'physician'}>
                         <MessagesPage proxy={proxy} token={token}/> 
                     </ProtectedRoute>
                     }/>
-
                     <Route path="/appointment"
                     element={
                     <ProtectedRoute isAllowed={!!token && userType === 'physician'}>
                         <AppointmentPage proxy={proxy} token={token}/> 
                     </ProtectedRoute>
                     }/>
-                    
-                    {/* <Route path="/demographics" element={<DemographicMedPage proxy={proxy} token={token}/>} />
-                    <Route path="/general" element={<GeneralMedPage proxy={proxy} token={token}/>} />
-                    <Route path="/eyes" element={<EyesMedPage proxy={proxy} token={token}/>} />
-                    <Route path="/hands" element={<HandsMedPage proxy={proxy} token={token}/>} />
-                    <Route path="/heart" element={<HeartMedPage proxy={proxy} token={token}/>} />
-                    <Route path="/abdomen" element={<AbdomenMedPage proxy={proxy} token={token}/>} />
-                    <Route path="/pulses" element={<PulsesMedPage proxy={proxy} token={token}/>} />
-                    <Route path="/legs" element={<LegsMedPage proxy={proxy} token={token}/>} />
-                    <Route path="/lungs" element={<LungsMedPage proxy={proxy} token={token}/>} /> */}
-                    {/* <Route path="/lungs" element={<LungsTab />} />
-                    <Route path="/legs-tab-clicked" element={<LegsTabClicked />} />
-                    <Route path="/legs-tab-clicked2" element={<LegsTabClickedScreen />} />
-                    <Route path="/legs" element={<LegsTab />} />
-                    <Route path="/messages" element={<Messages />} />
-                    <Route path="/setting" element={<Setting />} />
-                    <Route path="/appointment" element={<Appointments />} /> */}
-                    
-                    <Route path="/home" element={<Home />} />
+
+                    <Route path="camera" element={<CameraPage proxy={proxy} token={token} />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>

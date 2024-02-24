@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState} from "react";
+import React, { useState, useEffect} from "react";
 import { Link, useLocation, Navigate } from 'react-router-dom';
 import { Img, Input, Text} from "../components";
 import { EyeInvisibleTwoTone, EyeTwoTone } from '@ant-design/icons';
@@ -11,6 +11,12 @@ const ResetPasswordPage = (props) => {
     const searchParams = new URLSearchParams(location.search);
     const token = searchParams.get('token');
     const [navigate, setNavigate] = useState();
+
+    useEffect(() => {
+      if (!token){
+        setNavigate("/")
+      }
+    }, []);
 
     const handleToggle = () => {
       setShowPassword(!showPassword);
