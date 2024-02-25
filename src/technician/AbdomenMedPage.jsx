@@ -235,7 +235,7 @@ const AbdomenMedPage= (props) => {
     </FormControl>
        
        
-         {/* </div>*/}
+         
     {/* </div>*/}
                          
                         {/* </div>*/}
