@@ -20,16 +20,16 @@ const AdminHomePage = (props) => {
                       cell: (d) => <span>{d.name}</span>},    
                     { name: "Confirmed",
                       sortable: false,
-                      selector: "null",
+                      // selector: "null",
                       cell: (d) => <button onClick={sendAuthenticationEmail.bind(this, d.email)} style= {{border: 'none'}} disabled={d.is_confirmed ? true : false}>
                                       {d.is_confirmed?<CheckCircleTwoTone style={{fontSize: '32px'}} twoToneColor='#008000'/>: 
                                                       <CloseCircleTwoTone style={{fontSize: '32px'}} twoToneColor='	#FF0000'/> }
                                    </button>},
                     { name: "Delete",
                     sortable: false,
-                    selector: "null",
+                    // selector: "null",
                     cell: (d) => <button onClick={deleteAccount.bind(this, d.email)} style= {{border: 'none'}}>
-                                    <DeleteFilled />
+                                    <DeleteFilled style={{fontSize: '32px'}}/>
                                 </button>},
                   ];
 

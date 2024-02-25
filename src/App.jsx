@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, } from 'react-router-dom';
-import {LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage, UserSettingsPage, AdminHomePage, PatientSearchPage, CameraPage} from "./pages";
+import {LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage, UserSettingsPage, AdminHomePage, PatientSearchPage, CameraPage, MobileLoginPage, VideoPage, MobilePromptsPage} from "./pages";
 import {useToken} from './components';
 import { jwtDecode } from 'jwt-decode';
 import {AbdomenPage, AppointmentPage, DemographicPage, EyesPage, GeneralPage, HandsPage, HeartPage, LegsPage, LungsPage, MessagesPage, PulsesPage, SummaryPage} from "./physician"
@@ -53,6 +53,8 @@ export default function App() {
         <Router>
             <div className = 'App'>
                 <Routes>
+                <Route exact path="/m" element={<MobileLoginPage proxy={proxy} setToken={setToken}/>}/>
+                <Route exact path="/p" element={<MobilePromptsPage proxy={proxy} setToken={setToken}/>}/>
                     <Route exact path="/" element={homepage}/>
                     <Route path="/register" element={ <RegisterPage proxy={proxy} setToken={setToken} /> } />
                     <Route path="/forgot_password" element={ <ForgotPasswordPage  proxy={proxy} /> } />
@@ -155,6 +157,7 @@ export default function App() {
                     }/>
 
                     <Route path="camera" element={<CameraPage proxy={proxy} token={token} />} />
+                    <Route path="video" element={<VideoPage proxy={proxy} token={token} />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </div>
