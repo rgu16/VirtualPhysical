@@ -7,10 +7,22 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { useState } from 'react';
 
 
 const LegsMedPage = (props) => {
+  const [isHoveredOne, setIsHoveredOne] = useState(false);
+  const [isHoveredTwo, setIsHoveredTwo] = useState(false);
+  const [rightcalve, setRightCalfValue] = useState();
+  const [leftcalve, setLeftCalfValue] = useState();
 
+  const handleRightCalfChange = (event) => {
+    setRightCalfValue(event.target.value)
+  }
+
+  const handleLeftCalfChange = (event) => {
+    setLeftCalfValue(event.target.value)
+  }
 
   return (
     <>
@@ -32,7 +44,7 @@ const LegsMedPage = (props) => {
       <div className="absolute bg-white-A700 bottom-[8%] flex flex-col font-cairo gap-6 h-[1000px] md:h-auto inset-x-[0] justify-start max-w-[1695px] mx-auto pb-6 pt-8 px-5 rounded-bl-[12px] rounded-br-[12px] w-full">
 
 
-         <div className="md:h-[1277px] sm:h-[3072px] h-[925px] relative w-[84%] md:w-full">
+         <div className="md:h-[1277px] sm:h-[3072px] h-[370px] relative w-[84%] md:w-full">
            <div className="absolute bottom-[3%] h-[38px] right-[0] w-[10%]">
              <div className="absolute bg-black-900 h-[35px] inset-[0] justify-center m-auto shadow-bs w-full"></div>
              <Text
@@ -60,13 +72,15 @@ const LegsMedPage = (props) => {
 
                      </div>
               
-                     <Img
+                     <Img onMouseEnter={() => setIsHoveredOne(true)}
+                      onMouseLeave={() => setIsHoveredOne(false)}
                        className="h-[43px] w-[43px]"
                        src="images/img_profile_black_900.svg"
                        alt="profile"
                      />
                    </div>
-                   <Img
+                   <Img onMouseEnter={() => setIsHoveredTwo(true)}
+                    onMouseLeave={() => setIsHoveredTwo(false)}
                      className="h-[43px] w-[43px]"
                      src="images/img_profile_black_900.svg"
                      alt="profile_One"
@@ -90,12 +104,14 @@ const LegsMedPage = (props) => {
                  </div>
                </div>
              </div>
-             <Img
+             <Img style = {{ opacity: isHoveredOne ? 1 : 0, // Show the image if hovered, otherwise hide
+              transition: 'opacity 0.3s ease', }} // Add a smooth transition effect
                className="absolute h-[270px] object-cover right-[3%] top-[6%] w-[25%]"
                src="images/pedemascore.png"
                alt="screenshot20231"
              />
-             <Img
+             <Img style = {{ opacity: isHoveredTwo ? 1 : 0, // Show the image if hovered, otherwise hide
+              transition: 'opacity 0.3s ease', }} // Add a smooth transition effect
                className="absolute bottom-[10%] h-[465px] object-cover left-[73.5%] w-[31%]"
                src="images/edema.png"
                alt="screenshot20231_One"
@@ -121,7 +137,8 @@ const LegsMedPage = (props) => {
             
          </h4>
          {/*i. Right calve */}
-         <FormControl>
+         <FormControl value = {rightcalve}
+      onChange={handleRightCalfChange}>
          <FormLabel style={{paddingBottom: '10px', paddingTop: '15px', color: 'black', fontSize: '20px'}} id="demo-row-radio-buttons-group-label">i. Right calve</FormLabel>
       <RadioGroup
         row
@@ -139,7 +156,8 @@ const LegsMedPage = (props) => {
     </FormControl>
       
        {/*ii. Left calve */}
-       <FormControl>
+       <FormControl  value = {leftcalve}
+      onChange={handleLeftCalfChange}>
          <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black', fontSize: '20px'}} id="demo-row-radio-buttons-group-label">ii. Left calve</FormLabel>
       <RadioGroup
         row
@@ -155,7 +173,7 @@ const LegsMedPage = (props) => {
   <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
       </RadioGroup>
     </FormControl>
-
+    <div style={{paddingTop: "2rem"}}>The values is {rightcalve} {leftcalve}</div>
          {/* </div>*/}
     {/* </div>*/}
                          
