@@ -26,8 +26,8 @@ const App = () => {
       <Route path="/summary" element={<Summary />} />
       <Route path="/pulses" element={<PulsesTab />} />
       <Route path="/lungs" element={<LungsTab />} />
-      <Route path="/legs-tab-clicked" element={<LegsTabClicked />} />
-      <Route path="/legs-tab-clicked2" element={<LegsTabClickedScreen />} />
+      {/* <Route path="/legs-tab-clicked" element={<LegsTabClicked />} />
+      <Route path="/legs-tab-clicked2" element={<LegsTabClickedScreen />} /> */}
       <Route path="/legs" element={<LegsTab />} />
       <Route path="/messages" element={<Messages />} />
       <Route path="/setting" element={<Setting />} />
