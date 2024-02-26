@@ -9,6 +9,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import { useState } from 'react';
 
 const gender = [
   {
@@ -26,9 +27,18 @@ const gender = [
 
 ];
 
+
 const LungsMedPage = (props) => {
-
-
+  const [breatingrate, setBreathingRateValue] = useState();
+  const [breathinglabor, setBreathingLaborValue] = useState();
+  
+  const handleBreathingRateChange = (event) => {
+    setBreathingRateValue(event.target.value)
+  }
+  
+  const handleBreathingLaborChange = (event) => {
+    setBreathingLaborValue(event.target.value)
+  }
   return (
     <>
     <NavBar proxy={props.proxy} token={props.token}/>
@@ -55,15 +65,16 @@ const LungsMedPage = (props) => {
             Qualitative description on patient's breathing: {" "}
             
          </h4>
-         <div className="flex flex-row gap-[13px] items-center justify-between w-full" >
+         <div style={{paddingTop: '20px'}}  className="flex flex-row gap-[13px] items-center justify-between w-full" >
                     
-                            <Text
+                            <Text 
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24"
                             >
                               Breathing Rate:
                             </Text>
-         <TextField
+         <TextField  value = {breatingrate}
+    onChange={handleBreathingRateChange }
           id="outlined-number"
           label="breaths/min"
           type="number"
@@ -73,28 +84,33 @@ const LungsMedPage = (props) => {
         />
       
       </div>
-      <div className="flex flex-row gap-[12px] items-center justify-between w-full" >
+      <div  style={{paddingTop: '45px'}} className="flex flex-row gap-[12px] items-center justify-between w-full" >
                              <Text
                               className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24" 
                             >
                               Is breathing labored?
                             </Text>
-                        
-                          <TextField 
+                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <TextField  
           id="outlined-select-currency"
           select
           label="Select"
           defaultValue="EUR"
           helperText="Please select one of the options"
+          value = {breathinglabor}
+          onChange={handleBreathingLaborChange}
         > 
+         
           {gender.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
+            <MenuItem  key={option.value} value={option.value}>
               {option.label}
             </MenuItem>
           ))}
         </TextField>
         </div>
+        </div>
+        <div style={{paddingTop: "2rem"}}>The values is {breatingrate} {breathinglabor}</div>
       </div>
       <Img
                           className="common-pointer h-[43px] w-[43px]"
@@ -102,6 +118,7 @@ const LungsMedPage = (props) => {
                           alt="profile"
                  
                         />
+                    
     </div>
     
             </div>
