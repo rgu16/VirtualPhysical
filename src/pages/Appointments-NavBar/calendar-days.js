@@ -1,5 +1,5 @@
 import React from "react";
-import EventExt from './components/Event';
+import Event from './components/Event';
 
 function CalendarDays(props) {
   const { events } = props;
@@ -53,7 +53,7 @@ function CalendarDays(props) {
           <p>{day.number}</p>
           <div style={{ maxHeight: '400px', overflowY: 'auto' }}>
             {day.events.map((event, eventIndex) => (
-              <EventExt key={eventIndex} description={event} />
+              <Event key={eventIndex} description={event} />
             ))}
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ErrorMessage } from "../../components/ErrorMessage";
+import { ErrorMessage } from "../ErrorMessage/ErrorMessage";
 
 const shapes = { square: "rounded-none" };
 const sizes = { xs: "pb-px" };

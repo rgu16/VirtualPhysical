@@ -1,7 +1,6 @@
 import React from "react";
 
-import { Button, Img, Line, List, Text } from "components";
-import Header from "components/Header";
+import { Button, Img, Line, List, Text, Header } from "../components";
 
 const DemographicsTab = () => {
   return (

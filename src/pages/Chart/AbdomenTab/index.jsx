@@ -1,9 +1,8 @@
 import React from "react";
 
-import { Button, Img, Line, Text } from "components";
-import Header from "components/Header";
+import { Button, ButtonMUI, Img, Line, Text, Header } from "../components";
 
-const AbdomenTabPage = () => {
+const AbdomenTab = () => {
   return (
     <>
       <div
@@ -210,4 +209,4 @@ const AbdomenTabPage = () => {
   );
 };
 
-export default AbdomenTabPage;
+export default AbdomenTab;

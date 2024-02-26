@@ -295,6 +295,3 @@ export const GeneralTab = () => {
     </div>
   );
 };
-
-
-

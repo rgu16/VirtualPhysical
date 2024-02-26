@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
-import EventExt from "./components/EventExt.js";
+import "./Appointments.css";
 import axios from 'axios';
 import Calendar from './calendar.js';
-import { ArrowForward, ArrowBack } from '@mui/icons-material'; // Import icons here
+// import { ArrowForward, ArrowBack } from '@mui/icons-material';
+// import Event from "./components/Event.js";
 
 function Appointments() {
   const [events, setEvents] = useState([]);
