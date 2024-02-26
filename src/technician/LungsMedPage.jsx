@@ -10,6 +10,7 @@ import FormLabel from '@mui/material/FormLabel';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
+import axios from 'axios';
 
 const gender = [
   {
@@ -29,6 +30,30 @@ const gender = [
 
 
 const LungsMedPage = (props) => {
+  const [file, setFile] = useState()
+  const [uploadedFileURL, setUploadedFileURL] = useState(null)
+
+  function handleChange(event) {
+    setFile(event.target.files[0])
+  }
+  function handleSubmit(event) {
+    event.preventDefault()
+    const url = '/upload_file';
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('fileName', file.name);
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    };
+    axios.post(url, formData, config).then((response) => {
+      console.log(response.data);
+    });
+
+
+    
+  }
   const [breatingrate, setBreathingRateValue] = useState();
   const [breathinglabor, setBreathingLaborValue] = useState();
   
@@ -91,7 +116,7 @@ const LungsMedPage = (props) => {
                             >
                               Is breathing labored?
                             </Text>
-                            <div style={{ display: 'flex', alignItems: 'center' }}>
+                      
                           <TextField  
           id="outlined-select-currency"
           select
@@ -108,9 +133,17 @@ const LungsMedPage = (props) => {
             </MenuItem>
           ))}
         </TextField>
-        </div>
+      
         </div>
         <div style={{paddingTop: "2rem"}}>The values is {breatingrate} {breathinglabor}</div>
+        <div className="App">
+        <form onSubmit={handleSubmit}>
+          <h1>React File Upload</h1>
+          <input type="file" onChange={handleChange}/>
+          <button type="submit">Upload</button>
+        </form>
+        {uploadedFileURL && <img src={uploadedFileURL} alt="Uploaded content"/>}
+    </div>
       </div>
       <Img
                           className="common-pointer h-[43px] w-[43px]"
