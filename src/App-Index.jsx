@@ -1,10 +1,13 @@
 import React from "react";
+import ReactDOM from "react-dom";
+
 import "./styles/color.css";
 import "./styles/font.css";
-import ReactDOM from "react-dom";
-import App from "./App";
 import "./styles/index.css";
 import "./styles/tailwind.css";
+
+import App from "./App";
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

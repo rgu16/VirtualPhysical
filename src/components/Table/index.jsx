@@ -5,6 +5,7 @@ import {
   useReactTable,
   getSortedRowModel,
 } from "@tanstack/react-table";
+
 const ReactTable = ({
   columns,
   data = [],
