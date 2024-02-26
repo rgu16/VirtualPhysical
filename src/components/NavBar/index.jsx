@@ -8,25 +8,24 @@ const NavBar = (props) => {
   const [user, setUser] = useState({name:'                    ', email:'', workplace:'',timezone:'',zoomlink:''});
   const [profilePic, setProfilePic] = useState()
   const [imageLoaded, setImageLoaded] = useState(false);
-  // useEffect(() => {
-  //   axios({
-  //       method: "GET",
-  //       url: props.proxy + "/profile",
-  //       headers: {
-  //       Authorization: 'Bearer ' + token
-  //       }
-  //   })
-  //   .then((response) => {
-  //       const res = response.data
-  //       setUser(res.data)
-  //       setProfilePic(res.pic)
-  //       console.log(res)
-  //   }).catch((error) => {
-  //       console.log(error.response)
-  //       console.log(error.response.status)
-  //       console.log(error.response.headers)
-  //   })
-  // }, [token, props.proxy]);
+  useEffect(() => {
+    axios({
+        method: "GET",
+        url: props.proxy + "/profile",
+        headers: {
+        Authorization: 'Bearer ' + token
+        }
+    })
+    .then((response) => {
+        const res = response.data
+        setUser(res.data)
+        setProfilePic(res.pic)
+    }).catch((error) => {
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)
+    })
+  }, [token, props.proxy]);
   return (
     <>
       <header className={props.className}>

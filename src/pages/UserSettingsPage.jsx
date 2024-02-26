@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Img, Input, Text, NavBar} from "../components";
 import { Navigate } from 'react-router-dom';
 import { EditOutlined, EyeInvisibleTwoTone, EyeTwoTone } from '@ant-design/icons';
+import { jwtDecode } from 'jwt-decode';
 const UserSettingsPage = (props) => {
   const token = props.token
   const [user, setUser] = useState({name:'', email:'', workplace:'',timezone:'',zoomlink:''});
@@ -22,6 +23,7 @@ const UserSettingsPage = (props) => {
         setNavigate("/")
       }
     };
+    console.log(jwtDecode(props.token))
     axios({
         method: "GET",
         url: props.proxy + "/profile",
@@ -126,6 +128,34 @@ const UserSettingsPage = (props) => {
             console.log(error.response.headers)
         }
     })
+    // e.preventDefault();
+    // const file = e.target.files[0];
+    // if (!file) {
+    //     console.error('No file selected.');
+    //     return;
+    // }
+    // const formData = new FormData();
+    // formData.append('file', file, file.name);
+    // formData.append('location', "/profile/image")
+    // console.log(formData)
+    // axios({
+    //     method: "POST",
+    //     url: props.proxy+"/upload_file",
+    //     data: formData,
+    //     headers: {
+    //         Authorization: 'Bearer ' + props.token
+    //     }
+    // }).then((response) => {
+    //   const res = response.data
+    //   console.log(res)
+    //   // setProfilePic(res.data)
+    // }).catch((error)=>{
+    //     if(error.response){
+    //         console.log(error.response)
+    //         console.log(error.response.status)
+    //         console.log(error.response.headers)
+    //     }
+    // })
   };
 
   const handleUploadClick = () => {

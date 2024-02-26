@@ -9,7 +9,7 @@ const MobilePromptsPage = (props) => {
   const navigate = useNavigate();
   const [data, setData] = useState([{'filename': 'name/date/tab/file','tab':"demographic", 'file':"file", 'type':"image"},
                                     {'filename': 'name/date/tab/file1','tab':"demographic", 'file':"file1", 'type':"video"},
-                                    {'filename': 'name/date/tab/file1','tab':"demographic", 'file':"file1", 'type':"pdf"}]  );
+                                    {'filename': 'name/date/tab/file2','tab':"demographic", 'file':"file2", 'type':"pdf"}]  );
   const columns = [ { name: 'Tab',
                       selector: row => row.tab,
                       cell: (d) => <span>{d.tab}</span>,},
