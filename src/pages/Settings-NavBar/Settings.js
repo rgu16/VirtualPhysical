@@ -1,7 +1,7 @@
 import React from "react";
 import "./style.css";
 
-export const Setting = () => {
+export const Settings = () => {
   return (
     <div className="setting">
       <div className="overlap-wrapper">

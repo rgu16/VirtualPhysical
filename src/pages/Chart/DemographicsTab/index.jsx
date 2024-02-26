@@ -3,7 +3,7 @@ import React from "react";
 import { Button, Img, Line, List, Text } from "components";
 import Header from "components/Header";
 
-const DemographicsTabPage = () => {
+const DemographicsTab = () => {
   return (
     <>
       <div
@@ -312,4 +312,4 @@ const DemographicsTabPage = () => {
   );
 };
 
-export default DemographicsTabPage;
+export default DemographicsTab;

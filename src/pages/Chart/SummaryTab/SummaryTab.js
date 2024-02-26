@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 import { useState } from 'react';
 
-export const Summary = () => {
+export const SummaryTab = () => {
   return (
     <div className="summary">
       <div className="overlap-group-wrapper">

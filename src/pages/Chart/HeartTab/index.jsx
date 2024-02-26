@@ -3,7 +3,7 @@ import React from "react";
 import { Button, CheckBox, Img, Line, Text } from "components";
 import Header from "components/Header";
 
-const HeartTabPage = () => {
+const HeartTab = () => {
   return (
     <>
       <div
@@ -240,4 +240,4 @@ const HeartTabPage = () => {
   );
 };
 
-export default HeartTabPage;
+export default HeartTab;
