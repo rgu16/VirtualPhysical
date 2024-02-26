@@ -15,10 +15,30 @@ const PulsesMedPage = (props) => {
   const [isHoveredOne, setIsHoveredOne] = useState(false);
   const [isHoveredTwo, setIsHoveredTwo] = useState(false);
   const [isHoveredThree, setIsHoveredThree] = useState(false);
+  const [radial, setRadialValue] = useState();
+  const [brachial, setBrachialValue] = useState();
+  const [carotid, setCarotidValue] = useState();
+  const [pedis, setPedisValue] = useState();
+
+  const handleRadialChange = (event) => {
+    setRadialValue(event.target.value)
+  }
+
+  const handleBrachialChange = (event) => {
+    setBrachialValue(event.target.value)
+  }
+
+  const handleCarotidChange = (event) => {
+    setCarotidValue(event.target.value)
+  }
+
+  const handlePedisChange = (event) => {
+    setPedisValue(event.target.value)
+  }
   return (
     <>
     <NavBar proxy={props.proxy} token={props.token} />
-      <div
+      <div 
         className="bg-cover bg-no-repeat bg-white-A700 flex flex-col font-dmsans h-[1561px] items-center justify-start mx-auto pb-28 w-full"
         style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
       >
@@ -35,7 +55,7 @@ const PulsesMedPage = (props) => {
       <div className="absolute bg-white-A700 bottom-[8%] flex flex-col font-cairo gap-6 h-[1000px] md:h-auto inset-x-[0] justify-start max-w-[1695px] mx-auto pb-6 pt-8 px-5 rounded-bl-[12px] rounded-br-[12px] w-full">
 
 
-         <div className="md:h-[1277px] sm:h-[3072px] h-[925px] relative w-[84%] md:w-full">
+         <div className="md:h-[1277px] sm:h-[3072px] h-[390px] relative w-[84%] md:w-full">
           {/* <div className="absolute bottom-[3%] h-[38px] right-[0] w-[10%]">
              <div className="absolute bg-black-900 h-[35px] inset-[0] justify-center m-auto shadow-bs w-full"></div>
              <Text
@@ -135,7 +155,8 @@ const PulsesMedPage = (props) => {
             
          </h4>
          {/*i. Radial pulse (wrist) */}
-         <FormControl>
+         <FormControl  value = {radial}
+        onChange={handleRadialChange}>
          <FormLabel style={{paddingBottom: '10px', paddingTop: '15px', color: 'black' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">i. Radial pulse (wrist)</FormLabel>
       <RadioGroup
         row
@@ -152,7 +173,8 @@ const PulsesMedPage = (props) => {
     </FormControl>
       
        {/*ii. Brachial */}
-       <FormControl>
+       <FormControl value = {brachial}
+        onChange={handleBrachialChange}>
          <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">ii. Brachial</FormLabel>
       <RadioGroup
         row
@@ -169,7 +191,8 @@ const PulsesMedPage = (props) => {
     </FormControl>
 
      {/*iii. Carotid */}
-     <FormControl>
+     <FormControl value = {carotid}
+      onChange={handleCarotidChange}>
          <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black', fontSize: '20px'}} id="demo-row-radio-buttons-group-label">iii. Carotid</FormLabel>
       <RadioGroup
         row
@@ -186,7 +209,8 @@ const PulsesMedPage = (props) => {
     </FormControl>
 
     {/*iv. Right lumbar region */}
-    <FormControl>
+    <FormControl  value = {pedis}
+    onChange={handlePedisChange}>
          <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">iv. Dorsalis pedis pulse (foot) </FormLabel>
       <RadioGroup
         row
@@ -201,7 +225,7 @@ const PulsesMedPage = (props) => {
   <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
       </RadioGroup>
     </FormControl>
- 
+    <div style={{paddingTop: "2rem"}}>The values is {radial} {brachial} {carotid} {pedis}</div>
        
          {/* </div>*/}
     {/* </div>*/}
