@@ -33,6 +33,10 @@ const gender = [
     value: 'other',
     label: 'other',
   },
+  {
+    value: 'no selection',
+    label: 'no selection',
+  },
 
 ];
 
@@ -229,20 +233,25 @@ const DemographicMedPage = (props) => {
                               Gender:
                             </Text>
                             </div>
-                          <TextField 
-          id="outlined-select-currency"
-          select
-          label="Select"
-          defaultValue="EUR"
-          helperText="Please select your gender"
+                          
+
+        <TextField
           inputRef={inputRefs[2]}
           value = {genderValue} 
           onChange={handleGenderChange}
-        > 
+          id="outlined-select-currency-native"
+          select
+          label="Native select"
+          defaultValue="no selection"
+          SelectProps={{
+            native: true,
+          }}
+          helperText="Please select your currency"
+        >
           {gender.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
+            <option key={option.value} value={option.value}>
               {option.label}
-            </MenuItem>
+            </option>
           ))}
         </TextField>
                           </div>
@@ -384,7 +393,7 @@ const DemographicMedPage = (props) => {
           inputRef={inputRefs[7]}
         />
          
-         {/*   <div style={{paddingTop: "2rem"}}>The values is {history} {DOB}</div> */}
+           <div style={{paddingTop: "2rem"}}>The values is {genderValue} {DOB}</div> 
           
        {/*  <div className="h-[38px] md:h-[65px] md:ml-[0] ml-[138px] mt-[27px] relative w-[31%]">
                       <div className="absolute bg-black-900 h-[35px] inset-[0] justify-center m-auto rounded-[17px] shadow-bs w-full"></div>
