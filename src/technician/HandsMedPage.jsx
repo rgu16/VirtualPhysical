@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Img, Line, List, Text, NavBar, TabNav } from "components";
+import { Img, Line, List, Text, NavBar, TabNav } from "components";
 import { Link } from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -9,7 +9,8 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
-
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 const HandsMedPage = (props) => {
   const [isHoveredOne, setIsHoveredOne] = useState(false);
@@ -207,7 +208,13 @@ const HandsMedPage = (props) => {
 />
 
 </div>
-<div style={{paddingTop: "2rem"}}>The values is {cynosis} {pallor} {capillaryrefill}</div>
+{/*<div style={{paddingTop: "2rem"}}>The values is {cynosis} {pallor} {capillaryrefill}</div>*/}
+<div style={{paddingTop: "2rem"}}>
+      <Stack spacing={2} direction="row">
+      <Button variant="contained" >Next Input</Button>
+     <Link to="/legs"><Button variant="outlined" >Save</Button>   </Link>
+   </Stack>
+   </div>   
          {/* </div>*/}
     {/* </div>*/}
                          

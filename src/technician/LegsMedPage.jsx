@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Img, Line, List, Text, NavBar, TabNav } from "components";
+import { Img, Line, List, Text, NavBar, TabNav } from "components";
 import { Link } from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -8,7 +8,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useState } from 'react';
-
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 const LegsMedPage = (props) => {
   const [isHoveredOne, setIsHoveredOne] = useState(false);
@@ -45,17 +46,7 @@ const LegsMedPage = (props) => {
 
 
          <div className="md:h-[1277px] sm:h-[3072px] h-[370px] relative w-[84%] md:w-full">
-           <div className="absolute bottom-[3%] h-[38px] right-[0] w-[10%]">
-             <div className="absolute bg-black-900 h-[35px] inset-[0] justify-center m-auto shadow-bs w-full"></div>
-             <Text
-               className="absolute h-full inset-[0] justify-center m-auto text-white-A700 text-xl w-max"
-               size="txtCairoRegular20WhiteA700"
-             >
-               Save
-             </Text>
-
-             
-           </div>
+           
            <div className="absolute md:h-[1277px] sm:h-[3072px] h-[925px] inset-[0] justify-center m-auto w-[98%] md:w-full">
              <div className="absolute flex flex-col items-center justify-start left-[1%] top-[0] w-[92%]">
                <div className="flex md:flex-col flex-row gap-[23px] items-center justify-between w-full">
@@ -173,7 +164,14 @@ const LegsMedPage = (props) => {
   <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
       </RadioGroup>
     </FormControl>
-    <div style={{paddingTop: "2rem"}}>The values is {rightcalve} {leftcalve}</div>
+  
+    <div style={{paddingTop: "2rem"}}>
+      <Stack spacing={2} direction="row">
+     {/*  <Link to="/eyes"> <Button variant="text">Previous Section</Button></Link>*/}
+     <Button variant="contained" >Next Input</Button>
+     <Button variant="outlined" >Save</Button>  
+   </Stack>
+   </div>
          {/* </div>*/}
     {/* </div>*/}
                          

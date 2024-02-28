@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Img, Line, List, Text, NavBar, TabNav } from "components";
+import { Img, Line, List, Text, NavBar, TabNav } from "components";
 import { Link } from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -8,6 +8,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useState } from 'react';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 
 const AbdomenMedPage= (props) => {
@@ -270,8 +272,13 @@ const AbdomenMedPage= (props) => {
       </RadioGroup>
     </FormControl>
        
-    <div style={{paddingTop: "2rem"}}>The values is {hypochonriacR} {epigastric} {hypochonriacL} {lumbarR} {umbilical} {lumbarL}</div>  
-         
+    {/*<div style={{paddingTop: "2rem"}}>The values is {hypochonriacR} {epigastric} {hypochonriacL} {lumbarR} {umbilical} {lumbarL}</div>  */}
+    <div style={{paddingTop: "2rem"}}>
+      <Stack spacing={2} direction="row">
+      <Button variant="contained" >Next Input</Button>
+     <Link to="/heart"><Button variant="outlined" >Save</Button>   </Link>
+   </Stack>
+   </div>    
     {/* </div>*/}
                          
                         {/* </div>*/}

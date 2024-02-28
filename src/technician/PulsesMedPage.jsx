@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Img, Line, List, Text, NavBar, TabNav } from "components";
+import {Img, Line, List, Text, NavBar, TabNav } from "components";
 import { Link } from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -8,7 +8,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useRef,  useState } from 'react';
-
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 
 const PulsesMedPage = (props) => {
@@ -194,7 +195,7 @@ const PulsesMedPage = (props) => {
         name="row-radio-buttons-group"
       >
         <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-        <FormControlLabel onChange={() => handleRadioChange(0)}
+        <FormControlLabel onChange={() => handleRadioChange(0) }
         control={<Radio inputRef={inputRefs[0]} checked={selectedOptionIndex === 0} />}
         label="0"  value={'zero'} labelPlacement="bottom"  />
         <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
@@ -262,7 +263,13 @@ const PulsesMedPage = (props) => {
       </RadioGroup>
     </FormControl>
     <div style={{paddingTop: "2rem"}}>The values is {radial} {brachial} {carotid} {pedis}</div>
-    <Button onClick={handleClick}>Focus next radio button</Button>
+   {/*  <Button onClick={handleClick}>Focus next radio button</Button>*/}
+    <div style={{paddingTop: "2rem"}}>
+      <Stack spacing={2} direction="row">
+      <Button variant="contained" >Next Input</Button>
+     <Link to="/abdomen"><Button variant="outlined" >Save</Button>   </Link>
+   </Stack>
+   </div>
          {/* </div>*/}
     {/* </div>*/}
                          

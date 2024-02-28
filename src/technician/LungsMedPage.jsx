@@ -1,8 +1,6 @@
 import React from "react";
 
 
-
-
 import { Img, Line, List, Text, NavBar, TabNav } from "components";
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
@@ -11,6 +9,7 @@ import axios from 'axios';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import {Link } from "react-router-dom";
+
 const gender = [
 {
   value: 'mild',
@@ -25,13 +24,7 @@ const gender = [
   label: 'severe',
 },
 
-
-
-
 ];
-
-
-
 
 const LungsMedPage = (props) => {
  const inputRefs = [
@@ -50,38 +43,52 @@ const LungsMedPage = (props) => {
  
     setCurrentInputIndex((prevIndex) => (prevIndex + 1) % inputRefs.length);
   };
- const [file, setFile] = useState()
-const [uploadedFileURL, setUploadedFileURL] = useState(null)
-
-
-
-
-function handleChange(event) {
-  setFile(event.target.files[0])
-}
-function handleSubmit(event) {
-  event.preventDefault()
-  const url = '/upload_file';
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('fileName', file.name);
-  const config = {
-    headers: {
-      'content-type': 'multipart/form-data',
-    },
+  const [profilePic, setProfilePic] = useState()
+  const fileInputRef = useRef(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const handleUploadClick = () => {
+    fileInputRef.current.click();
   };
-  axios.post(url, formData, config).then((response) => {
-    console.log(response.data);
-  });
 
 
+  const handleImageUpload = (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    setProfilePic(URL.createObjectURL(file))
+    if (!file) {
+        console.error('No file selected.');
+        return;
+    }
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    formData.append('location', "/lungs/image")
+    console.log(formData)
+    axios({
+        method: "POST",
+        url: props.proxy+"/upload_file",
+        data: formData,
+        headers: {
+            Authorization: 'Bearer ' + props.token
+        }
+    }).then((response) => {
+      const res = response.data
+      console.log(res)
+    
+      console.log('Server response:', response);
+      console.log('Image uploaded:', imageUrl);
+  
+    // Assuming the URL is nested within a 'data' property, modify this accordingly
+    const imageUrl = response.data && response.data.url;
+      
+    }).catch((error)=>{
+        if(error.response){
+            console.log(error.response)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+        }
+    })
+  };
 
-
-
-
-
-
- }
 const [breatingrate, setBreathingRateValue] = useState();
 const [breathinglabor, setBreathingLaborValue] = useState();
  const handleBreathingRateChange = (event) => {
@@ -174,30 +181,46 @@ return (
       </div>
       {/*<div style={{paddingTop: "2rem"}}>The values is {breatingrate} {breathinglabor}</div>*/}
      {/* <button onClick={handleClick} >Focus next input</button>*/}
-     
+     <input
+                      ref={fileInputRef}
+                      type="file"
+                      style={{ display: 'none' }}
+                      accept="image/*" // Accept only image files
+                      onChange={handleImageUpload}
+                    />
+                    <button className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0"
+                            onClick = {handleUploadClick}>
+                      <Img
+                        className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
+                        src="images/img_television.svg"
+                        alt="television"
+                      />
+                      <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Upload EKG Image</Text>
+                     
+                    </button>
+                    <Img
+                        className="h-[130px] md:h-auto rounded-[50%] w-[130px] md:h-auto object-cover  w-full"
+                        src= {profilePic}
+                        alt=""
+                        onLoad ={()=> setImageLoaded(true)}
+                        // style = {{display: imageLoaded? "none": "block"}}
+                        />
+                        <Img
+                        className="h-[150px]md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-[150px]"
+                        src= "images/noimage.png"
+                        alt="image"
+                        style = {{display: imageLoaded? "none": "block"}}
+                      />
       <div style={{paddingTop: "2rem"}}>
       <Stack spacing={2} direction="row">
      {/*  <Link to="/eyes"> <Button variant="text">Previous Section</Button></Link>*/}
      <Button variant="contained" onClick={handleClick}>Next Input</Button>
-     <Link to="/pulses"><Button variant="outlined" >Next Section</Button>   </Link>
+     <Link to="/pulses"><Button variant="outlined" >Save</Button>   </Link>
    </Stack>
    </div>
-      <div className="App">
-      <form onSubmit={handleSubmit}>
-        <h1>React File Upload</h1>
-        <input type="file" onChange={handleChange}/>
-        <button type="submit">Upload</button>
-      </form>
-      {uploadedFileURL && <img src={uploadedFileURL} alt="Uploaded content"/>}
-  </div>
+    
     </div>
-    <Img
-                        className="common-pointer h-[43px] w-[43px]"
-                        src="images/img_profile_black_900.svg"
-                        alt="profile"
-             
-                      />
-                     
+   
                 
   </div>
            </div>

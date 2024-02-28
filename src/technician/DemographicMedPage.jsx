@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Img, Line, List, Text, NavBar, TabNav } from "components";
+import {  Img, Line, List, Text, NavBar, TabNav } from "components";
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
@@ -16,8 +16,9 @@ import dayjs, { Dayjs } from 'dayjs';
 import { Link } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import axios from 'axios';
-
-
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 const gender = [
   {
@@ -35,6 +36,17 @@ const gender = [
 
 ];
 
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
 
 const DemographicMedPage = (props) => {
   const [firstname, setFirstNameValue] = useState();
@@ -371,9 +383,10 @@ const DemographicMedPage = (props) => {
        
           inputRef={inputRefs[7]}
         />
-        <div style={{paddingTop: "2rem"}}>The values is {history} {DOB}</div>
-            <Button variant="contained" onClick={handleClick}>Next Input</Button>
-         <div className="h-[38px] md:h-[65px] md:ml-[0] ml-[138px] mt-[27px] relative w-[31%]">
+         
+         {/*   <div style={{paddingTop: "2rem"}}>The values is {history} {DOB}</div> */}
+          
+       {/*  <div className="h-[38px] md:h-[65px] md:ml-[0] ml-[138px] mt-[27px] relative w-[31%]">
                       <div className="absolute bg-black-900 h-[35px] inset-[0] justify-center m-auto rounded-[17px] shadow-bs w-full"></div>
                       <Text
                         className="absolute h-full inset-[0] justify-center m-auto text-white-A700 text-xl w-max"
@@ -381,12 +394,10 @@ const DemographicMedPage = (props) => {
                       >
                         Save
                       </Text>
-                    </div>
-                    <div className="flex md:flex-1 flex-col items-center justify-start w-1/4 md:w-full">
-                    <Text className="font-bold text-black-900 text-xl">Profile Picture</Text>
-                    <div className="flex flex-col items-center justify-start mt-1 w-full">
-                        
-                    </div>
+                    </div>*/} 
+                 
+                  
+                   
                     <input
                       ref={fileInputRef}
                       type="file"
@@ -394,16 +405,25 @@ const DemographicMedPage = (props) => {
                       accept="image/*" // Accept only image files
                       onChange={handleImageUpload}
                     />
-                    <button className="flex md:flex-col flex-row md:gap-5 items-center justify-center mt-2.5 w-[96%] md:w-full border-0"
+                    <button className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0"
                             onClick = {handleUploadClick}>
                       <Img
                         className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
                         src="images/img_television.svg"
                         alt="television"
                       />
-                      <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Edit image</Text>
+                      <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Upload Profile Picture</Text>
+                     
                     </button>
-                  </div>
+                    <div style={{paddingTop: "2rem"}}>
+      <Stack spacing={2} direction="row">
+     {/*  <Link to="/eyes"> <Button variant="text">Previous Section</Button></Link>*/}
+     <Button variant="contained" onClick={handleClick}>Next Input</Button>
+     <Link to="/general"><Button variant="outlined" >Save</Button>   </Link>
+   </Stack>
+   </div>
+                    
+               
                 </div>
               </div>
             </div>

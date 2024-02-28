@@ -1,7 +1,11 @@
 import React from "react";
 
-import { Button, Img, Line, List, Text, NavBar, TabNav } from "components";
+import { Img, Line, List, Text, NavBar, TabNav } from "components";
 import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import axios from 'axios';
+import { useRef,  useState } from 'react';
 
 // Checkbox component
 function Checkbox({ name, value = false, updateValue = () => {}, children }) {
@@ -23,6 +27,51 @@ const listOptions = ["Tricuspid/mitral thrill", "Pulmonary/tricuspid thrill", "A
 
 
 const HeartMedPage = (props) => {
+  const [profilePic, setProfilePic] = useState()
+  const fileInputRef = useRef(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const handleUploadClick = () => {
+    fileInputRef.current.click();
+  };
+
+
+  const handleImageUpload = (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    setProfilePic(URL.createObjectURL(file))
+    if (!file) {
+        console.error('No file selected.');
+        return;
+    }
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    formData.append('location', "/lungs/image")
+    console.log(formData)
+    axios({
+        method: "POST",
+        url: props.proxy+"/upload_file",
+        data: formData,
+        headers: {
+            Authorization: 'Bearer ' + props.token
+        }
+    }).then((response) => {
+      const res = response.data
+      console.log(res)
+    
+      console.log('Server response:', response);
+      console.log('Image uploaded:', imageUrl);
+  
+    // Assuming the URL is nested within a 'data' property, modify this accordingly
+    const imageUrl = response.data && response.data.url;
+      
+    }).catch((error)=>{
+        if(error.response){
+            console.log(error.response)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+        }
+    })
+  };
 
   const [selected, setSelected] = React.useState([]);
 
@@ -77,7 +126,42 @@ function selectAll() {
          <div className="-mx-5 px-5 py-0 rounded bg-gray-100 font-medium">
           <Checkbox name="all" value={selected.length === listOptions.length} updateValue={selectAll}>Select All</Checkbox>
         </div>
-        <div style={{paddingTop: "2rem"}}>The all checked values are {selected.join(" , ")}</div>
+        <div style={{paddingTop: "2rem"}}>The checked values are {selected.join(" , ")}</div>
+        <input
+                      ref={fileInputRef}
+                      type="file"
+                      style={{ display: 'none' }}
+                      accept="image/*" // Accept only image files
+                      onChange={handleImageUpload}
+                    />
+                    <button className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0"
+                            onClick = {handleUploadClick}>
+                      <Img
+                        className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
+                        src="images/img_television.svg"
+                        alt="television"
+                      />
+                      <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Upload Phonocardiogram Image</Text>
+                     
+                    </button>
+                    <Img
+                        className="h-[130px] md:h-auto rounded-[50%] w-[130px] md:h-auto object-cover  w-full"
+                        src= {profilePic}
+                        alt=""
+                        onLoad ={()=> setImageLoaded(true)}
+                        // style = {{display: imageLoaded? "none": "block"}}
+                        />
+                        <Img
+                        className="h-[150px]md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-[150px]"
+                        src= "images/noimage.png"
+                        alt="image"
+                        style = {{display: imageLoaded? "none": "block"}}
+                      />
+        <div style={{paddingTop: "2rem"}}>
+      <Stack spacing={2} direction="row">
+     <Link to="/hands"><Button variant="outlined" >Save</Button>   </Link>
+   </Stack>
+   </div>    
       </div>
     </div>
     
