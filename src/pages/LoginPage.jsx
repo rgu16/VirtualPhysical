@@ -70,7 +70,7 @@ const LoginPage = (props) => {
                   alt="untitleddesign"
                 />
               </div>
-              <form  action={handleSubmit} class="flex flex-col md:gap-10 items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full">
+              <form  onSubmit={handleSubmit} class="flex flex-col md:gap-10 items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full">
                 <div className="flex flex-col items-center justify-start w-full">
                   <Text className="font-bold sm:text-4xl md:text-[38px] text-[40px] text-black-900 text-center">
                     Login
@@ -114,7 +114,7 @@ const LoginPage = (props) => {
                             name="password" 
                             required
                           ></Input>
-                          <button className= "border-none outline-none absolute top-[20%] right-[5%] bg-transparent" onClick={handleToggle} >
+                          <button type="button" className= "border-none outline-none absolute top-[20%] right-[5%] bg-transparent" onClick={handleToggle} >
                           {showPassword? 
                           <EyeTwoTone style={{fontSize: '32px'}} twoToneColor='#8a8a8a'/> : 
                           <EyeInvisibleTwoTone style={{fontSize: '32px'}} twoToneColor='#8a8a8a'/> }
