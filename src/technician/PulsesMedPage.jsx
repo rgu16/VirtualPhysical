@@ -7,7 +7,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { useState } from 'react';
+import { useRef,  useState } from 'react';
 
 
 
@@ -35,6 +35,35 @@ const PulsesMedPage = (props) => {
   const handlePedisChange = (event) => {
     setPedisValue(event.target.value)
   }
+  const inputRefs = [
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    // Add more refs for additional radio buttons as needed
+  ];
+
+  const [selectedOptionIndex, setSelectedOptionIndex] = useState(0);
+
+  const handleRadioChange = (index) => {
+    setSelectedOptionIndex(index);
+  };
+
+  const handleClick = () => {
+    // Check the next FormControlLabel and uncheck the previous one
+    const nextIndex = (selectedOptionIndex + 1) % inputRefs.length;
+
+    // Uncheck the previous FormControlLabel
+    if (selectedOptionIndex !== null && inputRefs[selectedOptionIndex]?.current) {
+      inputRefs[selectedOptionIndex].current.checked = false;
+    }
+
+    // Check the next FormControlLabel
+    if (inputRefs[nextIndex]?.current) {
+      inputRefs[nextIndex].current.checked = true;
+      setSelectedOptionIndex(nextIndex);
+    }
+  };
+  
   return (
     <>
     <NavBar proxy={props.proxy} token={props.token} />
@@ -156,7 +185,8 @@ const PulsesMedPage = (props) => {
          </h4>
          {/*i. Radial pulse (wrist) */}
          <FormControl  value = {radial}
-        onChange={handleRadialChange}>
+        onChange={handleRadialChange} 
+        >
          <FormLabel style={{paddingBottom: '10px', paddingTop: '15px', color: 'black' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">i. Radial pulse (wrist)</FormLabel>
       <RadioGroup
         row
@@ -164,7 +194,9 @@ const PulsesMedPage = (props) => {
         name="row-radio-buttons-group"
       >
         <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-        <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
+        <FormControlLabel onChange={() => handleRadioChange(0)}
+        control={<Radio inputRef={inputRefs[0]} checked={selectedOptionIndex === 0} />}
+        label="0"  value={'zero'} labelPlacement="bottom"  />
         <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
         <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
         
@@ -174,7 +206,7 @@ const PulsesMedPage = (props) => {
       
        {/*ii. Brachial */}
        <FormControl value = {brachial}
-        onChange={handleBrachialChange}>
+        onChange={handleBrachialChange} >
          <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">ii. Brachial</FormLabel>
       <RadioGroup
         row
@@ -182,7 +214,11 @@ const PulsesMedPage = (props) => {
         name="row-radio-buttons-group"
       >
         <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-        <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
+        <FormControlLabel value={`zero-1`}
+            labelPlacement="bottom"
+            control={<Radio inputRef={inputRefs[1]} checked={selectedOptionIndex === 1} />}
+            label="0"
+            onChange={() => handleRadioChange(1)} />
         <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
         <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
         
@@ -192,7 +228,7 @@ const PulsesMedPage = (props) => {
 
      {/*iii. Carotid */}
      <FormControl value = {carotid}
-      onChange={handleCarotidChange}>
+      onChange={handleCarotidChange} >
          <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black', fontSize: '20px'}} id="demo-row-radio-buttons-group-label">iii. Carotid</FormLabel>
       <RadioGroup
         row
@@ -210,7 +246,7 @@ const PulsesMedPage = (props) => {
 
     {/*iv. Right lumbar region */}
     <FormControl  value = {pedis}
-    onChange={handlePedisChange}>
+    onChange={handlePedisChange} >
          <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">iv. Dorsalis pedis pulse (foot) </FormLabel>
       <RadioGroup
         row
@@ -226,7 +262,7 @@ const PulsesMedPage = (props) => {
       </RadioGroup>
     </FormControl>
     <div style={{paddingTop: "2rem"}}>The values is {radial} {brachial} {carotid} {pedis}</div>
-       
+    <Button onClick={handleClick}>Focus next radio button</Button>
          {/* </div>*/}
     {/* </div>*/}
                          
