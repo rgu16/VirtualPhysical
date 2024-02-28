@@ -15,6 +15,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import DataTable from 'react-data-table-component';
+import { SelectOutlined } from '@ant-design/icons';
 
 const PatientSearchPage = (props) => {
     const [newUser, setNewUser] = useState({email: '', date: '', name:''});
@@ -34,7 +35,7 @@ const PatientSearchPage = (props) => {
                       { name: "Action",
                       sortable: false,
                       cell: (d) => <button onClick={selectPatient.bind(this, d.folder)} style= {{border: 'none'}}>
-                                      Select
+                                      <SelectOutlined style={{fontSize: '24px'}} />
                                   </button>},
                     ];
 

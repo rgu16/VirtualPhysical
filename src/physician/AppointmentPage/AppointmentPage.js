@@ -32,12 +32,9 @@ function AppointmentPage(props) {
   }, []); // Empty dependency array means the effect runs only once when the component mounts
 
   return (
-    <div className="bg-white-A700 flex flex-col items-center justify-start mx-auto w-full h-screen">
-    <NavBar  proxy={props.proxy} token={props.token}></NavBar>
     <div className="App py-8 flex flex-col justify-center">
       <h1>Patient Appointments</h1>
       <Calendar events={events} /> 
-    </div>
     </div>
   );
 }

@@ -13,6 +13,7 @@ export default function App() {
     const { token, removeToken, checkToken, setToken} = useToken();
     const proxy = "https://virtualphysical.pythonanywhere.com/";
     const userType = token ? jwtDecode(token).type : null;
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
     let homepage;
 
     if (!token) {
@@ -37,7 +38,7 @@ export default function App() {
         checkToken={checkToken}
         />
     );
-    } else {
+    } else if (userType === 'medical-tech'){
     homepage = (
         <PatientChartPage
         proxy={proxy}
@@ -47,11 +48,31 @@ export default function App() {
         checkToken={checkToken}
         />
     );
+    } else {
+        homepage = <LoginPage proxy={proxy} setToken={setToken} />;
     }
 
     return (
         <Router>
             <div className = 'App'>
+                {isMobile?
+                <Routes>
+                    <Route exact path="/" element={!token?<MobileLoginPage proxy={proxy} setToken={setToken}/>:
+                                                          <MobilePromptsPage proxy={proxy} setToken={setToken}/> }/>
+                    <Route path="/camera"
+                        element={
+                        <ProtectedRoute isAllowed={!!token}>
+                            <CameraPage proxy={proxy} token={token} />
+                        </ProtectedRoute>
+                    }/>
+                    <Route path="/video"
+                        element={
+                        <ProtectedRoute isAllowed={!!token}>
+                            <VideoPage proxy={proxy} token={token} />
+                        </ProtectedRoute>
+                    }/>
+                    <Route path="*" element={<NotFound />} />
+                </Routes> :
                 <Routes>
                 <Route exact path="/m" element={<MobileLoginPage proxy={proxy} setToken={setToken}/>}/>
                 <Route exact path="/p" element={<MobilePromptsPage proxy={proxy} setToken={setToken}/>}/>
@@ -155,11 +176,8 @@ export default function App() {
                         <AppointmentPage proxy={proxy} token={token}/> 
                     </ProtectedRoute>
                     }/>
-
-                    <Route path="camera" element={<CameraPage proxy={proxy} token={token} />} />
-                    <Route path="video" element={<VideoPage proxy={proxy} token={token} />} />
                     <Route path="*" element={<NotFound />} />
-                </Routes>
+                </Routes> }
             </div>
         </Router>
     )

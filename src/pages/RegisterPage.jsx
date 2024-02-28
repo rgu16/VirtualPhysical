@@ -78,8 +78,8 @@ const RegisterPage = (props) => {
                 alt="untitleddesign"
               />
             </div>
-            <div className="flex flex-col md:gap-10 items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full">
-              <form action={handleSubmit}>
+            {/* <div className="flex flex-col md:gap-10 items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full"> */}
+              <form action={handleSubmit} class = "flex flex-col md:gap-10 items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full">
               <div className="flex flex-col gap-2 items-center justify-start w-full">
                 <Text className="font-bold sm:text-4xl md:text-[38px] text-[40px] text-black-900 text-center">
                   Register
@@ -194,10 +194,11 @@ const RegisterPage = (props) => {
                   Register
                 </Text>
               </button>
-              </form>
               <Link to="/"><button className='border-none bg-none text-blue-500 underline'>Return to login</button></Link>
+              </form>
+              
               {navigate ? (<Navigate replace to= {navigate} />) : null}
-            </div>
+            {/* </div> */}
           </div>
         </div>
       </div>
