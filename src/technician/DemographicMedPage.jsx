@@ -39,18 +39,6 @@ const gender = [
 const DemographicMedPage = (props) => {
   const [firstname, setFirstNameValue] = useState();
   const [lastname, setLastNameValue] = useState();
-  const [gendervalue, setGenderValue] = useState();
-  const [height, setHeightValue] = useState();
-  const [weight, setWeightValue] = useState();
-  const [selectedDate, setSelectedDate] = useState(dayjs('1989-04-17'));
-  const [age, setAgeValue] = useState();
-  const [history, setHistoryValue] = useState();
-
-  // Handle date selection and update the state
-  const handleDateChange = (date) => {
-    setSelectedDate(date);
-  };
-
   const [profilePic, setProfilePic] = useState()
   const fileInputRef = useRef(null);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -62,31 +50,9 @@ const DemographicMedPage = (props) => {
   const handleLastNameChange = (event) => {
     setLastNameValue(event.target.value)
   }
-  const handleGenderChange = (event) => {
-    setGenderValue(event.target.value)
-  }
-
-  const handleWeightChange = (event) => {
-    setWeightValue(event.target.value)
-  }
-
-  const handleHeightChange = (event) => {
-    setHeightValue(event.target.value)
-  }
-
-  const handleAgeChange = (event) => {
-    setAgeValue(event.target.value)
-  }
-
-  const handleHistoryChange = (event) => {
-    setHistoryValue(event.target.value)
-  }
-
-
   const handleUploadClick = () => {
     fileInputRef.current.click();
   };
-  
 
   const handleImageUpload = (e) => {
     e.preventDefault();
@@ -96,8 +62,9 @@ const DemographicMedPage = (props) => {
         return;
     }
     const formData = new FormData();
-    formData.append('image', file, file.name);
-    formData.append('location', "profile/image")
+    formData.append('file', file, file.name);
+    formData.append('location', "/profile/image")
+    console.log(formData)
     axios({
         method: "POST",
         url: props.proxy+"/upload_file",
@@ -107,7 +74,7 @@ const DemographicMedPage = (props) => {
         }
     }).then((response) => {
       const res = response.data
-      setProfilePic(res.data)
+      console.log(res)
     }).catch((error)=>{
         if(error.response){
             console.log(error.response)
@@ -189,13 +156,13 @@ const DemographicMedPage = (props) => {
                               Gender:
                             </Text>
                             </div>
-                          <TextField  value = {gendervalue} onChange={handleGenderChange}
+                          <TextField 
           id="outlined-select-currency"
           select
           label="Select"
           defaultValue="EUR"
           helperText="Please select your gender"
-
+   
         > 
           {gender.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -221,7 +188,7 @@ const DemographicMedPage = (props) => {
                               <div className="h-[45px] md:h-[50px] mb-[5px] relative w-[43%]">
                                 <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
       <div>
-        <TextField value = {height} onChange={handleHeightChange}
+        <TextField
           label="With normal TextField"
           id="outlined-start-adornment"
           sx={{ m: 1, width: '25ch' }}
@@ -230,7 +197,7 @@ const DemographicMedPage = (props) => {
           }}
         />
         <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-          <OutlinedInput value = {weight} onChange={handleWeightChange}
+          <OutlinedInput 
             id="outlined-adornment-weight"
             endAdornment={<InputAdornment position="end">kg</InputAdornment>}
             aria-describedby="outlined-weight-helper-text"
@@ -246,7 +213,7 @@ const DemographicMedPage = (props) => {
                               
                             </div>
                             <div className="flex flex-row items-start justify-between w-full">
-                              <Text 
+                              <Text
                                 className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
                                 size="txtCairoBold24"
                               >
@@ -265,8 +232,7 @@ const DemographicMedPage = (props) => {
                             
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']}>
-        <DatePicker  defaultValue={selectedDate}
-        onChange={handleDateChange}  />
+        <DatePicker label="Basic date picker" defaultValue={dayjs('1989-04-17')} />
       </DemoContainer>
     </LocalizationProvider>
                           </div>
@@ -277,7 +243,7 @@ const DemographicMedPage = (props) => {
                             >
                               Age:
                             </Text>
-                            <TextField value = {age} onChange={handleAgeChange} required id="outlined-basic" label="required" variant="outlined" />
+                            <TextField required id="outlined-basic" label="required" variant="outlined" />
                             
                           </div>
                         </div>
@@ -319,12 +285,12 @@ const DemographicMedPage = (props) => {
                   >
                     Patient History:
                   </Text>
-                  <TextField value = {history} onChange={handleHistoryChange} fullWidth sx={{ m: 1 }}
+                  <TextField fullWidth sx={{ m: 1 }}
           id="outlined-multiline-static"
           label="Multiline"
           multiline
           rows={4}
-          defaultValue=""
+          defaultValue="Default Value"
         />
          <div className="h-[38px] md:h-[65px] md:ml-[0] ml-[138px] mt-[27px] relative w-[31%]">
                       <div className="absolute bg-black-900 h-[35px] inset-[0] justify-center m-auto rounded-[17px] shadow-bs w-full"></div>
@@ -335,7 +301,23 @@ const DemographicMedPage = (props) => {
                         Save
                       </Text>
                     </div>
-                    <div style={{paddingTop: "2rem"}}>The values is {history} {selectedDate.format('YYYY-MM-DD')}</div>
+                    <div className="flex md:flex-1 flex-col items-center justify-start w-1/4 md:w-full">
+                    <Text className="font-bold text-black-900 text-xl">Profile Picture</Text>
+                    <div className="flex flex-col items-center justify-start mt-1 w-full">
+                        <Img
+                        className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
+                        src= {profilePic}
+                        alt=""
+                        onLoad ={()=> setImageLoaded(true)}
+                        // style = {{display: imageLoaded? "none": "block"}}
+                        />
+                        <Img
+                        className="h-auto md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
+                        src= "images/img_defaultprofile.jpg"
+                        alt="image"
+                        style = {{display: imageLoaded? "none": "block"}}
+                      />
+                    </div>
                     <input
                       ref={fileInputRef}
                       type="file"
@@ -344,16 +326,15 @@ const DemographicMedPage = (props) => {
                       onChange={handleImageUpload}
                     />
                     <button className="flex md:flex-col flex-row md:gap-5 items-center justify-center mt-2.5 w-[96%] md:w-full border-0"
-                            onClick = {handleUploadClick}>Upload</button>
-                              <Img
-                        className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
-                        src= {profilePic}
-                        alt=""
-                        onLoad ={()=> setImageLoaded(true)}
-                        // style = {{display: imageLoaded? "none": "block"}}
-                        />
-                        <Img/>
-                       
+                            onClick = {handleUploadClick}>
+                      <Img
+                        className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
+                        src="images/img_television.svg"
+                        alt="television"
+                      />
+                      <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Edit image</Text>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

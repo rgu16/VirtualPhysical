@@ -1,19 +1,15 @@
 import React from "react";
 
 
-import { Button, Img, Line, List, Text, NavBar, TabNav } from "components";
-import { Link } from 'react-router-dom';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import { Img, Line, List, Text, NavBar, TabNav } from "components";
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import axios from 'axios';
-
-
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import {Link } from "react-router-dom";
+ 
 const gender = [
  {
    value: 'mild',
@@ -33,6 +29,27 @@ const gender = [
 
 
 const LungsMedPage = (props) => {
+  const inputRefs = [
+    useRef(null),
+    useRef(null),
+    // Add more refs for additional text fields as needed
+  ];
+  
+  const [currentInputIndex, setCurrentInputIndex] = useState(0);
+  
+  
+   const handleClick = () => {
+     const currentRef = inputRefs[currentInputIndex];
+  
+  
+     if (currentRef && currentRef.current) {
+       currentRef.current.focus();
+     }
+  
+  
+     setCurrentInputIndex((prevIndex) => (prevIndex + 1) % inputRefs.length);
+   };
+  
  const [file, setFile] = useState()
  const [uploadedFileURL, setUploadedFileURL] = useState(null)
 
@@ -105,6 +122,10 @@ const LungsMedPage = (props) => {
                        
         <TextField  value = {breatingrate}
    onChange={handleBreathingRateChange }
+        inputRef={inputRefs[0]}
+
+         variant="outlined"
+
          id="outlined-number"
          label="breaths/min"
          type="number"
@@ -130,6 +151,10 @@ const LungsMedPage = (props) => {
          helperText="Please select one of the options"
          value = {breathinglabor}
          onChange={handleBreathingLaborChange}
+         inputRef={inputRefs[1]}
+        
+         variant="outlined"
+
        >
        
          {gender.map((option) => (
@@ -140,7 +165,16 @@ const LungsMedPage = (props) => {
        </TextField>
     
        </div>
-       <div style={{paddingTop: "2rem"}}>The values is {breatingrate} {breathinglabor}</div>
+       {/*<div style={{paddingTop: "2rem"}}>The values is {breatingrate} {breathinglabor}</div>*/}
+      {/* <button onClick={handleClick} >Focus next input</button>*/}
+       
+       <div style={{paddingTop: "2rem"}}>
+       <Stack spacing={2} direction="row">
+      {/*  <Link to="/eyes"> <Button variant="text">Previous Section</Button></Link>*/}
+      <Button variant="contained" onClick={handleClick}>Next Input</Button>
+      <Link to="/pulses"><Button variant="outlined" >Next Section</Button>   </Link>
+    </Stack>
+    </div>
        <div className="App">
        <form onSubmit={handleSubmit}>
          <h1>React File Upload</h1>
@@ -156,6 +190,7 @@ const LungsMedPage = (props) => {
                          alt="profile"
                
                        />
+                       
                   
    </div>
   
