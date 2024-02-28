@@ -328,7 +328,7 @@ const PulsesMedPage = (props) => {
                         src="images/img_television.svg"
                         alt="television"
                       />
-                      <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Upload audio file of the carotid file</Text>
+                      <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Upload audio file of the carotid pulses</Text>
                      
                     </button>
                     <Img
