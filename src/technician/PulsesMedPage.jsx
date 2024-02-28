@@ -10,7 +10,7 @@ import FormLabel from '@mui/material/FormLabel';
 import { useRef,  useState } from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-
+import axios from 'axios';
 
 const PulsesMedPage = (props) => {
   const [isHoveredOne, setIsHoveredOne] = useState(false);
@@ -63,6 +63,51 @@ const PulsesMedPage = (props) => {
       inputRefs[nextIndex].current.checked = true;
       setSelectedOptionIndex(nextIndex);
     }
+  };
+
+  const [profilePic, setProfilePic] = useState()
+  const fileInputRef = useRef(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const handleUploadClick = () => {
+    fileInputRef.current.click();
+  };
+  
+  const handleImageUpload = (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    setProfilePic(URL.createObjectURL(file))
+    if (!file) {
+        console.error('No file selected.');
+        return;
+    }
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    formData.append('location', "/pulses/image")
+    console.log(formData)
+    axios({
+        method: "POST",
+        url: props.proxy+"/upload_file",
+        data: formData,
+        headers: {
+            Authorization: 'Bearer ' + props.token
+        }
+    }).then((response) => {
+      const res = response.data
+      console.log(res)
+    
+      console.log('Server response:', response);
+      console.log('Image uploaded:', imageUrl);
+  
+    // Assuming the URL is nested within a 'data' property, modify this accordingly
+    const imageUrl = response.data && response.data.url;
+      
+    }).catch((error)=>{
+        if(error.response){
+            console.log(error.response)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+        }
+    })
   };
   
   return (
@@ -262,8 +307,38 @@ const PulsesMedPage = (props) => {
   <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
       </RadioGroup>
     </FormControl>
-    <div style={{paddingTop: "2rem"}}>The values is {radial} {brachial} {carotid} {pedis}</div>
+    {/*<div style={{paddingTop: "2rem"}}>The values is {radial} {brachial} {carotid} {pedis}</div>*/}
    {/*  <Button onClick={handleClick}>Focus next radio button</Button>*/}
+   <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '20px'}}>
+            {" "}
+            Auscultate the carotid pulse using the bell of the stethoscope {" "}
+            
+         </h4>
+   <input
+                      ref={fileInputRef}
+                      type="file"
+                      style={{ display: 'none' }}
+                      accept="image/*" // Accept only image files
+                      onChange={handleImageUpload}
+                    />
+                    <button className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0"
+                            onClick = {handleUploadClick}>
+                      <Img
+                        className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
+                        src="images/img_television.svg"
+                        alt="television"
+                      />
+                      <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Upload audio file of the carotid file</Text>
+                     
+                    </button>
+                    <Img
+                        className="h-[130px] md:h-auto rounded-[50%] w-[130px] md:h-auto object-cover  w-full"
+                        src= {profilePic}
+                        alt=""
+                        onLoad ={()=> setImageLoaded(true)}
+                        // style = {{display: imageLoaded? "none": "block"}}
+                        />
+
     <div style={{paddingTop: "2rem"}}>
       <Stack spacing={2} direction="row">
       <Button variant="contained" >Next Input</Button>
