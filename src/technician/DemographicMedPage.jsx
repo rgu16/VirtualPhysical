@@ -14,6 +14,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import { Link } from 'react-router-dom';
+import { useState, useRef } from 'react';
+import axios from 'axios';
+
+
 
 const gender = [
   {
@@ -33,6 +37,54 @@ const gender = [
 
 
 const DemographicMedPage = (props) => {
+  const [firstname, setFirstNameValue] = useState();
+  const [lastname, setLastNameValue] = useState();
+  const [profilePic, setProfilePic] = useState()
+  const fileInputRef = useRef(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const handleFirstNameChange = (event) => {
+    setFirstNameValue(event.target.value)
+  }
+
+  const handleLastNameChange = (event) => {
+    setLastNameValue(event.target.value)
+  }
+  const handleUploadClick = () => {
+    fileInputRef.current.click();
+  };
+
+  const handleImageUpload = (e) => {
+    e.preventDefault();
+    const file = e.target.files[0];
+    if (!file) {
+        console.error('No file selected.');
+        return;
+    }
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    formData.append('location', "/profile/image")
+    console.log(formData)
+    axios({
+        method: "POST",
+        url: props.proxy+"/upload_file",
+        data: formData,
+        headers: {
+            Authorization: 'Bearer ' + props.token
+        }
+    }).then((response) => {
+      const res = response.data
+      console.log(res)
+    }).catch((error)=>{
+        if(error.response){
+            console.log(error.response)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+        }
+    })
+  };
+
+ 
   return (
     <>
     <NavBar proxy={props.proxy} token={props.token}/>
@@ -62,14 +114,15 @@ const DemographicMedPage = (props) => {
                        Demographic 
                       </Text>
                           <div className="flex flex-row gap-[13px] items-center justify-between w-full" >
-                    
+                          
+                            
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24"
                             >
                               First Name:
                             </Text>
-                            <TextField required id="outlined-basic" label="required" variant="outlined" />
+                            <TextField value = {firstname} onChange={handleFirstNameChange} required id="outlined-basic" label="required" variant="outlined" />
                            
                           </div>
                           <div className="flex flex-row gap-[15px] items-start justify-between w-full">
@@ -81,7 +134,7 @@ const DemographicMedPage = (props) => {
                             </Text>
                           
                              
-                              <TextField required id="outlined-basic" label="required" variant="outlined" />
+                              <TextField value = {lastname} onChange={handleLastNameChange} required id="outlined-basic" label="required" variant="outlined" />
                            
                           </div>
                         </List>
@@ -90,7 +143,7 @@ const DemographicMedPage = (props) => {
                             className="mb-9 text-2xl md:text-[22px] text-black-900 sm:text-xl"
                             size="txtCairoRegular24"
                           >
-                            Taylor Swift
+                            {firstname} {lastname}
                           </Text>
                        
                           <div style={{
@@ -109,6 +162,7 @@ const DemographicMedPage = (props) => {
           label="Select"
           defaultValue="EUR"
           helperText="Please select your gender"
+   
         > 
           {gender.map((option) => (
             <MenuItem key={option.value} value={option.value}>
@@ -143,7 +197,7 @@ const DemographicMedPage = (props) => {
           }}
         />
         <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-          <OutlinedInput
+          <OutlinedInput 
             id="outlined-adornment-weight"
             endAdornment={<InputAdornment position="end">kg</InputAdornment>}
             aria-describedby="outlined-weight-helper-text"
@@ -247,6 +301,40 @@ const DemographicMedPage = (props) => {
                         Save
                       </Text>
                     </div>
+                    <div className="flex md:flex-1 flex-col items-center justify-start w-1/4 md:w-full">
+                    <Text className="font-bold text-black-900 text-xl">Profile Picture</Text>
+                    <div className="flex flex-col items-center justify-start mt-1 w-full">
+                        <Img
+                        className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
+                        src= {profilePic}
+                        alt=""
+                        onLoad ={()=> setImageLoaded(true)}
+                        // style = {{display: imageLoaded? "none": "block"}}
+                        />
+                        <Img
+                        className="h-auto md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
+                        src= "images/img_defaultprofile.jpg"
+                        alt="image"
+                        style = {{display: imageLoaded? "none": "block"}}
+                      />
+                    </div>
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      style={{ display: 'none' }}
+                      accept="image/*" // Accept only image files
+                      onChange={handleImageUpload}
+                    />
+                    <button className="flex md:flex-col flex-row md:gap-5 items-center justify-center mt-2.5 w-[96%] md:w-full border-0"
+                            onClick = {handleUploadClick}>
+                      <Img
+                        className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
+                        src="images/img_television.svg"
+                        alt="television"
+                      />
+                      <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Edit image</Text>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

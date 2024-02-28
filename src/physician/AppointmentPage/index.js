@@ -1,1 +1,1 @@
-export { AppointmentPage } from "./AppointmentPage";
+export { default as AppointmentPage } from "./AppointmentPage.js";

@@ -1,5 +1,5 @@
 export { AbdomenPage } from "./AbdomenPage/AbdomenPage";
-export { AppointmentPage } from "./AppointmentPage/AppointmentPage";
+export { default as AppointmentPage } from "./AppointmentPage/AppointmentPage";
 export { DemographicPage } from "./DemographicPage/DemographicPage";
 export { EyesPage } from "./EyesPage/EyesPage";
 export { GeneralPage } from "./GeneralPage/GeneralPage";
