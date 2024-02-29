@@ -7,6 +7,6 @@ export { HandsPage } from "./HandsPage/HandsPage";
 export { HeartPage } from "./HeartPage/HeartPage";
 export { LegsPage } from "./LegsPage/LegsPage";
 export { LungsPage } from "./LungsPage/LungsPage";
-export { MessagesPage } from "./MessagesPage/MessagesPage";
+export { MessagesPage } from "./MessagesPage/Messages";
 export { PulsesPage } from "./PulsesPage/PulsesPage";
 export { SummaryPage } from "./SummaryPage/SummaryPage";

@@ -326,7 +326,7 @@ const UserSettingsPage = (props) => {
                         src= {profilePic}
                         alt=""
                         onLoad ={()=> setImageLoaded(true)}
-                        // style = {{display: imageLoaded? "none": "block"}}
+                        style = {{display: imageLoaded? "block": "none"}}
                         />
                         <Img
                         className="h-auto md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"

@@ -124,7 +124,7 @@ const LoginPage = (props) => {
                       </div>
                     </div> 
                   </div>
-                  <Link to="/forgot_password"><button className='border-none bg-none text-blue-500 underline pb-12'>Forgot your password?</button></Link>
+                  <Link to="/forgot_password"><button type='button' className='border-none bg-none text-blue-500 underline pb-12'>Forgot your password?</button></Link>
                 </div>
                 <button className="bg-indigo-A200 flex flex-col h-[50px] items-center justify-start md:px-10 sm:px-5 px-[93px] rounded-[20px] w-full"
                         type="submit">

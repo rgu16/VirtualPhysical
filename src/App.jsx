@@ -74,7 +74,7 @@ export default function App() {
                     <Route path="*" element={<NotFound />} />
                 </Routes> :
                 <Routes>
-                <Route exact path="/m" element={<MobileLoginPage proxy={proxy} setToken={setToken}/>}/>
+                <Route exact path="/m" element={<MessagesPage  proxy={proxy} token={token}/>}/>
                 <Route exact path="/p" element={<MobilePromptsPage proxy={proxy} setToken={setToken}/>}/>
                     <Route exact path="/" element={homepage}/>
                     <Route path="/register" element={ <RegisterPage proxy={proxy} setToken={setToken} /> } />
