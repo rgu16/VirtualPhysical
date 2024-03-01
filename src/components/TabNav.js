@@ -1,10 +1,15 @@
 import React from "react";
 import { Button, Img, Line, List, Text } from "./";
 import { Link } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 const TabNav = (props) => {
+    const token = localStorage.getItem('token');
   return (
     <>
-       <div className="bg-gray-200_01 flex flex-row flex-wrap sm:gap-5 items-end justify-start max-w-[1100px] rounded-tl-[12px] rounded-tr-[12px] w-full">
+       <div className={ jwtDecode(token).type === "physician"?
+        "bg-gray-200_01 flex flex-row flex-wrap sm:gap-5 items-end justify-start max-w-[1220px] rounded-tl-[12px] rounded-tr-[12px] w-full"
+       :"bg-gray-200_01 flex flex-row flex-wrap sm:gap-5 items-end justify-start max-w-[1100px] rounded-tl-[12px] rounded-tr-[12px] w-full"}
+       >
               <Link to="/demographics">
                     <Button className="cursor-pointer font-medium leading-[normal] min-w-[188px] text-center text-lg" shape="round" 
                         color = {props.tab === "demographic"?"white_A700":""}> 
@@ -49,6 +54,12 @@ const TabNav = (props) => {
                     <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round"
                     color = {props.tab === "legs"?"white_A700":""}> 
                     Legs</Button> </Link>
+
+                {jwtDecode(token).type === "physician" &&
+                <Link to="/summary">
+                    <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round"
+                    color = {props.tab === "summary"?"white_A700":""}> 
+                    Summary</Button> </Link>}
         </div>
     </>
   );

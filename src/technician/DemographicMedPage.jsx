@@ -114,7 +114,7 @@ const DemographicMedPage = (props) => {
      axios({
       method:"POST",
       url: props.proxy + "/upload_json",
-      data: {data: data, filename: '/demographic/detail'},
+      data: {data: data, filename: '/demographic'},
       headers: {
         Authorization: 'Bearer ' + props.token
         }
@@ -164,7 +164,7 @@ const DemographicMedPage = (props) => {
     }
     const formData = new FormData();
     formData.append('file', file, file.name);
-    formData.append('location', "/profile/image")
+    formData.append('location', "/profile_pic")
     console.log(formData)
     axios({
         method: "POST",

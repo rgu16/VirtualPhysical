@@ -10,3 +10,4 @@ export {default as useToken} from './useToken';
 export { default as TabNav } from "./TabNav"
 export { default as NavBar } from "./NavBar"
 export { default as Event } from "./Event"
+export { default as PhysicianNotes} from "./PhysicianNotes"
