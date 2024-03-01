@@ -152,7 +152,7 @@ return (
          <div className="absolute md:h-[1277px] sm:h-[3072px] h-[925px] inset-[0] justify-center m-auto w-[98%] md:w-full">
            <div className="absolute flex flex-col items-center justify-start left-[1%] top-[0] w-[92%]">
              <div className="flex md:flex-col flex-row gap-[23px] items-center justify-between w-full">
-               <div className="flex md:flex-1 flex-col md:gap-10 gap-[292px] items-end justify-start w-[79%] md:w-full">
+               <div className="flex md:flex-1 flex-col md:gap-10 gap-[29px] items-end justify-start w-[79%] md:w-full">
                  <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between w-full">
                    <div className="flex flex-col items-center justify-start md:mt-0 mt-[9px]">
                      {/*<Text
@@ -172,28 +172,17 @@ return (
                      alt="profile"
                    />
                  </div>
-                 <Img onMouseEnter={() => setIsHoveredTwo(true)}
+                 
+                 {/*<Img onMouseEnter={() => setIsHoveredTwo(true)}
                   onMouseLeave={() => setIsHoveredTwo(false)}
                    className="h-[43px] w-[43px]"
                    src="images/img_profile_black_900.svg"
                    alt="profile_One"
-                 />
+                />*/}
                </div>
                <div className="flex flex-col md:gap-10 gap-[301px] justify-start">
-                 <Text
-                   className="md:ml-[0] ml-[18px] text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                   size="txtCairoBold24"
-                 >
-                   {" "}
-                   {" "}
-                 </Text>
-                 <Text
-                   className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                   size="txtCairoBold24"
-                 >
-                   {" "}
-                   {" "}
-                 </Text>
+                
+              
                </div>
              </div>
            </div>
