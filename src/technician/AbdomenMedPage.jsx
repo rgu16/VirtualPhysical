@@ -10,15 +10,15 @@ import FormLabel from '@mui/material/FormLabel';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-
+import axios from 'axios';
 
 const AbdomenMedPage= (props) => {
-  const [hypochonriacR, setHypochonriacRValue] = useState();
-  const [epigastric, setEpigastricValue] = useState();
-  const [hypochonriacL, setHypochonriacLValue] = useState();
-  const [lumbarR, setLumbarRValue] = useState();
-  const [umbilical, setUmbilicalValue] = useState();
-  const [lumbarL, setLumbarLValue] = useState();
+  const [hypochonriacR, setHypochonriacRValue] = useState("none");
+  const [epigastric, setEpigastricValue] = useState("none");
+  const [hypochonriacL, setHypochonriacLValue] = useState("none");
+  const [lumbarR, setLumbarRValue] = useState("none");
+  const [umbilical, setUmbilicalValue] = useState("none");
+  const [lumbarL, setLumbarLValue] = useState("none");
 
   const handleHypochonriacRChange = (event) => {
     setHypochonriacRValue(event.target.value)
@@ -43,6 +43,37 @@ const AbdomenMedPage= (props) => {
   const handleLumbarLChange = (event) => {
     setLumbarLValue(event.target.value)
   }
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    const data = {}
+    data['hypochonriacR'] = hypochonriacR; 
+    data['epigastric'] = epigastric; 
+    data['hypochonriacL'] = hypochonriacL; 
+    data['lumbarR'] = lumbarR; 
+    data['umbilical'] = umbilical; 
+    data['lumbarL'] = lumbarL; 
+
+    console.log(data);
+    axios({
+     method:"POST",
+     url: props.proxy + "/upload_json",
+     data: {data: data, filename: '/abdomen/detail'},
+     headers: {
+       Authorization: 'Bearer ' + props.token
+       }
+   }).then((response) => {
+     const res =response.data;
+     localStorage.setItem('abdomen', data);
+ })
+   .catch((error)=>{
+     if(error.response){
+       console.log(error.response)
+       console.log(error.response.status)
+       console.log(error.response.headers)
+     }
+   })
+ };
 
   return (
     <>
@@ -276,7 +307,7 @@ const AbdomenMedPage= (props) => {
     <div style={{paddingTop: "2rem"}}>
       <Stack spacing={2} direction="row">
       <Button variant="contained" >Next Input</Button>
-     <Link to="/heart"><Button variant="outlined" >Save</Button>   </Link>
+     <Link to="/heart"><Button variant="outlined" onClick={(e) => handleSave(e)}>Save</Button>   </Link>
    </Stack>
    </div>    
     {/* </div>*/}

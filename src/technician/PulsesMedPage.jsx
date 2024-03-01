@@ -16,10 +16,10 @@ const PulsesMedPage = (props) => {
   const [isHoveredOne, setIsHoveredOne] = useState(false);
   const [isHoveredTwo, setIsHoveredTwo] = useState(false);
   const [isHoveredThree, setIsHoveredThree] = useState(false);
-  const [radial, setRadialValue] = useState();
-  const [brachial, setBrachialValue] = useState();
-  const [carotid, setCarotidValue] = useState();
-  const [pedis, setPedisValue] = useState();
+  const [radial, setRadialValue] = useState("none");
+  const [brachial, setBrachialValue] = useState("none");
+  const [carotid, setCarotidValue] = useState("none");
+  const [pedis, setPedisValue] = useState("none");
 
   const handleRadialChange = (event) => {
     setRadialValue(event.target.value)
@@ -36,6 +36,36 @@ const PulsesMedPage = (props) => {
   const handlePedisChange = (event) => {
     setPedisValue(event.target.value)
   }
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    const data = {}
+    data['radial'] = radial; 
+    data['brachial'] = brachial; 
+    data['carotid'] = carotid; 
+    data['pedis'] = pedis; 
+
+    console.log(data);
+    axios({
+     method:"POST",
+     url: props.proxy + "/upload_json",
+     data: {data: data, filename: '/pulses/detail'},
+     headers: {
+       Authorization: 'Bearer ' + props.token
+       }
+   }).then((response) => {
+     const res =response.data;
+     localStorage.setItem('pulses', data);
+ })
+   .catch((error)=>{
+     if(error.response){
+       console.log(error.response)
+       console.log(error.response.status)
+       console.log(error.response.headers)
+     }
+   })
+ };
+
   const inputRefs = [
     useRef(null),
     useRef(null),
@@ -342,7 +372,7 @@ const PulsesMedPage = (props) => {
     <div style={{paddingTop: "2rem"}}>
       <Stack spacing={2} direction="row">
       <Button variant="contained" >Next Input</Button>
-     <Link to="/abdomen"><Button variant="outlined" >Save</Button>   </Link>
+     <Link to="/abdomen"><Button variant="outlined" onClick={(e) => handleSave(e)}>Save</Button>   </Link>
    </Stack>
    </div>
          {/* </div>*/}

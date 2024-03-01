@@ -6,7 +6,8 @@ import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-
+import { useState, useRef } from 'react';
+import axios from 'axios';
 
 // Checkbox component
 function Checkbox({ name, value = false, updateValue = () => {}, children }) {
@@ -26,8 +27,39 @@ function Checkbox({ name, value = false, updateValue = () => {}, children }) {
 // List of checkbox options
 const listOptions = ["Chest pain", "Discomfort", "Dyspnea", "Weakness", "Fatigue", "Palpitations", "Light-headedness", "Sense of impending faint", "Syncope"];
 
-
 const GeneralMedPage = (props) => {
+const [painsummary, setPainSummaryValue] = useState();
+
+const handlePainSummaryChange = (event) => {
+  setPainSummaryValue(event.target.value)
+}
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    const data = {}
+    data['generalpain'] = selected.join(" , "); 
+    data['painsummary'] = painsummary; 
+    console.log(data);
+    axios({
+     method:"POST",
+     url: props.proxy + "/upload_json",
+     data: {data: data, filename: '/general/detail'},
+     headers: {
+       Authorization: 'Bearer ' + props.token
+       }
+   }).then((response) => {
+     const res =response.data;
+     localStorage.setItem('general', data);
+ })
+   .catch((error)=>{
+     if(error.response){
+       console.log(error.response)
+       console.log(error.response.status)
+       console.log(error.response.headers)
+     }
+   })
+ };
+
 
   const [selected, setSelected] = React.useState([]);
 
@@ -103,7 +135,8 @@ function selectAll() {
          </h4>
         <TextField fullWidth 
           id="outlined-multiline-static"
-
+          value = {painsummary} 
+          onChange={handlePainSummaryChange}
           multiline
           rows={4}
           defaultValue=""
@@ -113,7 +146,7 @@ function selectAll() {
       <Stack spacing={2} direction="row">
      {/*  <Link to="/eyes"> <Button variant="text">Previous Section</Button></Link>*/}
      <Button variant="contained" >Next Input</Button>
-     <Link to="/eyes"><Button variant="outlined" >Save</Button>   </Link>
+     <Link to="/eyes"><Button variant="outlined" onClick={(e) => handleSave(e)}>Save</Button>   </Link>
    </Stack>
    </div>
       </div>

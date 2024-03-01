@@ -10,6 +10,7 @@ import FormLabel from '@mui/material/FormLabel';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import axios from 'axios';
 
 const LegsMedPage = (props) => {
   const [isHoveredOne, setIsHoveredOne] = useState(false);
@@ -24,6 +25,32 @@ const LegsMedPage = (props) => {
   const handleLeftCalfChange = (event) => {
     setLeftCalfValue(event.target.value)
   }
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    const data = {}
+    data['rightcalve'] = rightcalve; 
+    data['leftcalve'] = leftcalve; 
+    console.log(data);
+    axios({
+     method:"POST",
+     url: props.proxy + "/upload_json",
+     data: {data: data, filename: '/legs/detail'},
+     headers: {
+       Authorization: 'Bearer ' + props.token
+       }
+   }).then((response) => {
+     const res =response.data;
+     localStorage.setItem('legs', data);
+  })
+   .catch((error)=>{
+     if(error.response){
+       console.log(error.response)
+       console.log(error.response.status)
+       console.log(error.response.headers)
+     }
+   })
+  };
 
   return (
     <>
@@ -169,7 +196,7 @@ const LegsMedPage = (props) => {
       <Stack spacing={2} direction="row">
      {/*  <Link to="/eyes"> <Button variant="text">Previous Section</Button></Link>*/}
      <Button variant="contained" >Next Input</Button>
-     <Button variant="outlined" >Save</Button>  
+     <Button variant="outlined" onClick={(e) => handleSave(e)}>Save</Button>  
    </Stack>
    </div>
          {/* </div>*/}

@@ -82,7 +82,30 @@ const HeartMedPage = (props) => {
 
  const [selected, setSelected] = React.useState([]);
 
-
+ const handleSave = (e) => {
+  e.preventDefault();
+  const data = {}
+  data['heartthrills'] = selected.join(" , "); ; 
+  console.log(data);
+  axios({
+   method:"POST",
+   url: props.proxy + "/upload_json",
+   data: {data: data, filename: '/heart/detail'},
+   headers: {
+     Authorization: 'Bearer ' + props.token
+     }
+ }).then((response) => {
+   const res =response.data;
+   localStorage.setItem('heart', data);
+})
+ .catch((error)=>{
+   if(error.response){
+     console.log(error.response)
+     console.log(error.response.status)
+     console.log(error.response.headers)
+   }
+ })
+};
  // Function for updating state on checkbox change
  function handleSelect(value, name) {
    if (value) {
@@ -293,7 +316,7 @@ return (
                     
        <div style={{paddingTop: "2rem"}}>
      <Stack spacing={2} direction="row">
-    <Link to="/hands"><Button variant="outlined" >Save</Button>   </Link>
+    <Link to="/hands"><Button variant="outlined" onClick={(e) => handleSave(e)}>Save</Button>   </Link>
   </Stack>
   </div>   
      </div>

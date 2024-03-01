@@ -10,17 +10,43 @@ import FormLabel from '@mui/material/FormLabel';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import axios from 'axios';
 
 
 const EyesMedPage = (props) => {
   const [isHoveredOne, setIsHoveredOne] = useState(false);
   const [isHoveredTwo, setIsHoveredTwo] = useState(false);
   const [isHoveredThree, setIsHoveredThree] = useState(false);
-  const [value, setValue] = useState();
+  const [value, setValue] = useState("none");
   
   const handleChange = (event) => {
     setValue(event.target.value)
   }
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    const data = {}
+    data['eyes'] = value; 
+    console.log(data);
+    axios({
+     method:"POST",
+     url: props.proxy + "/upload_json",
+     data: {data: data, filename: '/eyes/detail'},
+     headers: {
+       Authorization: 'Bearer ' + props.token
+       }
+   }).then((response) => {
+     const res =response.data;
+     localStorage.setItem('eyes', data);
+ })
+   .catch((error)=>{
+     if(error.response){
+       console.log(error.response)
+       console.log(error.response.status)
+       console.log(error.response.headers)
+     }
+   })
+ };
 
   return (
     <>
@@ -178,7 +204,7 @@ const EyesMedPage = (props) => {
     {/* <div style={{paddingTop: "2rem"}}>The values is {value}</div>  */} 
     <div style={{paddingTop: "2rem"}}>
       <Stack spacing={2} direction="row">
-     <Link to="/lungs"><Button variant="outlined" >Save</Button>   </Link>
+     <Link to="/lungs"><Button variant="outlined" onClick={(e) => handleSave(e)} >Save</Button>   </Link>
    </Stack>
    </div>
          {/* </div>*/}

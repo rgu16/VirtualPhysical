@@ -31,6 +31,44 @@ const gender = [
 ];
 
 const LungsMedPage = (props) => {
+
+const [breathingrate, setBreathingRateValue] = useState("0");
+const [breathinglabor, setBreathingLaborValue] = useState("no selection");
+ const handleBreathingRateChange = (event) => {
+  setBreathingRateValue(event.target.value)
+}
+ const handleBreathingLaborChange = (event) => {
+  setBreathingLaborValue(event.target.value)
+}
+
+const [isHoveredOne, setIsHoveredOne] = useState(false);
+const [isHoveredTwo, setIsHoveredTwo] = useState(false);
+
+  const handleSave = (e) => {
+    e.preventDefault();
+    const data = {}
+    data['breathingrate'] = breathingrate; 
+    data['breathinglabor'] = breathinglabor; 
+    console.log(data);
+    axios({
+     method:"POST",
+     url: props.proxy + "/upload_json",
+     data: {data: data, filename: '/lungs/detail'},
+     headers: {
+       Authorization: 'Bearer ' + props.token
+       }
+   }).then((response) => {
+     const res =response.data;
+     localStorage.setItem('lungs', data);
+ })
+   .catch((error)=>{
+     if(error.response){
+       console.log(error.response)
+       console.log(error.response.status)
+       console.log(error.response.headers)
+     }
+   })
+ };
  const inputRefs = [
    useRef(null),
    useRef(null),
@@ -93,17 +131,7 @@ const LungsMedPage = (props) => {
     })
   };
 
-const [breatingrate, setBreathingRateValue] = useState();
-const [breathinglabor, setBreathingLaborValue] = useState();
- const handleBreathingRateChange = (event) => {
-  setBreathingRateValue(event.target.value)
-}
- const handleBreathingLaborChange = (event) => {
-  setBreathingLaborValue(event.target.value)
-}
 
-const [isHoveredOne, setIsHoveredOne] = useState(false);
-const [isHoveredTwo, setIsHoveredTwo] = useState(false);
 return (
   <>
   <NavBar proxy={props.proxy} token={props.token} />
@@ -210,7 +238,7 @@ return (
                            Breathing Rate:
                          </Text>
                    
-      <TextField  value = {breatingrate}
+      <TextField  value = {breathingrate}
  onChange={handleBreathingRateChange }
       inputRef={inputRefs[0]}
 
@@ -322,7 +350,7 @@ return (
      <Stack spacing={2} direction="row">
     {/*  <Link to="/eyes"> <Button variant="text">Previous Section</Button></Link>*/}
     <Button variant="contained" onClick={handleClick}>Next Input</Button>
-    <Link to="/pulses"><Button variant="outlined" >Save</Button>   </Link>
+    <Link to="/pulses"><Button variant="outlined" onClick={(e) => handleSave(e)} >Save</Button>   </Link>
   </Stack>
   </div>
   
