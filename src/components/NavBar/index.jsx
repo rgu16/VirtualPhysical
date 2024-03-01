@@ -11,40 +11,39 @@ const NavBar = (props) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [navigate, setNavigate] = useState(); 
 
-  // useEffect(() => {
-  //   // const handleTokenExpiration = () => {
-  //   //   if (props.checkToken()) {
-  //   //     props.removeToken();
-  //   //     setNavigate("/")
-  //   //     localStorage.clear()
-  //   //   }
-  //   // };
-  //   axios({ 
-  //       method: "GET",
-  //       url: props.proxy + "/profile",
-  //       headers: {
-  //       Authorization: 'Bearer ' + token
-  //       }
-  //   })
-  //   .then((response) => {
-  //       const res = response.data
-  //       setUser(res.data);
-  //       setProfilePic(res.pic);
-  //   }).catch((error) => {
-  //       console.log(error.response)
-  //       console.log(error.response.status)
-  //       console.log(error.response.headers)
-  //       if (error.response && error.response.status === 401) {
-  //           setNavigate("/")
-  //           localStorage.clear()
-  //       }
-  //   })
-  // }, [token, props.proxy]);
+  useEffect(() => {
+    // const handleTokenExpiration = () => {
+    //   if (props.checkToken()) {
+    //     props.removeToken();
+    //     setNavigate("/")
+    //     localStorage.clear()
+    //   }
+    // };
+    // axios({ 
+    //     method: "GET",
+    //     url: props.proxy + "/profile",
+    //     headers: {
+    //     Authorization: 'Bearer ' + token
+    //     }
+    // })
+    // .then((response) => {
+    //     const res = response.data
+    //     setUser(res.data);
+    //     setProfilePic(res.pic);
+    // }).catch((error) => {
+    //     console.log(error.response)
+    //     console.log(error.response.status)
+    //     console.log(error.response.headers)
+    //     if (error.response && error.response.status === 401) {
+    //         setNavigate("/")
+    //         localStorage.clear()
+    //     }
+    // })
+  }, [token, props.proxy]);
   return (
     <>
       <header className={props.className}>
         <div className = "flex flex-row gap-5 items-start justify-start w-full bg-white-A700 h-[95px]">
-        {/* <div className="flex flex-row gap-5 items-start justify-start mb-[22px] md:ml-[0] md:mt-0 mt-[30px] w-[14%] md:w-full"> */}
           <Img
             className="h-[35px] w-[35px] mt-[30px] ml-[100px]"
             src="images/img_settings.svg"
@@ -57,7 +56,6 @@ const NavBar = (props) => {
           >
             Virtual Physical
           </Text>
-        {/* </div> */}
         <div className="flex flex row gap-5 items-center mb-[27px] md:ml-[0] ml-[900px] md:mt-0 mt-[37px]">
         {jwtDecode(token).type === "physician" &&         
             <a href="/appointment">
@@ -98,6 +96,7 @@ const NavBar = (props) => {
               src= {profilePic}
               alt=""
               onLoad ={()=> setImageLoaded(true)}
+              style={{ display: imageLoaded ? "block" : "none" }}
               />
               <Img
               className="h-[60px] w-[60px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"

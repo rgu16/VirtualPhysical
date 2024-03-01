@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import "./style.css";
-import { NavBar } from 'components'
+import { NavBar } from 'components';
+import axios from 'axios';
 
 export const DemographicPage = (props) => {
 
@@ -10,6 +11,25 @@ export const DemographicPage = (props) => {
     const handleSaveClick = () => {
       setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
     };
+
+    useEffect(() => {
+      axios({
+          method: "GET",
+          url: props.proxy + "/download/demographic",
+          headers: {
+          Authorization: 'Bearer ' + props.token
+          }
+      })
+      .then((response) => {
+          const res = response
+          console.log(res)
+          console.log(res.json())
+      }).catch((error) => {
+          console.log(error.response)
+          console.log(error.response.status)
+          console.log(error.response.headers)
+      })
+    }, [props]);
 
   return (
     <div className="demographics-tab">
