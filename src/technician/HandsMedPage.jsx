@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Img, Line, List, Text, NavBar, TabNav } from "components";
+import { Img, Line, List, Text, NavBar, TabNav } from "components";
 import { Link } from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -9,12 +9,30 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useState } from 'react';
 import TextField from '@mui/material/TextField';
-
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 const HandsMedPage = (props) => {
   const [isHoveredOne, setIsHoveredOne] = useState(false);
   const [isHoveredTwo, setIsHoveredTwo] = useState(false);
   const [isHoveredThree, setIsHoveredThree] = useState(false);
+
+  const [cynosis, setCynosisValue] = useState();
+  const [pallor, setPallorValue] = useState();
+  const [capillaryrefill, setCRTValue] = useState();
+
+  const handleCynosisChange = (event) => {
+    setCynosisValue(event.target.value)
+  }
+
+  const handlePallorChange = (event) => {
+    setPallorValue(event.target.value)
+  }
+
+  const handleCRTChange = (event) => {
+    setCRTValue(event.target.value)
+  }
+
   return (
     <>
     <NavBar proxy={props.proxy} token={props.token} />
@@ -35,7 +53,7 @@ const HandsMedPage = (props) => {
       <div className="absolute bg-white-A700 bottom-[8%] flex flex-col font-cairo gap-6 h-[1000px] md:h-auto inset-x-[0] justify-start max-w-[1695px] mx-auto pb-6 pt-8 px-5 rounded-bl-[12px] rounded-br-[12px] w-full">
 
 
-         <div className="md:h-[1277px] sm:h-[3072px] h-[925px] relative w-[84%] md:w-full">
+         <div className="md:h-[1277px] sm:h-[3072px] h-[370px] relative w-[84%] md:w-full">
           {/* <div className="absolute bottom-[3%] h-[38px] right-[0] w-[10%]">
              <div className="absolute bg-black-900 h-[35px] inset-[0] justify-center m-auto shadow-bs w-full"></div>
              <Text
@@ -134,8 +152,9 @@ const HandsMedPage = (props) => {
             Check for cynosis and pallor and classify severity: {" "}
             
          </h4>
-         {/*i. Radial pulse (wrist) */}
-         <FormControl>
+         {/*i. Cynosis*/}
+         <FormControl value = {cynosis}
+    onChange={handleCynosisChange}>
          <FormLabel style={{paddingBottom: '10px', paddingTop: '15px', color: 'black' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">i. Cynosis </FormLabel>
       <RadioGroup
         row
@@ -151,8 +170,9 @@ const HandsMedPage = (props) => {
       </RadioGroup>
     </FormControl>
       
-       {/*ii. Brachial */}
-       <FormControl>
+       {/*ii. Pallor */}
+       <FormControl value = {pallor}
+    onChange={handlePallorChange}>
          <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">ii. Pallor</FormLabel>
       <RadioGroup
         row
@@ -177,7 +197,8 @@ const HandsMedPage = (props) => {
                     >
                       Enter capillary refill time (CRT):
                     </Text>
- <TextField
+ <TextField value = {capillaryrefill}
+    onChange={handleCRTChange}
   id="outlined-number"
   label="sec"
   type="number"
@@ -187,6 +208,13 @@ const HandsMedPage = (props) => {
 />
 
 </div>
+{/*<div style={{paddingTop: "2rem"}}>The values is {cynosis} {pallor} {capillaryrefill}</div>*/}
+<div style={{paddingTop: "2rem"}}>
+      <Stack spacing={2} direction="row">
+      <Button variant="contained" >Next Input</Button>
+     <Link to="/legs"><Button variant="outlined" >Save</Button>   </Link>
+   </Stack>
+   </div>   
          {/* </div>*/}
     {/* </div>*/}
                          

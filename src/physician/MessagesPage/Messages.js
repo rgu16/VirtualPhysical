@@ -50,7 +50,25 @@ export const MessagesPage = (props) => {
   };
 
   const handleSendMessage = () => {
-
+    axios({
+      method: "POST",
+      url: props.proxy + "send_message",
+      data:{
+        email: patients[active].email,
+        msg: msg[active],
+      },
+      headers: {
+      Authorization: 'Bearer ' + props.token
+      }
+  })
+    .then((response) => {
+        const res = response.data
+        alert('Scheduling email sent successfully!');
+    }).catch((error) => {
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)
+    })
   };
   return (
     <div className="bg-white-A700 flex flex-col items-center justify-start mx-auto w-full h-screen">

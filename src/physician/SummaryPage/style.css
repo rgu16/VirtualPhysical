@@ -29,12 +29,16 @@
 }
 
 .summary .buttons-2 {
+  display: flex;
+  justify-content: space-between; /* Adjust spacing between buttons */
+  align-items: center; /* Align buttons vertically */
   height: 76px;
   left: 65px;
   position: absolute;
   top: 41px;
   width: 1273px;
 }
+
 
 .summary .div-wrapper {
   background-color: #eaeaea;
@@ -107,7 +111,7 @@
   left: 354px;
   position: absolute;
   top: 0;
-  width: 250px;
+  width: 500px;
 }
 
 .summary .text-4 {
@@ -116,7 +120,7 @@
   left: 25px;
   position: relative;
   top: 17px;
-  width: 203px;
+  width: 500px;
 }
 
 .summary .img-2 {
@@ -176,7 +180,7 @@
   background-color: #eaeaea;
   border-radius: 20px;
   height: 76px;
-  left: 1078px;
+  left: 895px;
   position: absolute;
   top: 0;
   width: 195px;
@@ -528,57 +532,6 @@
   width: 15px;
 }
 
-.summary .profile-picture-2 {
-  background-image: url(../../../static/img/placeholder-6.png);
-  background-position: 50% 50%;
-  background-size: cover;
-  border-radius: 14px;
-  height: 57px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 57px;
-}
-
-.summary .icon-groups-2 {
-  height: 30px;
-  left: 1355px;
-  position: absolute;
-  top: 37px;
-  width: 210px;
-}
-
-.summary .calendar-icon-2 {
-  height: 30px;
-  left: 60px;
-  position: absolute;
-  top: 0;
-  width: 30px;
-}
-
-.summary .settings-icon-2 {
-  height: 30px;
-  left: 180px;
-  position: absolute;
-  top: 0;
-  width: 30px;
-}
-
-.summary .chart-icon-2 {
-  height: 30px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 30px;
-}
-
-.summary .message-icon-2 {
-  height: 30px;
-  left: 120px;
-  position: absolute;
-  top: 0;
-  width: 30px;
-}
 
 .summary .separator-2 {
   background-color: #d1d1d1;
@@ -588,14 +541,6 @@
   position: absolute;
   top: 23px;
   width: 2px;
-}
-
-.summary .VP-logo-3 {
-  height: 36px;
-  left: 28px;
-  position: absolute;
-  top: 29px;
-  width: 403px;
 }
 
 .summary .virtual-physical-2 {
@@ -621,10 +566,4 @@
   line-height: normal;
 }
 
-.summary .VP-logo-4 {
-  height: 35px;
-  left: 0;
-  position: absolute;
-  top: 1px;
-  width: 35px;
-}
+

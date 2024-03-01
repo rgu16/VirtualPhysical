@@ -1,8 +1,12 @@
 import React from "react";
 
-import { Button, Img, Line, List, Text, NavBar, TabNav } from "components";
+import { Img, Line, List, Text, NavBar, TabNav } from "components";
 import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+
 
 // Checkbox component
 function Checkbox({ name, value = false, updateValue = () => {}, children }) {
@@ -105,6 +109,13 @@ function selectAll() {
           defaultValue=""
           variant="outlined"
         /> </div>
+         <div style={{paddingTop: "2rem"}}>
+      <Stack spacing={2} direction="row">
+     {/*  <Link to="/eyes"> <Button variant="text">Previous Section</Button></Link>*/}
+     <Button variant="contained" >Next Input</Button>
+     <Link to="/eyes"><Button variant="outlined" >Save</Button>   </Link>
+   </Stack>
+   </div>
       </div>
     </div>
     

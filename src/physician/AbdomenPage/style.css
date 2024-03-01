@@ -1,4 +1,4 @@
-.general-tab {
+.abdomen-tab-question {
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
@@ -6,20 +6,20 @@
     width: 100%;
   }
   
-  .general-tab .overlap-wrapper {
+  .abdomen-tab-question .overlap-wrapper {
     background-color: #ffffff;
     border: 1px none;
     height: 1561px;
     width: 1920px;
   }
   
-  .general-tab .overlap {
+  .abdomen-tab-question .overlap {
     background-color: #f8f8f8;
     height: 1561px;
     position: relative;
   }
   
-  .general-tab .overlap-group {
+  .abdomen-tab-question .overlap-group {
     background-color: #ffffff;
     height: 1200px;
     left: 110px;
@@ -28,7 +28,7 @@
     width: 1700px;
   }
   
-  .general-tab .notes {
+  .abdomen-tab-question .notes {
     border-radius: 20px;
     height: 534px;
     left: 1218px;
@@ -37,7 +37,7 @@
     width: 421px;
   }
   
-  .general-tab .specialty-physician-wrapper {
+  .abdomen-tab-question .due-to-high-wrapper {
     background-color: #fffcfc;
     border-radius: 20px;
     height: 424px;
@@ -47,7 +47,7 @@
     width: 417px;
   }
   
-  .general-tab .specialty-physician {
+  .abdomen-tab-question .due-to-high {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 20px;
@@ -60,7 +60,7 @@
     width: 386px;
   }
   
-  .general-tab .text-wrapper {
+  .abdomen-tab-question .text-wrapper {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 20px;
@@ -69,7 +69,7 @@
     line-height: normal;
   }
   
-  .general-tab .span-wrapper {
+  .abdomen-tab-question .span-wrapper {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 24px;
@@ -82,7 +82,7 @@
     width: 184px;
   }
   
-  .general-tab .span {
+  .abdomen-tab-question .span {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 24px;
@@ -91,7 +91,7 @@
     line-height: normal;
   }
   
-  .general-tab .save-button {
+  .abdomen-tab-question .save-button {
     all: unset;
     border-radius: 20px;
     box-sizing: border-box;
@@ -102,14 +102,14 @@
     width: 129px;
   }
   
-  .general-tab .div {
+  .abdomen-tab-question .div {
     height: 38px;
     position: relative;
     top: -1px;
     width: 127px;
   }
   
-  /* .general-tab .background {
+  /* .abdomen-tab-question .background {
     background-color: #000000;
     border-radius: 20px;
     box-shadow: 0px 4px 4px #0000000a;
@@ -120,7 +120,7 @@
     width: 127px;
   } */
   
-  .general-tab .save {
+  .abdomen-tab-question .save {
     color: #ffffff;
     font-family: "Cairo", Helvetica;
     font-size: 20px;
@@ -132,7 +132,7 @@
     top: 0;
   }
   
-  .general-tab .text-wrapper-2 {
+  .abdomen-tab-question .text-wrapper-2 {
     color: #ffffff;
     font-family: "Cairo", Helvetica;
     font-size: 20px;
@@ -141,23 +141,63 @@
     line-height: normal;
   }
   
-  .general-tab .capillary-refill {
-    height: 47px;
-    left: 71px;
+  .abdomen-tab-question .pulse {
+    height: 37px;
+    left: 62px;
     position: absolute;
-    top: 829px;
-    width: 388px;
+    top: 77px;
+    width: 297px;
   }
   
-  .general-tab .overlap-2 {
-    height: 45px;
-    left: 242px;
+  .abdomen-tab-question .abdominal-palpation {
+    color: #000000;
+    font-family: "Helvetica Neue-Bold", Helvetica;
+    font-size: 30px;
+    font-weight: 700;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
     position: absolute;
-    top: 1px;
+    top: -1px;
+  }
+  
+  .abdomen-tab-question .text-wrapper-3 {
+    color: #000000;
+    font-family: "Helvetica Neue-Bold", Helvetica;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: normal;
+    width: 100;
+  }
+  
+  .abdomen-tab-question .overlap-2 {
+    background-image: url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/abdomen-pic-1@2x.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 384px;
+    left: 62px;
+    position: absolute;
+    top: 148px;
+    width: 461px;
+  }
+  
+  .abdomen-tab-question .region {
+    height: 45px;
+    left: 289px;
+    position: absolute;
+    top: 287px;
+    width: 95px;
+  }
+  
+  .abdomen-tab-question .overlap-3 {
+    height: 45px;
+    position: relative;
+    top: -1px;
     width: 93px;
   }
   
-  .general-tab .rectangle {
+  .abdomen-tab-question .rectangle {
     height: 42px;
     left: 0;
     position: absolute;
@@ -165,19 +205,19 @@
     width: 93px;
   }
   
-  .general-tab .element {
+  .abdomen-tab-question .element {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 24px;
     font-weight: 400;
-    left: 38px;
+    left: 40px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
     top: 0;
   }
   
-  .general-tab .text-wrapper-3 {
+  .abdomen-tab-question .text-wrapper-4 {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 24px;
@@ -186,285 +226,225 @@
     line-height: normal;
   }
   
-  .general-tab .sec {
+  .abdomen-tab-question .overlap-group-wrapper {
+    height: 45px;
+    left: 174px;
+    position: absolute;
+    top: 286px;
+    width: 95px;
+  }
+  
+  .abdomen-tab-question .div-wrapper {
+    height: 45px;
+    left: 63px;
+    position: absolute;
+    top: 286px;
+    width: 95px;
+  }
+  
+  .abdomen-tab-question .region-2 {
+    height: 45px;
+    left: 289px;
+    position: absolute;
+    top: 192px;
+    width: 95px;
+  }
+  
+  .abdomen-tab-question .region-3 {
+    height: 45px;
+    left: 174px;
+    position: absolute;
+    top: 192px;
+    width: 95px;
+  }
+  
+  .abdomen-tab-question .region-4 {
+    height: 45px;
+    left: 63px;
+    position: absolute;
+    top: 192px;
+    width: 95px;
+  }
+  
+  .abdomen-tab-question .region-5 {
+    height: 45px;
+    left: 289px;
+    position: absolute;
+    top: 88px;
+    width: 95px;
+  }
+  
+  .abdomen-tab-question .region-6 {
+    height: 45px;
+    left: 174px;
+    position: absolute;
+    top: 86px;
+    width: 95px;
+  }
+  
+  .abdomen-tab-question .region-7 {
+    height: 45px;
+    left: 63px;
+    position: absolute;
+    top: 87px;
+    width: 95px;
+  }
+  
+  .abdomen-tab-question .mdi-question-mark {
+    height: 43px;
+    left: 380px;
+    position: absolute;
+    top: 74px;
+    width: 43px;
+  }
+  
+  .abdomen-tab-question .overlap-4 {
+    background-color: #eaeaea;
+    border-radius: 20px;
+    height: 417px;
+    left: 625px;
+    position: absolute;
+    top: 93px;
+    width: 426px;
+  }
+  
+  .abdomen-tab-question .column-titles {
+    height: 45px;
+    left: 49px;
+    position: absolute;
+    top: 17px;
+    width: 333px;
+  }
+  
+  .abdomen-tab-question .scoring {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 24px;
-    font-weight: 700;
-    left: 347px;
+    font-weight: 400;
+    left: 0;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
     top: -1px;
   }
   
-  .general-tab .p {
+  .abdomen-tab-question .grade-point {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 24px;
-    font-weight: 700;
-    left: 0;
+    font-weight: 400;
+    left: 210px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
-    top: 1px;
-  }
-  
-  .general-tab .yellowing {
-    height: 154px;
-    left: 71px;
-    position: absolute;
-    top: 573px;
-    width: 609px;
-  }
-  
-  .general-tab .overlap-3 {
-    height: 74px;
-    left: 193px;
-    position: absolute;
-    top: 80px;
-    width: 418px;
-  }
-  
-  .general-tab .gradient-line {
-    height: 74px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 408px;
-  }
-  
-  .general-tab .rectangle-2 {
-    background: linear-gradient(90deg, rgb(0, 162.56, 94.29) 0%, rgb(229.59, 233.12, 56.78) 47.4%, rgb(255, 0, 0) 100%);
-    border-radius: 30px;
-    box-shadow: 0px 8px 20px #afafaf66;
-    height: 24px;
-    left: 0;
-    position: absolute;
-    top: 50px;
-    width: 408px;
-  }
-  
-  .general-tab .union {
-    height: 44px;
-    left: 328px;
-    position: absolute;
-    top: 0;
-    width: 5px;
-  }
-  
-  .general-tab .text-scale {
-    height: 14px;
-    left: 0;
-    position: absolute;
-    top: 30px;
-    width: 418px;
-  }
-  
-  .general-tab .bad {
-    color: #000000;
-    font-family: "Nunito", Helvetica;
-    font-size: 12px;
-    font-weight: 400;
-    left: 0;
-    letter-spacing: 0;
-    line-height: 120.4px;
-    position: absolute;
     top: -1px;
+  }
+  
+  .abdomen-tab-question .line {
+    height: 1px;
+    left: 27px;
+    position: absolute;
+    top: 71px;
+    width: 378px;
+  }
+  
+  .abdomen-tab-question .no-tenderness {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 22px;
+    font-weight: 400;
+    left: 44px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 100px;
+    width: 230px;
+  }
+  
+  .abdomen-tab-question .text-wrapper-5 {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 20px;
+  }
+  
+  .abdomen-tab-question .p {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 25px;
+    font-weight: 400;
+    left: 312px;
+    letter-spacing: 0;
+    line-height: 20px;
+    position: absolute;
+    top: 96px;
     white-space: nowrap;
   }
   
-  .general-tab .text-wrapper-4 {
+  .abdomen-tab-question .text-wrapper-6 {
     color: #000000;
-    font-family: "Nunito", Helvetica;
-    font-size: 12px;
+    font-family: "Cairo", Helvetica;
+    font-size: 25px;
     font-weight: 400;
     letter-spacing: 0;
-    line-height: 120.4px;
+    line-height: 20px;
   }
   
-  .general-tab .good {
+  .abdomen-tab-question .element-2 {
     color: #000000;
-    font-family: "Nunito", Helvetica;
-    font-size: 12px;
+    font-family: "Cairo", Helvetica;
+    font-size: 25px;
     font-weight: 400;
-    left: 384px;
+    left: 312px;
     letter-spacing: 0;
-    line-height: 120.4px;
+    line-height: 20px;
     position: absolute;
-    top: -1px;
+    top: 140px;
     white-space: nowrap;
   }
   
-  .general-tab .pallor-severity {
+  .abdomen-tab-question .element-3 {
     color: #000000;
     font-family: "Cairo", Helvetica;
-    font-size: 24px;
-    font-weight: 700;
-    left: 1px;
+    font-size: 25px;
+    font-weight: 400;
+    left: 312px;
     letter-spacing: 0;
-    line-height: normal;
+    line-height: 20px;
     position: absolute;
-    top: 94px;
+    top: 198px;
+    white-space: nowrap;
   }
   
-  .general-tab .group {
-    height: 45px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 273px;
-  }
-  
-  .general-tab .tick-circle {
-    height: 24px;
-    left: 209px;
-    position: absolute;
-    top: 10px;
-    width: 24px;
-  }
-  
-  .general-tab .close-circle {
-    height: 24px;
-    left: 247px;
-    position: absolute;
-    top: 10px;
-    width: 24px;
-  }
-  
-  .general-tab .span-wrapper-2 {
+  .abdomen-tab-question .element-4 {
     color: #000000;
     font-family: "Cairo", Helvetica;
-    font-size: 24px;
-    font-weight: 700;
-    left: 0;
+    font-size: 25px;
+    font-weight: 400;
+    left: 312px;
     letter-spacing: 0;
-    line-height: normal;
+    line-height: 20px;
     position: absolute;
-    top: -1px;
+    top: 263px;
+    white-space: nowrap;
   }
   
-  .general-tab .pallor {
-    height: 156px;
-    left: 71px;
-    position: absolute;
-    top: 317px;
-    width: 610px;
-  }
-  
-  .general-tab .overlap-4 {
-    height: 74px;
-    left: 194px;
-    position: absolute;
-    top: 82px;
-    width: 418px;
-  }
-  
-  .general-tab .img {
-    height: 44px;
-    left: 148px;
-    position: absolute;
-    top: 0;
-    width: 5px;
-  }
-  
-  .general-tab .pallor-severity-2 {
+  .abdomen-tab-question .element-5 {
     color: #000000;
     font-family: "Cairo", Helvetica;
-    font-size: 24px;
-    font-weight: 700;
-    left: 0;
+    font-size: 25px;
+    font-weight: 400;
+    left: 312px;
     letter-spacing: 0;
-    line-height: normal;
+    line-height: 20px;
     position: absolute;
-    top: 95px;
+    top: 338px;
+    white-space: nowrap;
   }
   
-  .general-tab .group-2 {
-    height: 45px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 153px;
-  }
-  
-  .general-tab .tick-circle-2 {
-    height: 24px;
-    left: 89px;
-    position: absolute;
-    top: 10px;
-    width: 24px;
-  }
-  
-  .general-tab .close-circle-2 {
-    height: 24px;
-    left: 127px;
-    position: absolute;
-    top: 10px;
-    width: 24px;
-  }
-  
-  .general-tab .cyanosis {
-    height: 155px;
-    left: 71px;
-    position: absolute;
-    top: 62px;
-    width: 612px;
-  }
-  
-  .general-tab .overlap-5 {
-    height: 74px;
-    left: 196px;
-    position: absolute;
-    top: 81px;
-    width: 418px;
-  }
-  
-  .general-tab .union-2 {
-    height: 44px;
-    left: 367px;
-    position: absolute;
-    top: 0;
-    width: 5px;
-  }
-  
-  .general-tab .pallor-severity-3 {
-    color: #000000;
-    font-family: "Cairo", Helvetica;
-    font-size: 24px;
-    font-weight: 700;
-    left: 2px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 94px;
-  }
-  
-  .general-tab .group-3 {
-    height: 45px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 181px;
-  }
-  
-  .general-tab .tick-circle-3 {
-    height: 24px;
-    left: 117px;
-    position: absolute;
-    top: 10px;
-    width: 24px;
-  }
-  
-  .general-tab .close-circle-3 {
-    height: 24px;
-    left: 155px;
-    position: absolute;
-    top: 10px;
-    width: 24px;
-  }
-  
-  .general-tab .tabs {
+  .abdomen-tab-question .tabs {
     background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
@@ -475,7 +455,7 @@
     width: 1062px;
   }
   
-  .general-tab .frame {
+  .abdomen-tab-question .frame {
     background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
@@ -486,7 +466,7 @@
     width: 188px;
   }
   
-  .general-tab .span-wrapper-3 {
+  .abdomen-tab-question .span-wrapper-2 {
     color: #222222;
     font-family: "DM Sans", Helvetica;
     font-size: 18px;
@@ -498,7 +478,7 @@
     top: 19px;
   }
   
-  .general-tab .text-wrapper-5 {
+  .abdomen-tab-question .text-wrapper-7 {
     color: #222222;
     font-family: "DM Sans", Helvetica;
     font-size: 18px;
@@ -507,8 +487,8 @@
     line-height: normal;
   }
   
-  .general-tab .general-wrapper {
-    background-color: #ffffff;
+  .abdomen-tab-question .general-wrapper {
+    background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
     left: 188px;
@@ -518,7 +498,7 @@
     width: 131px;
   }
   
-  .general-tab .lungs-wrapper {
+  .abdomen-tab-question .lungs-wrapper {
     background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
@@ -529,7 +509,7 @@
     width: 115px;
   }
   
-  .general-tab .pulses-wrapper {
+  .abdomen-tab-question .pulses-wrapper {
     background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
@@ -540,8 +520,8 @@
     width: 119px;
   }
   
-  .general-tab .abdomen-wrapper {
-    background-color: #eaeaea;
+  .abdomen-tab-question .abdomen-wrapper {
+    background-color: #ffffff;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
     left: 553px;
@@ -551,7 +531,7 @@
     width: 148px;
   }
   
-  .general-tab .heart-wrapper {
+  .abdomen-tab-question .heart-wrapper {
     background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
@@ -562,7 +542,7 @@
     width: 112px;
   }
   
-  .general-tab .legs-wrapper {
+  .abdomen-tab-question .legs-wrapper {
     background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
@@ -573,7 +553,7 @@
     width: 103px;
   }
   
-  .general-tab .summary-wrapper {
+  .abdomen-tab-question .summary-wrapper {
     background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
@@ -584,7 +564,7 @@
     width: 146px;
   }
   
-  .general-tab .NAV {
+  .abdomen-tab-question .NAV {
     background-color: #ffffff;
     height: 94px;
     left: 0;
@@ -593,7 +573,7 @@
     width: 1920px;
   }
   
-  .general-tab .profile {
+  .abdomen-tab-question .profile {
     height: 61px;
     left: 1647px;
     position: absolute;
@@ -601,7 +581,7 @@
     width: 223px;
   }
   
-  .general-tab .profile-2 {
+  .abdomen-tab-question .profile-2 {
     height: 60px;
     left: 81px;
     position: absolute;
@@ -609,7 +589,7 @@
     width: 146px;
   }
   
-  .general-tab .overlap-group-2 {
+  .abdomen-tab-question .overlap-group-2 {
     height: 60px;
     left: 0;
     position: absolute;
@@ -617,7 +597,7 @@
     width: 111px;
   }
   
-  .general-tab .dr-david-ochoa {
+  .abdomen-tab-question .dr-david-ochoa {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 16px;
@@ -629,7 +609,7 @@
     top: 0;
   }
   
-  .general-tab .text-wrapper-6 {
+  .abdomen-tab-question .text-wrapper-8 {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 16px;
@@ -638,7 +618,7 @@
     line-height: normal;
   }
   
-  .general-tab .cardiologist {
+  .abdomen-tab-question .cardiologist {
     color: #8f8f8f;
     font-family: "Cairo", Helvetica;
     font-size: 14px;
@@ -651,7 +631,7 @@
     top: 28px;
   }
   
-  .general-tab .text-wrapper-7 {
+  .abdomen-tab-question .text-wrapper-9 {
     color: #8f8f8f;
     font-family: "Cairo", Helvetica;
     font-size: 14px;
@@ -660,7 +640,7 @@
     line-height: normal;
   }
   
-  .general-tab .arrow {
+  .abdomen-tab-question .arrow {
     height: 8px;
     left: 127px;
     position: absolute;
@@ -668,7 +648,7 @@
     width: 15px;
   }
   
-  .general-tab .profile-picture {
+  .abdomen-tab-question .profile-picture {
     background-image: url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/placeholder-19@2x.png);
     background-position: 50% 50%;
     background-size: cover;
@@ -680,7 +660,7 @@
     width: 57px;
   }
   
-  .general-tab .icon-groups {
+  .abdomen-tab-question .icon-groups {
     height: 30px;
     left: 1355px;
     position: absolute;
@@ -688,7 +668,7 @@
     width: 210px;
   }
   
-  .general-tab .calendar-icon {
+  .abdomen-tab-question .calendar-icon {
     height: 30px;
     left: 60px;
     position: absolute;
@@ -696,7 +676,7 @@
     width: 30px;
   }
   
-  .general-tab .settings-icon {
+  .abdomen-tab-question .settings-icon {
     height: 30px;
     left: 180px;
     position: absolute;
@@ -704,7 +684,7 @@
     width: 30px;
   }
   
-  .general-tab .chart-icon {
+  .abdomen-tab-question .chart-icon {
     height: 30px;
     left: 0;
     position: absolute;
@@ -712,7 +692,7 @@
     width: 30px;
   }
   
-  .general-tab .message-icon {
+  .abdomen-tab-question .message-icon {
     height: 30px;
     left: 120px;
     position: absolute;
@@ -720,7 +700,7 @@
     width: 30px;
   }
   
-  .general-tab .separator {
+  .abdomen-tab-question .separator {
     background-color: #d1d1d1;
     border-radius: 8px;
     height: 56px;
@@ -730,7 +710,7 @@
     width: 2px;
   }
   
-  .general-tab .VP-logo {
+  .abdomen-tab-question .VP-logo {
     height: 36px;
     left: 28px;
     position: absolute;
@@ -738,7 +718,7 @@
     width: 403px;
   }
   
-  .general-tab .virtual-physical {
+  .abdomen-tab-question .virtual-physical {
     color: #000000;
     font-family: "DM Sans", Helvetica;
     font-size: 30px;
@@ -752,7 +732,7 @@
     width: 358px;
   }
   
-  .general-tab .text-wrapper-8 {
+  .abdomen-tab-question .text-wrapper-10 {
     color: #000000;
     font-family: "DM Sans", Helvetica;
     font-size: 30px;
@@ -761,7 +741,7 @@
     line-height: normal;
   }
   
-  .general-tab .VP-logo-2 {
+  .abdomen-tab-question .img {
     height: 35px;
     left: 0;
     position: absolute;

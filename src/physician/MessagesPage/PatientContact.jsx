@@ -7,7 +7,6 @@ export const PatientContact= (props) => {
   const picture = props.patient.picture
   const active = props.active
   const id = props.id
-  console.log(props)
   return (
 
     <button className="rounded-[20px] w-[336px] h-[124px]"
@@ -16,7 +15,7 @@ export const PatientContact= (props) => {
             >
     <div className="flex flex-row h-[70px] w-[300px] items-center justify-between">
     <img
-      className=" h-[70px] w-[70px] ml-[30px]"
+      className=" h-[60px] w-[60px] ml-[30px]"
       alt="profile picture"
       src = {picture} 
     />

@@ -1,1 +1,0 @@
-export { PulsesTab } from "./PulsesTab";

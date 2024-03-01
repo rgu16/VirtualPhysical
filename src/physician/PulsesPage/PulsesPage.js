@@ -1,49 +1,14 @@
 import React from "react";
 import "./style.css";
 import { useState } from 'react';
-
-// function MyComponent() {
-//   const [inputValue, setInputValue] = useState('+2');
-//   const [isOutOfRange, setIsOutOfRange] = useState(false);
-
-//   const handleInputChange = (e) => {
-//     const value = e.target.value;
-//     setInputValue(value);
-
-//     // Check if the value is out of the -3 to +3 range
-//     const numericValue = parseFloat(value);
-//     if (numericValue < -3 || numericValue > 3) {
-//       setIsOutOfRange(true);
-//     } else {
-//       setIsOutOfRange(false);
-//     }
-//   };
-
-//   return (
-//     <div className="overlap-4">
-//       <img
-//         className="textbox-42"
-//         alt="Rectangle"
-//         src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
-//       />
-//       <input
-//         type="text"
-//         className={`textbox-42 ${isOutOfRange ? 'input-error' : ''}`}
-//         value={inputValue}
-//         onChange={handleInputChange}
-//       />
-//       {isOutOfRange && (
-//         <div className="error-popup">Value must be between -3 and +3.</div>
-//       )}
-//     </div>
-//   );
-// }
-
-// export default MyComponent;
+import Popover from '@mui/material/Popover';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import { NavBar } from 'components'
+import CarotidPopover from "components/CarotidPopover/CarotidPopover.jsx"
 
 
-
-export const PulsesPage= () => {
+export const PulsesPage = (props) => {
   // State for the radial pulse value and whether it's out of range
   // const [radialPulseValue, setRadialPulseValue] = useState('');
   // const [isRadialOutOfRange, setIsRadialOutOfRange] = useState('');
@@ -60,6 +25,23 @@ export const PulsesPage= () => {
   const [systolicStatus, setSystolicStatus] = useState('');
   const [diastolicPulseValue, setDiastolicPulseValue] = useState('');
   const [diastolicStatus, setDiastolicStatus] = useState('');
+
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const open = Boolean(anchorEl);
+  const id = open ? 'image-popover' : undefined;
+
+  const [saveVariant, setSaveVariant] = useState('outlined');
+
+  const handleSaveClick = () => {
+    setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
+  };
 
 
 
@@ -104,8 +86,8 @@ export const PulsesPage= () => {
       case 4:
         status = 'bounding';
         break;
-      // default:
-      //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
+      default:
+        status = ''; // For values not in the 0-4 range or non-numeric values
     }
 
     setRadialStatus(status);
@@ -136,8 +118,8 @@ export const PulsesPage= () => {
       case 4:
         status = 'bounding';
         break;
-      // default:
-      //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
+      default:
+        status = ''; // For values not in the 0-4 range or non-numeric values
     }
 
     setCarotidStatus(status);
@@ -168,8 +150,8 @@ export const PulsesPage= () => {
       case 4:
         status = 'bounding';
         break;
-      // default:
-      //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
+      default:
+        status = ''; // For values not in the 0-4 range or non-numeric values
     }
 
     setBrachialStatus(status);
@@ -200,8 +182,8 @@ export const PulsesPage= () => {
       case 4:
         status = 'bounding';
         break;
-      // default:
-      //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
+      default:
+        status = ''; // For values not in the 0-4 range or non-numeric values
     }
 
     setDorsalisStatus(status);
@@ -215,27 +197,49 @@ export const PulsesPage= () => {
     const numericValue = parseInt(value, 10);
 
     // Determine the carotid pulse status
+    // let status = '';
+    // switch (numericValue) {
+    //   case 0:
+    //     status = 'absent';
+    //     break;
+    //   case 1:
+    //     status = 'weak';
+    //     break;
+    //   case 2:
+    //     status = 'normal';
+    //     break;
+    //   case 3:
+    //     status = 'increased';
+    //     break;
+    //   case 4:
+    //     status = 'bounding';
+    //     break;
+    //   // default:
+    //   //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
+    // }
     let status = '';
-    switch (numericValue) {
-      case 0:
-        status = 'absent';
-        break;
-      case 1:
-        status = 'weak';
-        break;
-      case 2:
-        status = 'normal';
-        break;
-      case 3:
-        status = 'increased';
-        break;
-      case 4:
-        status = 'bounding';
-        break;
-      // default:
-      //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
-    }
 
+  // Check if the input value is not empty
+  if (value.trim() !== '') {
+    // Convert the value to a number for comparison
+    const numericValue = parseInt(value, 10);
+
+    // Ensure the conversion to a number was successful (i.e., the result is not NaN)
+    if (!isNaN(numericValue)) {
+      if (numericValue <= 89) {
+        status = 'Abnormal (low blood pressure)';
+      // } else if (numericValue >= 90 && numericValue <= 120) {
+      //   status = 'Normal';
+      } else if (numericValue >= 121 && numericValue <= 140) {
+        status = 'Slightly abnormal';
+      } else if (numericValue > 140) {
+        status = 'Abnormal (high blood pressure)';
+      }
+    } else {
+      // Handle non-numeric input gracefully
+      status = 'Invalid input';
+    }
+  }
     setSystolicStatus(status);
   };
 
@@ -248,28 +252,48 @@ export const PulsesPage= () => {
     const numericValue = parseInt(value, 10);
 
     // Determine the carotid pulse status
-    let status = '';
-    switch (numericValue) {
-      case 0:
-        status = 'absent';
-        break;
-      case 1:
-        status = 'weak';
-        break;
-      case 2:
-        status = 'normal';
-        break;
-      case 3:
-        status = 'increased';
-        break;
-      case 4:
-        status = 'bounding';
-        break;
-      // default:
-      //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
+    // let status = '';
+    // switch (numericValue) {
+    //   case 0:
+    //     status = 'absent';
+    //     break;
+    //   case 1:
+    //     status = 'weak';
+    //     break;
+    //   case 2:
+    //     status = 'normal';
+    //     break;
+    //   case 3:
+    //     status = 'increased';
+    //     break;
+    //   case 4:
+    //     status = 'bounding';
+    //     break;
+    //   // default:
+    //   //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
+    // }
+    if (value.trim() !== '') {
+      let status = '';
+      // Check if the value is numeric
+      if (!isNaN(numericValue)) {
+        if (numericValue <= 59) {
+          status = 'Abnormal (low blood pressure)';
+        // } else if (numericValue >= 60 && numericValue <= 80) {
+        //   status = 'Normal';
+        } else if (numericValue >= 81 && numericValue <= 89) {
+          status = 'Slightly abnormal';
+        } else if (numericValue >= 90) {
+          status = 'Abnormal (high blood pressure)';
+        }
+        setDiastolicStatus(status);
+      } else {
+        // The input is non-numeric
+        setDiastolicStatus('Invalid input');
+      }
+    } else {
+      // The textbox is blank, reset the status or take no action
+      setDiastolicStatus(''); // Resetting the status for blank input
     }
-
-    setDiastolicStatus(status);
   };
 
 
@@ -322,7 +346,7 @@ export const PulsesPage= () => {
                     className={`textbox-43 ${systolicStatus && systolicStatus !== 'normal' ? 'input-error' : ''}`}
                     value={systolicPulseValue}
                     onChange={handleSystolicChange}
-                    placeholder="Enter a value"
+                    placeholder="135"
                   />
                   {systolicStatus && systolicStatus !== 'normal' && (
                     <div className="error-popup">Abnormal systolic value: {systolicStatus}</div>
@@ -350,7 +374,7 @@ export const PulsesPage= () => {
                     className={`textbox-43 ${diastolicStatus && diastolicStatus !== 'normal' ? 'input-error' : ''}`}
                     value={diastolicPulseValue}
                     onChange={handleDiastolicChange}
-                    placeholder="Enter a value"
+                    placeholder="87"
                   />
                   {diastolicStatus && diastolicStatus !== 'normal' && (
                     <div className="error-popup">Abnormal diastolic value: {diastolicStatus}</div>
@@ -367,20 +391,37 @@ export const PulsesPage= () => {
                   <span className="text-wrapper">Heart Rate:</span>
                 </p>
                 <div className="overlap-3">
-                  <input type="text" className="textbox-43" placeholder="Enter a value" />
+                  <input type="text" className="textbox-43" placeholder="80" />
                 </div>
                 <p className="bpm-2">
                   <span className="span">bpm</span>
                 </p>
               </div>
             </div>
-            <div className="chainlink-link-wrapper">
-              <img
-                className="chainlink-link"
-                alt="Chainlink link"
-                src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/chainlink--link--13@2x.png"
-              />
+
+
+
+
+            <div className="popover">
+
+              <div className="carotidpopover">
+                <CarotidPopover></CarotidPopover>
+              </div>                      
+
             </div>
+
+
+
+            <img
+              className="carotid-img"
+              alt="carotidimg"
+              src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/carotid-img-1@2x.png"
+            />
+
+
+
+
+
             <p className="carotid-auscultation">
               <span className="text-wrapper-2">Carotid Auscultation</span>
             </p>
@@ -397,22 +438,13 @@ export const PulsesPage= () => {
                     alt="Rectangle"
                     src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
                   />
-                  {/* <input
-                    type="text"
-                    className={`textbox-42 ${isRadialOutOfRange ? 'input-error' : ''}`}
-                    value={radialPulseValue}
-                    onChange={handleRadialChange}
-                    placeholder="Enter a value"
-                  />
-                  {isRadialOutOfRange && (
-                    <div className="error-popup">Value must be between 0 and +4.</div>
-                  )} */}
+
                   <input
                     type="text"
                     className={`textbox-42 ${radialStatus && radialStatus !== 'normal' ? 'input-error' : ''}`}
                     value={radialPulseValue}
                     onChange={handleRadialChange}
-                    placeholder="Enter a value"
+                    placeholder="1"
                   />
                   {radialStatus && radialStatus !== 'normal' && (
                     <div className="error-popup">Abnormal radial pulse status: {radialStatus}</div>
@@ -420,7 +452,7 @@ export const PulsesPage= () => {
 
 
                 </div>
-                <p className="span-wrapper">
+                <p className="span-wrapper-2">
                   <span className="text-wrapper">Radial pulse:</span>
                 </p>
               </div>
@@ -444,7 +476,7 @@ export const PulsesPage= () => {
                     className={`textbox-42 ${carotidStatus && carotidStatus !== 'normal' ? 'input-error' : ''}`}
                     value={brachialPulseValue}
                     onChange={handleBrachialChange}
-                    placeholder="Enter a value"
+                    placeholder="1"
                   />
                   {brachialStatus && brachialStatus !== 'normal' && (
                     <div className="error-popup">Abnormal posterior tibial status: {brachialStatus}</div>
@@ -469,7 +501,7 @@ export const PulsesPage= () => {
                     className={`textbox-42 ${carotidStatus && carotidStatus !== 'normal' ? 'input-error' : ''}`}
                     value={carotidPulseValue}
                     onChange={handleCarotidChange}
-                    placeholder="Enter a value"
+                    placeholder="2"
                   />
                   {carotidStatus && carotidStatus !== 'normal' && (
                     <div className="error-popup">Abnormal carotid pulse status: {carotidStatus}</div>
@@ -502,7 +534,7 @@ export const PulsesPage= () => {
                     className={`textbox-42 ${dorsalisStatus && dorsalisStatus !== 'normal' ? 'input-error' : ''}`}
                     value={dorsalisPulseValue}
                     onChange={handleDorsalisChange}
-                    placeholder="Enter a value"
+                    placeholder="1"
                   />
                   {dorsalisStatus && dorsalisStatus !== 'normal' && (
                     <div className="error-popup">Abnormal dorsalis pedis pulse status: {dorsalisStatus}</div>
@@ -519,14 +551,10 @@ export const PulsesPage= () => {
             </div>
             
             <div className="JVP">
-              {/* <p className="abnormal">
-                <span className="span">abnormal</span>
-              </p> */}
-            <select className="abnormal">
-                <option value="normal">normal</option>
-                <option value="abnormal">abnormal</option>
-                {/* Add other options here as needed */}
-            </select>
+              <p className="abnormal">
+                <span className="span">normal</span>
+              </p>
+
 
               <p className="jugular-venous">
                 <span className="text-wrapper">Jugular Venous Pressure (JVP) Evaluation:</span>
@@ -535,24 +563,28 @@ export const PulsesPage= () => {
 
             <div className="notes">
               <div className="specialty-physician-wrapper">
-                {/* <p className="specialty-physician">
-                  <span className="text-wrapper-3">[specialty physician notes on pulse mesasurements go here]</span>
-                </p> */}
+                <p className="specialty-physician">
+                  {/* <span className="text-wrapper-3">[specialty physician notes on pulse mesasurements go here]</span> */}
+                
                 <textarea className="specialty-physician-textarea" placeholder="specialty physician notes on pulse mesasurements go here"></textarea>
+                </p>
               </div>
               <p className="notes-2">
                 <span className="text-wrapper-4">Notes:</span>
               </p>
+
               <button className="save-button">
-                <div className="overlap-group-4">
+                <div className="overlap-group-2">
                   <div className="background" />
-                  <p className="save">
-                    <span className="text-wrapper-5">Save</span>
-                  </p>
+                  <Button variant={saveVariant} onClick={handleSaveClick}>
+                    {saveVariant === 'outlined' ? 'Save' : 'Saved'}
+                  </Button>
                 </div>
               </button>
+
             </div>
           </div>
+
           <div className="tabs">
             <div className="frame">
               {/* <p className="span-wrapper-3">
@@ -619,91 +651,10 @@ export const PulsesPage= () => {
               </a>
             </div>
           </div>
-          <div className="NAV">
-            <div className="profile">
-              <div className="profile-2">
-                <div className="overlap-group-5">
-                  <p className="dr-david-ochoa">
-                    <span className="text-wrapper-7">Dr. David Ochoa</span>
-                  </p>
-                  <p className="cardiologist">
-                    <span className="text-wrapper-8">Cardiologist</span>
-                  </p>
-                </div>
-                <img
-                  className="arrow"
-                  alt="Arrow"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/arrow-19@2x.png"
-                />
-              </div>
-              <div className="profile-picture" />
-            </div>
-            <div className="icon-groups">
-              {/* <img
-                className="calendar-icon"
-                alt="Calendar icon"
-                src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/calendar-icon-21@2x.png"
-              />
-              <img
-                className="settings-icon"
-                alt="Settings icon"
-                src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/settings-icon-19@2x.png"
-              />
-              <img
-                className="chart-icon"
-                alt="Chart icon"
-                src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/chart-icon-20@2x.png"
-              />
-              <img
-                className="message-icon"
-                alt="Message icon"
-                src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/message-icon-19@2x.png"
-              /> */}
-              <a href="/appointment">
-                <img
-                  className="calendar-icon"
-                  alt="Calendar icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/calendar-icon-21@2x.png"
-                />
-              </a>
+          
+          <NavBar proxy={props.proxy} token={props.token} /> {/* Display NavBar at the top */}
 
-              <a href="/setting">
-                <img
-                  className="settings-icon"
-                  alt="Settings icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/settings-icon-19@2x.png"
-                />
-              </a>
 
-              <a href="/chart">
-                <img
-                  className="chart-icon"
-                  alt="Chart icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/chart-icon-20@2x.png"
-                />
-              </a>
-
-              <a href="/messages">
-                <img
-                  className="message-icon"
-                  alt="Message icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/message-icon-19@2x.png"
-                />
-              </a>
-              
-            </div>
-            <div className="separator" />
-            <div className="VP-logo">
-              <p className="virtual-physical">
-                <span className="text-wrapper-9">Virtual Physical</span>
-              </p>
-              <img
-                className="VP-logo-2"
-                alt="Vp logo"
-                src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/vp-logo-19@2x.png"
-              />
-            </div>
-          </div>
         </div>
       </div>
     </div>

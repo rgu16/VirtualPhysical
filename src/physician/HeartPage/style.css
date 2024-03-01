@@ -1,4 +1,4 @@
-.general-tab {
+.heart-tab {
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
@@ -6,29 +6,220 @@
     width: 100%;
   }
   
-  .general-tab .overlap-wrapper {
+  .heart-tab .overlap-wrapper {
     background-color: #ffffff;
     border: 1px none;
     height: 1561px;
     width: 1920px;
   }
   
-  .general-tab .overlap {
+  .heart-tab .overlap {
     background-color: #f8f8f8;
-    height: 1561px;
+    height: 2261px;
     position: relative;
   }
   
-  .general-tab .overlap-group {
+  .heart-tab .overlap-group {
     background-color: #ffffff;
-    height: 1200px;
+    height: 1900px;
     left: 110px;
     position: absolute;
     top: 249px;
     width: 1700px;
   }
   
-  .general-tab .notes {
+  .heart-tab .div {
+    background-image: url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/tempimagefen4er-1-1@2x.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    height: 379px;
+    left: 300px;
+    position: absolute;
+    top: 447px;
+    width: 553px;
+  }
+  
+  .heart-tab .atrialpopover {
+    height: 35px;
+    left: 230px;
+    position: absolute;
+    top: 118px;
+    width: 35px;
+    z-index: 999;
+  }
+  
+  .heart-tab .pulmonarypopover {
+    height: 35px;
+    left: 290px;
+    position: absolute;
+    top: 118px;
+    width: 35px;
+    z-index: 999;
+  }
+  
+  .heart-tab .tricuspidpopover {
+    height: 35px;
+    left: 230px;
+    position: absolute;
+    top: 192px;
+    width: 35px;
+    z-index: 999;
+  }
+  
+  .heart-tab .mitralpopover {
+    height: 35px;
+    left: 356px;
+    position: absolute;
+    top: 245px;
+    width: 35px;
+    z-index: 999;
+  }
+  
+  .heart-tab .heart-ausc {
+    height: 37px;
+    left: 50px;
+    position: absolute;
+    top: 377px;
+    width: 700px;
+  }
+  
+  .heart-tab .heart-auscultation {
+    color: #000000;
+    font-family: "Helvetica Neue-Bold", Helvetica;
+    font-size: 30px;
+    font-weight: 700;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: -1px;
+  }
+  
+  .heart-tab .text-wrapper {
+    color: #000000;
+    font-family: "Helvetica Neue-Bold", Helvetica;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .heart-tab .span {
+    font-family: "Helvetica Neue-Regular", Helvetica;
+    font-weight: 400;
+  }
+  
+  .heart-tab .thrill {
+    height: 45px;
+    left: 50px;
+    position: absolute;
+    top: 249px;
+    width: 377px;
+  }
+  
+  .heart-tab .normal {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 24px;
+    font-weight: 400;
+    left: 301px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: -1px;
+  }
+  
+  .heart-tab .text-wrapper-2 {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .heart-tab .span-wrapper {
+    color: #000000;
+    font-family: "Helvetica Neue-Bold", Helvetica;
+    font-size: 24px;
+    font-weight: 700;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 7px;
+  }
+  
+  .heart-tab .text-wrapper-3 {
+    color: #000000;
+    font-family: "Helvetica Neue-Bold", Helvetica;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0;
+    line-height: normal;
+  }
+  
+  .heart-tab .thrill-2 {
+    height: 45px;
+    left: 50px;
+    position: absolute;
+    top: 185px;
+    width: 428px;
+  }
+  
+  .heart-tab .abnormal {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 24px;
+    font-weight: 400;
+    left: 327px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: -1px;
+  }
+  
+  .heart-tab .thrill-3 {
+    height: 45px;
+    left: 50px;
+    position: absolute;
+    top: 121px;
+    width: 354px;
+  }
+  
+  .heart-tab .p {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 24px;
+    font-weight: 400;
+    left: 278px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: -1px;
+  }
+  
+  .heart-tab .parasternal-heave {
+    height: 45px;
+    left: 50px;
+    position: absolute;
+    top: 57px;
+    width: 342px;
+  }
+  
+  .heart-tab .abnormal-2 {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 24px;
+    font-weight: 400;
+    left: 241px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: -1px;
+  }
+  
+  .heart-tab .notes {
     border-radius: 20px;
     height: 534px;
     left: 1218px;
@@ -37,7 +228,7 @@
     width: 421px;
   }
   
-  .general-tab .specialty-physician-wrapper {
+  .heart-tab .specialty-physician-wrapper {
     background-color: #fffcfc;
     border-radius: 20px;
     height: 424px;
@@ -47,7 +238,7 @@
     width: 417px;
   }
   
-  .general-tab .specialty-physician {
+  .heart-tab .specialty-physician {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 20px;
@@ -60,7 +251,7 @@
     width: 386px;
   }
   
-  .general-tab .text-wrapper {
+  .heart-tab .text-wrapper-4 {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 20px;
@@ -69,7 +260,7 @@
     line-height: normal;
   }
   
-  .general-tab .span-wrapper {
+  .heart-tab .notes-2 {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 24px;
@@ -82,7 +273,7 @@
     width: 184px;
   }
   
-  .general-tab .span {
+  .heart-tab .text-wrapper-5 {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 24px;
@@ -91,7 +282,7 @@
     line-height: normal;
   }
   
-  .general-tab .save-button {
+  .heart-tab .save-button {
     all: unset;
     border-radius: 20px;
     box-sizing: border-box;
@@ -102,14 +293,14 @@
     width: 129px;
   }
   
-  .general-tab .div {
+  .heart-tab .overlap-group-2 {
     height: 38px;
     position: relative;
     top: -1px;
     width: 127px;
   }
   
-  /* .general-tab .background {
+  /* .heart-tab .background {
     background-color: #000000;
     border-radius: 20px;
     box-shadow: 0px 4px 4px #0000000a;
@@ -120,7 +311,7 @@
     width: 127px;
   } */
   
-  .general-tab .save {
+  .heart-tab .save {
     color: #ffffff;
     font-family: "Cairo", Helvetica;
     font-size: 20px;
@@ -132,7 +323,7 @@
     top: 0;
   }
   
-  .general-tab .text-wrapper-2 {
+  .heart-tab .text-wrapper-6 {
     color: #ffffff;
     font-family: "Cairo", Helvetica;
     font-size: 20px;
@@ -141,330 +332,62 @@
     line-height: normal;
   }
   
-  .general-tab .capillary-refill {
-    height: 47px;
-    left: 71px;
-    position: absolute;
-    top: 829px;
-    width: 388px;
-  }
-  
-  .general-tab .overlap-2 {
-    height: 45px;
-    left: 242px;
-    position: absolute;
-    top: 1px;
-    width: 93px;
-  }
-  
-  .general-tab .rectangle {
-    height: 42px;
-    left: 0;
-    position: absolute;
-    top: 2px;
-    width: 93px;
-  }
-  
-  .general-tab .element {
+  .heart-tab .normal-2 {
     color: #000000;
-    font-family: "Cairo", Helvetica;
-    font-size: 24px;
-    font-weight: 400;
-    left: 38px;
+    font-family: "Helvetica Neue-Medium", Helvetica;
+    font-size: 20px;
+    font-weight: 500;
+    left: 76px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
-    top: 0;
-  }
-  
-  .general-tab .text-wrapper-3 {
-    color: #000000;
-    font-family: "Cairo", Helvetica;
-    font-size: 24px;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: normal;
-  }
-  
-  .general-tab .sec {
-    color: #000000;
-    font-family: "Cairo", Helvetica;
-    font-size: 24px;
-    font-weight: 700;
-    left: 347px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: -1px;
-  }
-  
-  .general-tab .p {
-    color: #000000;
-    font-family: "Cairo", Helvetica;
-    font-size: 24px;
-    font-weight: 700;
-    left: 0;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 1px;
-  }
-  
-  .general-tab .yellowing {
-    height: 154px;
-    left: 71px;
-    position: absolute;
-    top: 573px;
-    width: 609px;
-  }
-  
-  .general-tab .overlap-3 {
-    height: 74px;
-    left: 193px;
-    position: absolute;
-    top: 80px;
-    width: 418px;
-  }
-  
-  .general-tab .gradient-line {
-    height: 74px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 408px;
-  }
-  
-  .general-tab .rectangle-2 {
-    background: linear-gradient(90deg, rgb(0, 162.56, 94.29) 0%, rgb(229.59, 233.12, 56.78) 47.4%, rgb(255, 0, 0) 100%);
-    border-radius: 30px;
-    box-shadow: 0px 8px 20px #afafaf66;
-    height: 24px;
-    left: 0;
-    position: absolute;
-    top: 50px;
-    width: 408px;
-  }
-  
-  .general-tab .union {
-    height: 44px;
-    left: 328px;
-    position: absolute;
-    top: 0;
-    width: 5px;
-  }
-  
-  .general-tab .text-scale {
-    height: 14px;
-    left: 0;
-    position: absolute;
-    top: 30px;
-    width: 418px;
-  }
-  
-  .general-tab .bad {
-    color: #000000;
-    font-family: "Nunito", Helvetica;
-    font-size: 12px;
-    font-weight: 400;
-    left: 0;
-    letter-spacing: 0;
-    line-height: 120.4px;
-    position: absolute;
-    top: -1px;
+    top: 1721px;
     white-space: nowrap;
   }
   
-  .general-tab .text-wrapper-4 {
+  .heart-tab .text-wrapper-7 {
     color: #000000;
-    font-family: "Nunito", Helvetica;
-    font-size: 12px;
-    font-weight: 400;
+    font-family: "Helvetica Neue-Medium", Helvetica;
+    font-size: 25px;
+    font-weight: 500;
     letter-spacing: 0;
-    line-height: 120.4px;
+    line-height: normal;
   }
   
-  .general-tab .good {
-    color: #000000;
-    font-family: "Nunito", Helvetica;
-    font-size: 12px;
-    font-weight: 400;
-    left: 384px;
-    letter-spacing: 0;
-    line-height: 120.4px;
+  .heart-tab .tick-circle {
+    height: 15px;
+    left: 190px;
     position: absolute;
-    top: -1px;
-    white-space: nowrap;
+    top: 1712px;
+    width: 15px;
+    z-index: 999;
   }
+
   
-  .general-tab .pallor-severity {
+  .heart-tab .single-lead-ECG {
     color: #000000;
-    font-family: "Cairo", Helvetica;
-    font-size: 24px;
+    font-family: "Helvetica Neue-Bold", Helvetica;
+    font-size: 30px;
     font-weight: 700;
-    left: 1px;
+    left: 265px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
-    top: 94px;
+    top: 1250px;
   }
-  
-  .general-tab .group {
-    height: 45px;
-    left: 0;
+
+
+  .heart-tab .ecg-picture {
+    height: 5000px;
+    left: 240px;
     position: absolute;
-    top: 0;
-    width: 273px;
+    top: 1300px;
+    width: 1400px;
   }
+
+
   
-  .general-tab .tick-circle {
-    height: 24px;
-    left: 209px;
-    position: absolute;
-    top: 10px;
-    width: 24px;
-  }
-  
-  .general-tab .close-circle {
-    height: 24px;
-    left: 247px;
-    position: absolute;
-    top: 10px;
-    width: 24px;
-  }
-  
-  .general-tab .span-wrapper-2 {
-    color: #000000;
-    font-family: "Cairo", Helvetica;
-    font-size: 24px;
-    font-weight: 700;
-    left: 0;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: -1px;
-  }
-  
-  .general-tab .pallor {
-    height: 156px;
-    left: 71px;
-    position: absolute;
-    top: 317px;
-    width: 610px;
-  }
-  
-  .general-tab .overlap-4 {
-    height: 74px;
-    left: 194px;
-    position: absolute;
-    top: 82px;
-    width: 418px;
-  }
-  
-  .general-tab .img {
-    height: 44px;
-    left: 148px;
-    position: absolute;
-    top: 0;
-    width: 5px;
-  }
-  
-  .general-tab .pallor-severity-2 {
-    color: #000000;
-    font-family: "Cairo", Helvetica;
-    font-size: 24px;
-    font-weight: 700;
-    left: 0;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 95px;
-  }
-  
-  .general-tab .group-2 {
-    height: 45px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 153px;
-  }
-  
-  .general-tab .tick-circle-2 {
-    height: 24px;
-    left: 89px;
-    position: absolute;
-    top: 10px;
-    width: 24px;
-  }
-  
-  .general-tab .close-circle-2 {
-    height: 24px;
-    left: 127px;
-    position: absolute;
-    top: 10px;
-    width: 24px;
-  }
-  
-  .general-tab .cyanosis {
-    height: 155px;
-    left: 71px;
-    position: absolute;
-    top: 62px;
-    width: 612px;
-  }
-  
-  .general-tab .overlap-5 {
-    height: 74px;
-    left: 196px;
-    position: absolute;
-    top: 81px;
-    width: 418px;
-  }
-  
-  .general-tab .union-2 {
-    height: 44px;
-    left: 367px;
-    position: absolute;
-    top: 0;
-    width: 5px;
-  }
-  
-  .general-tab .pallor-severity-3 {
-    color: #000000;
-    font-family: "Cairo", Helvetica;
-    font-size: 24px;
-    font-weight: 700;
-    left: 2px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    top: 94px;
-  }
-  
-  .general-tab .group-3 {
-    height: 45px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 181px;
-  }
-  
-  .general-tab .tick-circle-3 {
-    height: 24px;
-    left: 117px;
-    position: absolute;
-    top: 10px;
-    width: 24px;
-  }
-  
-  .general-tab .close-circle-3 {
-    height: 24px;
-    left: 155px;
-    position: absolute;
-    top: 10px;
-    width: 24px;
-  }
-  
-  .general-tab .tabs {
+  .heart-tab .tabs {
     background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
@@ -475,7 +398,7 @@
     width: 1062px;
   }
   
-  .general-tab .frame {
+  .heart-tab .frame {
     background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
@@ -486,7 +409,7 @@
     width: 188px;
   }
   
-  .general-tab .span-wrapper-3 {
+  .heart-tab .span-wrapper-2 {
     color: #222222;
     font-family: "DM Sans", Helvetica;
     font-size: 18px;
@@ -498,7 +421,7 @@
     top: 19px;
   }
   
-  .general-tab .text-wrapper-5 {
+  .heart-tab .text-wrapper-8 {
     color: #222222;
     font-family: "DM Sans", Helvetica;
     font-size: 18px;
@@ -507,8 +430,8 @@
     line-height: normal;
   }
   
-  .general-tab .general-wrapper {
-    background-color: #ffffff;
+  .heart-tab .general-wrapper {
+    background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
     left: 188px;
@@ -518,7 +441,7 @@
     width: 131px;
   }
   
-  .general-tab .lungs-wrapper {
+  .heart-tab .lungs-wrapper {
     background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
@@ -529,7 +452,7 @@
     width: 115px;
   }
   
-  .general-tab .pulses-wrapper {
+  .heart-tab .pulses-wrapper {
     background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
@@ -540,7 +463,7 @@
     width: 119px;
   }
   
-  .general-tab .abdomen-wrapper {
+  .heart-tab .abdomen-wrapper {
     background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
@@ -551,8 +474,8 @@
     width: 148px;
   }
   
-  .general-tab .heart-wrapper {
-    background-color: #eaeaea;
+  .heart-tab .heart-wrapper {
+    background-color: #ffffff;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
     left: 701px;
@@ -562,7 +485,7 @@
     width: 112px;
   }
   
-  .general-tab .legs-wrapper {
+  .heart-tab .legs-wrapper {
     background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
@@ -573,7 +496,7 @@
     width: 103px;
   }
   
-  .general-tab .summary-wrapper {
+  .heart-tab .summary-wrapper {
     background-color: #eaeaea;
     border-radius: 12px 12px 0px 0px;
     height: 63px;
@@ -584,7 +507,7 @@
     width: 146px;
   }
   
-  .general-tab .NAV {
+  .heart-tab .NAV {
     background-color: #ffffff;
     height: 94px;
     left: 0;
@@ -593,7 +516,7 @@
     width: 1920px;
   }
   
-  .general-tab .profile {
+  .heart-tab .profile {
     height: 61px;
     left: 1647px;
     position: absolute;
@@ -601,7 +524,7 @@
     width: 223px;
   }
   
-  .general-tab .profile-2 {
+  .heart-tab .profile-2 {
     height: 60px;
     left: 81px;
     position: absolute;
@@ -609,7 +532,7 @@
     width: 146px;
   }
   
-  .general-tab .overlap-group-2 {
+  .heart-tab .overlap-group-3 {
     height: 60px;
     left: 0;
     position: absolute;
@@ -617,7 +540,7 @@
     width: 111px;
   }
   
-  .general-tab .dr-david-ochoa {
+  .heart-tab .dr-david-ochoa {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 16px;
@@ -629,7 +552,7 @@
     top: 0;
   }
   
-  .general-tab .text-wrapper-6 {
+  .heart-tab .text-wrapper-9 {
     color: #000000;
     font-family: "Cairo", Helvetica;
     font-size: 16px;
@@ -638,7 +561,7 @@
     line-height: normal;
   }
   
-  .general-tab .cardiologist {
+  .heart-tab .cardiologist {
     color: #8f8f8f;
     font-family: "Cairo", Helvetica;
     font-size: 14px;
@@ -651,7 +574,7 @@
     top: 28px;
   }
   
-  .general-tab .text-wrapper-7 {
+  .heart-tab .text-wrapper-10 {
     color: #8f8f8f;
     font-family: "Cairo", Helvetica;
     font-size: 14px;
@@ -660,7 +583,7 @@
     line-height: normal;
   }
   
-  .general-tab .arrow {
+  .heart-tab .arrow {
     height: 8px;
     left: 127px;
     position: absolute;
@@ -668,7 +591,7 @@
     width: 15px;
   }
   
-  .general-tab .profile-picture {
+  .heart-tab .profile-picture {
     background-image: url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/placeholder-19@2x.png);
     background-position: 50% 50%;
     background-size: cover;
@@ -680,7 +603,7 @@
     width: 57px;
   }
   
-  .general-tab .icon-groups {
+  .heart-tab .icon-groups {
     height: 30px;
     left: 1355px;
     position: absolute;
@@ -688,7 +611,7 @@
     width: 210px;
   }
   
-  .general-tab .calendar-icon {
+  .heart-tab .calendar-icon {
     height: 30px;
     left: 60px;
     position: absolute;
@@ -696,7 +619,7 @@
     width: 30px;
   }
   
-  .general-tab .settings-icon {
+  .heart-tab .settings-icon {
     height: 30px;
     left: 180px;
     position: absolute;
@@ -704,7 +627,7 @@
     width: 30px;
   }
   
-  .general-tab .chart-icon {
+  .heart-tab .chart-icon {
     height: 30px;
     left: 0;
     position: absolute;
@@ -712,7 +635,7 @@
     width: 30px;
   }
   
-  .general-tab .message-icon {
+  .heart-tab .message-icon {
     height: 30px;
     left: 120px;
     position: absolute;
@@ -720,7 +643,7 @@
     width: 30px;
   }
   
-  .general-tab .separator {
+  .heart-tab .separator {
     background-color: #d1d1d1;
     border-radius: 8px;
     height: 56px;
@@ -730,7 +653,7 @@
     width: 2px;
   }
   
-  .general-tab .VP-logo {
+  .heart-tab .VP-logo {
     height: 36px;
     left: 28px;
     position: absolute;
@@ -738,7 +661,7 @@
     width: 403px;
   }
   
-  .general-tab .virtual-physical {
+  .heart-tab .virtual-physical {
     color: #000000;
     font-family: "DM Sans", Helvetica;
     font-size: 30px;
@@ -752,7 +675,7 @@
     width: 358px;
   }
   
-  .general-tab .text-wrapper-8 {
+  .heart-tab .text-wrapper-11 {
     color: #000000;
     font-family: "DM Sans", Helvetica;
     font-size: 30px;
@@ -761,11 +684,26 @@
     line-height: normal;
   }
   
-  .general-tab .VP-logo-2 {
+  .heart-tab .VP-logo-2 {
     height: 35px;
     left: 0;
     position: absolute;
     top: 1px;
     width: 35px;
+  }
+
+  .heart-tab .taylor {
+    color: #000000;
+    font-family: "Cairo", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    left: 10px;
+    top: -5px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    width: 100px; 
+    height: 40px; 
+    padding: 8px; 
   }
   

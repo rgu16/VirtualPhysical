@@ -21,9 +21,10 @@ const UserSettingsPage = (props) => {
       if (props.checkToken()) {
         props.removeToken();
         setNavigate("/")
+        localStorage.clear()
       }
     };
-    console.log(jwtDecode(props.token))
+    // console.log(jwtDecode(props.token))
     axios({
         method: "GET",
         url: props.proxy + "/profile",
@@ -37,6 +38,7 @@ const UserSettingsPage = (props) => {
         setProfilePic(res.pic)
     }).catch((error) => {
         props.removeToken();
+        localStorage.clear()
         console.log(error.response)
         console.log(error.response.status)
         console.log(error.response.headers)
@@ -129,34 +131,6 @@ const UserSettingsPage = (props) => {
             console.log(error.response.headers)
         }
     })
-    // e.preventDefault();
-    // const file = e.target.files[0];
-    // if (!file) {
-    //     console.error('No file selected.');
-    //     return;
-    // }
-    // const formData = new FormData();
-    // formData.append('file', file, file.name);
-    // formData.append('location', "/profile/image")
-    // console.log(formData)
-    // axios({
-    //     method: "POST",
-    //     url: props.proxy+"/upload_file",
-    //     data: formData,
-    //     headers: {
-    //         Authorization: 'Bearer ' + props.token
-    //     }
-    // }).then((response) => {
-    //   const res = response.data
-    //   console.log(res)
-    //   // setProfilePic(res.data)
-    // }).catch((error)=>{
-    //     if(error.response){
-    //         console.log(error.response)
-    //         console.log(error.response.status)
-    //         console.log(error.response.headers)
-    //     }
-    // })
   };
 
   const handleUploadClick = () => {
@@ -173,6 +147,7 @@ const UserSettingsPage = (props) => {
     })
     .then(() => {
         props.removeToken()
+        localStorage.clear()
     }).catch((error) => {
        if (error.response) {
          console.log(error.response)

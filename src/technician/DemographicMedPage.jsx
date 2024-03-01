@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Img, Line, List, Text, NavBar, TabNav } from "components";
+import {  Img, Line, List, Text, NavBar, TabNav } from "components";
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Box from '@mui/material/Box';
@@ -16,8 +16,9 @@ import dayjs, { Dayjs } from 'dayjs';
 import { Link } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import axios from 'axios';
-
-
+import { styled } from '@mui/material/styles';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 const gender = [
   {
@@ -32,13 +33,34 @@ const gender = [
     value: 'other',
     label: 'other',
   },
+  {
+    value: 'no selection',
+    label: 'no selection',
+  },
 
 ];
 
+const VisuallyHiddenInput = styled('input')({
+  clip: 'rect(0 0 0 0)',
+  clipPath: 'inset(50%)',
+  height: 1,
+  overflow: 'hidden',
+  position: 'absolute',
+  bottom: 0,
+  left: 0,
+  whiteSpace: 'nowrap',
+  width: 1,
+});
 
 const DemographicMedPage = (props) => {
   const [firstname, setFirstNameValue] = useState();
   const [lastname, setLastNameValue] = useState();
+  const [genderValue, setGenderValue] = useState();
+  const [height, setHeightValue] = useState();
+  const [weight, setWeightValue] = useState();
+  const [DOB, setDOBValue] = useState();
+  const [age, setAgeValue] = useState();
+  const [history, setHistoryValue] = useState();
   const [profilePic, setProfilePic] = useState()
   const fileInputRef = useRef(null);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -50,13 +72,61 @@ const DemographicMedPage = (props) => {
   const handleLastNameChange = (event) => {
     setLastNameValue(event.target.value)
   }
+
+  const handleGenderChange = (event) => {
+    setGenderValue(event.target.value)
+  }
+
+  const handleHeightChange = (event) => {
+    setHeightValue(event.target.value)
+  }
+
+  const handleWeightChange = (event) => {
+    setWeightValue(event.target.value)
+  }
+
+  const handleDOBChange = (event) => {
+    setDOBValue(event.target.value)
+  }
+  const handleAgeChange = (event) => {
+    setAgeValue(event.target.value)
+  }
+
+  const handleHistoryChange = (event) => {
+    setHistoryValue(event.target.value)
+  }
+  
   const handleUploadClick = () => {
     fileInputRef.current.click();
   };
 
+  const inputRefs = [
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    // Add more refs for additional text fields as needed
+  ];
+   const [currentInputIndex, setCurrentInputIndex] = useState(0);
+  
+   const handleClick = () => {
+     const currentRef = inputRefs[currentInputIndex];
+  
+     if (currentRef && currentRef.current) {
+       currentRef.current.focus();
+     }
+  
+     setCurrentInputIndex((prevIndex) => (prevIndex + 1) % inputRefs.length);
+   };
+
   const handleImageUpload = (e) => {
     e.preventDefault();
     const file = e.target.files[0];
+    setProfilePic(URL.createObjectURL(file))
     if (!file) {
         console.error('No file selected.');
         return;
@@ -75,6 +145,13 @@ const DemographicMedPage = (props) => {
     }).then((response) => {
       const res = response.data
       console.log(res)
+    
+      console.log('Server response:', response);
+      console.log('Image uploaded:', imageUrl);
+
+    // Assuming the URL is nested within a 'data' property, modify this accordingly
+    const imageUrl = response.data && response.data.url;
+      
     }).catch((error)=>{
         if(error.response){
             console.log(error.response)
@@ -122,7 +199,7 @@ const DemographicMedPage = (props) => {
                             >
                               First Name:
                             </Text>
-                            <TextField value = {firstname} onChange={handleFirstNameChange} required id="outlined-basic" label="required" variant="outlined" />
+                            <TextField  inputRef={inputRefs[0]} value = {firstname} onChange={handleFirstNameChange} required id="outlined-basic" label="required" variant="outlined" />
                            
                           </div>
                           <div className="flex flex-row gap-[15px] items-start justify-between w-full">
@@ -134,7 +211,7 @@ const DemographicMedPage = (props) => {
                             </Text>
                           
                              
-                              <TextField value = {lastname} onChange={handleLastNameChange} required id="outlined-basic" label="required" variant="outlined" />
+                              <TextField  inputRef={inputRefs[1]} value = {lastname} onChange={handleLastNameChange} required id="outlined-basic" label="required" variant="outlined" />
                            
                           </div>
                         </List>
@@ -156,18 +233,25 @@ const DemographicMedPage = (props) => {
                               Gender:
                             </Text>
                             </div>
-                          <TextField 
-          id="outlined-select-currency"
+                          
+
+        <TextField
+          inputRef={inputRefs[2]}
+          value = {genderValue} 
+          onChange={handleGenderChange}
+          id="outlined-select-currency-native"
           select
-          label="Select"
-          defaultValue="EUR"
-          helperText="Please select your gender"
-   
-        > 
+          label="Native select"
+          defaultValue="no selection"
+          SelectProps={{
+            native: true,
+          }}
+          helperText="Please select your currency"
+        >
           {gender.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
+            <option key={option.value} value={option.value}>
               {option.label}
-            </MenuItem>
+            </option>
           ))}
         </TextField>
                           </div>
@@ -195,6 +279,9 @@ const DemographicMedPage = (props) => {
           InputProps={{
             startAdornment: <InputAdornment position="start">ft</InputAdornment>,
           }}
+          inputRef={inputRefs[3]}
+          value = {height} 
+          onChange={handleHeightChange}
         />
         <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
           <OutlinedInput 
@@ -204,6 +291,9 @@ const DemographicMedPage = (props) => {
             inputProps={{
               'aria-label': 'weight',
             }}
+            inputRef={inputRefs[4]}
+            value = {weight} 
+            onChange={handleWeightChange}
           />
           <FormHelperText id="outlined-weight-helper-text">Weight</FormHelperText>
         </FormControl>
@@ -232,7 +322,7 @@ const DemographicMedPage = (props) => {
                             
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']}>
-        <DatePicker label="Basic date picker" defaultValue={dayjs('1989-04-17')} />
+        <DatePicker  inputRef={inputRefs[5]} label="Basic date picker" defaultValue={dayjs('1989-04-17')} />
       </DemoContainer>
     </LocalizationProvider>
                           </div>
@@ -243,17 +333,26 @@ const DemographicMedPage = (props) => {
                             >
                               Age:
                             </Text>
-                            <TextField required id="outlined-basic" label="required" variant="outlined" />
+                            <TextField value = {age} onChange={handleAgeChange} inputRef={inputRefs[6]} required id="outlined-basic" label="required" variant="outlined" />
                             
                           </div>
                         </div>
                       </div>
                     </div>
                     <div className="absolute flex flex-col h-[130px] items-center justify-start left-[0] top-[0] w-[130px]">
+                      
                       <Img
-                        className="h-[130px] md:h-auto rounded-[50%] w-[130px]"
-                        src="images/img_screenshot20231206.png"
-                        alt="screenshot20231"
+                        className="h-[130px] md:h-auto rounded-[50%] w-[130px] md:h-auto object-cover  w-full"
+                        src= {profilePic}
+                        alt=""
+                        onLoad ={()=> setImageLoaded(true)}
+                        // style = {{display: imageLoaded? "none": "block"}}
+                        />
+                        <Img
+                        className="h-auto md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
+                        src= "images/img_defaultprofile.jpg"
+                        alt="image"
+                        style = {{display: imageLoaded? "none": "block"}}
                       />
                     </div>
                   </div>
@@ -285,14 +384,18 @@ const DemographicMedPage = (props) => {
                   >
                     Patient History:
                   </Text>
-                  <TextField fullWidth sx={{ m: 1 }}
+                  <TextField  value = {history} onChange={handleHistoryChange} fullWidth sx={{ m: 1 }}
           id="outlined-multiline-static"
           label="Multiline"
           multiline
           rows={4}
-          defaultValue="Default Value"
+       
+          inputRef={inputRefs[7]}
         />
-         <div className="h-[38px] md:h-[65px] md:ml-[0] ml-[138px] mt-[27px] relative w-[31%]">
+         
+           <div style={{paddingTop: "2rem"}}>The values is {genderValue} {DOB}</div> 
+          
+       {/*  <div className="h-[38px] md:h-[65px] md:ml-[0] ml-[138px] mt-[27px] relative w-[31%]">
                       <div className="absolute bg-black-900 h-[35px] inset-[0] justify-center m-auto rounded-[17px] shadow-bs w-full"></div>
                       <Text
                         className="absolute h-full inset-[0] justify-center m-auto text-white-A700 text-xl w-max"
@@ -300,24 +403,10 @@ const DemographicMedPage = (props) => {
                       >
                         Save
                       </Text>
-                    </div>
-                    <div className="flex md:flex-1 flex-col items-center justify-start w-1/4 md:w-full">
-                    <Text className="font-bold text-black-900 text-xl">Profile Picture</Text>
-                    <div className="flex flex-col items-center justify-start mt-1 w-full">
-                        <Img
-                        className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
-                        src= {profilePic}
-                        alt=""
-                        onLoad ={()=> setImageLoaded(true)}
-                        // style = {{display: imageLoaded? "none": "block"}}
-                        />
-                        <Img
-                        className="h-auto md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
-                        src= "images/img_defaultprofile.jpg"
-                        alt="image"
-                        style = {{display: imageLoaded? "none": "block"}}
-                      />
-                    </div>
+                    </div>*/} 
+                 
+                  
+                   
                     <input
                       ref={fileInputRef}
                       type="file"
@@ -325,16 +414,25 @@ const DemographicMedPage = (props) => {
                       accept="image/*" // Accept only image files
                       onChange={handleImageUpload}
                     />
-                    <button className="flex md:flex-col flex-row md:gap-5 items-center justify-center mt-2.5 w-[96%] md:w-full border-0"
+                    <button className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0"
                             onClick = {handleUploadClick}>
                       <Img
                         className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
                         src="images/img_television.svg"
                         alt="television"
                       />
-                      <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Edit image</Text>
+                      <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Upload Profile Picture</Text>
+                     
                     </button>
-                  </div>
+                    <div style={{paddingTop: "2rem"}}>
+      <Stack spacing={2} direction="row">
+     {/*  <Link to="/eyes"> <Button variant="text">Previous Section</Button></Link>*/}
+     <Button variant="contained" onClick={handleClick}>Next Input</Button>
+     <Link to="/general"><Button variant="outlined" >Save</Button>   </Link>
+   </Stack>
+   </div>
+                    
+               
                 </div>
               </div>
             </div>

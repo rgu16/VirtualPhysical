@@ -1,10 +1,33 @@
 import React from "react";
 import "./style.css";
 import { useState } from 'react';
+import Popover from '@mui/material/Popover';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import { NavBar } from 'components'
+import LungPopover from "components/LungPopover/LungPopover.jsx"
 
-export const LungsPage = () => {
+
+export const LungsPage = (props) => {
   const [breathingValue, setBreathingValue] = useState('');
   const [breathingStatus, setBreathingStatus] = useState('');
+
+  const [saveVariant, setSaveVariant] = useState('outlined');
+
+  const handleSaveClick = () => {
+    setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
+  };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const open = Boolean(anchorEl);
+  const id = open ? 'image-popover' : undefined;
+
 
   const handleBreathingChange = (e) => {
     const value = e.target.value;
@@ -31,13 +54,9 @@ export const LungsPage = () => {
         <div className="overlap">
           <div className="overlap-group">
             <div className="labored-breathing">
-            <select className="moderate">
-                <option value="low">low</option>
-                <option value="moderate">moderate</option>
-                <option value="high">high</option>
-                <option value="extreme">extreme</option>
-                {/* Add other options here as needed */}
-            </select>
+            <p className="moderate">
+              no
+            </p>
               <p className="span-wrapper">
                 <span className="span">Labored breathing?</span>
               </p>
@@ -69,7 +88,7 @@ export const LungsPage = () => {
                     className={`rectangle ${breathingStatus && breathingStatus !== 'normal' ? 'input-error' : ''}`}
                     value={breathingValue}
                     onChange={handleBreathingChange}
-                    placeholder="Enter a value"
+                    placeholder="13"
                     style={{
                       width: 'same width as the image',
                       height: 'same height as the image',
@@ -90,77 +109,84 @@ export const LungsPage = () => {
               </p>
 
             </div>
-            {/* <div className="notes">
-              <div className="specialty-physician-wrapper">
-                <p className="specialty-physician">
-                  <span className="text-wrapper-2">[specialty physician notes on lung measurements go here]</span>
-                </p>
-              </div>
-              <p className="p">
-                <span className="span">Notes:</span>
-              </p>
-              <button className="save-button">
-                <div className="overlap-group-2">
-                  <div className="background" />
-                  <p className="save">
-                    <span className="text-wrapper-3">Save</span>
-                  </p>
-                </div>
-              </button>
-            </div> */}
+
+
             <div className="notes">
+
             <div className="specialty-physician-wrapper">
-                <textarea className="specialty-physician-textarea" placeholder="specialty physician notes on lung measurements go here"></textarea>
+            <div className="specialty-physician">
+              <textarea className="specialty-physician-textarea" placeholder="specialty physician notes on lungs go here"></textarea>
             </div>
+            </div>
+      
             <p className="p">
                 <span className="span">Notes:</span>
             </p>
-            <button className="save-button" >
+
+            <button className="save-button">
                 <div className="overlap-group-2">
-                <div className="background" />
-                <p className="save">
-                    <span className="text-wrapper-3">Save</span>
-                </p>
+                  <div className="background" />
+                  <Button variant={saveVariant} onClick={handleSaveClick}>
+                    {saveVariant === 'outlined' ? 'Save' : 'Saved'}
+                  </Button>
                 </div>
-            </button>
+              </button>
+
             </div>
 
             <div className="overlap-2">
+
               <div className="left-lung">
-                <img
-                  className="chainlink-link"
-                  alt="Chainlink link"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/chainlink--link--14@2x.png"
-                />
-                <img
-                  className="img"
-                  alt="Chainlink link"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/chainlink--link--14@2x.png"
-                />
-                <img
-                  className="chainlink-link-2"
-                  alt="Chainlink link"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/chainlink--link--14@2x.png"
-                />
+
+                <div className="popover">
+                  <div className="lungpopover-1">
+                    <LungPopover></LungPopover>
+                  </div>                      
+                </div>
+
+                <div className="popover">
+                  <div className="lungpopover-2">
+                    <LungPopover></LungPopover>
+                  </div>                      
+                </div>
+
+
+                <div className="popover">
+                  <div className="lungpopover-3">
+                    <LungPopover></LungPopover>
+                  </div>                      
+                </div>
+
+
               </div>
+
+
+
               <div className="right-lung">
-                <img
-                  className="chainlink-link"
-                  alt="Chainlink link"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/chainlink--link--14@2x.png"
-                />
-                <img
-                  className="img"
-                  alt="Chainlink link"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/chainlink--link--14@2x.png"
-                />
-                <img
-                  className="chainlink-link-2"
-                  alt="Chainlink link"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/chainlink--link--14@2x.png"
-                />
+               
+              <div className="popover">
+                  <div className="lungpopover-4">
+                    <LungPopover></LungPopover>
+                  </div>                      
+                </div>
+
+                <div className="popover">
+                  <div className="lungpopover-5">
+                    <LungPopover></LungPopover>
+                  </div>                      
+                </div>
+
+
+                <div className="popover">
+                  <div className="lungpopover-6">
+                    <LungPopover></LungPopover>
+                  </div>                      
+                </div>
+
               </div>
+
             </div>
+
             <p className="lung-auscultation">
               <span className="text-wrapper-4">Lung Auscultation </span>
               <span className="text-wrapper-5">(posterior analysis only)</span>
@@ -232,74 +258,12 @@ export const LungsPage = () => {
               </a>
             </div>
           </div>
-          <div className="NAV">
-            <div className="profile">
-              <div className="profile-2">
-                <div className="overlap-group-3">
-                  <p className="dr-david-ochoa">
-                    <span className="text-wrapper-7">Dr. David Ochoa</span>
-                  </p>
-                  <p className="cardiologist">
-                    <span className="text-wrapper-8">Cardiologist</span>
-                  </p>
-                </div>
-                <img
-                  className="arrow"
-                  alt="Arrow"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/arrow-19@2x.png"
-                />
-              </div>
-              <div className="profile-picture" />
-            </div>
-            <div className="icon-groups">
-            <a href="/appointment">
-                <img
-                  className="calendar-icon"
-                  alt="Calendar icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/calendar-icon-21@2x.png"
-                />
-              </a>
+          
+          <NavBar proxy={props.proxy} token={props.token} /> {/* Display NavBar at the top */}
 
-              <a href="/setting">
-                <img
-                  className="settings-icon"
-                  alt="Settings icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/settings-icon-19@2x.png"
-                />
-              </a>
-
-              <a href="/chart">
-                <img
-                  className="chart-icon"
-                  alt="Chart icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/chart-icon-20@2x.png"
-                />
-              </a>
-
-              <a href="/messages">
-                <img
-                  className="message-icon"
-                  alt="Message icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/message-icon-19@2x.png"
-                />
-              </a>
-            </div>
-            <div className="separator" />
-            <div className="VP-logo">
-              <p className="virtual-physical">
-                <span className="text-wrapper-9">Virtual Physical</span>
-              </p>
-              <img
-                className="VP-logo-2"
-                alt="Vp logo"
-                src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/vp-logo-19@2x.png"
-              />
-            </div>
-          </div>
         </div>
       </div>
     </div>
   );
 };
-
 

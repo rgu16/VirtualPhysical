@@ -1,5 +1,5 @@
 export { AbdomenPage } from "./AbdomenPage/AbdomenPage";
-export { default as AppointmentPage } from "./AppointmentPage/AppointmentPage";
+export { default as AppointmentsPage } from "./AppointmentsPage/AppointmentsPage";
 export { DemographicPage } from "./DemographicPage/DemographicPage";
 export { EyesPage } from "./EyesPage/EyesPage";
 export { GeneralPage } from "./GeneralPage/GeneralPage";
@@ -9,4 +9,4 @@ export { LegsPage } from "./LegsPage/LegsPage";
 export { LungsPage } from "./LungsPage/LungsPage";
 export { MessagesPage } from "./MessagesPage/Messages";
 export { PulsesPage } from "./PulsesPage/PulsesPage";
-export { SummaryPage } from "./SummaryPage/SummaryPage";
+export { default as SummaryPage } from "./SummaryPage/SummaryPage";

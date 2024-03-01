@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, } from 'react
 import {LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage, UserSettingsPage, AdminHomePage, PatientSearchPage, CameraPage, MobileLoginPage, VideoPage, MobilePromptsPage} from "./pages";
 import {useToken} from './components';
 import { jwtDecode } from 'jwt-decode';
-import {AbdomenPage, AppointmentPage, DemographicPage, EyesPage, GeneralPage, HandsPage, HeartPage, LegsPage, LungsPage, MessagesPage, PulsesPage, SummaryPage} from "./physician"
+import {AbdomenPage, AppointmentsPage, DemographicPage, EyesPage, GeneralPage, HandsPage, HeartPage, LegsPage, LungsPage, MessagesPage, PulsesPage, SummaryPage} from "./physician"
 import {LegsMedPage, HandsMedPage, AbdomenMedPage, HeartMedPage, PulsesMedPage, GeneralMedPage, DemographicMedPage, EyesMedPage, LungsMedPage, PatientChartPage} from "./technician"
 import NotFound from "pages/NotFound";
 
@@ -173,7 +173,7 @@ export default function App() {
                     <Route path="/appointment"
                     element={
                     <ProtectedRoute isAllowed={!!token && userType === 'physician'}>
-                        <AppointmentPage proxy={proxy} token={token}/> 
+                        <AppointmentsPage proxy={proxy} token={token}/> 
                     </ProtectedRoute>
                     }/>
                     <Route path="*" element={<NotFound />} />

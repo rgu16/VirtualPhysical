@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import Button from '@mui/material/Button';
 import "./style.css";
+import { NavBar } from 'components'
 
-export const GeneralPage = () => {
+export const GeneralPage = (props) => {
+
+  const [saveVariant, setSaveVariant] = useState('outlined');
+
+  const handleSaveClick = () => {
+    setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
+  };
+
   return (
     <div className="general-tab">
       <div className="overlap-wrapper">
@@ -10,23 +19,29 @@ export const GeneralPage = () => {
             <div className="notes">
               <div className="specialty-physician-wrapper">
                 <p className="specialty-physician">
-                  <span className="text-wrapper">
+                  {/* <span className="text-wrapper">
                     [specialty physician notes on general inspection measurements go here]
-                  </span>
+                  </span> */}
+                  <textarea className="specialty-physician-textarea" placeholder="specialty physician notes on general inspection measurements go here"></textarea>
                 </p>
               </div>
+
               <p className="span-wrapper">
                 <span className="span">Notes:</span>
               </p>
+
               <button className="save-button">
-                <div className="div">
+                <div className="overlap-group-2">
                   <div className="background" />
-                  <p className="save">
-                    <span className="text-wrapper-2">Save</span>
-                  </p>
+                  <Button variant={saveVariant} onClick={handleSaveClick}>
+                    {saveVariant === 'outlined' ? 'Save' : 'Saved'}
+                  </Button>
                 </div>
               </button>
+
             </div>
+
+
             <div className="capillary-refill">
               <div className="overlap-2">
                 <img
@@ -34,9 +49,14 @@ export const GeneralPage = () => {
                   alt="Rectangle"
                   src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
                 />
-                <p className="element">
-                  <span className="text-wrapper-3">3</span>
-                </p>
+                {/* <p className="element"> */}
+                  <input
+                    type="text"
+                    className="rectangle"
+                    placeholder="1" //CHANGE THIS LATER
+                    // style={{ position: 'left', width: '80%', height: '80%', border: 'none', textAlign: 'center' }}
+                  />
+                {/* </p> */}
               </div>
               <p className="sec">
                 <span className="span">sec</span>
@@ -45,6 +65,8 @@ export const GeneralPage = () => {
                 <span className="span">Capillary Refill Time:</span>
               </p>
             </div>
+
+
             <div className="yellowing">
               <div className="overlap-3">
                 <div className="gradient-line">
@@ -65,7 +87,7 @@ export const GeneralPage = () => {
                 </div>
               </div>
               <p className="pallor-severity">
-                <span className="span">Pallor severity:</span>
+                <span className="span">Jaundice severity:</span>
               </p>
               <div className="group">
                 <img
@@ -79,7 +101,7 @@ export const GeneralPage = () => {
                   src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/close-circle-5@2x.png"
                 />
                 <p className="span-wrapper-2">
-                  <span className="span">Yellowing in eyes:</span>
+                  <span className="span">Jaundice (eyes):</span>
                 </p>
               </div>
             </div>
@@ -102,6 +124,7 @@ export const GeneralPage = () => {
                   </p>
                 </div>
               </div>
+              
               <p className="pallor-severity-2">
                 <span className="span">Pallor severity:</span>
               </p>
@@ -141,7 +164,7 @@ export const GeneralPage = () => {
                 </div>
               </div>
               <p className="pallor-severity-3">
-                <span className="span">Pallor severity:</span>
+                <span className="span">Cyanosis severity:</span>
               </p>
               <div className="group-3">
                 <img
@@ -226,75 +249,11 @@ export const GeneralPage = () => {
               </a>
             </div>
           </div>
-          <div className="NAV">
-            <div className="profile">
-              <div className="profile-2">
-                <div className="overlap-group-2">
-                  <p className="dr-david-ochoa">
-                    <span className="text-wrapper-6">Dr. David Ochoa</span>
-                  </p>
-                  <p className="cardiologist">
-                    <span className="text-wrapper-7">Cardiologist</span>
-                  </p>
-                </div>
-                <img
-                  className="arrow"
-                  alt="Arrow"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/arrow-19@2x.png"
-                />
-              </div>
-              <div className="profile-picture" />
-            </div>
-            <div className="icon-groups">
-            <a href="/appointment">
-                <img
-                  className="calendar-icon"
-                  alt="Calendar icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/calendar-icon-21@2x.png"
-                />
-              </a>
-
-              <a href="/setting">
-                <img
-                  className="settings-icon"
-                  alt="Settings icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/settings-icon-19@2x.png"
-                />
-              </a>
-
-              <a href="/chart">
-                <img
-                  className="chart-icon"
-                  alt="Chart icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/chart-icon-20@2x.png"
-                />
-              </a>
-
-              <a href="/messages">
-                <img
-                  className="message-icon"
-                  alt="Message icon"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/message-icon-19@2x.png"
-                />
-              </a>
-            </div>
-            <div className="separator" />
-            <div className="VP-logo">
-              <p className="virtual-physical">
-                <span className="text-wrapper-8">Virtual Physical</span>
-              </p>
-              <img
-                className="VP-logo-2"
-                alt="Vp logo"
-                src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/vp-logo-19@2x.png"
-              />
-            </div>
-          </div>
+          
+          <NavBar proxy={props.proxy} token={props.token} /> {/* Display NavBar at the top */}
+          
         </div>
       </div>
     </div>
   );
 };
-
-
-

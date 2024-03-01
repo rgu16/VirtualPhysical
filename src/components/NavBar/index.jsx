@@ -1,15 +1,25 @@
 import React, { useState, useEffect} from "react";
 import { jwtDecode } from 'jwt-decode';
-import { Img, Line, Text } from "../";
+import { Img, Line, Text } from "components";
 import axios from 'axios';
+import { Navigate } from 'react-router-dom';
 
 const NavBar = (props) => {
   const token = props.token
-  const [user, setUser] = useState({name:'                    ', email:'', workplace:'',timezone:'',zoomlink:''});
-  const [profilePic, setProfilePic] = useState()
+  const [user, setUser] = useState({name:'', email:'', workplace:'',timezone:'',zoomlink:''});
+  const [profilePic, setProfilePic] = useState();
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [navigate, setNavigate] = useState(); 
+
   // useEffect(() => {
-  //   axios({
+  //   // const handleTokenExpiration = () => {
+  //   //   if (props.checkToken()) {
+  //   //     props.removeToken();
+  //   //     setNavigate("/")
+  //   //     localStorage.clear()
+  //   //   }
+  //   // };
+  //   axios({ 
   //       method: "GET",
   //       url: props.proxy + "/profile",
   //       headers: {
@@ -18,12 +28,16 @@ const NavBar = (props) => {
   //   })
   //   .then((response) => {
   //       const res = response.data
-  //       setUser(res.data)
-  //       setProfilePic(res.pic)
+  //       setUser(res.data);
+  //       setProfilePic(res.pic);
   //   }).catch((error) => {
   //       console.log(error.response)
   //       console.log(error.response.status)
   //       console.log(error.response.headers)
+  //       if (error.response && error.response.status === 401) {
+  //           setNavigate("/")
+  //           localStorage.clear()
+  //       }
   //   })
   // }, [token, props.proxy]);
   return (
@@ -108,6 +122,7 @@ const NavBar = (props) => {
                   {jwtDecode(token).type}
                 </Text>
               </div>
+              {navigate ? (<Navigate replace to= {navigate} />) : null}
               {/* <Img className="h-2" src="images/img_arrow.svg" alt="arrow" /> */}
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Img, Line, List, Text, TabNav, NavBar } from "components";
+import { Img, Line, List, Text, TabNav, NavBar } from "components";
 import { Link } from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -8,13 +8,20 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useState } from 'react';
-
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 
 const EyesMedPage = (props) => {
   const [isHoveredOne, setIsHoveredOne] = useState(false);
   const [isHoveredTwo, setIsHoveredTwo] = useState(false);
   const [isHoveredThree, setIsHoveredThree] = useState(false);
+  const [value, setValue] = useState();
+  
+  const handleChange = (event) => {
+    setValue(event.target.value)
+  }
+
   return (
     <>
     <NavBar proxy={props.proxy} token={props.token} />
@@ -35,7 +42,7 @@ const EyesMedPage = (props) => {
       <div className="absolute bg-white-A700 bottom-[8%] flex flex-col font-cairo gap-6 h-[1000px] md:h-auto inset-x-[0] justify-start max-w-[1695px] mx-auto pb-6 pt-8 px-5 rounded-bl-[12px] rounded-br-[12px] w-full">
 
 
-         <div className="md:h-[1277px] sm:h-[3072px] h-[925px] relative w-[84%] md:w-full">
+         <div className="md:h-[1277px] sm:h-[3072px] h-[300px] relative w-[84%] md:w-full">
           {/* <div className="absolute bottom-[3%] h-[38px] right-[0] w-[10%]">
              <div className="absolute bg-black-900 h-[35px] inset-[0] justify-center m-auto shadow-bs w-full"></div>
              <Text
@@ -47,7 +54,7 @@ const EyesMedPage = (props) => {
 
              
            </div>*/}
-           <div className="absolute md:h-[1277px] sm:h-[3072px] h-[925px] inset-[0] justify-center m-auto w-[98%] md:w-full">
+           <div className="absolute md:h-[1277px] sm:h-[3072px] h-[900px] inset-[0] justify-center m-auto w-[98%] md:w-full">
              <div className="absolute flex flex-col items-center justify-start left-[1%] top-[0] w-[92%]">
                <div className="flex md:flex-col flex-row gap-[23px] items-center justify-between w-full">
                  <div className="flex md:flex-1 flex-col md:gap-10 gap-[292px] items-end justify-start w-[79%] md:w-full">
@@ -63,14 +70,14 @@ const EyesMedPage = (props) => {
                        
 
                      </div>
-              
+              <div style={{paddingTop: '75px'}}>
                      <Img onMouseEnter={() => setIsHoveredOne(true)}
                       onMouseLeave={() => setIsHoveredOne(false)}
-                       className="h-[43px] w-[43px]"
+                       className="h-[43px] w-[43px] "
                        src="images/img_profile_black_900.svg"
                        alt="profile"
                      />
-                     
+                     </div>
                    </div>
                    
                    <Img onMouseEnter={() => setIsHoveredTwo(true)}
@@ -98,6 +105,7 @@ const EyesMedPage = (props) => {
           transition: "opacity 0.3s ease",
           width: "355px",
           height: "250px",
+          paddingTop: '30px',
         }}
         className="absolute h-[300px] object-cover left-[77%] w-[27%]"
         src="images/noyellowing.png"
@@ -155,6 +163,8 @@ const EyesMedPage = (props) => {
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
+        value = {value}
+        onChange={handleChange}
       >
         <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
         <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
@@ -165,7 +175,12 @@ const EyesMedPage = (props) => {
       </RadioGroup>
     </FormControl>
    
-       
+    {/* <div style={{paddingTop: "2rem"}}>The values is {value}</div>  */} 
+    <div style={{paddingTop: "2rem"}}>
+      <Stack spacing={2} direction="row">
+     <Link to="/lungs"><Button variant="outlined" >Save</Button>   </Link>
+   </Stack>
+   </div>
          {/* </div>*/}
     {/* </div>*/}
                          

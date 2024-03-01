@@ -1,16 +1,48 @@
 import React from "react";
 
-import { Button, Img, Line, List, Text, NavBar, TabNav } from "components";
+import { Img, Line, List, Text, NavBar, TabNav } from "components";
 import { Link } from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import { useState } from 'react';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 
 const AbdomenMedPage= (props) => {
+  const [hypochonriacR, setHypochonriacRValue] = useState();
+  const [epigastric, setEpigastricValue] = useState();
+  const [hypochonriacL, setHypochonriacLValue] = useState();
+  const [lumbarR, setLumbarRValue] = useState();
+  const [umbilical, setUmbilicalValue] = useState();
+  const [lumbarL, setLumbarLValue] = useState();
 
+  const handleHypochonriacRChange = (event) => {
+    setHypochonriacRValue(event.target.value)
+  }
+
+  const handleEpigastricChange = (event) => {
+    setEpigastricValue(event.target.value)
+  }
+
+  const handleHypochonriacLChange = (event) => {
+    setHypochonriacLValue(event.target.value)
+  }
+
+  const handleLumbarRChange = (event) => {
+    setLumbarRValue(event.target.value)
+  }
+
+  const handleUmbilicalChange = (event) => {
+    setUmbilicalValue(event.target.value)
+  }
+
+  const handleLumbarLChange = (event) => {
+    setLumbarLValue(event.target.value)
+  }
 
   return (
     <>
@@ -32,7 +64,7 @@ const AbdomenMedPage= (props) => {
       <div className="absolute bg-white-A700 bottom-[8%] flex flex-col font-cairo gap-6 h-[1000px] md:h-auto inset-x-[0] justify-start max-w-[1695px] mx-auto pb-6 pt-8 px-5 rounded-bl-[12px] rounded-br-[12px] w-full">
 
 
-         <div className="md:h-[1277px] sm:h-[3072px] h-[925px] relative w-[84%] md:w-full">
+         <div className="md:h-[1277px] sm:h-[3072px] h-[370px] relative w-[84%] md:w-full">
            <div className="absolute bottom-[3%] h-[38px] right-[0] w-[10%]">
              <div className="absolute bg-black-900 h-[35px] inset-[0] justify-center m-auto shadow-bs w-full"></div>
              <Text
@@ -121,7 +153,8 @@ const AbdomenMedPage= (props) => {
             
          </h4>
          {/*i. Right hypochondriac region */}
-         <FormControl>
+         <FormControl value = {hypochonriacR}
+    onChange={handleHypochonriacRChange}>
          <FormLabel style={{paddingBottom: '10px', paddingTop: '15px', color: 'black' }} id="demo-row-radio-buttons-group-label">i. Right hypochondriac region</FormLabel>
       <RadioGroup
         row
@@ -140,7 +173,8 @@ const AbdomenMedPage= (props) => {
     </FormControl>
       
        {/*ii. Epigastric hypochondriac region */}
-       <FormControl>
+       <FormControl value = {epigastric}
+    onChange={handleEpigastricChange}>
          <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">ii. Epigastric region</FormLabel>
       <RadioGroup
         row
@@ -159,7 +193,8 @@ const AbdomenMedPage= (props) => {
     </FormControl>
 
      {/*iii. Left hypochondriac region */}
-     <FormControl>
+     <FormControl value = {hypochonriacL}
+    onChange={handleHypochonriacLChange}>
          <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">iii. Left hypochondriac region</FormLabel>
       <RadioGroup
         row
@@ -178,7 +213,8 @@ const AbdomenMedPage= (props) => {
     </FormControl>
 
     {/*iv. Right lumbar region */}
-    <FormControl>
+    <FormControl value = {lumbarR}
+    onChange={handleLumbarRChange}>
          <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">iv. Right lumbar region</FormLabel>
       <RadioGroup
         row
@@ -197,7 +233,8 @@ const AbdomenMedPage= (props) => {
     </FormControl>
 
     {/*v. Umbilical region */}
-    <FormControl>
+    <FormControl value = {umbilical}
+    onChange={handleUmbilicalChange}>
          <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">v. Umbilical region</FormLabel>
       <RadioGroup
         row
@@ -216,7 +253,8 @@ const AbdomenMedPage= (props) => {
     </FormControl>
 
     {/*v. Left lumbar region */}
-    <FormControl>
+    <FormControl value = {lumbarL}
+    onChange={handleLumbarLChange}>
          <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">v. Left lumbar region </FormLabel>
       <RadioGroup
         row
@@ -234,8 +272,13 @@ const AbdomenMedPage= (props) => {
       </RadioGroup>
     </FormControl>
        
-       
-         {/* </div>*/}
+    {/*<div style={{paddingTop: "2rem"}}>The values is {hypochonriacR} {epigastric} {hypochonriacL} {lumbarR} {umbilical} {lumbarL}</div>  */}
+    <div style={{paddingTop: "2rem"}}>
+      <Stack spacing={2} direction="row">
+      <Button variant="contained" >Next Input</Button>
+     <Link to="/heart"><Button variant="outlined" >Save</Button>   </Link>
+   </Stack>
+   </div>    
     {/* </div>*/}
                          
                         {/* </div>*/}
