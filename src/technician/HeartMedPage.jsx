@@ -7,7 +7,15 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
 import { useRef,  useState } from 'react';
+import "physician/HeartPage/style.css";
 
+import AtrialPopover from 'components/AtrialPopover/AtrialUpload.js'
+import MitralPopover from 'components/MitralPopover/MitralPopover.js'
+import TricuspidPopover from 'components/TricuspidPopover/TricuspidPopover.jsx'
+import PulmonaryPopover from 'components/PulmonaryPopover/PulmonaryPopover.jsx'
+
+import CheckandXButtons from "components/CheckandXButtons";
+//import ECG from "./ECG.png"
 
 // Checkbox component
 function Checkbox({ name, value = false, updateValue = () => {}, children }) {
@@ -15,6 +23,24 @@ function Checkbox({ name, value = false, updateValue = () => {}, children }) {
  const handleChange = () => {
    updateValue(!value, name);
  };
+
+ //popup from speciality physician UI
+ const [anchorEl, setAnchorEl] = React.useState(null);
+ const handleClick = (event) => {
+   setAnchorEl(event.currentTarget);
+ };
+ const handleClose = () => {
+   setAnchorEl(null);
+ };
+ const open = Boolean(anchorEl);
+ const id = open ? 'image-popover' : undefined;
+
+ const [saveVariant, setSaveVariant] = useState('outlined');
+
+ const handleSaveClick = () => {
+   setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
+ };
+
  // render the checkbox
  return (
    <div className="py-2">
@@ -214,6 +240,7 @@ return (
          <Checkbox name="all" value={selected.length === listOptions.length} updateValue={selectAll}>Select All</Checkbox>
        </div>
        <div style={{paddingTop: "2rem"}}>The checked values are {selected.join(" , ")}</div>
+       
        <input
                      ref={fileInputRef}
                      type="file"
@@ -238,33 +265,43 @@ return (
                        onLoad ={()=> setImageLoaded(true)}
                        // style = {{display: imageLoaded? "none": "block"}}
                        />
+    <div className="heart-tab">
 
 
-               <input
-                     ref={fileInputRef}
-                     type="file"
-                     style={{ display: 'none' }}
-                     accept="audio/*" // Accept only image files
-                     onChange={handleImageUpload}
-                   />
-                   <button className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0"
-                           onClick = {handleUploadClick}>
-                     <Img
-                       className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
-                       src="images/img_television.svg"
-                       alt="television"
-                     />
-                     <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Measure the aortic, tricuspid, pulmonic and mitral area from the bell of the stethoscope</Text>
-                   
-                   </button>
-                   <Img
-                       className="h-[130px] md:h-auto rounded-[50%] w-[130px] md:h-auto object-cover  w-full"
-                       src= {profilePic}
-                       alt=""
-                       onLoad ={()=> setImageLoaded(true)}
-                       // style = {{display: imageLoaded? "none": "block"}}
-                       />
+        
+            
+            <div className="div">
 
+              <div className="atrialpopover">
+                <AtrialPopover></AtrialPopover>
+              </div>
+
+              <div className="pulmonarypopover">
+                <PulmonaryPopover></PulmonaryPopover>
+              </div>
+
+              <div className="tricuspidpopover">
+                <TricuspidPopover></TricuspidPopover>
+              </div>
+
+              <div className="mitralpopover">
+                <MitralPopover></MitralPopover>
+              </div>                            
+
+            </div>
+
+
+            <div className="heart-ausc">
+              <p className="heart-auscultation">
+                <span className="text-wrapper">Heart Auscultation </span>
+                <span className="span">(anterior only)</span>
+              </p>
+            </div>
+          
+      
+   
+
+    </div>
 
 <input
                      ref={fileInputRef}
