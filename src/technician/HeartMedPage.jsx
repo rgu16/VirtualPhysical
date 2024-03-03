@@ -10,7 +10,7 @@ import { useRef,  useState } from 'react';
 import "physician/HeartPage/style.css";
 
 import AtrialPopover from 'components/AtrialPopover/AtrialUpload.js'
-import MitralPopover from 'components/MitralPopover/MitralPopover.js'
+import MitralPopover from 'components/MitralPopover/MitralUpload.js'
 import TricuspidPopover from 'components/TricuspidPopover/TricuspidPopover.jsx'
 import PulmonaryPopover from 'components/PulmonaryPopover/PulmonaryPopover.jsx'
 
@@ -239,38 +239,11 @@ return (
         <div className="-mx-5 px-5 py-0 rounded bg-gray-100 font-medium">
          <Checkbox name="all" value={selected.length === listOptions.length} updateValue={selectAll}>Select All</Checkbox>
        </div>
-       <div style={{paddingTop: "2rem"}}>The checked values are {selected.join(" , ")}</div>
-       
-       <input
-                     ref={fileInputRef}
-                     type="file"
-                     style={{ display: 'none' }}
-                     accept="image/*" // Accept only image files
-                     onChange={handleImageUpload}
-                   />
-                   <button className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0"
-                           onClick = {handleUploadClick}>
-                     <Img
-                       className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
-                       src="images/img_television.svg"
-                       alt="television"
-                     />
-                     <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Measure the aortic, tricuspid, pulmonic and mitral area from the diaphram of the stethoscope</Text>
-                   
-                   </button>
-                   <Img
-                       className="h-[130px] md:h-auto rounded-[50%] w-[130px] md:h-auto object-cover  w-full"
-                       src= {profilePic}
-                       alt=""
-                       onLoad ={()=> setImageLoaded(true)}
-                       // style = {{display: imageLoaded? "none": "block"}}
-                       />
+      {/* <div style={{paddingTop: "2rem"}}>The checked values are {selected.join(" , ")}</div>*/} 
+     
     <div className="heart-tab">
 
-
-        
-            
-            <div className="div">
+            <div className="div" >
 
               <div className="atrialpopover">
                 <AtrialPopover></AtrialPopover>
@@ -302,37 +275,12 @@ return (
    
 
     </div>
-
-<input
-                     ref={fileInputRef}
-                     type="file"
-                     style={{ display: 'none' }}
-                     accept="image/*" // Accept only image files
-                     onChange={handleImageUpload}
-                   />
-                   <button className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0"
-                           onClick = {handleUploadClick}>
-                     <Img
-                       className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
-                       src="images/img_television.svg"
-                       alt="television"
-                     />
-                     <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Upload an image of the ECG recording</Text>
-                   
-                   </button>
-                   <Img
-                       className="h-[130px] md:h-auto rounded-[50%] w-[130px] md:h-auto object-cover  w-full"
-                       src= {profilePic}
-                       alt=""
-                       onLoad ={()=> setImageLoaded(true)}
-                       // style = {{display: imageLoaded? "none": "block"}}
-                       />
-                    
-       <div style={{paddingTop: "2rem"}}>
+    <div style={{paddingTop: "30rem"}}>
      <Stack spacing={2} direction="row">
     <Link to="/hands"><Button variant="outlined" >Save</Button>   </Link>
   </Stack>
   </div>   
+
      </div>
 
 
