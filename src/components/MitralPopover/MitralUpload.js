@@ -42,7 +42,7 @@ export default function AtrialPopover(props) {
     console.log(formData)
     axios({
         method: "POST",
-        url: props.proxy+"/heart",
+        url: props.proxy+"/upload_file",
         data: formData,
         headers: {
             Authorization: 'Bearer ' + props.token
@@ -79,7 +79,7 @@ export default function AtrialPopover(props) {
     console.log(formData)
     axios({
         method: "POST",
-        url: props.proxy+"/heart",
+        url: props.proxy+"/upload_file",
         data: formData,
         headers: {
             Authorization: 'Bearer ' + props.token
