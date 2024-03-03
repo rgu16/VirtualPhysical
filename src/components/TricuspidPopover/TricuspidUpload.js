@@ -7,7 +7,7 @@ import axios from 'axios';
 import { useRef,  useState } from 'react';
 import { Img, Line, List, Text, NavBar, TabNav } from "components";
 
-export default function AtrialPopover(props) {
+export default function TricuspidPopover(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -47,7 +47,7 @@ export default function AtrialPopover(props) {
   }
   const formData = new FormData();
   formData.append('file', file, file.name);
-  formData.append('location', "/heart/atrialdiaphram")
+  formData.append('location', "/heart/tricuspiddiaphram")
   console.log(formData)
   axios({
       method: "POST",
@@ -85,7 +85,7 @@ const handleAudioUploadBell = (e) => {
   }
   const formData = new FormData();
   formData.append('file', file, file.name);
-  formData.append('location', "/heart/atrialbell")
+  formData.append('location', "/heart/tricuspidbell")
   console.log(formData)
   axios({
       method: "POST",
@@ -112,13 +112,15 @@ const handleAudioUploadBell = (e) => {
   })
 };
 
-
-
-
- 
   return (
     <div>
-     <Button aria-describedby={id} variant="contained" color="error" onClick={handleClick} style={{ padding: 1, minWidth: 25 }}> A
+      <Button 
+        aria-describedby={id} 
+        variant="contained" 
+        color="success"
+        onClick={handleClick} 
+        style={{ padding: 1, minWidth: 25 }}> 
+      T
       </Button>
       <Popover
         id={id}

@@ -11,8 +11,8 @@ import "physician/HeartPage/style.css";
 
 import AtrialPopover from 'components/AtrialPopover/AtrialUpload.js'
 import MitralPopover from 'components/MitralPopover/MitralUpload.js'
-import TricuspidPopover from 'components/TricuspidPopover/TricuspidPopover.jsx'
-import PulmonaryPopover from 'components/PulmonaryPopover/PulmonaryPopover.jsx'
+import TricuspidPopover from 'components/TricuspidPopover/TricuspidUpload.js'
+import PulmonaryPopover from 'components/PulmonaryPopover/PulmonaryUpload.js'
 
 import CheckandXButtons from "components/CheckandXButtons";
 //import ECG from "./ECG.png"
@@ -246,19 +246,19 @@ return (
             <div className="div" >
 
               <div className="atrialpopover">
-                <AtrialPopover></AtrialPopover>
+                <AtrialPopover proxy={props.proxy} token={props.token}></AtrialPopover>
               </div>
 
               <div className="pulmonarypopover">
-                <PulmonaryPopover></PulmonaryPopover>
+                <PulmonaryPopover proxy={props.proxy} token={props.token}></PulmonaryPopover>
               </div>
 
               <div className="tricuspidpopover">
-                <TricuspidPopover></TricuspidPopover>
+                <TricuspidPopover proxy={props.proxy} token={props.token}></TricuspidPopover>
               </div>
 
               <div className="mitralpopover">
-                <MitralPopover></MitralPopover>
+                <MitralPopover proxy={props.proxy} token={props.token}></MitralPopover>
               </div>                            
 
             </div>
