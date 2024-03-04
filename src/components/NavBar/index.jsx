@@ -6,6 +6,7 @@ import { Navigate } from 'react-router-dom';
 
 const NavBar = (props) => {
   const token = props.token
+  // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcwOTUwNzIwNCwianRpIjoiYTM4ZjAwYzAtYzdlYi00ZGYzLWEzZjUtZWE3NmEyY2UwY2Y5IiwidHlwZSI6InBoeXNpY2lhbiIsInN1YiI6InJhZzE2QHJpY2UuZWR1IiwibmJmIjoxNzA5NTA3MjA0LCJleHAiOjE3MDk1MTA4MDQsInBhdGllbnQiOiJ5b3VyZW1haWxAZ21haWwuY29tL0pvaG4gRG9lLzIwMjQtMDMtMDMvIn0.zd8SE4-XYOMv1RBRFEtu5g-NrChTAOgYV8HIbYjmJ4k"
   const [user, setUser] = useState({name:'', email:'', workplace:'',timezone:'',zoomlink:''});
   const [profilePic, setProfilePic] = useState();
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -19,26 +20,26 @@ const NavBar = (props) => {
     //     localStorage.clear()
     //   }
     // };
-    // axios({ 
-    //     method: "GET",
-    //     url: props.proxy + "/profile",
-    //     headers: {
-    //     Authorization: 'Bearer ' + token
-    //     }
-    // })
-    // .then((response) => {
-    //     const res = response.data
-    //     setUser(res.data);
-    //     setProfilePic(res.pic);
-    // }).catch((error) => {
-    //     console.log(error.response)
-    //     console.log(error.response.status)
-    //     console.log(error.response.headers)
-    //     if (error.response && error.response.status === 401) {
-    //         setNavigate("/")
-    //         localStorage.clear()
-    //     }
-    // })
+    axios({ 
+        method: "GET",
+        url: props.proxy + "/profile",
+        headers: {
+        Authorization: 'Bearer ' + token
+        }
+    })
+    .then((response) => {
+        const res = response.data
+        setUser(res.data);
+        setProfilePic(res.pic);
+    }).catch((error) => {
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)
+        if (error.response && error.response.status === 401) {
+            setNavigate("/")
+            localStorage.clear()
+        }
+    })
   }, [token, props.proxy]);
   return (
     <>

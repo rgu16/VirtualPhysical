@@ -57,7 +57,8 @@ export const DemographicPage = (props) => {
           setGenderValue(res.detail['gender'])
           setHeightValue(res.detail['height'])
           setWeightValue(res.detail['weight'])
-          setDOBValue(dayjs(res.detail['DOB']).format("MM/DD/YYYY"))
+          setDOBValue(res.detail['DOB'])
+          // setDOBValue(dayjs(res.detail['DOB']).format("MM/DD/YYYY"))
           setHistoryValue(res.detail['history'])
           if(res.hasOwnProperty("note")){
             setNotes(res.note)
@@ -147,11 +148,11 @@ export const DemographicPage = (props) => {
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               id="outlined-start-adornment"
                               sx={{ m: 1, width: '25ch' }}
-                              InputProps={{
-                                endAdornment: <InputAdornment position="end">ft</InputAdornment>,
-                              }}
+                              // InputProps={{
+                              //   endAdornment: <InputAdornment position="end">ft</InputAdornment>,
+                              // }}
                               value = {height} 
-                              >{height} ft</Text>
+                              >{height}</Text>
                           </div>
                           <div className="flex flex-row gap-[15px] items-center justify-start w-full">  
                           <Text

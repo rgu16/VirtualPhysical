@@ -108,7 +108,7 @@ const DemographicMedPage = (props) => {
      data['gender'] = genderValue;
      data['height'] = height;
      data['weight'] = weight;
-     data['DOB'] = DOB;
+     data['DOB'] = DOB.format("MM/DD/YYYY");
      data['history'] = history;
      console.log(data);
      axios({
