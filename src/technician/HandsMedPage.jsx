@@ -12,6 +12,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
+import InputAdornment from '@mui/material/InputAdornment';
 
 const HandsMedPage = (props) => {
   const [isHoveredOne, setIsHoveredOne] = useState(false);
@@ -21,6 +22,7 @@ const HandsMedPage = (props) => {
   const [cynosis, setCynosisValue] = useState("none");
   const [pallor, setPallorValue] = useState("none");
   const [capillaryrefill, setCRTValue] = useState("0");
+  const [pulseox, setPulseOxValue] = useState();
 
   const handleCynosisChange = (event) => {
     setCynosisValue(event.target.value)
@@ -33,12 +35,19 @@ const HandsMedPage = (props) => {
   const handleCRTChange = (event) => {
     setCRTValue(event.target.value)
   }
+
+  const handlePulseOxChange = (event) => {
+    setPulseOxValue(event.target.value)
+  }
+
   const handleSave = (e) => {
     e.preventDefault();
     const data = {}
     data['cynosis'] = cynosis; 
     data['pallor'] = pallor; 
-    data['capillaryrefill'] = pallor; 
+    data['capillaryrefill'] = capillaryrefill; 
+    data['pulseox'] = pulseox; 
+
     console.log(data);
     axios({
      method:"POST",
@@ -188,9 +197,9 @@ const HandsMedPage = (props) => {
         name="row-radio-buttons-group"
       >
         <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-        <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
-        <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
-        <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
+        <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+        <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+        <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
         
   <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
       </RadioGroup>
@@ -206,9 +215,9 @@ const HandsMedPage = (props) => {
         name="row-radio-buttons-group"
       >
         <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-        <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
-        <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
-        <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
+        <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+        <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+        <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
         
   <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
       </RadioGroup>
@@ -225,6 +234,7 @@ const HandsMedPage = (props) => {
                     </Text>
  <TextField value = {capillaryrefill}
     onChange={handleCRTChange}
+    sx={{ m: 1, width: '15ch' }}
   id="outlined-number"
   label="sec"
   type="number"
@@ -232,8 +242,23 @@ const HandsMedPage = (props) => {
     shrink: true,
   }}
 />
-
 </div>
+<div className="flex flex-row gap-[15px] items-center justify-between w-full">
+<Text
+   className="mt-[5px] text-2xl md:text-[22px] text-black-900 sm:text-xl"
+   size="txtCairoBold24">
+   Pulse Ox Measurement:
+  </Text>
+  <TextField
+   id="outlined-start-adornment"
+    sx={{ m: 1, width: '14ch' }}
+   InputProps={{
+   endAdornment: <InputAdornment position="end">%</InputAdornment>,
+  }}
+  value = {pulseox} 
+  onChange={handlePulseOxChange}/>
+        </div>
+
 {/*<div style={{paddingTop: "2rem"}}>The values is {cynosis} {pallor} {capillaryrefill}</div>*/}
 <div style={{paddingTop: "2rem"}}>
       <Stack spacing={2} direction="row">

@@ -7,12 +7,15 @@ import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
 import { useRef,  useState } from 'react';
+import TextField from '@mui/material/TextField';
 import "physician/HeartPage/style.css";
 
 import AtrialPopover from 'components/AtrialPopover/AtrialUpload.js'
 import MitralPopover from 'components/MitralPopover/MitralUpload.js'
 import TricuspidPopover from 'components/TricuspidPopover/TricuspidUpload.js'
 import PulmonaryPopover from 'components/PulmonaryPopover/PulmonaryUpload.js'
+
+import InputAdornment from '@mui/material/InputAdornment';
 
 import CheckandXButtons from "components/CheckandXButtons";
 //import ECG from "./ECG.png"
@@ -55,23 +58,42 @@ function Checkbox({ name, value = false, updateValue = () => {}, children }) {
 // List of checkbox options
 const listOptions = ["Tricuspid/mitral thrill", "Pulmonary/tricuspid thrill", "Aortic pulmonary thrill"];
 
+const parasternalHeave = [
+  {
+    value: 'normal',
+    label: 'normal (no heave)',
+  },
+  {
+    value: 'abnormal',
+    label: 'abnormal (heave)',
+  },
+  {
+    value: 'none',
+    label: 'no selection',
+  },
 
 
+];
 
 const HeartMedPage = (props) => {
  const [profilePic, setProfilePic] = useState()
  const fileInputRef = useRef(null);
  const [imageLoaded, setImageLoaded] = useState(false);
+
+ const [heave, setParasternalValue] = useState();
+
+const handleparasternalHeave = (event) => {
+  setParasternalValue(event.target.value)
+}
+
  const handleUploadClick = () => {
    fileInputRef.current.click();
  };
 
-
-
-
  const handleImageUpload = (e) => {
    e.preventDefault();
    const file = e.target.files[0];
+   console.log('UploadECGImage')
    setProfilePic(URL.createObjectURL(file))
    if (!file) {
        console.error('No file selected.');
@@ -113,6 +135,7 @@ const HeartMedPage = (props) => {
   e.preventDefault();
   const data = {}
   data['thrills'] = selected.join(" , ");
+  data['heave'] = heave;
   console.log(data);
   axios({
    method:"POST",
@@ -189,7 +212,34 @@ return (
                      >
                       Heart Inspection
                      </Text>
-       <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '22px'}}>
+        <div className="flex flex-row gap-[15px] items-center justify-between w-full">
+                             <Text
+                              className="mt-0.5 text-2xl md:text-[10px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24" 
+                            >
+                              Parasternal heave:
+                            </Text>
+                            <TextField
+                              className = "w-[70%]"
+                              value = {heave} 
+                              onChange={handleparasternalHeave}
+                              id="outlined-select-currency-native"
+                              select
+                              label=""
+                              defaultValue="none"
+                              SelectProps={{
+                                native: true,
+                              }}
+                              helperText=""
+                            >
+                              {parasternalHeave.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                  {option.label}
+                                </option>
+                              ))}
+                            </TextField>
+                          </div>
+                          <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '22px'}}>
            {" "}
            Assess for thrills (palpable murmurs): {" "}
           
@@ -227,8 +277,8 @@ return (
 
             <div className="heart-ausc">
               <p className="heart-auscultation">
-                <span className="text-wrapper">Heart Auscultation </span>
-                <span className="span">(anterior only)</span>
+               {/* <span className="text-wrapper">Heart Auscultation </span>
+                <span className="span">(anterior only)</span>*/} 
               </p>
             </div>
           
