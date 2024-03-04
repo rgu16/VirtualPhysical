@@ -179,7 +179,7 @@ const handleHeartRateChange = (event) => {
    <>
    <NavBar proxy={props.proxy} token={props.token} />
      <div
-       className="bg-cover bg-no-repeat bg-white-A700 flex flex-col font-dmsans h-[2080px] items-center justify-start mx-auto pb-28 w-full"
+       className="bg-cover bg-no-repeat bg-white-A700 flex flex-col font-dmsans h-[2180px] items-center justify-start mx-auto pb-28 w-full"
        style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
      >
        <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
@@ -192,7 +192,7 @@ const handleHeartRateChange = (event) => {
      <div className="w-full max-w-md">
     
     
-     <div className="absolute bg-white-A700 bottom-[8%] flex flex-col font-cairo gap-6 h-[1480px] md:h-auto inset-x-[0] justify-start max-w-[1695px] mx-auto pb-6 pt-8 px-5 rounded-bl-[12px] rounded-br-[12px] w-full">
+     <div className="absolute bg-white-A700 bottom-[8%] flex flex-col font-cairo gap-6 h-[1580px] md:h-auto inset-x-[0] justify-start max-w-[1695px] mx-auto pb-6 pt-8 px-5 rounded-bl-[12px] rounded-br-[12px] w-full">
 
 
 
@@ -301,7 +301,7 @@ const handleHeartRateChange = (event) => {
                              </Text>
                             <TextField
                               id="outlined-start-adornment"
-                              sx={{ m: 1, width: '20ch' }}
+                              sx={{ m: 1, width: '20ch', paddingBottom: '10px' }}
                               InputProps={{
                                 endAdornment: <InputAdornment position="end">mmHg</InputAdornment>,
                               }}
@@ -316,7 +316,7 @@ const handleHeartRateChange = (event) => {
                              </Text>
                             <TextField
                               id="outlined-start-adornment"
-                              sx={{ m: 1, width: '20ch' }}
+                              sx={{ m: 1, width: '20ch' , paddingBottom: '10px'}}
                               InputProps={{
                                 endAdornment: <InputAdornment position="end">mmHg</InputAdornment>,
                               }}
@@ -331,7 +331,7 @@ const handleHeartRateChange = (event) => {
                              </Text>
                             <TextField
                               id="outlined-start-adornment"
-                              sx={{ m: 1, width: '25ch' }}
+                              sx={{ m: 1, width: '25ch' , paddingBottom: '10px'}}
                               InputProps={{
                                 endAdornment: <InputAdornment position="end">mmHg</InputAdornment>,
                               }}
