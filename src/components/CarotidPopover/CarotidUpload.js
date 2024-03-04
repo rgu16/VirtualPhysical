@@ -8,7 +8,7 @@ import { useRef,  useState } from 'react';
 import { Img, Line, List, Text, NavBar, TabNav } from "components";
 import "./pulses.css";
 
-export default function LungPopover(props) {
+export default function CarotidPopover(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -39,7 +39,7 @@ export default function LungPopover(props) {
 
  const handleAudioUpload = (e) => {
   e.preventDefault();
-  console.log("handleBottomLungAudioUpload")
+  console.log("handleCarotidAudioUpload")
   const file = e.target.files[0];
   setProfilePic(URL.createObjectURL(file))
   if (!file) {
@@ -48,7 +48,7 @@ export default function LungPopover(props) {
   }
   const formData = new FormData();
   formData.append('file', file, file.name);
-  formData.append('location', "/lungs/bottomleftaudio")
+  formData.append('location', "/pulses/carotidaudio")
   console.log(formData)
   axios({
       method: "POST",
@@ -77,7 +77,7 @@ export default function LungPopover(props) {
 
   return (
     <div>
-     <Button aria-describedby={id} variant="contained" color="error" onClick={handleClick} style={{ padding: 1, minWidth: 25 }}> L
+     <Button aria-describedby={id} variant="contained" color="error" onClick={handleClick} style={{ padding: 1, minWidth: 25 }}> C
       </Button>
       <Popover
         id={id}
@@ -95,7 +95,7 @@ export default function LungPopover(props) {
       >
             <Typography sx={{ p: 2 }}>
                 <div>
-                  <h1> Bottom Lung Area Recording </h1>
+                  <h1> Carotid Recording </h1>
                   <br></br>
                   <input
                      ref={fileInputRef}
@@ -114,11 +114,11 @@ export default function LungPopover(props) {
     src="images/audioupload.png"
     alt="television"
   />
-  <Text  style={{color: 'white' }} className="font-semibold ml-2.5 md:ml-[0] text-xl">Upload diaphram audio</Text>
+  <Text  style={{color: 'white' }} className="font-semibold ml-2.5 md:ml-[0] text-xl">Upload carotid audio</Text>
 </button>
 <br></br>
 
-  <h2>Stethoscope Recording - Diaphragm</h2>
+  <h2>Audio Recording - Carotid</h2>
 <audio controls>
   <source src={profilePic} type="audio/wav" />
   onLoad ={()=> setImageLoaded(true)}

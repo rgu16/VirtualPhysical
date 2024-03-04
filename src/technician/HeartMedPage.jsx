@@ -41,6 +41,7 @@ function Checkbox({ name, value = false, updateValue = () => {}, children }) {
    setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
  };
 
+
  // render the checkbox
  return (
    <div className="py-2">
@@ -78,7 +79,7 @@ const HeartMedPage = (props) => {
    }
    const formData = new FormData();
    formData.append('file', file, file.name);
-   formData.append('location', "/heart/audio")
+   formData.append('location', "/heart/EKGgraph")
    console.log(formData)
    axios({
        method: "POST",
@@ -108,7 +109,30 @@ const HeartMedPage = (props) => {
 
  const [selected, setSelected] = React.useState([]);
 
-
+ const handleSave = (e) => {
+  e.preventDefault();
+  const data = {}
+  data['thrills'] = selected.join(" , ");
+  console.log(data);
+  axios({
+   method:"POST",
+   url: props.proxy + "/upload_json",
+   data: {data: data, filename: '/heart/thrills'},
+   headers: {
+     Authorization: 'Bearer ' + props.token
+     }
+ }).then((response) => {
+   const res =response.data;
+   localStorage.setItem('general', data);
+})
+ .catch((error)=>{
+   if(error.response){
+     console.log(error.response)
+     console.log(error.response.status)
+     console.log(error.response.headers)
+   }
+ })
+};
  // Function for updating state on checkbox change
  function handleSelect(value, name) {
    if (value) {
@@ -153,72 +177,9 @@ return (
        <div className="md:h-[1277px] sm:h-[3072px] h-[370px] relative w-[84%] md:w-full">
          
          <div className="absolute md:h-[1277px] sm:h-[3072px] h-[925px] inset-[0] justify-center m-auto w-[98%] md:w-full">
-           <div className="absolute flex flex-col items-center justify-start left-[1%] top-[0] w-[92%]">
-             <div className="flex md:flex-col flex-row gap-[23px] items-center justify-between w-full">
-               <div className="flex md:flex-1 flex-col md:gap-10 gap-[292px] items-end justify-start w-[79%] md:w-full">
-                 <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between w-full">
-                   <div className="flex flex-col items-center justify-start md:mt-0 mt-[9px]">
-                     {/*<Text
-                       className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                       size="txtCairoBold24"
-                     >
-                       Feel for tenderness and input grading for each region:{" "}
-</Text>*/}
-                     
-
-                   </div>
-            
-                   <Img onMouseEnter={() => setIsHoveredOne(true)}
-                    onMouseLeave={() => setIsHoveredOne(false)}
-                     className="h-[43px] w-[43px]"
-                     src="images/img_profile_black_900.svg"
-                     alt="profile"
-                   />
-                 </div>
-                 <Img onMouseEnter={() => setIsHoveredTwo(true)}
-                  onMouseLeave={() => setIsHoveredTwo(false)}
-                   className="h-[43px] w-[43px]"
-                   src="images/img_profile_black_900.svg"
-                   alt="profile_One"
-                 />
-               </div>
-               <div className="flex flex-col md:gap-10 gap-[301px] justify-start">
-                 <Text
-                   className="md:ml-[0] ml-[18px] text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                   size="txtCairoBold24"
-                 >
-                   {" "}
-                   {" "}
-                 </Text>
-                 <Text
-                   className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                   size="txtCairoBold24"
-                 >
-                   {" "}
-                   {" "}
-                 </Text>
-               </div>
-             </div>
-           </div>
-           <Img style = {{ opacity: isHoveredOne ? 1 : 0, // Show the image if hovered, otherwise hide
-            transition: 'opacity 0.3s ease', }} // Add a smooth transition effect
-             className="absolute h-[270px] object-cover right-[3%] top-[6%] w-[25%]"
-             src="images/stethoscope.png"
-             alt="screenshot20231"
-           />
-           <Img style = {{ opacity: isHoveredTwo ? 1 : 0, // Show the image if hovered, otherwise hide
-            transition: 'opacity 0.3s ease', }} // Add a smooth transition effect
-             className="absolute bottom-[10%] h-[465px] object-cover left-[73.5%] w-[31%]"
-             src="images/heartregions.png"
-             alt="screenshot20231_One"
-           />
-           {/*  <div className="absolute bottom-[0] flex flex-col items-center justify-start left-[0] w-[47%]">*/}
-            {/*   <div className="flex flex-col items-center justify-start w-full">*/}
-                {/* <div className="flex flex-col items-center justify-end w-full">*/}
-                 {/* <div className="flex flex-col items-end justify-end pb-[38px] sm:pl-5 pl-[38px] w-full">*/}
-                  {/* <div className="flex sm:flex-col flex-row sm:gap-10 gap-[85px] items-start justify-end w-[99%] md:w-full">*/}
-                     {/*<div className="flex flex-col gap-[47px] items-center justify-start sm:mt-0 mt-10 w-4/5 sm:w-full">*/}
-                      
+        
+         
+          
                      <div style={{paddingLeft: '150px', }} className="flex w-full min-h-screen p-5">
     <div className="w-full max-w-md">
     <div className="w-full max-w-md">
@@ -271,22 +232,43 @@ return (
               </p>
             </div>
           
-      
+          <div style={{ paddingTop: "30rem" }}>
+            <input 
+                    ref={fileInputRef}
+                    type="file"
+                    style={{ display: 'none'}}
+                    accept="image/*" // Accept only image files
+                    onChange={handleImageUpload}
+                  />
+                  <button
+  className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0 roundedButton"
+  style={{ background: '#5974F6',  borderRadius: '20px', width: '250px'}}
+  onClick={handleUploadClick}
+>
+  <Img
+    className="h-7 md:ml-[0] ml-[0] md:mt-0 mt-1 w-7 "
+    src="images/audioupload.png"
+    alt="television"
+  />
+  <Text  style={{color: 'white' }} className="font-semibold ml-2.5 md:ml-[0] text-xl">Upload EKG Graph</Text>
+</button>
+                  <Img
+                      className="h-[130px] md:h-auto rounded-[50%] w-[130px] md:h-auto object-cover  w-full"
+                      src= {profilePic}
+                      alt=""
+                      onLoad ={()=> setImageLoaded(true)}
+                      // style = {{display: imageLoaded? "none": "block"}}
+                      />
    
 
-    </div>
-    <div style={{paddingTop: "30rem"}}>
+    </div></div>
+    <div >
      <Stack spacing={2} direction="row">
-    <Link to="/hands"><Button variant="outlined" >Save</Button>   </Link>
+    <Link to="/hands"><Button variant="outlined" onClick={(e) => handleSave(e)}>Save</Button>   </Link>
   </Stack>
   </div>   
 
      </div>
-
-
-    
-
- 
     
              </div>
            </div>

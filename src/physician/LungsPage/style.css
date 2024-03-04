@@ -4,6 +4,9 @@
   flex-direction: row;
   justify-content: center;
   width: 100%;
+  position: relative;
+  top: -350px;
+  right: 350px;
 }
 
 .lungs-tab .overlap-wrapper {

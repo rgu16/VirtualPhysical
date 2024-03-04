@@ -156,7 +156,7 @@ const PulsesMedPage = (props) => {
    <>
    <NavBar proxy={props.proxy} token={props.token} />
      <div
-       className="bg-cover bg-no-repeat bg-white-A700 flex flex-col font-dmsans h-[1590px] items-center justify-start mx-auto pb-28 w-full"
+       className="bg-cover bg-no-repeat bg-white-A700 flex flex-col font-dmsans h-[1750px] items-center justify-start mx-auto pb-28 w-full"
        style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
      >
        <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
@@ -169,7 +169,7 @@ const PulsesMedPage = (props) => {
      <div className="w-full max-w-md">
     
     
-     <div className="absolute bg-white-A700 bottom-[8%] flex flex-col font-cairo gap-6 h-[1000px] md:h-auto inset-x-[0] justify-start max-w-[1695px] mx-auto pb-6 pt-8 px-5 rounded-bl-[12px] rounded-br-[12px] w-full">
+     <div className="absolute bg-white-A700 bottom-[8%] flex flex-col font-cairo gap-6 h-[1180px] md:h-auto inset-x-[0] justify-start max-w-[1695px] mx-auto pb-6 pt-8 px-5 rounded-bl-[12px] rounded-br-[12px] w-full">
 
 
 
@@ -363,30 +363,6 @@ const PulsesMedPage = (props) => {
           
         </h4>
        
-  <input
-                     ref={fileInputRef}
-                     type="file"
-                     style={{ display: 'none' }}
-                     accept="image/*" // Accept only image files
-                     onChange={handleImageUpload}
-                   />
-                   <button className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0"
-                           onClick = {handleUploadClick}>
-                     <Img
-                       className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
-                       src="images/img_television.svg"
-                       alt="television"
-                     />
-                     <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Upload audio file of the carotid pulses</Text>
-                   
-                   </button>
-                   <Img
-                       className="h-[130px] md:h-auto rounded-[50%] w-[130px] md:h-auto object-cover  w-full"
-                       src= {profilePic}
-                       alt=""
-                       onLoad ={()=> setImageLoaded(true)}
-                       // style = {{display: imageLoaded? "none": "block"}}
-                       />
  <div className="pulses-tab"  >
         {/*<div className="overlap">*/}
           {/*<div className="overlap-group">*/}
@@ -394,7 +370,7 @@ const PulsesMedPage = (props) => {
             <div className="popover" >
 
               <div className="carotidpopover">
-                <CarotidPopover></CarotidPopover>
+                <CarotidPopover proxy={props.proxy} token={props.token}></CarotidPopover>
               </div>                      
 
             </div>
@@ -415,7 +391,7 @@ const PulsesMedPage = (props) => {
 
     </div>
 
-   <div style={{paddingTop: "2rem"}}>
+   <div style={{paddingTop: "25rem"}}>
      <Stack spacing={2} direction="row">
      <Button variant="contained" >Next Input</Button>
     <Link to="/abdomen"><Button variant="outlined" onClick={(e) => handleSave(e)}>Save</Button>   </Link>
