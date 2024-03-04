@@ -110,16 +110,7 @@ const AbdomenMedPage= (props) => {
 
         <div className="md:h-[1277px] sm:h-[3072px] h-[370px] relative w-[84%] md:w-full">
           <div className="absolute bottom-[3%] h-[38px] right-[0] w-[10%]">
-            <div className="absolute bg-black-900 h-[35px] inset-[0] justify-center m-auto shadow-bs w-full"></div>
-            <Text
-              className="absolute h-full inset-[0] justify-center m-auto text-white-A700 text-xl w-max"
-              size="txtCairoRegular20WhiteA700"
-            >
-              Save
-            </Text>
-
-
-           
+   
           </div>
           <div className="absolute md:h-[1277px] sm:h-[3072px] h-[925px] inset-[0] justify-center m-auto w-[98%] md:w-full">
             <div className="absolute flex flex-col items-center justify-start left-[1%] top-[0] w-[92%]">
@@ -208,11 +199,11 @@ const AbdomenMedPage= (props) => {
        name="row-radio-buttons-group"
      >
        <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-       <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
-       <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
-       <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
-       <FormControlLabel value="three" labelPlacement="bottom" control={<Radio />} label="3" />
-       <FormControlLabel value="four" labelPlacement="bottom" control={<Radio />} label="4" />
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
+       <FormControlLabel value="4" labelPlacement="bottom" control={<Radio />} label="4" />
       
  <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
      </RadioGroup>
@@ -228,11 +219,11 @@ const AbdomenMedPage= (props) => {
        name="row-radio-buttons-group"
      >
        <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-       <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
-       <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
-       <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
-       <FormControlLabel value="three" labelPlacement="bottom" control={<Radio />} label="3" />
-       <FormControlLabel value="four" labelPlacement="bottom" control={<Radio />} label="4" />
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
+       <FormControlLabel value="4" labelPlacement="bottom" control={<Radio />} label="4" />
       
  <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
      </RadioGroup>
@@ -249,11 +240,11 @@ const AbdomenMedPage= (props) => {
        name="row-radio-buttons-group"
      >
        <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-       <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
-       <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
-       <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
-       <FormControlLabel value="three" labelPlacement="bottom" control={<Radio />} label="3" />
-       <FormControlLabel value="four" labelPlacement="bottom" control={<Radio />} label="4" />
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
+       <FormControlLabel value="4" labelPlacement="bottom" control={<Radio />} label="4" />
       
  <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
      </RadioGroup>
@@ -270,11 +261,11 @@ const AbdomenMedPage= (props) => {
        name="row-radio-buttons-group"
      >
        <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-       <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
-       <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
-       <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
-       <FormControlLabel value="three" labelPlacement="bottom" control={<Radio />} label="3" />
-       <FormControlLabel value="four" labelPlacement="bottom" control={<Radio />} label="4" />
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
+       <FormControlLabel value="4" labelPlacement="bottom" control={<Radio />} label="4" />
       
  <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
      </RadioGroup>
@@ -291,11 +282,11 @@ const AbdomenMedPage= (props) => {
        name="row-radio-buttons-group"
      >
        <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-       <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
-       <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
-       <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
-       <FormControlLabel value="three" labelPlacement="bottom" control={<Radio />} label="3" />
-       <FormControlLabel value="four" labelPlacement="bottom" control={<Radio />} label="4" />
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
+       <FormControlLabel value="4" labelPlacement="bottom" control={<Radio />} label="4" />
       
  <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
      </RadioGroup>
@@ -312,11 +303,11 @@ const AbdomenMedPage= (props) => {
        name="row-radio-buttons-group"
      >
        <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-       <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
-       <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
-       <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
-       <FormControlLabel value="three" labelPlacement="bottom" control={<Radio />} label="3" />
-       <FormControlLabel value="four" labelPlacement="bottom" control={<Radio />} label="4" />
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
+       <FormControlLabel value="4" labelPlacement="bottom" control={<Radio />} label="4" />
       
  <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
      </RadioGroup>

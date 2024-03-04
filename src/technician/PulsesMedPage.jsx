@@ -2,6 +2,8 @@ import React from "react";
 
 
 import {Img, Line, List, Text, NavBar, TabNav } from "components";
+import TextField from '@mui/material/TextField';
+import InputAdornment from '@mui/material/InputAdornment';
 import { Link } from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -12,7 +14,7 @@ import { useRef,  useState } from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
-
+import CarotidPopover from "components/CarotidPopover/CarotidUpload.js"
 
 const PulsesMedPage = (props) => {
  const [isHoveredOne, setIsHoveredOne] = useState(false);
@@ -22,7 +24,10 @@ const PulsesMedPage = (props) => {
  const [brachial, setBrachialValue] = useState("none");
  const [carotid, setCarotidValue] = useState("none");
  const [pedis, setPedisValue] = useState("none");
-
+ const [systolic, setSystolicValue] = useState();
+ const [diastolic, setDiastolicValue] = useState();
+ const [jvp, setJVPValue] = useState();
+ const [heartrate, setHeartRateValue] = useState();
 
  const handleRadialChange = (event) => {
    setRadialValue(event.target.value)
@@ -43,6 +48,21 @@ const PulsesMedPage = (props) => {
    setPedisValue(event.target.value)
  }
 
+ const handleSystolicChange = (event) => {
+  setSystolicValue(event.target.value)
+}
+
+const handleDiastolicChange = (event) => {
+  setDiastolicValue(event.target.value)
+}
+
+const handleJVPChange = (event) => {
+  setJVPValue(event.target.value)
+}
+
+const handleHeartRateChange = (event) => {
+  setHeartRateValue(event.target.value)
+}
 
  const handleSave = (e) => {
    e.preventDefault();
@@ -51,7 +71,10 @@ const PulsesMedPage = (props) => {
    data['brachial'] = brachial;
    data['carotid'] = carotid;
    data['pedis'] = pedis;
-
+   data['systolic'] = systolic;
+   data['diastolic'] = diastolic;
+   data['jvp'] = jvp;
+   data['heartrate'] = heartrate;
 
    console.log(data);
    axios({
@@ -156,7 +179,7 @@ const PulsesMedPage = (props) => {
    <>
    <NavBar proxy={props.proxy} token={props.token} />
      <div
-       className="bg-cover bg-no-repeat bg-white-A700 flex flex-col font-dmsans h-[1561px] items-center justify-start mx-auto pb-28 w-full"
+       className="bg-cover bg-no-repeat bg-white-A700 flex flex-col font-dmsans h-[2180px] items-center justify-start mx-auto pb-28 w-full"
        style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
      >
        <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
@@ -169,7 +192,7 @@ const PulsesMedPage = (props) => {
      <div className="w-full max-w-md">
     
     
-     <div className="absolute bg-white-A700 bottom-[8%] flex flex-col font-cairo gap-6 h-[1000px] md:h-auto inset-x-[0] justify-start max-w-[1695px] mx-auto pb-6 pt-8 px-5 rounded-bl-[12px] rounded-br-[12px] w-full">
+     <div className="absolute bg-white-A700 bottom-[8%] flex flex-col font-cairo gap-6 h-[1580px] md:h-auto inset-x-[0] justify-start max-w-[1695px] mx-auto pb-6 pt-8 px-5 rounded-bl-[12px] rounded-br-[12px] w-full">
 
 
 
@@ -270,6 +293,69 @@ const PulsesMedPage = (props) => {
                      >
                       Pulses and Blood Pressure
                      </Text>
+                     <div className="flex flex-row gap-[15px] items-center justify-between w-full">
+                             <Text
+                               className="mt-[5px] text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                               size="txtCairoBold24">
+                               Systolic Blood Pressure:
+                             </Text>
+                            <TextField
+                              id="outlined-start-adornment"
+                              sx={{ m: 1, width: '20ch', paddingBottom: '10px' }}
+                              InputProps={{
+                                endAdornment: <InputAdornment position="end">mmHg</InputAdornment>,
+                              }}
+                              value = {systolic} 
+                              onChange={handleSystolicChange}/>
+                          </div>
+                          <div className="flex flex-row gap-[15px] items-center justify-between w-full">
+                             <Text
+                               className="mt-[5px] text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                               size="txtCairoBold24">
+                               Diastolic Blood Pressure:
+                             </Text>
+                            <TextField
+                              id="outlined-start-adornment"
+                              sx={{ m: 1, width: '20ch' , paddingBottom: '10px'}}
+                              InputProps={{
+                                endAdornment: <InputAdornment position="end">mmHg</InputAdornment>,
+                              }}
+                              value = {diastolic} 
+                              onChange={handleDiastolicChange}/>
+                          </div>
+                          <div className="flex flex-row gap-[15px] items-center justify-between w-full">
+                             <Text
+                               className="mt-[5px] text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                               size="txtCairoBold24">
+                               Jugular venous pressure (JVP):
+                             </Text>
+                            <TextField
+                              id="outlined-start-adornment"
+                              sx={{ m: 1, width: '25ch' , paddingBottom: '10px'}}
+                              InputProps={{
+                                endAdornment: <InputAdornment position="end">mmHg</InputAdornment>,
+                              }}
+                              value = {jvp} 
+                              onChange={handleJVPChange}/>
+                          </div>
+                          <div className="flex flex-row gap-[15px] items-center justify-between w-full">
+                             <Text
+                               className="mt-[5px] text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                               size="txtCairoBold24">
+                               Heart Rate:
+                             </Text>
+                            <TextField
+                              id="outlined-start-adornment"
+                              sx={{ m: 1, width: '20ch' }}
+                              InputProps={{
+                                endAdornment: <InputAdornment position="end">BPM</InputAdornment>,
+                              }}
+                              value = {heartrate} 
+                              onChange={handleHeartRateChange}/>
+                          </div>
+      
+      
+      
        <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '20px'}}>
            {" "}
            Check pulses at extremities and classify strength on 0-2 scale: {" "}
@@ -286,11 +372,9 @@ const PulsesMedPage = (props) => {
        name="row-radio-buttons-group"
      >
        <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-       <FormControlLabel onChange={() => handleRadioChange(0) }
-       control={<Radio inputRef={inputRefs[0]} checked={selectedOptionIndex === 0} />}
-       label="0"  value={'zero'} labelPlacement="bottom"  />
-       <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
-       <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
       
  <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
      </RadioGroup>
@@ -306,13 +390,9 @@ const PulsesMedPage = (props) => {
        name="row-radio-buttons-group"
      >
        <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-       <FormControlLabel value={`zero-1`}
-           labelPlacement="bottom"
-           control={<Radio inputRef={inputRefs[1]} checked={selectedOptionIndex === 1} />}
-           label="0"
-           onChange={() => handleRadioChange(1)} />
-       <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
-       <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
       
  <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
      </RadioGroup>
@@ -329,9 +409,9 @@ const PulsesMedPage = (props) => {
        name="row-radio-buttons-group"
      >
        <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-       <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
-       <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
-       <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
       
  <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
      </RadioGroup>
@@ -348,9 +428,9 @@ const PulsesMedPage = (props) => {
        name="row-radio-buttons-group"
      >
        <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-       <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
-       <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
-       <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
       
  <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
      </RadioGroup>
@@ -362,33 +442,36 @@ const PulsesMedPage = (props) => {
            Auscultate the carotid pulse using the bell of the stethoscope {" "}
           
         </h4>
-  <input
-                     ref={fileInputRef}
-                     type="file"
-                     style={{ display: 'none' }}
-                     accept="image/*" // Accept only image files
-                     onChange={handleImageUpload}
-                   />
-                   <button className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0"
-                           onClick = {handleUploadClick}>
-                     <Img
-                       className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
-                       src="images/img_television.svg"
-                       alt="television"
-                     />
-                     <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Upload audio file of the carotid pulses</Text>
-                   
-                   </button>
-                   <Img
-                       className="h-[130px] md:h-auto rounded-[50%] w-[130px] md:h-auto object-cover  w-full"
-                       src= {profilePic}
-                       alt=""
-                       onLoad ={()=> setImageLoaded(true)}
-                       // style = {{display: imageLoaded? "none": "block"}}
-                       />
+       
+ <div className="pulses-tab"  >
+        {/*<div className="overlap">*/}
+          {/*<div className="overlap-group">*/}
+           
+            <div className="popover" >
 
+              <div className="carotidpopover">
+                <CarotidPopover proxy={props.proxy} token={props.token}></CarotidPopover>
+              </div>                      
 
-   <div style={{paddingTop: "2rem"}}>
+            </div>
+            <img  
+              className="carotid-img"
+              alt="carotidimg"
+              src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/carotid-img-1@2x.png"
+            />
+            <p className="carotid-auscultation">
+              <span className="text-wrapper-2">Carotid Auscultation</span>
+            </p>
+            <div className="pulse">
+            </div>
+   
+           {/*</div>*/}
+
+       {/* </div>*/}
+
+    </div>
+
+   <div style={{paddingTop: "28rem"}}>
      <Stack spacing={2} direction="row">
      <Button variant="contained" >Next Input</Button>
     <Link to="/abdomen"><Button variant="outlined" onClick={(e) => handleSave(e)}>Save</Button>   </Link>

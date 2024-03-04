@@ -4,6 +4,9 @@
   flex-direction: row;
   justify-content: center;
   width: 100%;
+  position: relative;
+  top: -350px;
+  right: 350px;
 }
 
 .lungs-tab .overlap-wrapper {
@@ -293,10 +296,9 @@
   top: 266px;
   width: 24px;
 }
-
 .lungs-tab .lungpopover-1 {
   height: 108px;
-  left: 0px;
+  left: -25px;
   position: absolute;
   top: 75px;
   width: 24px;
@@ -304,7 +306,7 @@
 
 .lungs-tab .lungpopover-2 {
   height: 108px;
-  left: 0px;
+  left: -10px; /* Adjusted left position */
   position: absolute;
   top: 37px;
   width: 24px;
@@ -312,7 +314,7 @@
 
 .lungs-tab .lungpopover-3 {
   height: 108px;
-  left: 0px;
+  left: 5px; /* Adjusted left position */
   position: absolute;
   top: 0px;
   width: 24px;
@@ -320,7 +322,7 @@
 
 .lungs-tab .lungpopover-4 {
   height: 108px;
-  left: 0px;
+  left: 20px; /* Adjusted left position */
   position: absolute;
   top: 75px;
   width: 24px;
@@ -328,7 +330,7 @@
 
 .lungs-tab .lungpopover-5 {
   height: 108px;
-  left: 0px;
+  left: 10px; /* Adjusted left position */
   position: absolute;
   top: 37px;
   width: 24px;
@@ -336,7 +338,7 @@
 
 .lungs-tab .lungpopover-6 {
   height: 108px;
-  left: 0px;
+  left: -5px; /* Adjusted left position */
   position: absolute;
   top: 0px;
   width: 24px;

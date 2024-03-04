@@ -173,10 +173,10 @@ const LegsMedPage = (props) => {
        name="row-radio-buttons-group"
      >
        <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-       <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
-       <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
-       <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
-       <FormControlLabel value="three" labelPlacement="bottom" control={<Radio />} label="3" />
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
       
  <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
      </RadioGroup>
@@ -192,10 +192,10 @@ const LegsMedPage = (props) => {
        name="row-radio-buttons-group"
      >
        <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-       <FormControlLabel value="zero" labelPlacement="bottom" control={<Radio />} label="0" />
-       <FormControlLabel value="one" labelPlacement="bottom" control={<Radio />} label="1" />
-       <FormControlLabel value="two" labelPlacement="bottom" control={<Radio />} label="2" />
-       <FormControlLabel value="three" labelPlacement="bottom" control={<Radio />} label="3" />
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
       
  <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
      </RadioGroup>
