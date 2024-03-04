@@ -12,7 +12,7 @@ import { useRef,  useState } from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
-
+import CarotidPopover from "components/CarotidPopover/CarotidUpload.js"
 
 const PulsesMedPage = (props) => {
  const [isHoveredOne, setIsHoveredOne] = useState(false);
@@ -156,7 +156,7 @@ const PulsesMedPage = (props) => {
    <>
    <NavBar proxy={props.proxy} token={props.token} />
      <div
-       className="bg-cover bg-no-repeat bg-white-A700 flex flex-col font-dmsans h-[1561px] items-center justify-start mx-auto pb-28 w-full"
+       className="bg-cover bg-no-repeat bg-white-A700 flex flex-col font-dmsans h-[1590px] items-center justify-start mx-auto pb-28 w-full"
        style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
      >
        <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
@@ -362,6 +362,7 @@ const PulsesMedPage = (props) => {
            Auscultate the carotid pulse using the bell of the stethoscope {" "}
           
         </h4>
+       
   <input
                      ref={fileInputRef}
                      type="file"
@@ -386,7 +387,33 @@ const PulsesMedPage = (props) => {
                        onLoad ={()=> setImageLoaded(true)}
                        // style = {{display: imageLoaded? "none": "block"}}
                        />
+ <div className="pulses-tab"  >
+        {/*<div className="overlap">*/}
+          {/*<div className="overlap-group">*/}
+           
+            <div className="popover" >
 
+              <div className="carotidpopover">
+                <CarotidPopover></CarotidPopover>
+              </div>                      
+
+            </div>
+            <img  
+              className="carotid-img"
+              alt="carotidimg"
+              src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/carotid-img-1@2x.png"
+            />
+            <p className="carotid-auscultation">
+              <span className="text-wrapper-2">Carotid Auscultation</span>
+            </p>
+            <div className="pulse">
+            </div>
+   
+           {/*</div>*/}
+
+       {/* </div>*/}
+
+    </div>
 
    <div style={{paddingTop: "2rem"}}>
      <Stack spacing={2} direction="row">

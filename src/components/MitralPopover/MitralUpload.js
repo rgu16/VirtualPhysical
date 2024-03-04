@@ -142,7 +142,7 @@ const handleAudioUploadBell = (e) => {
       >
             <Typography sx={{ p: 2 }}>
                 <div>
-                  <h1> APEX </h1>
+                  <h1> Mitral Area Recording </h1>
                   <br></br>
                   <input
                      ref={fileInputRef}

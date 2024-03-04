@@ -11,15 +11,16 @@ import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import axios from 'axios';
 
 const HandsMedPage = (props) => {
   const [isHoveredOne, setIsHoveredOne] = useState(false);
   const [isHoveredTwo, setIsHoveredTwo] = useState(false);
   const [isHoveredThree, setIsHoveredThree] = useState(false);
 
-  const [cynosis, setCynosisValue] = useState();
-  const [pallor, setPallorValue] = useState();
-  const [capillaryrefill, setCRTValue] = useState();
+  const [cynosis, setCynosisValue] = useState("none");
+  const [pallor, setPallorValue] = useState("none");
+  const [capillaryrefill, setCRTValue] = useState("0");
 
   const handleCynosisChange = (event) => {
     setCynosisValue(event.target.value)
@@ -32,7 +33,32 @@ const HandsMedPage = (props) => {
   const handleCRTChange = (event) => {
     setCRTValue(event.target.value)
   }
-
+  const handleSave = (e) => {
+    e.preventDefault();
+    const data = {}
+    data['cynosis'] = cynosis; 
+    data['pallor'] = pallor; 
+    data['capillaryrefill'] = pallor; 
+    console.log(data);
+    axios({
+     method:"POST",
+     url: props.proxy + "/upload_json",
+     data: {data: data, filename: '/hands/detail'},
+     headers: {
+       Authorization: 'Bearer ' + props.token
+       }
+   }).then((response) => {
+     const res =response.data;
+     localStorage.setItem('hands', data);
+  })
+   .catch((error)=>{
+     if(error.response){
+       console.log(error.response)
+       console.log(error.response.status)
+       console.log(error.response.headers)
+     }
+   })
+  };
   return (
     <>
     <NavBar proxy={props.proxy} token={props.token} />
@@ -212,7 +238,7 @@ const HandsMedPage = (props) => {
 <div style={{paddingTop: "2rem"}}>
       <Stack spacing={2} direction="row">
       <Button variant="contained" >Next Input</Button>
-     <Link to="/legs"><Button variant="outlined" >Save</Button>   </Link>
+     <Link to="/legs"><Button variant="outlined" onClick={(e) => handleSave(e)} >Save</Button>   </Link>
    </Stack>
    </div>   
          {/* </div>*/}

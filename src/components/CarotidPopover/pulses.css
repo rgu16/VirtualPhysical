@@ -4,8 +4,9 @@
     flex-direction: row;
     justify-content: center;
     width: 100%;
+    position: relative;
+    top: -700px; /* Adjust the value to move it down by your desired amount */
   }
-
   
   .pulses-tab .overlap-wrapper {
     background-color: #ffffff;
@@ -896,4 +897,3 @@
     z-index: 10; /* Ensure it's above other elements */
     white-space: nowrap; /* Prevents the text from wrapping */
   }
-  
