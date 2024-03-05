@@ -5,8 +5,6 @@ import Button from '@mui/material/Button';
 import AudioPlayer from "components/AudioPlayer/AudioPlayer.js"
 
 export default function AtrialPopover({diaphragm, bell}) {
-  console.log("ATRIAL POPOVER")
-  console.log(diaphragm)
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {

@@ -3,8 +3,6 @@ import CheckandXButtons from 'components/CheckandXButtons';
 import Eko from './Eko.wav';
 
 function AudioPlayer({diaphragm, bell}) {
-  console.log("AUDIO PLAYER")
-  console.log(diaphragm)
   return (
     <div>
       <h2>(Headphones recommended)</h2>

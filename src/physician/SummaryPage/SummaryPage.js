@@ -36,13 +36,13 @@ const SummaryPage = (props) => {
     })
     .then((response) => {
         const res = response.data
-        console.log(res)
+        // console.log(res)
         tabNames.forEach((item, index) => {
           const noteKey = "note_" + item;
           if (res.hasOwnProperty(noteKey)) {
-            console.log(noteKey)
+            // console.log(noteKey)
             const noteValue = res[noteKey];
-            console.log(noteValue)
+            // console.log(noteValue)
             setNotes(prevNotes => {
               const updatedNotes = [...prevNotes];
               updatedNotes[index] = noteValue;
@@ -50,7 +50,7 @@ const SummaryPage = (props) => {
             });
           }
           if (res.hasOwnProperty("detail_" + item)){
-            console.log(res["detail_" + item])
+            // console.log(res["detail_" + item])
             setData(prevData => {
               const updatedData = [...prevData];
               updatedData[index] = res["detail_" + item];
@@ -58,7 +58,7 @@ const SummaryPage = (props) => {
             });
           }
         })
-        console.log(notes)
+        // console.log(notes)
     }).catch((error) => {
         if (error.response){
         console.log(error.response)
