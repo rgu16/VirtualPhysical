@@ -11,7 +11,8 @@ const PhysicianNotes = (props) => {
   }, [props.notes]);
 
   const handleSave = (e) => {
-    // console.log(notes);
+    console.log(notes);
+    console.log(props.tab);
     e.preventDefault();
     const filename = props.tab === '/demographic'? "/demographic_notes" : props.tab + "/note";
     axios({

@@ -4,7 +4,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import AudioPlayer from "components/AudioPlayer/AudioPlayer.js"
 
-export default function AtrialPopover() {
+export default function AtrialPopover({diaphragm, bell}) {
+  console.log("ATRIAL POPOVER")
+  console.log(diaphragm)
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -40,7 +42,7 @@ export default function AtrialPopover() {
                 <div>
                   <h1> RUSB </h1>
                   <br></br>
-                    <AudioPlayer></AudioPlayer>
+                    <AudioPlayer diaphragm={diaphragm} bell={bell}></AudioPlayer>
                 </div>
             </Typography>
       </Popover>
