@@ -595,6 +595,7 @@ export const PulsesPage = (props) => {
 
 
   return (
+    <div className = "bg-white flex flex-row justify-center w-full relative top-[550px]">
     <div className="pulses-tab">
       <div className="overlap-wrapper">
         <div className="overlap">
@@ -971,6 +972,7 @@ export const PulsesPage = (props) => {
 
         </div>
       </div>
+    </div>
     </div>
   );
 };
