@@ -4,6 +4,12 @@ import { Button, Img, Line, List, Text, NavBar, TabNav } from "components";
 // import NavBar from "components/NavBar";
 
 const SummaryTab = (props) => {
+    let note
+    if (props.data.split("T05:00:00.000Z")[1]){
+        note = props.data.split("T05:00:00.000Z")[0] + props.data.split("T05:00:00.000Z")[1];
+    }else{
+        note = props.data.split("T05:00:00.000Z")[0]
+    }
   return (
     <>
     <div className="flex md:flex-1 flex-col gap-[5px] items-start justify-start w-full md:w-full">
@@ -22,7 +28,9 @@ const SummaryTab = (props) => {
         >
         <span className="text-black-900 font-cairo text-left font-normal">
             <>
-            {props.data}<br />
+            {/* {props.data}<br />
+             */}
+             {note}<br />
             </>
         </span>
         <span className="text-black-900 font-cairo text-left font-bold">

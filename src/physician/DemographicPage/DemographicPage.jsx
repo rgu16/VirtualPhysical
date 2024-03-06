@@ -57,7 +57,10 @@ export const DemographicPage = (props) => {
           setGenderValue(res.detail['gender'])
           setHeightValue(res.detail['height'])
           setWeightValue(res.detail['weight'])
-          setDOBValue(res.detail['DOB'])
+          const temp = res.detail['DOB'].split("T")[0]
+          console.log(temp)
+          // setDOBValue(res.detail['DOB'])
+          setDOBValue(temp)
           // setDOBValue(dayjs(res.detail['DOB']).format("MM/DD/YYYY"))
           setHistoryValue(res.detail['history'])
           if(res.hasOwnProperty("note")){

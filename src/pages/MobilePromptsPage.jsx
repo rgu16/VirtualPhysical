@@ -1,15 +1,18 @@
 import axios from 'axios';
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, useRef} from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { Img, Input, Text} from "../components";
 import DataTable from 'react-data-table-component';
 import { DeleteFilled, CloseCircleTwoTone, CheckCircleTwoTone, CameraOutlined, VideoCameraOutlined, FileAddOutlined } from '@ant-design/icons';
 const MobilePromptsPage = (props) => {
   const token = props.token
+  const imageInputRef = useRef(null);
+  const audioInputRef = useRef(null);
+  const videoInputRef = useRef(null);
   const navigate = useNavigate();
-  const [data, setData] = useState([{'filename': 'name/date/tab/file','tab':"demographic", 'file':"file", 'type':"image"},
-                                    {'filename': 'name/date/tab/file1','tab':"demographic", 'file':"file1", 'type':"video"},
-                                    {'filename': 'name/date/tab/file2','tab':"demographic", 'file':"file2", 'type':"pdf"}]  );
+  const [data, setData] = useState([{'filename': 'name/date/tab/file','tab':"demographic", 'file':"profile_pic", 'type':"image"},
+                                    {'filename': 'name/date/tab/file1','tab':"legs", 'file':"pitting edema", 'type':"video"},
+                                    {'filename': 'name/date/tab/file2','tab':"Heart", 'file':"stethescope", 'type':"audio"}]  );
   const columns = [ { name: 'Tab',
                       selector: row => row.tab,
                       cell: (d) => <span>{d.tab}</span>,},
@@ -18,24 +21,24 @@ const MobilePromptsPage = (props) => {
                       cell: (d) => <span>{d.file}</span>},                
                     { name: "Upload File",
                     sortable: false,
-                    cell: (d) => <button onClick={uploadFile.bind(this, d.filename)} style= {{border: 'none'}}>
+                    cell: (d) => <button onClick={uploadFile.bind(this, d.type)} style= {{border: 'none'}}>
                                     <FileAddOutlined style={{fontSize: '32px'}}/>
                                 </button>},
-                    { name: "Action",
-                    sortable: false,
-                    cell: (d) => (
-                      d.type === "image" ? (
-                        <button onClick={goToPhoto.bind(this, d.filename)} style= {{border: 'none'}}>
-                                    <CameraOutlined style={{fontSize: '32px'}}/>
-                        </button>
-                      ) : ( d.type === "video" ?
-                        <button onClick={goToVideo.bind(this, d.filename)} style= {{border: 'none'}}>
-                                    <VideoCameraOutlined style={{fontSize: '32px'}}/>
-                        </button>:
-                        <div>None</div>
-                      )
-                    )
-                  }
+                  //   { name: "Action",
+                  //   sortable: false,
+                  //   cell: (d) => (
+                  //     d.type === "image" ? (
+                  //       <button onClick={goToPhoto.bind(this, d.filename)} style= {{border: 'none'}}>
+                  //                   <CameraOutlined style={{fontSize: '32px'}}/>
+                  //       </button>
+                  //     ) : ( d.type === "video" ?
+                  //       <button onClick={goToVideo.bind(this, d.filename)} style= {{border: 'none'}}>
+                  //                   <VideoCameraOutlined style={{fontSize: '32px'}}/>
+                  //       </button>:
+                  //       <div>None</div>
+                  //     )
+                  //   )
+                  // }
                     ,  
                   ];
 
@@ -51,9 +54,30 @@ const MobilePromptsPage = (props) => {
     navigate('/video',{state:{folder:file}})
     // setNavigate('/camera', { state: { key: file } });
   }
-  function uploadFile(file) {
-    console.log(file)
-    console.log("UPLOAD FILE")
+  // function uploadFile(file) {
+  //   console.log(file)
+  //   console.log("UPLOAD FILE")
+  // };
+  const uploadFile = (type) => {
+    if(type === "image"){
+      imageInputRef.current.click();
+    }
+    if(type === "audio"){
+      audioInputRef.current.click();
+    }
+    if(type === "video"){
+      videoInputRef.current.click();
+    }
+  };
+
+  const handleImageUpload =() => {
+    console.log("Image")
+  };
+  const handleAudioUpload =() => {
+    console.log("Image")
+  };
+  const handleVideoUpload =() => {
+    console.log("Image")
   };
   // useEffect(() => {
   //   axios({
@@ -74,6 +98,7 @@ const MobilePromptsPage = (props) => {
   // }, [token, props.proxy]);
 
   function logOut() {
+    localStorage.clear()
     axios({
         method: "POST",
         url: props.proxy + "/logout",
@@ -136,6 +161,27 @@ const MobilePromptsPage = (props) => {
                         onClick={() => logOut()}>
                         <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Log out</Text>
             </button>
+            <input
+                      ref={imageInputRef}
+                      type="file"
+                      style={{ display: 'none' }}
+                      accept="image/*" // Accept only image files
+                      onChange={handleImageUpload}
+                    />
+            <input
+              ref={audioInputRef}
+              type="file"
+              style={{ display: 'none' }}
+              accept="audio/*" // Accept only image files
+              onChange={handleAudioUpload}
+            />
+            <input
+              ref={videoInputRef}
+              type="file"
+              style={{ display: 'none' }}
+              accept="video/*" // Accept only image files
+              onChange={handleVideoUpload}
+            />
           </div>
         </div>
       </div>

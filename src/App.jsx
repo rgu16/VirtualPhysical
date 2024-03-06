@@ -59,7 +59,7 @@ export default function App() {
                 {isMobile?
                 <Routes>
                     <Route exact path="/" element={!token?<MobileLoginPage proxy={proxy} setToken={setToken}/>:
-                                                          <MobilePromptsPage proxy={proxy} setToken={setToken}/> }/>
+                                                          <MobilePromptsPage proxy={proxy} setToken={setToken} removeToken={removeToken}/> }/>
                     <Route path="/camera"
                         element={
                         <ProtectedRoute isAllowed={!!token}>

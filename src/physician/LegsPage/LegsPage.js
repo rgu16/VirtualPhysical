@@ -1,23 +1,93 @@
 import React from "react";
 import "./style.css";
-import { useState } from 'react';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { NavBar } from 'components'
 import Grade from "./Grade.png"
+
+import { Img, Line, List, Text, TabNav, NavBar } from "components";
+import { Link } from 'react-router-dom';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import Stack from '@mui/material/Stack';
+import { useState, useRef, useEffect } from 'react';
+import {  PhysicianNotes } from "components";
+import axios from 'axios';
+import { styled } from '@mui/material/styles';
+// import Button from '@mui/material/Button';
+// import Stack from '@mui/material/Stack';
+import { jwtDecode } from "jwt-decode";
+
+
 
 export const LegsPage = (props) => {
   const [L_pittingValue, setL_pittingValue] = useState('');
   const [L_pittingStatus, setL_pittingStatus] = useState('');
   const [R_pittingValue, setR_pittingValue] = useState('');
   const [R_pittingStatus, setR_pittingStatus] = useState('');
-
+  const [note, setNotes] = useState();
   const [saveVariant, setSaveVariant] = useState('outlined');
 
   const handleSaveClick = () => {
     setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
   };
+
+
+  useEffect(() => {
+    axios({
+        method: "GET",
+        url: props.proxy + "/download/legs",
+        headers: {
+        Authorization: 'Bearer ' + props.token
+        }
+    })
+    .then((response) => {
+        const res = response.data
+        console.log(res)
+
+        // setL_pittingValue(res.detail[ 'leftcalve' ])
+        const L_pittingValue = parseInt(res.detail['leftcalve'], 10);
+        setL_pittingValue(L_pittingValue)
+        let L_pittingStatus = '';
+        if (L_pittingValue >= 0 && L_pittingValue <= 1) {
+          L_pittingStatus = 'normal';
+        } else if (L_pittingValue >= 2) {
+          L_pittingStatus = 'abnormal';
+        }
+        setL_pittingStatus(L_pittingStatus);
+
+        const R_pittingValue = parseInt(res.detail['rightcalve'], 10);
+        setR_pittingValue(R_pittingValue)
+        let R_pittingStatus = '';
+        if (R_pittingValue >= 0 && R_pittingValue <= 1) {
+          R_pittingStatus = 'normal';
+        } else if (R_pittingValue >= 2) {
+          R_pittingStatus = 'abnormal';
+        }
+        setR_pittingStatus(R_pittingStatus)
+
+
+
+        if(res.hasOwnProperty("note")){
+          setNotes(res.note)
+          console.log(res.note)
+        }
+        // if(res.hasOwnProperty("profile_pic")){
+        //   setProfilePic(res.profile_pic)
+        // }
+    }).catch((error) => {
+        if (error.response){
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)}
+    })
+  }, [props]);
+
+
+
 
   // For Image Popover
   const [imageAnchorEl, setImageAnchorEl] = React.useState(null);
