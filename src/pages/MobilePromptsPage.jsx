@@ -9,10 +9,9 @@ const MobilePromptsPage = (props) => {
   const imageInputRef = useRef(null);
   const audioInputRef = useRef(null);
   const videoInputRef = useRef(null);
+  const [folder,setFolder] = useState();
   const navigate = useNavigate();
-  const [data, setData] = useState([{'filename': 'name/date/tab/file','tab':"demographic", 'file':"profile_pic", 'type':"image"},
-                                    {'filename': 'name/date/tab/file1','tab':"legs", 'file':"pitting edema", 'type':"video"},
-                                    {'filename': 'name/date/tab/file2','tab':"Heart", 'file':"stethescope", 'type':"audio"}]  );
+  const [data, setData] = useState([]);
   const columns = [ { name: 'Tab',
                       selector: row => row.tab,
                       cell: (d) => <span>{d.tab}</span>,},
@@ -21,25 +20,9 @@ const MobilePromptsPage = (props) => {
                       cell: (d) => <span>{d.file}</span>},                
                     { name: "Upload File",
                     sortable: false,
-                    cell: (d) => <button onClick={uploadFile.bind(this, d.type)} style= {{border: 'none'}}>
+                    cell: (d) => <button onClick={uploadFile.bind(this, d)} style= {{border: 'none'}}>
                                     <FileAddOutlined style={{fontSize: '32px'}}/>
-                                </button>},
-                  //   { name: "Action",
-                  //   sortable: false,
-                  //   cell: (d) => (
-                  //     d.type === "image" ? (
-                  //       <button onClick={goToPhoto.bind(this, d.filename)} style= {{border: 'none'}}>
-                  //                   <CameraOutlined style={{fontSize: '32px'}}/>
-                  //       </button>
-                  //     ) : ( d.type === "video" ?
-                  //       <button onClick={goToVideo.bind(this, d.filename)} style= {{border: 'none'}}>
-                  //                   <VideoCameraOutlined style={{fontSize: '32px'}}/>
-                  //       </button>:
-                  //       <div>None</div>
-                  //     )
-                  //   )
-                  // }
-                    ,  
+                                </button>}, 
                   ];
 
   function goToPhoto(file){
@@ -58,7 +41,10 @@ const MobilePromptsPage = (props) => {
   //   console.log(file)
   //   console.log("UPLOAD FILE")
   // };
-  const uploadFile = (type) => {
+  const uploadFile = (d) => {
+    const type = d.type
+    setFolder(d.filename)
+    console.log(d.filename)
     if(type === "image"){
       imageInputRef.current.click();
     }
@@ -70,32 +56,51 @@ const MobilePromptsPage = (props) => {
     }
   };
 
-  const handleImageUpload =() => {
-    console.log("Image")
+  const handleUpload =(e) => {
+    e.preventDefault();
+    console.log(folder)
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    formData.append('location', folder)
+    console.log(formData)
+    axios({
+        method: "POST",
+        url: props.proxy+"/mobile_upload_file",
+        data: formData,
+        headers: {
+            Authorization: 'Bearer ' + props.token
+        }
+    }).then((response) => {
+      const res = response.data
+      console.log(res)
+    }).catch((error)=>{
+        if(error.response){
+            console.log(error.response)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+        }
+    })
   };
-  const handleAudioUpload =() => {
-    console.log("Image")
-  };
-  const handleVideoUpload =() => {
-    console.log("Image")
-  };
-  // useEffect(() => {
-  //   axios({
-  //       method: "GET",
-  //       url: props.proxy + "/all_prompts",
-  //       headers: {
-  //       Authorization: 'Bearer ' + token
-  //       }
-  //   })
-  //   .then((response) => {
-  //       const res = response.data
-  //       setData(res)
-  //   }).catch((error) => {
-  //       console.log(error.response)
-  //       console.log(error.response.status)
-  //       console.log(error.response.headers)
-  //   })
-  // }, [token, props.proxy]);
+
+  useEffect(() => {
+    axios({
+        method: "GET",
+        url: props.proxy + "/all_prompts",
+        headers: {
+        Authorization: 'Bearer ' + props.token
+        }
+    })
+    .then((response) => {
+        const res = response.data
+        console.log(response)
+        setData(res)
+    }).catch((error) => {
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)
+    })
+  }, [props.token, props.proxy]);
 
   function logOut() {
     localStorage.clear()
@@ -166,21 +171,21 @@ const MobilePromptsPage = (props) => {
                       type="file"
                       style={{ display: 'none' }}
                       accept="image/*" // Accept only image files
-                      onChange={handleImageUpload}
+                      onChange={handleUpload}
                     />
             <input
               ref={audioInputRef}
               type="file"
               style={{ display: 'none' }}
               accept="audio/*" // Accept only image files
-              onChange={handleAudioUpload}
+              onChange={handleUpload}
             />
             <input
               ref={videoInputRef}
               type="file"
               style={{ display: 'none' }}
               accept="video/*" // Accept only image files
-              onChange={handleVideoUpload}
+              onChange={handleUpload}
             />
           </div>
         </div>
