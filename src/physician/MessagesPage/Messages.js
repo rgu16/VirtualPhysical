@@ -63,7 +63,7 @@ export const MessagesPage = (props) => {
   })
     .then((response) => {
         const res = response.data
-        alert('Scheduling email sent successfully!');
+        alert('Email sent successfully!');
     }).catch((error) => {
         console.log(error.response)
         console.log(error.response.status)

@@ -28,6 +28,7 @@ const RegisterPage = (props) => {
         })
         .then((response)=>{
           // props.setToken(response.data.access_token)
+          alert('Your account has been registered! A confirmation email will be sent shortly.');
           setNavigate('/')
         }).catch((error)=>{
           if(error.response){

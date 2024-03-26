@@ -25,22 +25,6 @@ const MobilePromptsPage = (props) => {
                                 </button>}, 
                   ];
 
-  function goToPhoto(file){
-    console.log(file);
-    console.log("GO TO PHOTO");
-    navigate('/camera',{state:{folder:file}})
-    // setNavigate('/camera', { state: { key: file } });
-  }
-  function goToVideo(file){
-    console.log(file);
-    console.log("GO TO VIDEO");
-    navigate('/video',{state:{folder:file}})
-    // setNavigate('/camera', { state: { key: file } });
-  }
-  // function uploadFile(file) {
-  //   console.log(file)
-  //   console.log("UPLOAD FILE")
-  // };
   const uploadFile = (d) => {
     const type = d.type
     setFolder(d.filename)
@@ -73,7 +57,7 @@ const MobilePromptsPage = (props) => {
         }
     }).then((response) => {
       const res = response.data
-      console.log(res)
+      alert('File successfully uploaded!');
     }).catch((error)=>{
         if(error.response){
             console.log(error.response)
