@@ -312,7 +312,7 @@ const DemographicMedPage = (props) => {
                               </DemoContainer>
                             </LocalizationProvider>
                           </div>
-                          <div className="flex flex-row gap-[15px] items-center justify-between w-full">
+                         {/*  <div className="flex flex-row gap-[15px] items-center justify-between w-full">
                             <Text
                               className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24"
@@ -321,7 +321,7 @@ const DemographicMedPage = (props) => {
                             </Text>
                             <TextField value = {age} onChange={handleAgeChange} inputRef={inputRefs[6]} required id="outlined-basic" label="required" variant="outlined" />
                             
-                          </div>
+                          </div>*/}
                         </List>
                       </div>
                     {/* </div> */}
@@ -355,7 +355,7 @@ const DemographicMedPage = (props) => {
                 </div>
                 <div className="flex flex-col items-start justify-start md:ml-[0] ml-[35px] w-[41%] md:w-full">
                   <Text style={{
-    paddingBottom: '20px', paddingTop: '80px',  paddingLeft: '15px', 
+    paddingBottom: '20px',  paddingLeft: '15px', 
   }}
                     className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                     size="txtCairoBold24"
@@ -368,7 +368,7 @@ const DemographicMedPage = (props) => {
           multiline
           rows={4}
        
-          inputRef={inputRefs[7]}
+          inputRef={inputRefs[6]}
         />
          
            {/* <div style={{paddingTop: "2rem"}}>The values is {genderValue} {DOB}</div>  */}

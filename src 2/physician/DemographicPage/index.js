@@ -1,0 +1,1 @@
+export { DemographicPage } from "./DemographicPage";

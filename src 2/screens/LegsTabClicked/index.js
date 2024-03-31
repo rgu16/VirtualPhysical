@@ -1,0 +1,1 @@
+export { LegsTabClicked } from "./LegsTabClicked";
