@@ -1,15 +1,17 @@
 import axios from 'axios';
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect, useRef} from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import { Img, Input, Text} from "../components";
 import DataTable from 'react-data-table-component';
 import { DeleteFilled, CloseCircleTwoTone, CheckCircleTwoTone, CameraOutlined, VideoCameraOutlined, FileAddOutlined } from '@ant-design/icons';
 const MobilePromptsPage = (props) => {
   const token = props.token
+  const imageInputRef = useRef(null);
+  const audioInputRef = useRef(null);
+  const videoInputRef = useRef(null);
+  const [folder,setFolder] = useState();
   const navigate = useNavigate();
-  const [data, setData] = useState([{'filename': 'name/date/tab/file','tab':"demographic", 'file':"file", 'type':"image"},
-                                    {'filename': 'name/date/tab/file1','tab':"demographic", 'file':"file1", 'type':"video"},
-                                    {'filename': 'name/date/tab/file2','tab':"demographic", 'file':"file2", 'type':"pdf"}]  );
+  const [data, setData] = useState([]);
   const columns = [ { name: 'Tab',
                       selector: row => row.tab,
                       cell: (d) => <span>{d.tab}</span>,},
@@ -18,62 +20,74 @@ const MobilePromptsPage = (props) => {
                       cell: (d) => <span>{d.file}</span>},                
                     { name: "Upload File",
                     sortable: false,
-                    cell: (d) => <button onClick={uploadFile.bind(this, d.filename)} style= {{border: 'none'}}>
+                    cell: (d) => <button onClick={uploadFile.bind(this, d)} style= {{border: 'none'}}>
                                     <FileAddOutlined style={{fontSize: '32px'}}/>
-                                </button>},
-                    { name: "Action",
-                    sortable: false,
-                    cell: (d) => (
-                      d.type === "image" ? (
-                        <button onClick={goToPhoto.bind(this, d.filename)} style= {{border: 'none'}}>
-                                    <CameraOutlined style={{fontSize: '32px'}}/>
-                        </button>
-                      ) : ( d.type === "video" ?
-                        <button onClick={goToVideo.bind(this, d.filename)} style= {{border: 'none'}}>
-                                    <VideoCameraOutlined style={{fontSize: '32px'}}/>
-                        </button>:
-                        <div>None</div>
-                      )
-                    )
-                  }
-                    ,  
+                                </button>}, 
                   ];
 
-  function goToPhoto(file){
-    console.log(file);
-    console.log("GO TO PHOTO");
-    navigate('/camera',{state:{folder:file}})
-    // setNavigate('/camera', { state: { key: file } });
-  }
-  function goToVideo(file){
-    console.log(file);
-    console.log("GO TO VIDEO");
-    navigate('/video',{state:{folder:file}})
-    // setNavigate('/camera', { state: { key: file } });
-  }
-  function uploadFile(file) {
-    console.log(file)
-    console.log("UPLOAD FILE")
+  const uploadFile = (d) => {
+    const type = d.type
+    setFolder(d.filename)
+    console.log(d.filename)
+    if(type === "image"){
+      imageInputRef.current.click();
+    }
+    if(type === "audio"){
+      audioInputRef.current.click();
+    }
+    if(type === "video"){
+      videoInputRef.current.click();
+    }
   };
-  // useEffect(() => {
-  //   axios({
-  //       method: "GET",
-  //       url: props.proxy + "/all_prompts",
-  //       headers: {
-  //       Authorization: 'Bearer ' + token
-  //       }
-  //   })
-  //   .then((response) => {
-  //       const res = response.data
-  //       setData(res)
-  //   }).catch((error) => {
-  //       console.log(error.response)
-  //       console.log(error.response.status)
-  //       console.log(error.response.headers)
-  //   })
-  // }, [token, props.proxy]);
+
+  const handleUpload =(e) => {
+    e.preventDefault();
+    console.log(folder)
+    const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append('file', file, file.name);
+    formData.append('location', folder)
+    console.log(formData)
+    axios({
+        method: "POST",
+        url: props.proxy+"/mobile_upload_file",
+        data: formData,
+        headers: {
+            Authorization: 'Bearer ' + props.token
+        }
+    }).then((response) => {
+      const res = response.data
+      alert('File successfully uploaded!');
+    }).catch((error)=>{
+        if(error.response){
+            console.log(error.response)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+        }
+    })
+  };
+
+  useEffect(() => {
+    axios({
+        method: "GET",
+        url: props.proxy + "/all_prompts",
+        headers: {
+        Authorization: 'Bearer ' + props.token
+        }
+    })
+    .then((response) => {
+        const res = response.data
+        console.log(response)
+        setData(res)
+    }).catch((error) => {
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)
+    })
+  }, [props.token, props.proxy]);
 
   function logOut() {
+    localStorage.clear()
     axios({
         method: "POST",
         url: props.proxy + "/logout",
@@ -136,6 +150,27 @@ const MobilePromptsPage = (props) => {
                         onClick={() => logOut()}>
                         <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Log out</Text>
             </button>
+            <input
+                      ref={imageInputRef}
+                      type="file"
+                      style={{ display: 'none' }}
+                      accept="image/*" // Accept only image files
+                      onChange={handleUpload}
+                    />
+            <input
+              ref={audioInputRef}
+              type="file"
+              style={{ display: 'none' }}
+              accept="audio/*" // Accept only image files
+              onChange={handleUpload}
+            />
+            <input
+              ref={videoInputRef}
+              type="file"
+              style={{ display: 'none' }}
+              accept="video/*" // Accept only image files
+              onChange={handleUpload}
+            />
           </div>
         </div>
       </div>

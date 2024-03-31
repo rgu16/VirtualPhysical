@@ -1,11 +1,17 @@
 .pulses-tab {
+    /* background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%; */
     background-color: #ffffff;
     display: flex;
     flex-direction: row;
     justify-content: center;
     width: 100%;
+    position: absolute;
+    top: 0px;
   }
-
   
   .pulses-tab .overlap-wrapper {
     background-color: #ffffff;
@@ -64,6 +70,7 @@
     font-weight: 700;
     letter-spacing: 0;
     line-height: normal;
+    left: -5;
   }
   
   .pulses-tab .div {
@@ -309,7 +316,7 @@
     font-family: "Helvetica Neue-Bold", Helvetica;
     font-size: 24px;
     font-weight: 700;
-    left: 0;
+    left: -48px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
@@ -887,8 +894,8 @@
   
   .pulses-tab .error-popup {
     position: absolute;
-    left: 100%; /* Adjust based on your layout */
-    top: 0;
+    left: 110%; /* Adjust based on your layout */
+    top: -10px;
     background-color: white;
     border: 1px solid #ff0000;
     padding: 5px;

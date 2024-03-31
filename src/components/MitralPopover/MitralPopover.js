@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { orange } from '@mui/material/colors';
 import AudioPlayer from "components/AudioPlayer/AudioPlayer.js"
 
-export default function MitralPopover() {
+export default function MitralPopover({diaphragm,bell}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -49,7 +49,7 @@ export default function MitralPopover() {
                 <div>
                     <h1>APEX</h1>
                     <br></br>
-                    <AudioPlayer></AudioPlayer>
+                    <AudioPlayer diaphragm={diaphragm} bell={bell}></AudioPlayer>
                 </div>
             </Typography>
       </Popover>

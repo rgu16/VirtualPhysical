@@ -1,11 +1,25 @@
 import React from "react";
 import "./style.css";
-import { useState } from 'react';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { NavBar } from 'components'
 import CarotidPopover from "components/CarotidPopover/CarotidPopover.jsx"
+
+import { Img, Line, List, Text, TabNav, NavBar } from "components";
+import { Link } from 'react-router-dom';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import Stack from '@mui/material/Stack';
+import { useState, useRef, useEffect } from 'react';
+import {  PhysicianNotes } from "components";
+import axios from 'axios';
+import { styled } from '@mui/material/styles';
+// import Button from '@mui/material/Button';
+// import Stack from '@mui/material/Stack';
+import { jwtDecode } from "jwt-decode";
 
 
 export const PulsesPage = (props) => {
@@ -26,6 +40,12 @@ export const PulsesPage = (props) => {
   const [diastolicPulseValue, setDiastolicPulseValue] = useState('');
   const [diastolicStatus, setDiastolicStatus] = useState('');
 
+  const [heartRateValue, setheartRateValue] = useState('')
+  const [heartRateStatus, setheartRateStatus] = useState('')
+
+  const [JugularValue, setJugularValue] = useState('');
+  const [JugularStatus, setJugularStatus] = useState('');
+
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const handleClick = (event) => {
@@ -42,6 +62,250 @@ export const PulsesPage = (props) => {
   const handleSaveClick = () => {
     setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
   };
+
+
+  const patient = jwtDecode(props.token).patient.split("/");
+  // const firstname = useState(patient[1]);
+  // const lastname = useState(patient[0]);
+  // const fileInputRef = useRef(null);
+  // const [imageLoaded, setImageLoaded] = useState(false);
+  const [note, setNotes] = useState();
+
+  
+    useEffect(() => {
+      axios({
+          method: "GET",
+          url: props.proxy + "/download/pulses",
+          headers: {
+          Authorization: 'Bearer ' + props.token
+          }
+      })
+      .then((response) => {
+          const res = response.data
+          console.log(res)
+
+          const RadialPulseValue = parseInt(res.detail['radial'], 10);
+          setRadialPulseValue(RadialPulseValue)
+          const brachialValue = parseInt(res.detail['brachial'], 10);
+          setBrachialPulseValue(brachialValue);
+          const CarotidPulseValue = parseInt(res.detail['carotid'], 10);
+          setCarotidPulseValue(CarotidPulseValue)
+          const DorsalisPulseValue = parseInt(res.detail['pedis'], 10);
+          setDorsalisPulseValue(DorsalisPulseValue)
+          const SystolicPulseValue = parseInt(res.detail['systolic'], 10);
+          setSystolicPulseValue(SystolicPulseValue)
+          const DiastolicPulseValue = parseInt(res.detail['diastolic'], 10);
+          setDiastolicPulseValue(DiastolicPulseValue)
+
+          const heartRateValue = parseInt(res.detail['heartrate'], 10);
+          setheartRateValue(heartRateValue)
+
+          const JugularValue = res.detail['jvp']
+          setJugularValue(JugularValue)
+
+          let JugularStatus = '';
+          // Check if the value is numeric
+          if (!isNaN(JugularValue)) {
+            if (JugularValue > 9) {
+              JugularStatus = 'Abnormally high jugular venous pressure (JVP) ';
+            // } else if (numericValue >= 60 && numericValue <= 80) {
+            //   status = 'Normal';
+            } else {
+              JugularStatus = '';
+            }
+            setJugularStatus(JugularStatus);
+          }
+
+
+
+            let heartRateStatus = '';
+            // Check if the value is numeric
+            if (!isNaN(heartRateValue)) {
+              if (heartRateValue <= 59) {
+                heartRateStatus = 'Abnormally slow heart rate';
+              // } else if (numericValue >= 60 && numericValue <= 80) {
+              //   status = 'Normal';
+              } else if (heartRateValue >= 60 && heartRateValue <= 100) {
+                heartRateStatus = 'Normal';
+              } else if (heartRateValue >= 101) {
+                heartRateStatus = 'Abnormally fast heart rate';
+              }
+              setheartRateStatus(heartRateStatus);
+            } else {
+              // The input is non-numeric
+              setheartRateStatus('');
+            }
+          // else {
+          //   // The textbox is blank, reset the status or take no action
+          //   setheartRateStatus(''); // Resetting the status for blank input
+          // }
+
+
+          let systolicStatus = '';
+          // Check if the input value is not empty
+          // if (value.trim() !== '') {
+          //   // Convert the value to a number for comparison
+          //   const numericValue = parseInt(value, 10);
+
+          // Ensure the conversion to a number was successful (i.e., the result is not NaN)
+          if (!isNaN(SystolicPulseValue)) {
+            if (SystolicPulseValue <= 89) {
+              systolicStatus = 'Abnormal (low blood pressure)';
+            // } else if (numericValue >= 90 && numericValue <= 120) {
+            //   status = 'Normal';
+            } else if (SystolicPulseValue >= 121 && SystolicPulseValue <= 140) {
+              systolicStatus = 'Slightly abnormal';
+            } else if (SystolicPulseValue > 140) {
+              systolicStatus = 'Abnormal (high blood pressure)';
+            }
+          } else {
+            // Handle non-numeric input gracefully
+            systolicStatus = 'Invalid input';
+          }
+          setSystolicStatus(systolicStatus)
+
+
+          let diastolicStatus = '';
+          // Check if the value is numeric
+          if (!isNaN(DiastolicPulseValue)) {
+            if (DiastolicPulseValue <= 59) {
+              diastolicStatus = 'Abnormal (low blood pressure)';
+            // } else if (numericValue >= 60 && numericValue <= 80) {
+            //   status = 'Normal';
+            } else if (DiastolicPulseValue >= 81 && DiastolicPulseValue <= 89) {
+              diastolicStatus = 'Slightly abnormal';
+            } else if (DiastolicPulseValue >= 90) {
+              diastolicStatus = 'Abnormal (high blood pressure)';
+            }
+            setDiastolicStatus(diastolicStatus);
+          } 
+          else {
+            // The input is non-numeric
+            setDiastolicStatus('Invalid input');
+          }
+        // else {
+        //   // The textbox is blank, reset the status or take no action
+        //   setDiastolicStatus('')
+        // }
+          setDiastolicStatus(diastolicStatus)
+
+
+          // Determine the brachial status based on the value
+          let brachialStatus = '';
+          switch (brachialValue) {
+            case 0:
+              brachialStatus = 'absent';
+              break;
+            case 1:
+              brachialStatus = 'weak';
+              break;
+            case 2:
+              brachialStatus = 'normal';
+              break;
+            case 3:
+              brachialStatus = 'increased';
+              break;
+            case 4:
+              brachialStatus = 'bounding';
+              break;
+            default:
+              brachialStatus = ''; // Adjust as needed for other values
+          }
+
+          // Update the brachial status state
+          setBrachialStatus(brachialStatus);
+
+        
+            // Determine the carotid pulse status
+            let RadialStatus = '';
+            switch (RadialPulseValue) {
+              case 0:
+                RadialStatus = 'absent';
+                break;
+              case 1:
+                RadialStatus = 'weak';
+                break;
+              case 2:
+                RadialStatus = 'normal';
+                break;
+              case 3:
+                RadialStatus = 'increased';
+                break;
+              case 4:
+                RadialStatus = 'bounding';
+                break;
+              default:
+                RadialStatus = ''; // For values not in the 0-4 range or non-numeric values
+            }
+        
+            setRadialStatus(RadialStatus);
+
+        
+        
+            // Determine the carotid pulse status
+            let CarotidStatus = '';
+            switch (CarotidPulseValue) {
+              case 0:
+                CarotidStatus = 'absent';
+                break;
+              case 1:
+                CarotidStatus = 'weak';
+                break;
+              case 2:
+                CarotidStatus = 'normal';
+                break;
+              case 3:
+                CarotidStatus = 'increased';
+                break;
+              case 4:
+                CarotidStatus = 'bounding';
+                break;
+              default:
+                CarotidStatus = ''; // For values not in the 0-4 range or non-numeric values
+            }
+        
+            setCarotidStatus(CarotidStatus);
+          
+
+            // Determine the carotid pulse status
+            let DorsalisStatus = '';
+            switch (DorsalisPulseValue) {
+              case 0:
+                DorsalisStatus = 'absent';
+                break;
+              case 1:
+                DorsalisStatus = 'weak';
+                break;
+              case 2:
+                DorsalisStatus = 'normal';
+                break;
+              case 3:
+                DorsalisStatus = 'increased';
+                break;
+              case 4:
+                DorsalisStatus = 'bounding';
+                break;
+              default:
+                DorsalisStatus = ''; // For values not in the 0-4 range or non-numeric values
+            }
+        
+            setDorsalisStatus(DorsalisStatus);
+          
+
+          if(res.hasOwnProperty("note")){
+            setNotes(res.note)
+            console.log(res.note)
+          }
+          // if(res.hasOwnProperty("profile_pic")){
+          //   setProfilePic(res.profile_pic)
+          // }
+      }).catch((error) => {
+          if (error.response){
+          console.log(error.response)
+          console.log(error.response.status)
+          console.log(error.response.headers)}
+      })
+    }, [props]);
 
 
 
@@ -189,6 +453,7 @@ export const PulsesPage = (props) => {
     setDorsalisStatus(status);
   };
 
+
   const handleSystolicChange = (e) => {
     const value = e.target.value;
     setSystolicPulseValue(value);
@@ -196,33 +461,11 @@ export const PulsesPage = (props) => {
     // Convert the value to a number for comparison
     const numericValue = parseInt(value, 10);
 
-    // Determine the carotid pulse status
-    // let status = '';
-    // switch (numericValue) {
-    //   case 0:
-    //     status = 'absent';
-    //     break;
-    //   case 1:
-    //     status = 'weak';
-    //     break;
-    //   case 2:
-    //     status = 'normal';
-    //     break;
-    //   case 3:
-    //     status = 'increased';
-    //     break;
-    //   case 4:
-    //     status = 'bounding';
-    //     break;
-    //   // default:
-    //   //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
-    // }
     let status = '';
-
-  // Check if the input value is not empty
-  if (value.trim() !== '') {
-    // Convert the value to a number for comparison
-    const numericValue = parseInt(value, 10);
+    // Check if the input value is not empty
+    if (value.trim() !== '') {
+      // Convert the value to a number for comparison
+      const numericValue = parseInt(value, 10);
 
     // Ensure the conversion to a number was successful (i.e., the result is not NaN)
     if (!isNaN(numericValue)) {
@@ -251,27 +494,6 @@ export const PulsesPage = (props) => {
     // Convert the value to a number for comparison
     const numericValue = parseInt(value, 10);
 
-    // Determine the carotid pulse status
-    // let status = '';
-    // switch (numericValue) {
-    //   case 0:
-    //     status = 'absent';
-    //     break;
-    //   case 1:
-    //     status = 'weak';
-    //     break;
-    //   case 2:
-    //     status = 'normal';
-    //     break;
-    //   case 3:
-    //     status = 'increased';
-    //     break;
-    //   case 4:
-    //     status = 'bounding';
-    //     break;
-    //   // default:
-    //   //   status = 'abnormal'; // For values not in the 0-4 range or non-numeric values
-    // }
     if (value.trim() !== '') {
       let status = '';
       // Check if the value is numeric
@@ -296,6 +518,65 @@ export const PulsesPage = (props) => {
     }
   };
 
+  const handleHeartRateChange = (e) => {
+    const value = e.target.value;
+    setheartRateValue(value);
+
+    // Convert the value to a number for comparison
+    const numericValue = parseInt(value, 10);
+
+    if (value.trim() !== '') {
+      let status = '';
+      // Check if the value is numeric
+      if (!isNaN(numericValue)) {
+        if (numericValue <= 59) {
+          status = 'Abnormally slow heart rate';
+        // } else if (numericValue >= 60 && numericValue <= 80) {
+        //   status = 'Normal';
+        } else if (numericValue >= 60 && numericValue <= 100) {
+          status = 'Normal';
+        } else if (numericValue >= 101) {
+          status = 'Abnormally fast heart rate';
+        }
+        setheartRateStatus(status);
+      }
+    } else {
+      // The textbox is blank, reset the status or take no action
+      setheartRateStatus(''); // Resetting the status for blank input
+    }
+  }
+
+  const handleJugularChange = (e) => {
+    const value = e.target.value
+    setJugularValue(value)
+
+    const numericValue = parseInt(value, 10);
+
+    // JugularStatus, setJugularStatus
+    if (value.trim() !== '') {
+      let status = '';
+      // Check if the value is numeric
+      if (!isNaN(numericValue)) {
+        if (numericValue > 9) {
+          status = 'Abnormally high jugular venous pressure (JVP) ';
+        // } else if (numericValue >= 60 && numericValue <= 80) {
+        //   status = 'Normal';
+        } else {
+          status = '';
+        }
+        setJugularStatus(status);
+      }
+    //   else {
+    //     // The input is non-numeric
+    //     setJugularStatus('Invalid input');
+    //   }
+    // } else {
+    //   // The textbox is blank, reset the status or take no action
+    //   setheartRateStatus(''); // Resetting the status for blank input
+    // 
+    }
+  }
+
 
 
   // Handler for radial pulse input changes
@@ -314,6 +595,7 @@ export const PulsesPage = (props) => {
 
 
   return (
+    <div className = "bg-white flex flex-row justify-center w-full relative top-[550px]">
     <div className="pulses-tab">
       <div className="overlap-wrapper">
         <div className="overlap">
@@ -391,7 +673,17 @@ export const PulsesPage = (props) => {
                   <span className="text-wrapper">Heart Rate:</span>
                 </p>
                 <div className="overlap-3">
-                  <input type="text" className="textbox-43" placeholder="80" />
+                  {/* <input type="text" className="textbox-43" placeholder="80" /> */}
+                  <input
+                    type="text"
+                    className={`textbox-43 ${heartRateStatus && heartRateStatus !== 'normal' ? 'input-error' : ''}`}
+                    value={heartRateValue}
+                    onChange={handleHeartRateChange}
+                    placeholder="87"
+                  />
+                  {heartRateStatus && heartRateStatus !== 'normal' && (
+                    <div className="error-popup">Abnormal heart rate value: {heartRateStatus}</div>
+                  )}
                 </div>
                 <p className="bpm-2">
                   <span className="span">bpm</span>
@@ -551,9 +843,31 @@ export const PulsesPage = (props) => {
             </div>
             
             <div className="JVP">
-              <p className="abnormal">
+              {/* <p className="abnormal">
                 <span className="span">normal</span>
-              </p>
+              </p> */}
+              <img
+                    className="abnormal"
+                      alt="Rectangle"
+                      src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
+                    />
+              {/* <input
+                    type="text"
+                    className="abnormal"
+                    // value={radialPulseValue}
+                    // onChange={handleRadialChange}
+                    placeholder="Normal"
+              /> */}
+              <input
+                    type="text"
+                    className={`abnormal ${JugularStatus && JugularStatus !== 'normal' ? 'input-error' : ''}`}
+                    value={JugularValue}
+                    onChange={handleJugularChange}
+                    placeholder="Normal"
+                  />
+              {JugularStatus && JugularStatus !== 'normal' && (
+                    <div className="error-popup">Abnormal jugular venous pressure status: {JugularStatus}</div>
+              )}
 
 
               <p className="jugular-venous">
@@ -652,11 +966,13 @@ export const PulsesPage = (props) => {
             </div>
           </div>
           
-          <NavBar proxy={props.proxy} token={props.token} /> {/* Display NavBar at the top */}
+          <NavBar proxy={props.proxy} token={props.token} /> 
+          {/* Display NavBar at the top */}
 
 
         </div>
       </div>
+    </div>
     </div>
   );
 };

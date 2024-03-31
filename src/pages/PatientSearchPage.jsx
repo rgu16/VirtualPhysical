@@ -17,12 +17,16 @@ const PatientSearchPage = (props) => {
     const [data, setData] = useState([]  );
     const columns = [ { name: 'Email',
                         selector: row => row.email,
+                        sortable: true,
                         cell: (d) => <span>{d.email}</span>,},
+                        
                       { name: 'Name',
                         selector: row => row.name,
+                        sortable: true,
                         cell: (d) => <span>{d.name}</span>},
                       { name: 'Date',
                         selector: row => row.date,
+                        sortable: true,
                         cell: (d) => <span>{d.date}</span>},     
                       { name: "Action",
                       sortable: false,

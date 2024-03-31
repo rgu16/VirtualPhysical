@@ -7,11 +7,12 @@ const PhysicianNotes = (props) => {
 
   useEffect(() => {
     setNotes(props.notes);
-    console.log('props.notes changed:', props.notes);
+    // console.log('props.notes changed:', props.notes);
   }, [props.notes]);
 
   const handleSave = (e) => {
     console.log(notes);
+    console.log(props.tab);
     e.preventDefault();
     const filename = props.tab === '/demographic'? "/demographic_notes" : props.tab + "/note";
     axios({
@@ -23,7 +24,7 @@ const PhysicianNotes = (props) => {
        }
    }).then((response) => {
      const res =response.data;
-     console.log(notes)
+    //  console.log(notes)
  })
    .catch((error)=>{
      if(error.response){

@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 const TabNav = (props) => {
     const token = localStorage.getItem('token');
+    const type = jwtDecode(token).type
   return (
     <>
        <div className={ jwtDecode(token).type === "physician"?
-        "bg-gray-200_01 flex flex-row flex-wrap sm:gap-5 items-end justify-start max-w-[1220px] rounded-tl-[12px] rounded-tr-[12px] w-full"
+        "bg-gray-200_01 flex flex-row flex-wrap sm:gap-5 items-end justify-start max-w-[1010px] rounded-tl-[12px] rounded-tr-[12px] w-full"
        :"bg-gray-200_01 flex flex-row flex-wrap sm:gap-5 items-end justify-start max-w-[1100px] rounded-tl-[12px] rounded-tr-[12px] w-full"}
        >
               <Link to="/demographics">
@@ -19,11 +20,12 @@ const TabNav = (props) => {
                     <Button className="cursor-pointer font-medium leading-[normal] min-w-[131px] text-center text-lg" shape="round"
                     color = {props.tab === "general"?"white_A700":""}> 
                     General </Button> </Link>
-  
+                {type == "medical-tech" &&
                 <Link to="/eyes">
                     <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round"
                     color = {props.tab === "eyes"?"white_A700":""}> 
                     Eyes</Button> </Link>
+                }
   
                 <Link to="/lungs">
                     <Button className="cursor-pointer font-medium leading-[normal] min-w-[115px] text-center text-lg" shape="round"
@@ -44,18 +46,19 @@ const TabNav = (props) => {
                     <Button className="cursor-pointer font-medium leading-[normal] min-w-[112px] text-center text-lg" shape="round"
                     color = {props.tab === "heart"?"white_A700":""}> 
                      Heart </Button> </Link>
-                
+                {type == "medical-tech" &&
                 <Link to="/hands">
                     <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round"
                     color = {props.tab === "hands"?"white_A700":""}> 
                     Hands</Button> </Link>
+                }
   
                 <Link to="/legs">
                     <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round"
                     color = {props.tab === "legs"?"white_A700":""}> 
                     Legs</Button> </Link>
 
-                {jwtDecode(token).type === "physician" &&
+                {type === "physician" &&
                 <Link to="/summary">
                     <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round"
                     color = {props.tab === "summary"?"white_A700":""}> 

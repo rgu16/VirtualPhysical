@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./style.css";
 import axios from 'axios';
-import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button';
 import { jwtDecode } from 'jwt-decode';
+import {Img, Button} from 'components';
 
 const SendEmailComponent = (props) => {
   const [sendVariant, setSendVariant] = useState('text');
@@ -58,12 +59,29 @@ Best regards,
 
   return (
     <div>
-      <div>
-        {/* Pass props.token to SendEmailComponent */}
+      <Button
+        className="cursor-pointer flex items-center justify-between min-w-[320px] sm:min-w-full rounded-[20px]"
+        leftIcon={
+          <Img
+            className="h-[30px] mt-1 mb-[7px] ml-[10px]"
+            src="images/img_calendar.svg"
+            alt="calendar"
+          />
+        }
+        // variant={sendVariant}
+        onClick={() => handleSendClick()}
+        color="gray_200_01"
+
+      >
+        <div className="!text-black-900 font-semibold leading-[normal] md:text-xl sm:text-lg text-[16px] text-center mr-[10px]">
+          Schedule virtual call with patient
+        </div>
+      </Button>
+      {/* <div>
         <Button variant={sendVariant} onClick={() => handleSendClick()}>
           Send your consult scheduling link to the patient
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

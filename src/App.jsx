@@ -7,6 +7,7 @@ import { jwtDecode } from 'jwt-decode';
 import {AbdomenPage, AppointmentsPage, DemographicPage, EyesPage, GeneralPage, HandsPage, HeartPage, LegsPage, LungsPage, MessagesPage, PulsesPage, SummaryPage} from "./physician"
 import {LegsMedPage, HandsMedPage, AbdomenMedPage, HeartMedPage, PulsesMedPage, GeneralMedPage, DemographicMedPage, EyesMedPage, LungsMedPage, PatientChartPage} from "./technician"
 import NotFound from "pages/NotFound";
+// import {default as Test} from "physician/SummaryPage/Test"
 
 
 export default function App() {
@@ -58,7 +59,7 @@ export default function App() {
                 {isMobile?
                 <Routes>
                     <Route exact path="/" element={!token?<MobileLoginPage proxy={proxy} setToken={setToken}/>:
-                                                          <MobilePromptsPage proxy={proxy} setToken={setToken}/> }/>
+                                                          <MobilePromptsPage proxy={proxy} token={token} setToken={setToken} removeToken={removeToken}/> }/>
                     <Route path="/camera"
                         element={
                         <ProtectedRoute isAllowed={!!token}>
@@ -74,8 +75,8 @@ export default function App() {
                     <Route path="*" element={<NotFound />} />
                 </Routes> :
                 <Routes>
-                <Route exact path="/m" element={<MessagesPage  proxy={proxy} token={token}/>}/>
-                <Route exact path="/p" element={<MobilePromptsPage proxy={proxy} setToken={setToken}/>}/>
+                {/* <Route exact path="/m" element={<Test/>}/> */}
+                {/* <Route exact path="/p" element={<MobilePromptsPage proxy={proxy} setToken={setToken}/>}/> */}
                     <Route exact path="/" element={homepage}/>
                     <Route path="/register" element={ <RegisterPage proxy={proxy} setToken={setToken} /> } />
                     <Route path="/forgot_password" element={ <ForgotPasswordPage  proxy={proxy} /> } />
