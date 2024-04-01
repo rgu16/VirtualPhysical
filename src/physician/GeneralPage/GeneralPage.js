@@ -9,8 +9,8 @@ import { InputSharp } from '@mui/icons-material';
 export const GeneralPage = (props) => {
 
   // General tab inputs
-  const [generalpain, setGeneralPain] = useState();
-  const [painsummary, setPainSummary] = useState();
+  const [generalpain, setGeneralPain] = useState(); // checked values for prior medical history
+  const [painsummary, setPainSummary] = useState(); // text input for any pain before starting physical exam
   // Eyes tab inputs
   const [eyesvalue, setEyesValue] = useState();
   // Hands tab inputs
@@ -23,6 +23,7 @@ export const GeneralPage = (props) => {
 
 
   useEffect(() => {
+    
     axios.all([
       axios.get(props.proxy + "download/general", { headers: { Authorization: 'Bearer ' + props.token } }),
       axios.get(props.proxy + "download/eyes", { headers: { Authorization: 'Bearer ' + props.token } }),
@@ -30,32 +31,56 @@ export const GeneralPage = (props) => {
 
     ]).then(axios.spread((generalResponse, eyesResponse, handsResponse) => {
 
-      // General tab inputs
-      setGeneralPain(generalResponse.detail['generalpain'])
-      setPainSummary(generalResponse.detail['painsummary'])
-      // Eyes tab inputs
-      setEyesValue(eyesResponse.detail['eyes'])
-      // Hands tab inputs
-      setCyanosisValue(handsResponse.detail['cyanosis'])
-      setPallorValue(handsResponse.detail['pallor'])
-      setCapillaryRefillValue(handsResponse.detail['capillaryrefill'])
-      setPulseOx(handsResponse.detail['pulseox'])
+      console.log("general response", generalResponse.data.detail)
+      console.log("eyes response", eyesResponse.data.detail)
+      console.log("hands response", handsResponse.data.detail)
 
+      // Check if the generalResponse has the detail property
+      if (generalResponse.data.detail) {
+        // General tab inputs
+        setGeneralPain(generalResponse.data.detail['generalpain'])
+        setPainSummary(generalResponse.data.detail['painsummary'])
+        console.log(generalResponse.data.detail)
+      } else {
+        console.log("General folder does not exist");
+      }
+
+      // Check if the eyesResponse has the detail property
+      if (eyesResponse.data.detail) {
+        // Eyes tab inputs
+        setEyesValue(eyesResponse.data.detail['eyes'])
+        console.log(eyesResponse.data.detail)
+      } else {
+        console.log("Eyes folder does not exist");
+      }
+
+      // Check if the handsResponse has the detail property
+      if (handsResponse.data.detail) {
+        // Hands tab inputs
+        setCyanosisValue(handsResponse.data.detail['cyanosis'])
+        setPallorValue(handsResponse.data.detail['pallor'])
+        setCapillaryRefillValue(handsResponse.data.detail['capillaryrefill'])
+        setPulseOx(handsResponse.data.detail['pulseox'])
+        console.log(handsResponse.data.detail)
+      } else {
+        console.log("Hands folder does not exist");
+      }
 
       // Consolidated notes section
-        const generalNotes = generalResponse.note || "";
-        const eyesNotes = eyesResponse.note || "";
-        const handsNotes = handsResponse.note || "";
+        const generalNotes = generalResponse.data.note || "";
+        const eyesNotes = eyesResponse.data.note || "";
+        const handsNotes = handsResponse.data.note || "";
 
         // Concatenate notes from all folders
-        const allNotes = `General Notes:\n${generalNotes}\n\nEyes Notes:\n${eyesNotes}\n\nHands Notes:\n${handsNotes}`;
+        const allNotes = `${eyesNotes}${handsNotes}${generalNotes}`;
         setNotes(allNotes);
 
     })).catch((error) => {
-      console.error("Error fetching notes:", error);
+      console.error("Error fetching data:", error);
     });
 
-  }, [props]);
+  }, [props]); // Dependency array to trigger useEffect when props change
+
 
   return (
     <div className="general-tab">
@@ -68,55 +93,60 @@ export const GeneralPage = (props) => {
             </div>
 
 
-            <div className="capillary-refill">
-            <Text>{capillaryrefillvalue}</Text>
 
+            <div className="cyanosis-pallor-jaundice-generalpain-painsummary">
+
+            <div className="capillary-refill">
+              <div className='cap-refill-res'>
+                <Text>{capillaryrefillvalue} sec</Text>
+              </div>
               <p className="p">
                 <span className="span">Capillary Refill Time:</span>
               </p>
-
-              <p className="sec">
-                <span className="span">sec</span>
-              </p>
             </div>
-
-
-
-
-            <div className="cyanosis-pallor">
-
-
-              <p className="cyanosis-title">
-                <span className="span">Cyanosis (hands):</span>
-                <Text>{cyanosisvalue}</Text>
-              </p>
               
 
               <p className="pallor-title">
                 <span className="span">Pallor (hands):</span>
-                <Text>{pallorvalue}</Text>
+                <div className='pallor-res'>
+                <Text>+{pallorvalue}</Text>
+                </div>
               </p>
 
               <div className="pulse-ox-title">
                 <span className="span">Pulse Ox Reading:</span>
-                <Text>{pulseox}</Text>
+                <div className='pulse-ox-res'>
+                <Text>{pulseox}%</Text>
+                </div>
               </div>
+
+              <p className="cyanosis-title">
+                <span className="span">Cyanosis (hands):</span>
+                <div className='cyanosis-res'>
+                <Text>+{cyanosisvalue}</Text>
+                </div>
+              </p>
 
               <div className="jaundice-title">
                 <span className="span">Jaundice Severity (eyes):</span>
-                <Text>{eyesvalue}</Text>
+                <div className='jaundice-res'>
+                <Text>+{eyesvalue}</Text>
+                </div>
               </div>
 
               <div className="general-pain-title">
                 <span className="span">General Pain:</span>
+                <div className='general-pain-res'>
                 <Text>{generalpain}</Text>
+                </div>
               </div>
 
               <div className="pain-summary-title">
                 <span className="span">Pain Summary:</span>
+                <div className='pain-summary-res'>
                 <Text>{painsummary}</Text>
+                </div>
               </div>
-
 
             </div>
 
