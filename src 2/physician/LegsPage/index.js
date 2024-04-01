@@ -1,1 +1,0 @@
-export { LegsPage } from "./LegsPage";

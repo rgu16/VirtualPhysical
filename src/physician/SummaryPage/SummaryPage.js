@@ -29,7 +29,7 @@ const SummaryPage = (props) => {
   useEffect(() => {
     axios({
         method: "GET",
-        url: props.proxy + "/download/summary",
+        url: props.proxy + "download/summary",
         headers: {
         Authorization: 'Bearer ' + props.token
         }
@@ -78,6 +78,8 @@ return (
        <div></div>
         <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
           <TabNav tab="summary"></TabNav>
+
+          
         <div className="bg-white-A700 flex flex-col font-cairo gap-[22px] items-start justify-start max-w-[1700px] mx-auto p-[41px] md:px-5 w-full">
           <div className="flex md:flex-col flex-row gap-10 items-start justify-start ml-6 md:ml-[0] w-auto md:w-full no-print">
             <Button
@@ -113,6 +115,7 @@ return (
               </div>
             </Button>
           </div>
+
           <div className="bg-white-A700 flex flex-col items-start justify-start mb-[17px] ml-6 mr-[50px] md:ml-[0] w-[97%] md:w-full">
             <List
               className="flex flex-col gap-2.5 items-center pt-[20px] w-full"

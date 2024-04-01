@@ -14,7 +14,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Stack from '@mui/material/Stack';
 import { useState, useRef, useEffect } from 'react';
-import {  PhysicianNotes } from "components";
+import { PhysicianNotes } from "components";
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
 // import Button from '@mui/material/Button';
@@ -24,10 +24,13 @@ import { jwtDecode } from "jwt-decode";
 
 
 export const LegsPage = (props) => {
+  const patient = jwtDecode(props.token).patient.split("/");
   const [L_pittingValue, setL_pittingValue] = useState('');
   const [L_pittingStatus, setL_pittingStatus] = useState('');
   const [R_pittingValue, setR_pittingValue] = useState('');
   const [R_pittingStatus, setR_pittingStatus] = useState('');
+
+  
   const [note, setNotes] = useState();
   const [saveVariant, setSaveVariant] = useState('outlined');
 
@@ -39,7 +42,7 @@ export const LegsPage = (props) => {
   useEffect(() => {
     axios({
         method: "GET",
-        url: props.proxy + "/download/legs",
+        url: props.proxy + "/download/legs/detail",
         headers: {
         Authorization: 'Bearer ' + props.token
         }
@@ -160,24 +163,7 @@ export const LegsPage = (props) => {
           <div className="overlap-16">
 
             <div className="notes-5">
-              <div className="overlap-17">
-                <p className="specialty-physician">
-                <textarea className="specialty-physician-textarea" placeholder="specialty physician notes on legs go here"></textarea>
-                </p>
-              </div>
-              <p className="notes-6">
-                <span className="text-wrapper-39">Notes:</span>
-              </p>
-
-              <button className="save-button">
-                <div className="overlap-group-2">
-                  <div className="background" />
-                    <Button variant={saveVariant} onClick={handleSaveClick}>
-                      {saveVariant === 'outlined' ? 'Save' : 'Saved'}
-                    </Button>
-                </div>
-              </button>
-
+                <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="legs"></PhysicianNotes>
             </div>
 
             <p className="pitting-edema-3">
@@ -209,6 +195,7 @@ export const LegsPage = (props) => {
                   )}
 
             </div>
+
             <div className="overlap-19">
               <img className="textbox-42" alt="Rectangle" src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png" />
               <input
