@@ -1,188 +1,130 @@
-import React, { useState } from "react";
-import Button from '@mui/material/Button';
+import { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
 import "./style.css";
-import { NavBar } from 'components'
+import {  Img, Line, List, Text, NavBar, TabNav, PhysicianNotes } from "components";
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
+import { InputSharp } from '@mui/icons-material';
 
 export const GeneralPage = (props) => {
 
-  const [saveVariant, setSaveVariant] = useState('outlined');
+  // General tab inputs
+  const [generalpain, setGeneralPain] = useState();
+  const [painsummary, setPainSummary] = useState();
+  // Eyes tab inputs
+  const [eyesvalue, setEyesValue] = useState();
+  // Hands tab inputs
+  const [cyanosisvalue, setCyanosisValue] = useState();
+  const [pallorvalue, setPallorValue] = useState();
+  const [capillaryrefillvalue, setCapillaryRefillValue] = useState();
+  const [pulseox, setPulseOx] = useState();
+  // Consolidated notes
+  const [note, setNotes] = useState();
 
-  const handleSaveClick = () => {
-    setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
-  };
+
+  useEffect(() => {
+    axios.all([
+      axios.get(props.proxy + "download/general", { headers: { Authorization: 'Bearer ' + props.token } }),
+      axios.get(props.proxy + "download/eyes", { headers: { Authorization: 'Bearer ' + props.token } }),
+      axios.get(props.proxy + "download/hands", { headers: { Authorization: 'Bearer ' + props.token } })
+
+    ]).then(axios.spread((generalResponse, eyesResponse, handsResponse) => {
+
+      // General tab inputs
+      setGeneralPain(generalResponse.detail['generalpain'])
+      setPainSummary(generalResponse.detail['painsummary'])
+      // Eyes tab inputs
+      setEyesValue(eyesResponse.detail['eyes'])
+      // Hands tab inputs
+      setCyanosisValue(handsResponse.detail['cyanosis'])
+      setPallorValue(handsResponse.detail['pallor'])
+      setCapillaryRefillValue(handsResponse.detail['capillaryrefill'])
+      setPulseOx(handsResponse.detail['pulseox'])
+
+
+      // Consolidated notes section
+        const generalNotes = generalResponse.note || "";
+        const eyesNotes = eyesResponse.note || "";
+        const handsNotes = handsResponse.note || "";
+
+        // Concatenate notes from all folders
+        const allNotes = `General Notes:\n${generalNotes}\n\nEyes Notes:\n${eyesNotes}\n\nHands Notes:\n${handsNotes}`;
+        setNotes(allNotes);
+
+    })).catch((error) => {
+      console.error("Error fetching notes:", error);
+    });
+
+  }, [props]);
 
   return (
     <div className="general-tab">
       <div className="overlap-wrapper">
         <div className="overlap">
           <div className="overlap-group">
+
             <div className="notes">
-              <div className="specialty-physician-wrapper">
-                <p className="specialty-physician">
-                  {/* <span className="text-wrapper">
-                    [specialty physician notes on general inspection measurements go here]
-                  </span> */}
-                  <textarea className="specialty-physician-textarea" placeholder="specialty physician notes on general inspection measurements go here"></textarea>
-                </p>
-              </div>
-
-              <p className="span-wrapper">
-                <span className="span">Notes:</span>
-              </p>
-
-              <button className="save-button">
-                <div className="overlap-group-2">
-                  <div className="background" />
-                  <Button variant={saveVariant} onClick={handleSaveClick}>
-                    {saveVariant === 'outlined' ? 'Save' : 'Saved'}
-                  </Button>
-                </div>
-              </button>
-
+              <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="general" />
             </div>
 
 
             <div className="capillary-refill">
-              <div className="overlap-2">
-                <img
-                  className="rectangle"
-                  alt="Rectangle"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
-                />
-                {/* <p className="element"> */}
-                  <input
-                    type="text"
-                    className="rectangle"
-                    placeholder="1" //CHANGE THIS LATER
-                    // style={{ position: 'left', width: '80%', height: '80%', border: 'none', textAlign: 'center' }}
-                  />
-                {/* </p> */}
-              </div>
-              <p className="sec">
-                <span className="span">sec</span>
-              </p>
+            <Text>{capillaryrefillvalue}</Text>
+
               <p className="p">
                 <span className="span">Capillary Refill Time:</span>
               </p>
-            </div>
 
-
-            <div className="yellowing">
-              <div className="overlap-3">
-                <div className="gradient-line">
-                  <div className="rectangle-2" />
-                  <img
-                    className="union"
-                    alt="Union"
-                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/union-1@2x.png"
-                  />
-                </div>
-                <div className="text-scale">
-                  <p className="bad">
-                    <span className="text-wrapper-4">Bad</span>
-                  </p>
-                  <p className="good">
-                    <span className="text-wrapper-4">Good</span>
-                  </p>
-                </div>
-              </div>
-              <p className="pallor-severity">
-                <span className="span">Jaundice severity:</span>
+              <p className="sec">
+                <span className="span">sec</span>
               </p>
-              <div className="group">
-                <img
-                  className="tick-circle"
-                  alt="Tick circle"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/tick-circle-5@2x.png"
-                />
-                <img
-                  className="close-circle"
-                  alt="Close circle"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/close-circle-5@2x.png"
-                />
-                <p className="span-wrapper-2">
-                  <span className="span">Jaundice (eyes):</span>
-                </p>
-              </div>
             </div>
-            <div className="pallor">
-              <div className="overlap-4">
-                <div className="gradient-line">
-                  <div className="rectangle-2" />
-                  <img
-                    className="img"
-                    alt="Union"
-                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/union-2@2x.png"
-                  />
-                </div>
-                <div className="text-scale">
-                  <p className="bad">
-                    <span className="text-wrapper-4">Bad</span>
-                  </p>
-                  <p className="good">
-                    <span className="text-wrapper-4">Good</span>
-                  </p>
-                </div>
-              </div>
+
+
+
+
+            <div className="cyanosis-pallor">
+
+
+              <p className="cyanosis-title">
+                <span className="span">Cyanosis (hands):</span>
+                <Text>{cyanosisvalue}</Text>
+              </p>
               
-              <p className="pallor-severity-2">
-                <span className="span">Pallor severity:</span>
+
+              <p className="pallor-title">
+                <span className="span">Pallor (hands):</span>
+                <Text>{pallorvalue}</Text>
               </p>
-              <div className="group-2">
-                <img
-                  className="tick-circle-2"
-                  alt="Tick circle"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/tick-circle-9@2x.png"
-                />
-                <img
-                  className="close-circle-2"
-                  alt="Close circle"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/close-circle-8@2x.png"
-                />
-                <p className="span-wrapper-2">
-                  <span className="span">Pallor:</span>
-                </p>
+
+              <div className="pulse-ox-title">
+                <span className="span">Pulse Ox Reading:</span>
+                <Text>{pulseox}</Text>
               </div>
+
+              <div className="jaundice-title">
+                <span className="span">Jaundice Severity (eyes):</span>
+                <Text>{eyesvalue}</Text>
+              </div>
+
+              <div className="general-pain-title">
+                <span className="span">General Pain:</span>
+                <Text>{generalpain}</Text>
+              </div>
+
+              <div className="pain-summary-title">
+                <span className="span">Pain Summary:</span>
+                <Text>{painsummary}</Text>
+              </div>
+
+
             </div>
-            <div className="cyanosis">
-              <div className="overlap-5">
-                <div className="gradient-line">
-                  <div className="rectangle-2" />
-                  <img
-                    className="union-2"
-                    alt="Union"
-                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/union-3@2x.png"
-                  />
-                </div>
-                <div className="text-scale">
-                  <p className="bad">
-                    <span className="text-wrapper-4">Bad</span>
-                  </p>
-                  <p className="good">
-                    <span className="text-wrapper-4">Good</span>
-                  </p>
-                </div>
-              </div>
-              <p className="pallor-severity-3">
-                <span className="span">Cyanosis severity:</span>
-              </p>
-              <div className="group-3">
-                <img
-                  className="tick-circle-3"
-                  alt="Tick circle"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/tick-circle-5@2x.png"
-                />
-                <img
-                  className="close-circle-3"
-                  alt="Close circle"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/close-circle-9@2x.png"
-                />
-                <p className="span-wrapper-2">
-                  <span className="span">Cyanosis:</span>
-                </p>
-              </div>
-            </div>
+
+
           </div>
+
+
+
           <div className="tabs">
             <div className="frame">
               {/* <p className="span-wrapper-3">

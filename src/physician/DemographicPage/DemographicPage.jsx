@@ -26,12 +26,14 @@ export const DemographicPage = (props) => {
   const patient = jwtDecode(props.token).patient.split("/");
   const firstname = useState(patient[1]);
   const lastname = useState(patient[0]);
+
   const [genderValue, setGenderValue] = useState();
   const [height, setHeightValue] = useState();
   const [weight, setWeightValue] = useState();
   const [DOB, setDOBValue] = useState();
   const [age, setAgeValue] = useState();
   const [history, setHistoryValue] = useState();
+
   const [profilePic, setProfilePic] = useState()
   // const fileInputRef = useRef(null);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -54,15 +56,19 @@ export const DemographicPage = (props) => {
       .then((response) => {
           const res = response.data
           console.log(res)
+
           setGenderValue(res.detail['gender'])
           setHeightValue(res.detail['height'])
           setWeightValue(res.detail['weight'])
           const temp = res.detail['DOB'].split("T")[0]
+
           console.log(temp)
           // setDOBValue(res.detail['DOB'])
           setDOBValue(temp)
           // setDOBValue(dayjs(res.detail['DOB']).format("MM/DD/YYYY"))
+
           setHistoryValue(res.detail['history'])
+          
           if(res.hasOwnProperty("note")){
             setNotes(res.note)
             console.log(res.note)
@@ -172,7 +178,7 @@ export const DemographicPage = (props) => {
                                 endAdornment: <InputAdornment position="end">ft</InputAdornment>,
                               }}
                               value = {height} 
-                              >{weight} kg</Text>                
+                              >{weight} lbs</Text>                
                           </div>
                            <div className="flex flex-row gap-[15px] items-center justify-start w-full">
                             <Text
