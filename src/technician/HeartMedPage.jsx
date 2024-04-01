@@ -56,7 +56,7 @@ function Checkbox({ name, value = false, updateValue = () => {}, children }) {
 
 
 // List of checkbox options
-const listOptions = ["Tricuspid/mitral thrill", "Pulmonary/tricuspid thrill", "Aortic pulmonary thrill"];
+const listOptions = ["Tricuspid/mitral thrill", "Pulmonary/tricuspid thrill", "Aortic/pulmonary thrill"];
 
 const parasternalHeave = [
   {

@@ -75,7 +75,7 @@ export const PulsesPage = (props) => {
     useEffect(() => {
       axios({
           method: "GET",
-          url: props.proxy + "/download/pulses",
+          url: props.proxy + "download/pulses",
           headers: {
           Authorization: 'Bearer ' + props.token
           }
@@ -876,26 +876,7 @@ export const PulsesPage = (props) => {
             </div>
 
             <div className="notes">
-              <div className="specialty-physician-wrapper">
-                <p className="specialty-physician">
-                  {/* <span className="text-wrapper-3">[specialty physician notes on pulse mesasurements go here]</span> */}
-                
-                <textarea className="specialty-physician-textarea" placeholder="specialty physician notes on pulse mesasurements go here"></textarea>
-                </p>
-              </div>
-              <p className="notes-2">
-                <span className="text-wrapper-4">Notes:</span>
-              </p>
-
-              <button className="save-button">
-                <div className="overlap-group-2">
-                  <div className="background" />
-                  <Button variant={saveVariant} onClick={handleSaveClick}>
-                    {saveVariant === 'outlined' ? 'Save' : 'Saved'}
-                  </Button>
-                </div>
-              </button>
-
+            <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="download/pulses"></PhysicianNotes>
             </div>
           </div>
 

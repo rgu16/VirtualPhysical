@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
+import FormControl from '@mui/material/FormControl';
 import "./style.css";
 import Typography from '@mui/material/Typography';
 import { NavBar, PhysicianNotes, Img, Text } from 'components'
@@ -10,6 +11,8 @@ import MitralPopover from 'components/MitralPopover/MitralPopover.js'
 import TricuspidPopover from 'components/TricuspidPopover/TricuspidPopover.jsx'
 import PulmonaryPopover from 'components/PulmonaryPopover/PulmonaryPopover.jsx'
 import CheckandXButtons from "components/CheckandXButtons";
+
+
 export const HeartPage = (props) => {
   const [status, setStatus] = useState();
   const [statusAtrial, setStatusAtrial] = useState();
@@ -103,6 +106,8 @@ export const HeartPage = (props) => {
   };
   const open = Boolean(anchorEl);
   const id = open ? 'image-popover' : undefined;
+
+
   return (
     <div className="heart-tab">
       <div className="overlap-wrapper">
@@ -135,58 +140,69 @@ export const HeartPage = (props) => {
                                tab={'heart'} name={'Mitral'}></MitralPopover>
               </div>                            
             </div>
+
+
+
+
             <div className="heart-ausc">
               <p className="heart-auscultation">
                 <span className="text-wrapper">Heart Auscultation </span>
                 <span className="span">(anterior only)</span>
               </p>
             </div>
+
+
+
+
             <div className="thrill">
               <p className="normal">
-                {/* <span className="text-wrapper-2">normal</span> */}
                 <text
                   className="taylor"
                   type="text"
-                  placeholder="Normal"
+                  placeholder="no data available"
                   >{apthrill}</text>
               </p>
               <p className="span-wrapper">
                 <span className="text-wrapper-3">Aortic/pulmonary thrill:</span>
               </p>
             </div>
+
+
+
             <div className="thrill-2">
               <p className="abnormal">
-                {/* <span className="text-wrapper-2">abnormal</span> */}
                 <text
                   className="taylor"
                   type="text"
-                  placeholder="Abnormal"
+                  placeholder="no data available"
                   >{ptthrill}</text>
               </p>
               <p className="span-wrapper">
                 <span className="text-wrapper-3">Pulmonary/tricuspid thrill:</span>
               </p>
             </div>
+
+
             <div className="thrill-3">
               <p className="p">
-                {/* <span className="text-wrapper-2">normal</span> */}
                 <text
                   className="taylor"
                   type="text"
-                  placeholder="Normal"
+                  placeholder="no data available"
               >{tmthrill}</text>
               </p>
               <p className="span-wrapper">
                 <span className="text-wrapper-3">Tricuspid/mitral thrill:</span>
               </p>
             </div>
+
             {/* Pulmonary Tricuspid Thrill */}
             <div className="parasternal-heave">
               <p className="abnormal-2">
                 <text
                   className="taylor"
                   type="text"
-                  placeholder="Abnormal"
+                  placeholder="no data available"
               >{paraheave}</text>
               </p>
               <p className="span-wrapper">
@@ -194,10 +210,17 @@ export const HeartPage = (props) => {
               </p>
 
             </div>
+
+
+
             {/* Notes section */}
             <div className="notes">
               <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="heart"></PhysicianNotes>
             </div>
+
+
+
+
             {/* Interpreting ECG */}
             <p className="normal-2">
               <span className="text-wrapper-7">Normal?</span>
@@ -209,7 +232,11 @@ export const HeartPage = (props) => {
                                   tab={'heart'} name={'EKG'}/>
               </div>            
             </span>
+
           </div>
+
+
+
           {/* TABS */}
           <div className="tabs">
             <div className="frame">
@@ -255,16 +282,27 @@ export const HeartPage = (props) => {
           </div>
           
           <NavBar proxy={props.proxy} token={props.token} /> {/* Display NavBar at the top */}
+
+
         </div>
       </div>
-    <p className="single-lead-ECG">
+
+
+
+
+      <p className="single-lead-ECG">
       <span className="text-wrapper">Single-Lead ECG Recording</span>
-    </p>
-    <div className="ecg-picture">
-      <Img
-        src= {ecgimg}
-      />
-    </div>
+      </p>
+
+      <div className="ecg-picture">
+        <Img
+          src= {ecgimg}
+        />
+      </div>
+
+
+
+
     </div>
   );
 };

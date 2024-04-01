@@ -19,13 +19,13 @@ const HandsMedPage = (props) => {
   const [isHoveredTwo, setIsHoveredTwo] = useState(false);
   const [isHoveredThree, setIsHoveredThree] = useState(false);
 
-  const [cynosis, setCynosisValue] = useState("none");
+  const [cyanosis, setCyanosisValue] = useState("none");
   const [pallor, setPallorValue] = useState("none");
   const [capillaryrefill, setCRTValue] = useState("0");
   const [pulseox, setPulseOxValue] = useState();
 
-  const handleCynosisChange = (event) => {
-    setCynosisValue(event.target.value)
+  const handleCyanosisChange = (event) => {
+    setCyanosisValue(event.target.value)
   }
 
   const handlePallorChange = (event) => {
@@ -43,7 +43,7 @@ const HandsMedPage = (props) => {
   const handleSave = (e) => {
     e.preventDefault();
     const data = {}
-    data['cynosis'] = cynosis; 
+    data['cyanosis'] = cyanosis; 
     data['pallor'] = pallor; 
     data['capillaryrefill'] = capillaryrefill; 
     data['pulseox'] = pulseox; 
@@ -149,7 +149,7 @@ const HandsMedPage = (props) => {
               style = {{ opacity: isHoveredOne ? 1 : 0, // Show the image if hovered, otherwise hide
               transition: 'opacity 0.3s ease', }} // Add a smooth transition effect
                className="absolute h-[300px] object-cover left-[75%] w-[27%]"
-               src="images/cynosis.png"
+               src="images/cyanosis.png"
                alt="screenshot20231"
              />
              <Img  style = {{width: '400px', height: '320px', opacity: isHoveredTwo ? 1 : 0, // Show the image if hovered, otherwise hide
@@ -184,13 +184,13 @@ const HandsMedPage = (props) => {
                       </Text>
         <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '20px'}}>
             {" "}
-            Check for cynosis and pallor and classify severity: {" "}
+            Check for cyanosis and pallor and classify severity: {" "}
             
          </h4>
-         {/*i. Cynosis*/}
-         <FormControl value = {cynosis}
-    onChange={handleCynosisChange}>
-         <FormLabel style={{paddingBottom: '10px', paddingTop: '15px', color: 'black' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">i. Cynosis </FormLabel>
+         {/*i. Cyanosis*/}
+         <FormControl value = {cyanosis}
+    onChange={handleCyanosisChange}>
+         <FormLabel style={{paddingBottom: '10px', paddingTop: '15px', color: 'black' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">i. Cyanosis </FormLabel>
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
@@ -259,7 +259,7 @@ const HandsMedPage = (props) => {
   onChange={handlePulseOxChange}/>
         </div>
 
-{/*<div style={{paddingTop: "2rem"}}>The values is {cynosis} {pallor} {capillaryrefill}</div>*/}
+{/*<div style={{paddingTop: "2rem"}}>The values is {cyanosis} {pallor} {capillaryrefill}</div>*/}
 <div style={{paddingTop: "2rem"}}>
       <Stack spacing={2} direction="row">
       <Button variant="contained" >Next Input</Button>

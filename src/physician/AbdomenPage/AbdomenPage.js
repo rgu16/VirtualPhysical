@@ -1,21 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import axios from 'axios';
 import Button from '@mui/material/Button';
 import "./style.css";
+import {  PhysicianNotes } from "components";
 import { NavBar } from 'components'
 import Grade from "./Grade.png"
 import Popover from '@mui/material/Popover';
+import {  Img, Line, List, Text, TabNav } from "components";
+
 
 
 export const AbdomenPage = (props) => {
 
-  const [saveVariant, setSaveVariant] = useState('outlined');
-
-  const handleSaveClick = () => {
-    setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
-  };
-
   // For Question Mark Popover
   const [questionMarkAnchorEl, setQuestionMarkAnchorEl] = useState(null);
+  const questionMarkOpen = Boolean(questionMarkAnchorEl);
 
   const handleQuestionMarkPopoverOpen = (event) => {
     setQuestionMarkAnchorEl(event.currentTarget);
@@ -25,7 +24,59 @@ export const AbdomenPage = (props) => {
     setQuestionMarkAnchorEl(null);
   };
 
-  const questionMarkOpen = Boolean(questionMarkAnchorEl);
+  const [note, setNotes] = useState();
+
+  // Top row
+  const [hypochonriacRValue, setHypochonriacRValue] = useState();
+  const [epigastricValue, setEpigastricValue] = useState();
+  const [hypochonriacLValue, setHypochonriacLValue] = useState();
+  // Middle row
+  const [lumbarRValue, setLumbarRValue] = useState();
+  const [umbilicalValue, setUmbilicalValue] = useState();
+  const [lumbarLValue, setLumbarLValue] = useState();
+  // Bottom row
+  const [iliacRValue, setIliacRValue] = useState();
+  const [hypogastricValue, setHypogastricValue] = useState();
+  const [iliacLValue, setIliacLValue] = useState();
+
+
+  useEffect(() => {
+    axios({
+        method: "GET",
+        url: props.proxy + "download/abdomen",
+        headers: {
+        Authorization: 'Bearer ' + props.token
+        }
+    })
+    .then((response) => {
+        const res = response.data
+        console.log(res)
+
+        // Top row
+        setHypochonriacRValue(res.detail['hypochonriacR'])
+        setEpigastricValue(res.detail['epigastric'])
+        setHypochonriacLValue(res.detail['hypochonriacL'])
+        // Middle row
+        setLumbarRValue(res.detail['lumbarR'])
+        setUmbilicalValue(res.detail['umbilical'])
+        setLumbarLValue(res.detail['lumbarL'])
+        // Bottom row
+        setIliacRValue(res.detail['iliacR'])
+        setHypogastricValue(res.detail['hypogastric'])
+        setIliacLValue(res.detail['iliacL'])
+
+        if(res.hasOwnProperty("note")){
+          setNotes(res.note)
+        }
+        
+    }).catch((error) => {
+        if (error.response){
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)}
+    })
+  }, [props]);
+
 
   return (
     <div className="abdomen-tab-question">
@@ -33,26 +84,7 @@ export const AbdomenPage = (props) => {
         <div className="overlap">
           <div className="overlap-group">
             <div className="notes">
-              
-              <div className="due-to-high-wrapper">
-                <p className="due-to-high">
-                  <textarea className="specialty-physician-textarea" placeholder="Due to high tenderness in liver region, liver is likely enlarged and could indicate congestive heart
-                    failure. Patient must undergo __ dietary changes and begin taking&nbsp;&nbsp;__ medications."></textarea>
-                </p>
-              </div>
-
-              <p className="span-wrapper">
-                <span className="span">Notes:</span>
-              </p>
-
-              <button className="save-button">
-                <div className="overlap-group-2">
-                  <div className="background" />
-                  <Button variant={saveVariant} onClick={handleSaveClick}>
-                    {saveVariant === 'outlined' ? 'Save' : 'Saved'}
-                  </Button>
-                </div>
-              </button>
+              <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="abdomen"></PhysicianNotes>
             </div>
 
             <div className="pulse">
@@ -69,11 +101,26 @@ export const AbdomenPage = (props) => {
                     alt="Rectangle"
                     src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
                   />
+
                   <p className="element">
-                    <span className="text-wrapper-4">0</span>
+                    <Text
+                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                      value = {iliacLValue} 
+                      id="outlined-select-currency-native"
+                      select
+                      label=""
+                      defaultValue="no selection"
+                      SelectProps={{
+                        native: true,
+                      }}
+                      helperText=""
+                    >
+                    {iliacLValue} </Text>
                   </p>
+
                 </div>
               </div>
+
               <div className="overlap-group-wrapper">
                 <div className="overlap-3">
                   <img
@@ -81,11 +128,26 @@ export const AbdomenPage = (props) => {
                     alt="Rectangle"
                     src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
                   />
+
                   <p className="element">
-                    <span className="text-wrapper-4">0</span>
+                    <Text
+                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                      value = {hypogastricValue} 
+                      id="outlined-select-currency-native"
+                      select
+                      label=""
+                      defaultValue="no selection"
+                      SelectProps={{
+                        native: true,
+                      }}
+                      helperText=""
+                    >
+                    {hypogastricValue} </Text>
                   </p>
+
                 </div>
               </div>
+
               <div className="div-wrapper">
                 <div className="overlap-3">
                   <img
@@ -93,11 +155,27 @@ export const AbdomenPage = (props) => {
                     alt="Rectangle"
                     src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
                   />
+
                   <p className="element">
-                    <span className="text-wrapper-4">0</span>
+                    <Text
+                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                      value = {iliacRValue} 
+                      id="outlined-select-currency-native"
+                      select
+                      label=""
+                      defaultValue="no selection"
+                      SelectProps={{
+                        native: true,
+                      }}
+                      helperText=""
+                    >
+                    {iliacRValue} </Text>
                   </p>
+
+
                 </div>
               </div>
+
               <div className="region-2">
                 <div className="overlap-3">
                   <img
@@ -105,11 +183,26 @@ export const AbdomenPage = (props) => {
                     alt="Rectangle"
                     src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
                   />
+
                   <p className="element">
-                    <span className="text-wrapper-4">0</span>
+                    <Text
+                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                      value = {lumbarLValue} 
+                      id="outlined-select-currency-native"
+                      select
+                      label=""
+                      defaultValue="no selection"
+                      SelectProps={{
+                        native: true,
+                      }}
+                      helperText=""
+                    >
+                    {lumbarLValue} </Text>
                   </p>
+
                 </div>
               </div>
+
               <div className="region-3">
                 <div className="overlap-3">
                   <img
@@ -117,11 +210,26 @@ export const AbdomenPage = (props) => {
                     alt="Rectangle"
                     src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
                   />
+
                   <p className="element">
-                    <span className="text-wrapper-4">0</span>
+                    <Text
+                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                      value = {umbilicalValue} 
+                      id="outlined-select-currency-native"
+                      select
+                      label=""
+                      defaultValue="no selection"
+                      SelectProps={{
+                        native: true,
+                      }}
+                      helperText=""
+                    >
+                    {umbilicalValue} </Text>
                   </p>
+
                 </div>
               </div>
+
               <div className="region-4">
                 <div className="overlap-3">
                   <img
@@ -129,11 +237,26 @@ export const AbdomenPage = (props) => {
                     alt="Rectangle"
                     src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
                   />
+
                   <p className="element">
-                    <span className="text-wrapper-4">0</span>
+                    <Text
+                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                      value = {lumbarRValue} 
+                      id="outlined-select-currency-native"
+                      select
+                      label=""
+                      defaultValue="no selection"
+                      SelectProps={{
+                        native: true,
+                      }}
+                      helperText=""
+                    >
+                    {lumbarRValue} </Text>
                   </p>
+
                 </div>
               </div>
+
               <div className="region-5">
                 <div className="overlap-3">
                   <img
@@ -141,11 +264,26 @@ export const AbdomenPage = (props) => {
                     alt="Rectangle"
                     src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
                   />
+
                   <p className="element">
-                    <span className="text-wrapper-4">0</span>
+                    <Text
+                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                      value = {hypochonriacLValue} 
+                      id="outlined-select-currency-native"
+                      select
+                      label=""
+                      defaultValue="no selection"
+                      SelectProps={{
+                        native: true,
+                      }}
+                      helperText=""
+                    >
+                    {hypochonriacLValue} </Text>
                   </p>
+
                 </div>
               </div>
+
               <div className="region-6">
                 <div className="overlap-3">
                   <img
@@ -153,11 +291,26 @@ export const AbdomenPage = (props) => {
                     alt="Rectangle"
                     src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
                   />
+
                   <p className="element">
-                    <span className="text-wrapper-4">0</span>
+                    <Text
+                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                      value = {epigastricValue} 
+                      id="outlined-select-currency-native"
+                      select
+                      label=""
+                      defaultValue="no selection"
+                      SelectProps={{
+                        native: true,
+                      }}
+                      helperText=""
+                    >
+                    {epigastricValue} </Text>
                   </p>
+
                 </div>
               </div>
+
               <div className="region-7">
                 <div className="overlap-3">
                   <img
@@ -165,9 +318,23 @@ export const AbdomenPage = (props) => {
                     alt="Rectangle"
                     src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
                   />
+
                   <p className="element">
-                    <span className="text-wrapper-4">3</span>
+                    <Text
+                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                      value = {hypochonriacRValue} 
+                      id="outlined-select-currency-native"
+                      select
+                      label=""
+                      defaultValue="no selection"
+                      SelectProps={{
+                        native: true,
+                      }}
+                      helperText=""
+                    >
+                    {hypochonriacRValue} </Text>
                   </p>
+
                 </div>
               </div>
             </div>
