@@ -1,1 +1,0 @@
-export { LegsTabClickedScreen } from "./LegsTabClickedScreen";

@@ -1,1 +1,0 @@
-export { PulsesPage } from "./PulsesPage";

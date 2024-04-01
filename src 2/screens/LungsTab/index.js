@@ -1,1 +1,0 @@
-export { LungsTab } from "./LungsTab";

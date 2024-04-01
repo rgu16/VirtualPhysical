@@ -1,1 +1,0 @@
-export { EyesPage } from "./EyesPage";

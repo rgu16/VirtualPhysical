@@ -10,3 +10,4 @@ export {default as PatientSearchPage} from "./PatientSearchPage";
 export {default as CameraPage} from "./CameraPage"
 export {default as VideoPage} from "./VideoPage"
 export {default as MobilePromptsPage} from "./MobilePromptsPage"
+export {default as LoadingPage} from "./LoadingPage"

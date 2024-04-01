@@ -1,1 +1,0 @@
-export { AbdomenPage } from "./AbdomenPage";

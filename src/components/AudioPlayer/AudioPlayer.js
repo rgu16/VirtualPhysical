@@ -2,7 +2,7 @@ import React from 'react';
 import CheckandXButtons from 'components/CheckandXButtons';
 import Eko from './Eko.wav';
 
-function AudioPlayer({diaphragm, bell}) {
+function AudioPlayer(props) {
   return (
     <div>
       <h2>(Headphones recommended)</h2>
@@ -11,14 +11,14 @@ function AudioPlayer({diaphragm, bell}) {
 
       <h2>Stethoscope Recording - Diaphragm</h2>
       <audio controls>
-        <source src={diaphragm} type="audio/wav" />
+        <source src={props.diaphragm} type="audio/wav" />
       </audio>
       
       <br></br>
 
       <h2>Stethoscope Recording - Bell</h2>
       <audio controls>
-        <source src={bell} type="audio/wav" />
+        <source src={props.bell} type="audio/wav" />
       </audio>
 
       <br></br>
@@ -27,7 +27,9 @@ function AudioPlayer({diaphragm, bell}) {
               <span className="text-wrapper-7">Normal?   </span>
       </p>
       <div>
-        <CheckandXButtons />
+        <CheckandXButtons setStatus={props.setStatus} status={props.status}
+                          tab={props.tab} name={props.name}
+                          proxy={props.proxy} token={props.token}/>
       </div>
     </div>
   );

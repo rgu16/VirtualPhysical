@@ -88,7 +88,6 @@ const PatientSearchPage = (props) => {
       .then((response)=>{
         console.log(response.data)
         setData(response.data)
-        // props.setToken(response.data.access_token)
       }).catch((error)=>{
         if(error.response){
           console.log(error.response)
@@ -169,19 +168,6 @@ const PatientSearchPage = (props) => {
                     <div className="flex flex-col gap-6 items-start justify-start w-full">
                       <div className="flex flex-col items-start justify-start pt-0.5 w-full">
                         <Text className="font-bold text-base text-black-900">Date</Text>
-                        {/* <Input
-                          className="leading-[normal] p-0 placeholder:text-gray-600 text-base text-left w-full"
-                          wrapClassName="border border-gray-400 border-solid mt-0.5 rounded-[20px] w-full"
-                          color="white_A700"
-                          size="xs"
-                          variant="fill"
-                          value={newUser.email} 
-                          onChange={(e) => handleInputChange(e)} 
-                          type="email"
-                          placeholder="youremail@gmail.com"
-                          id="email" 
-                          name="email" 
-                        ></Input> */}
                       <LocalizationProvider dateAdapter={AdapterDayjs}>
                           <div className="bg-white-A700 rounded-[20px] border border-gray-400 border-solid w-full items-start justify-start ">
                           <DatePicker
