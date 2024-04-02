@@ -21,6 +21,9 @@ const AbdomenMedPage= (props) => {
  const [lumbarR, setLumbarRValue] = useState("none");
  const [umbilical, setUmbilicalValue] = useState("none");
  const [lumbarL, setLumbarLValue] = useState("none");
+ const [iliacR, setIliacRValue] = useState("none");
+ const [hypogastric, setHypogastricValue] = useState("none");
+ const [iliacL, setIliacLValue] = useState("none");
 
 
  const handleHypochonriacRChange = (event) => {
@@ -52,6 +55,18 @@ const AbdomenMedPage= (props) => {
    setLumbarLValue(event.target.value)
  }
 
+ const handleIliacRChange = (event) => {
+  setIliacRValue(event.target.value)
+}
+
+const handleHypogastricLChange = (event) => {
+  setHypogastricValue(event.target.value)
+}
+
+const handleIliacLChange = (event) => {
+  setIliacLValue(event.target.value)
+}
+
 
  const handleSave = (e) => {
    e.preventDefault();
@@ -62,6 +77,9 @@ const AbdomenMedPage= (props) => {
    data['lumbarR'] = lumbarR;
    data['umbilical'] = umbilical;
    data['lumbarL'] = lumbarL;
+   data['iliacR'] = iliacR;
+   data['hypogastric'] = hypogastric;
+   data['iliacL'] = iliacL;
 
 
    console.log(data);
@@ -293,7 +311,7 @@ const AbdomenMedPage= (props) => {
    </FormControl>
 
 
-   {/*v. Left lumbar region */}
+   {/*vi. Left lumbar region */}
    <FormControl value = {lumbarL}
    onChange={handleLumbarLChange}>
         <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">v. Left lumbar region </FormLabel>
@@ -312,7 +330,72 @@ const AbdomenMedPage= (props) => {
  <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
      </RadioGroup>
    </FormControl>
-     
+
+
+   {/*vii. Iliac L region */}
+   <FormControl value = {iliacL}
+   onChange={handleIliacLChange}>
+        <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">v. Umbilical region</FormLabel>
+     <RadioGroup
+       row
+       aria-labelledby="demo-row-radio-buttons-group-label"
+       name="row-radio-buttons-group"
+     >
+       <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
+       <FormControlLabel value="4" labelPlacement="bottom" control={<Radio />} label="4" />
+      
+ <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
+     </RadioGroup>
+   </FormControl>
+
+
+   {/*viii. Hypogastric region */}
+   <FormControl value = {hypogastric}
+   onChange={handleHypogastricChange}>
+        <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">v. Umbilical region</FormLabel>
+     <RadioGroup
+       row
+       aria-labelledby="demo-row-radio-buttons-group-label"
+       name="row-radio-buttons-group"
+     >
+       <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
+       <FormControlLabel value="4" labelPlacement="bottom" control={<Radio />} label="4" />
+      
+ <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
+     </RadioGroup>
+   </FormControl>
+
+
+   {/*ix. Iliac R region */}
+   <FormControl value = {iliacR}
+   onChange={handleIliacRChange}>
+        <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">v. Umbilical region</FormLabel>
+     <RadioGroup
+       row
+       aria-labelledby="demo-row-radio-buttons-group-label"
+       name="row-radio-buttons-group"
+     >
+       <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
+       <FormControlLabel value="4" labelPlacement="bottom" control={<Radio />} label="4" />
+      
+ <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
+     </RadioGroup>
+   </FormControl>
+
+
+
    {/*<div style={{paddingTop: "2rem"}}>The values is {hypochonriacR} {epigastric} {hypochonriacL} {lumbarR} {umbilical} {lumbarL}</div>  */}
    <div style={{paddingTop: "2rem"}}>
      <Stack spacing={2} direction="row">
@@ -320,11 +403,8 @@ const AbdomenMedPage= (props) => {
    <Button variant="outlined" onClick={(e) => handleSave(e)}>Save</Button>
   </Stack>
   </div>   
-   {/* </div>*/}
-                       
+   {/* </div>*/}     
                        {/* </div>*/}
-                    
-                    
                     {/* </div>*/}
                    {/*</div>*/}
                {/*</div>*/}
@@ -333,13 +413,8 @@ const AbdomenMedPage= (props) => {
           </div>
         </div>
       </div>
-
-
-     
      </div>
-    
    </div>
-  
            </div>
          </div>
        </div>
@@ -348,7 +423,4 @@ const AbdomenMedPage= (props) => {
  );
 };
 
-
 export default AbdomenMedPage;
-
-
