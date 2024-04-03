@@ -15,71 +15,72 @@ import axios from 'axios';
 
 
 const AbdomenMedPage= (props) => {
- const [hypochonriacR, setHypochonriacRValue] = useState("none");
+  const [hypochonriacL, setHypochonriacLValue] = useState("none");
  const [epigastric, setEpigastricValue] = useState("none");
- const [hypochonriacL, setHypochonriacLValue] = useState("none");
- const [lumbarR, setLumbarRValue] = useState("none");
- const [umbilical, setUmbilicalValue] = useState("none");
+ const [hypochonriacR, setHypochonriacRValue] = useState("none");
+
  const [lumbarL, setLumbarLValue] = useState("none");
- const [iliacR, setIliacRValue] = useState("none");
- const [hypogastric, setHypogastricValue] = useState("none");
+ const [umbilical, setUmbilicalValue] = useState("none");
+ const [lumbarR, setLumbarRValue] = useState("none");
+ 
  const [iliacL, setIliacLValue] = useState("none");
+ const [hypogastric, setHypogastricValue] = useState("none");
+ const [iliacR, setIliacRValue] = useState("none");
 
 
- const handleHypochonriacRChange = (event) => {
-   setHypochonriacRValue(event.target.value)
- }
-
+ const handleHypochonriacLChange = (event) => {
+  setHypochonriacLValue(event.target.value)
+}
 
  const handleEpigastricChange = (event) => {
    setEpigastricValue(event.target.value)
  }
 
-
- const handleHypochonriacLChange = (event) => {
-   setHypochonriacLValue(event.target.value)
- }
-
-
- const handleLumbarRChange = (event) => {
-   setLumbarRValue(event.target.value)
- }
-
-
- const handleUmbilicalChange = (event) => {
-   setUmbilicalValue(event.target.value)
- }
-
-
- const handleLumbarLChange = (event) => {
-   setLumbarLValue(event.target.value)
- }
-
- const handleIliacRChange = (event) => {
-  setIliacRValue(event.target.value)
+ const handleHypochonriacRChange = (event) => {
+  setHypochonriacRValue(event.target.value)
 }
 
-const handleHypogastricLChange = (event) => {
-  setHypogastricValue(event.target.value)
+
+const handleLumbarLChange = (event) => {
+  setLumbarLValue(event.target.value)
 }
+
+const handleUmbilicalChange = (event) => {
+  setUmbilicalValue(event.target.value)
+}
+
+const handleLumbarRChange = (event) => {
+  setLumbarRValue(event.target.value)
+}
+
 
 const handleIliacLChange = (event) => {
   setIliacLValue(event.target.value)
+}
+
+const handleHypogastricChange = (event) => {
+  setHypogastricValue(event.target.value)
+}
+
+const handleIliacRChange = (event) => {
+  setIliacRValue(event.target.value)
 }
 
 
  const handleSave = (e) => {
    e.preventDefault();
    const data = {}
-   data['hypochonriacR'] = hypochonriacR;
-   data['epigastric'] = epigastric;
    data['hypochonriacL'] = hypochonriacL;
-   data['lumbarR'] = lumbarR;
-   data['umbilical'] = umbilical;
+   data['epigastric'] = epigastric;
+   data['hypochonriacR'] = hypochonriacR;
+
    data['lumbarL'] = lumbarL;
-   data['iliacR'] = iliacR;
-   data['hypogastric'] = hypogastric;
+   data['umbilical'] = umbilical;
+   data['lumbarR'] = lumbarR;
+
    data['iliacL'] = iliacL;
+   data['hypogastric'] = hypogastric;
+   data['iliacR'] = iliacR;
 
 
    console.log(data);
