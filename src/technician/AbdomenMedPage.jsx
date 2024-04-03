@@ -15,9 +15,9 @@ import axios from 'axios';
 
 
 const AbdomenMedPage= (props) => {
-  const [hypochonriacL, setHypochonriacLValue] = useState("none");
+  const [hypochondriacL, setHypochonriacLValue] = useState("none");
  const [epigastric, setEpigastricValue] = useState("none");
- const [hypochonriacR, setHypochonriacRValue] = useState("none");
+ const [hypochondriacR, setHypochonriacRValue] = useState("none");
 
  const [lumbarL, setLumbarLValue] = useState("none");
  const [umbilical, setUmbilicalValue] = useState("none");
@@ -28,7 +28,7 @@ const AbdomenMedPage= (props) => {
  const [iliacR, setIliacRValue] = useState("none");
 
 
- const handleHypochonriacLChange = (event) => {
+ const handleHypochondriacLChange = (event) => {
   setHypochonriacLValue(event.target.value)
 }
 
@@ -36,7 +36,7 @@ const AbdomenMedPage= (props) => {
    setEpigastricValue(event.target.value)
  }
 
- const handleHypochonriacRChange = (event) => {
+ const handleHypochondriacRChange = (event) => {
   setHypochonriacRValue(event.target.value)
 }
 
