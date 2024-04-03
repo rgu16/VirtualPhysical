@@ -70,9 +70,9 @@ const handleIliacRChange = (event) => {
  const handleSave = (e) => {
    e.preventDefault();
    const data = {}
-   data['hypochonriacL'] = hypochonriacL;
+   data['hypochondriacL'] = hypochondriacL;
    data['epigastric'] = epigastric;
-   data['hypochonriacR'] = hypochonriacR;
+   data['hypochondriacR'] = hypochondriacR;
 
    data['lumbarL'] = lumbarL;
    data['umbilical'] = umbilical;
@@ -209,8 +209,8 @@ const handleIliacRChange = (event) => {
           
         </h4>
         {/*i. Right hypochondriac region */}
-        <FormControl value = {hypochonriacR}
-   onChange={handleHypochonriacRChange}>
+        <FormControl value = {hypochondriacR}
+   onChange={handleHypochondriacRChange}>
         <FormLabel style={{paddingBottom: '10px', paddingTop: '15px', color: 'black' }} id="demo-row-radio-buttons-group-label">i. Right hypochondriac region</FormLabel>
      <RadioGroup
        row
@@ -228,7 +228,7 @@ const handleIliacRChange = (event) => {
      </RadioGroup>
    </FormControl>
     
-      {/*ii. Epigastric hypochondriac region */}
+      {/*ii. Epigastric region */}
       <FormControl value = {epigastric}
    onChange={handleEpigastricChange}>
         <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">ii. Epigastric region</FormLabel>
@@ -250,8 +250,8 @@ const handleIliacRChange = (event) => {
 
 
     {/*iii. Left hypochondriac region */}
-    <FormControl value = {hypochonriacL}
-   onChange={handleHypochonriacLChange}>
+    <FormControl value = {hypochondriacL}
+   onChange={handleHypochondriacLChange}>
         <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">iii. Left hypochondriac region</FormLabel>
      <RadioGroup
        row
@@ -397,7 +397,7 @@ const handleIliacRChange = (event) => {
 
 
 
-   {/*<div style={{paddingTop: "2rem"}}>The values is {hypochonriacR} {epigastric} {hypochonriacL} {lumbarR} {umbilical} {lumbarL}</div>  */}
+   {/*<div style={{paddingTop: "2rem"}}>The values is {hypochondriacR} {epigastric} {hypochondriacL} {lumbarR} {umbilical} {lumbarL}</div>  */}
    <div style={{paddingTop: "2rem"}}>
      <Stack spacing={2} direction="row">
      <Button variant="contained" >Next Input</Button>
