@@ -23,7 +23,12 @@ const HandsMedPage = (props) => {
   const [pallor, setPallorValue] = useState("none");
   const [capillaryrefill, setCRTValue] = useState("0");
   const [pulseox, setPulseOxValue] = useState();
+  const [isChecked, setIsChecked] = useState(false);
 
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+  
   const handleCyanosisChange = (event) => {
     setCyanosisValue(event.target.value)
   }
@@ -116,57 +121,16 @@ const HandsMedPage = (props) => {
                        
 
                      </div>
-              
-                     <Img onMouseEnter={() => setIsHoveredOne(true)}
-                      onMouseLeave={() => setIsHoveredOne(false)}
-                       className="h-[43px] w-[43px]"
-                       src="images/img_profile_black_900.svg"
-                       alt="profile"
-                     />
                      
                    </div>
                    
-                   <Img onMouseEnter={() => setIsHoveredTwo(true)}
-                    onMouseLeave={() => setIsHoveredTwo(false)}
-                     className="h-[43px] w-[43px]"
-                     src="images/img_profile_black_900.svg"
-                     alt="profile_One"
-                   />
                  </div>
-                 <Img onMouseEnter={() => setIsHoveredThree(true)}
-                     onMouseLeave={() => setIsHoveredThree(false)}
-                     className="h-[43px] w-[43px]"
-                     src="images/img_profile_black_900.svg"
-                     alt="profile_One"
-                   />
                    </div>
                  <div className="flex flex-col md:gap-10 gap-[301px] justify-start">
                   
                  </div>
                </div>
              </div>
-             <Img 
-              style = {{ opacity: isHoveredOne ? 1 : 0, // Show the image if hovered, otherwise hide
-              transition: 'opacity 0.3s ease', }} // Add a smooth transition effect
-               className="absolute h-[300px] object-cover left-[75%] w-[27%]"
-               src="images/cyanosis.png"
-               alt="screenshot20231"
-             />
-             <Img  style = {{width: '400px', height: '320px', opacity: isHoveredTwo ? 1 : 0, // Show the image if hovered, otherwise hide
-              transition: 'opacity 0.3s ease', }} 
-               className="absolute bottom-[17%] h-[364px] object-cover bottom-[28%] left-[74%] w-[35%]"
-               src="images/pallor.png"
-               alt="screenshot20231_One"
-             
-             />
-            
-             <Img style = {{width: '560px', height: '460px', opacity: isHoveredThree ? 1 : 0, // Show the image if hovered, otherwise hide
-              transition: 'opacity 0.3s ease', }} 
-               className="absolute bottom-[17%] h-[350px] object-cover top-[70%] left-[76%] w-[31%]"
-               src="images/capillaryrefill.png"
-               alt="screenshot20231_One"
-             
-             />
              {/*  <div className="absolute bottom-[0] flex flex-col items-center justify-start left-[0] w-[47%]">*/}
               {/*   <div className="flex flex-col items-center justify-start w-full">*/}
                   {/* <div className="flex flex-col items-center justify-end w-full">*/}
@@ -195,15 +159,66 @@ const HandsMedPage = (props) => {
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
         name="row-radio-buttons-group"
+        style={{ flexWrap: 'nowrap' }}
       >
         <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-        <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
-        <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
-        <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+        <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} style={{ marginLeft: '15px', marginRight: '100px' }} label="0" />
+        <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} style={{ marginLeft: '50px', marginRight: '100px' }} label="1" />
+        <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} style={{ marginLeft: '50px', marginRight: '15px' }} label="2" />
         
   <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
       </RadioGroup>
     </FormControl>
+    <div>
+      {isChecked && (
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', marginLeft: '200px' }}>
+          {/* Your images */}
+          <img
+            style={{
+              width: "75%", // Set width to 100% to occupy the whole width
+              height: "60%", // Set height to auto to maintain aspect ratio
+              paddingTop: "0px",
+              paddingBottom: "20px",
+              marginLeft: '-100px',
+              marginRight: '9px'
+           
+
+            }}
+            src="images/cyanosis1.png"
+            alt="screenshot20231"
+          />
+          <img
+            style={{
+              width: "80%", // Set width to 100% to occupy the whole width
+              height: "auto", // Set height to auto to maintain aspect ratio
+       
+              paddingBottom: "20px",
+              marginRight: '9px'
+            }}
+            src="images/cyanosis2.png"
+            alt="screenshot20231_One"
+          />
+          <img
+            style={{
+              width: "70%", // Set width to 100% to occupy the whole width
+              height: "60%", // Set height to auto to maintain aspect ratio
+              paddingBottom: "20px"
+            }}
+            src="images/cyanosis3.png"
+            alt="screenshot20231_One"
+          />
+        </div>
+      )}
+       <label>
+        <input
+          type="checkbox"
+          className="cboxes"
+          checked={isChecked}
+          onChange={handleCheckboxChange}
+        />
+        Show Reference Images for Cyanosis
+      </label>
+    </div>
       
        {/*ii. Pallor */}
        <FormControl value = {pallor}
@@ -266,6 +281,7 @@ const HandsMedPage = (props) => {
      <Link to="/legs"><Button variant="outlined" onClick={(e) => handleSave(e)} >Save</Button>   </Link>
    </Stack>
    </div>   
+   
          {/* </div>*/}
     {/* </div>*/}
                          

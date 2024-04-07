@@ -25,10 +25,22 @@ const LegsMedPage = (props) => {
     const [profilePic, setProfilePic] = useState()
 
  const [isChecked, setIsChecked] = useState(false);
+ const [isCheckedScale, setIsCheckedScale] = useState(false);
+ const [isCheckedLeg, setIsCheckedLeg] = useState(false);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
+
+  const handleCheckboxScaleChange = () => {
+    setIsCheckedScale(!isCheckedScale);
+  };
+
+  const handleCheckboxLegChange = () => {
+    setIsCheckedLeg(!isCheckedLeg);
+  };
+
+
  const handleRightCalfChange = (event) => {
    setRightCalfValue(event.target.value)
  }
@@ -173,6 +185,67 @@ const handleImageUpload = (e) => {
             <div className="absolute top-30 right-20 w-1/2" style={{paddingLeft: '300px'}}>
  
  <div className= "flex flex-col items-start justify-start w-[400px] h-full m-[50px] mt-[80px]">
+ <div>
+   {isCheckedScale && (
+        <div style={{ marginLeft: '50px' }}>
+          {/* Your images */}
+          <img
+            style={{
+              width: "300px", // Enlarge the width of the image
+              height: "280px", // Set height to auto to maintain aspect ratio
+              paddingTop: "5px",
+              marginRight: '15px'
+
+            }}
+            src="images/pedemascore.png"
+            alt="screenshot20231"
+          />
+         
+         
+        </div>
+      )}
+       <label>
+        <input
+          type="checkbox"
+          className="cboxes"
+          checked={isCheckedScale}
+          onChange={handleCheckboxScaleChange}
+        />
+        Show Detailed Scale
+      </label>
+    </div>
+
+    <div>
+   {isCheckedLeg && (
+        <div style={{ marginLeft: '50px' }}>
+          {/* Your images */}
+          <img
+            style={{
+              width: "300px", // Enlarge the width of the image
+              height: "350px", // Set height to auto to maintain aspect ratio
+              paddingTop: "5px",
+              marginRight: '15px'
+
+            }}
+            src="images/edemaleg.png"
+            alt="screenshot20231"
+          />
+         
+         
+        </div>
+      )}
+       <label>
+        <input
+          type="checkbox"
+          className="cboxes"
+          checked={isCheckedLeg}
+          onChange={handleCheckboxLegChange}
+        />
+        Show Example of normal vs edema leg
+      </label>
+    </div>
+       
+       
         <Text className="font-bold text-2xl text-black-900">Notes: </Text>
         <textarea className="w-full h-[200px] border border-gray-400 border-2 rounded-[14px] p-[10px]" 
                   placeholder="Medical Technician notes"
@@ -198,7 +271,7 @@ const handleImageUpload = (e) => {
     src="images/audioupload.png"
     alt="television"
   />
-  <Text  style={{color: 'white' }} className="font-semibold ml-2.5 md:ml-[0] text-xl">Upload Image of Eyes</Text>
+  <Text  style={{color: 'white' }} className="font-semibold ml-2.5 md:ml-[0] text-xl">Upload Image of Legs</Text>
 </button>
                   <Img
                       className="h-[130px] md:h-auto rounded-[50%] w-[130px] md:h-auto object-cover  w-full"
