@@ -97,6 +97,7 @@ const handleImageUpload = (e) => {
    const data = {}
    data['rightcalve'] = rightcalve;
    data['leftcalve'] = leftcalve;
+   data['legs_notes'] = note;
    console.log(data);
    axios({
     method:"POST",
@@ -185,6 +186,7 @@ const handleImageUpload = (e) => {
             <div className="absolute top-30 right-20 w-1/2" style={{paddingLeft: '300px'}}>
  
  <div className= "flex flex-col items-start justify-start w-[400px] h-full m-[50px] mt-[80px]">
+ <Text className="font-bold text-2xl text-black-900">More References: </Text>
  <div>
    {isCheckedScale && (
         <div style={{ marginLeft: '50px' }}>
@@ -246,7 +248,7 @@ const handleImageUpload = (e) => {
     </div>
        
        
-        <Text className="font-bold text-2xl text-black-900">Notes: </Text>
+        <Text className="font-bold text-2xl text-black-900" style={{ paddingTop: "2rem" }}>Notes: </Text>
         <textarea className="w-full h-[200px] border border-gray-400 border-2 rounded-[14px] p-[10px]" 
                   placeholder="Medical Technician notes"
                   value={note}
