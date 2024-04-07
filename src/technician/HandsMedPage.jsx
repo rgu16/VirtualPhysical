@@ -216,7 +216,7 @@ const HandsMedPage = (props) => {
     </div>
     <div className="absolute top-20 left-25 w-1/2" style={{paddingTop: '450px',paddingLeft: '50px'}}>
     <div className= "flex flex-col items-start justify-start w-[600px] h-full ">
-    <Text className="font-bold text-2xl text-black-900">More References: </Text>
+    <Text className="font-bold text-2xl text-black-900">CRT and Pulse Ox References: </Text>
  <div>
  </div>
    {isCheckedCRT && (
@@ -237,6 +237,7 @@ const HandsMedPage = (props) => {
          
         </div>
       )}
+      <div style={{ marginTop: '20px' }}>
        <label>
         <input
           type="checkbox"
@@ -246,6 +247,7 @@ const HandsMedPage = (props) => {
         />
         Show how to take the capillary refill time
       </label>
+      </div>
 
       {isCheckedPulseOx && (
         <div style={{ marginLeft: '10px' }}>
@@ -265,6 +267,7 @@ const HandsMedPage = (props) => {
          
         </div>
       )}
+      <div style={{ marginTop: '60px' }}>
        <label>
         <input
           type="checkbox"
@@ -274,6 +277,7 @@ const HandsMedPage = (props) => {
         />
         Show how to take the pulse ox measurement
       </label>
+      </div>
     </div>
     </div>
 
