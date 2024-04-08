@@ -79,7 +79,19 @@ const HeartMedPage = (props) => {
  const [profilePic, setProfilePic] = useState()
  const fileInputRef = useRef(null);
  const [imageLoaded, setImageLoaded] = useState(false);
+ const [isCheckedCRT, setIsCheckedCRT] = useState(false);
+  const [isCheckedPulseOx, setIsCheckedPulseOx] = useState(false);
+  const [isCheckedThrills, setIsCheckedThrills] = useState(false);
 
+  const handleCheckboxCRTChange = () => {
+    setIsCheckedCRT(!isCheckedCRT);
+  };
+  const handleCheckboxPulseOxChange = () => {
+    setIsCheckedPulseOx(!isCheckedPulseOx);
+  };
+  const handleCheckboxThrillsChange = () => {
+    setIsCheckedThrills(!isCheckedThrills);
+  };
  const [heave, setParasternalValue] = useState();
 
 const handleparasternalHeave = (event) => {
@@ -204,8 +216,107 @@ return (
          
           
                      <div style={{paddingLeft: '150px', }} className="flex w-full min-h-screen p-5">
+                     <div className="absolute top-10 left-25 w-1/2" style={{paddingTop: '10px',paddingLeft: '850px'}}>
+    <div className= "flex flex-col items-start justify-start w-[600px] h-full ">
+    <Text className="font-bold text-2xl text-black-900">References: </Text>
+ <div>
+ </div>
+   {isCheckedCRT && (
+        <div style={{ marginLeft: '10px' }}>
+          {/* Your images */}
+          <img
+            style={{
+              width: "100%", // Enlarge the width of the image
+              height: "auto", // Set height to auto to maintain aspect ratio
+              paddingTop: "5px",
+              marginRight: '80px',
+
+            }}
+            src="images/heave.png"
+            alt="screenshot20231"
+          />
+         
+         
+        </div>
+      )}
+      <div style={{ marginTop: '20px' }}>
+       <label>
+        <input
+          type="checkbox"
+          className="cboxes"
+          checked={isCheckedCRT}
+          onChange={handleCheckboxCRTChange}
+        />
+        Show how to access for parasternal heave
+      </label>
+      </div>
+
+      {isCheckedPulseOx && (
+        <div style={{ marginLeft: '10px' }}>
+          {/* Your images */}
+          <img
+            style={{
+              width: "100%", // Enlarge the width of the image
+              height: "auto", // Set height to auto to maintain aspect ratio
+              paddingTop: "5px",
+              marginRight: '80px',
+
+            }}
+            src="images/thrill.png"
+            alt="screenshot20231"
+          />
+         
+         
+        </div>
+      )}
+      <div style={{ marginTop: '20px' }}>
+       <label>
+        <input
+          type="checkbox"
+          className="cboxes"
+          checked={isCheckedPulseOx}
+          onChange={handleCheckboxPulseOxChange}
+        />
+        Show how to access for thrills in general
+      </label>
+      </div>
+
+      {isCheckedThrills && (
+        <div style={{ marginLeft: '10px' }}>
+          {/* Your images */}
+          <img
+            style={{
+              width: "100%", // Enlarge the width of the image
+              height: "auto", // Set height to auto to maintain aspect ratio
+              paddingTop: "5px",
+              marginRight: '80px',
+
+            }}
+            src="images/thrills.png"
+            alt="screenshot20231"
+          />
+         
+         
+        </div>
+      )}
+      <div style={{ marginTop: '20px' }}>
+       <label>
+        <input
+          type="checkbox"
+          className="cboxes"
+          checked={isCheckedThrills}
+          onChange={handleCheckboxThrillsChange}
+        />
+        Show where to access for each thrill
+      </label>
+      </div>
+
+    </div>
+    </div>
+
     <div className="w-full max-w-md">
     <div className="w-full max-w-md">
+      
      <Text
                        className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
                        size="txtCairoBold34"
