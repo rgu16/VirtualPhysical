@@ -21,8 +21,11 @@ const AbdomenMedPage= (props) => {
 
  const [lumbarL, setLumbarLValue] = useState("none");
  const [umbilical, setUmbilicalValue] = useState("none");
- const [lumbarL, setLumbarLValue] = useState("none");
+ const [lumbarR, setLumbarRValue] = useState("none");
 
+ const [iliacL, setIliacLValue] = useState("none");
+ const [hypogastric, setHypogastricValue] = useState("none");
+ const [iliacR, setIliacRValue] = useState("none");
 
  const handleHypochondriacLChange = (event) => {
   setHypochonriacLValue(event.target.value)
