@@ -172,7 +172,7 @@ const RegisterPage = (props) => {
                         <div className="flex items-center">
                           <Input
                             color="bg-blue-50"
-                            size="xs"
+                            size="rxs"
                             variant="fill"
                             value="medical-tech"
                             onChange={(e) => handleInputChange(e)} 
@@ -189,13 +189,13 @@ const RegisterPage = (props) => {
                   </div> 
                 </div>
               </div>
-              <button className="bg-indigo-A200 flex flex-col h-[50px] items-center justify-start md:px-10 sm:px-5 px-[93px] rounded-[20px] w-full"
+              <button className="bg-indigo-A200 flex flex-col mt-[15px] h-[50px] items-center justify-center md:px-10 sm:px-5 px-[93px] rounded-[20px] w-full hover:bg-indigo-A700"
                       type="submit">
-                <Text className="flex flex-row font-bold items-center justify-center leading-[20.00px] mt-2.5 text-center text-white-A700 text-xl w-full">
+                <Text className="flex flex-row font-bold items-center justify-center leading-[20.00px] text-center text-white-A700 text-xl w-full">
                   Register
                 </Text>
               </button>
-              <Link to="/"><button className='border-none bg-none text-blue-500 underline'>Return to login</button></Link>
+              <Link to="/"><button className='border-none mt-[15px] bg-none text-blue-500 underline'>Return to login</button></Link>
               </form>
               
               {navigate ? (<Navigate replace to= {navigate} />) : null}

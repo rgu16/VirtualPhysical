@@ -1,25 +1,16 @@
 import React from "react";
-
-import {  Img, Line, List, Text, NavBar, TabNav } from "components";
+import {  Img, List, Text, NavBar, TabNav, MedTechNotes } from "components";
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import Box from '@mui/material/Box';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs, { Dayjs } from 'dayjs';
-import { Link } from 'react-router-dom';
-import { useState, useRef } from 'react';
+import dayjs from 'dayjs';
+import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import { jwtDecode } from "jwt-decode";
+import { Navigate } from 'react-router-dom';
 
 const gender = [
   {
@@ -35,66 +26,142 @@ const gender = [
     label: 'other',
   },
   {
-    value: 'no selection',
+    value: '',
     label: 'no selection',
   },
 
 ];
 
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1,
-});
-
 const DemographicMedPage = (props) => {
+  const [navigate, setNavigate] = useState();
   const patient = jwtDecode(props.token).patient.split("/");
-  const [firstname, setFirstNameValue] = useState(patient[1]);
-  const [lastname, setLastNameValue] = useState(patient[0]);
-  const [genderValue, setGenderValue] = useState();
-  const [height, setHeightValue] = useState();
-  const [weight, setWeightValue] = useState();
-  const [DOB, setDOBValue] = useState(dayjs());
-  const [age, setAgeValue] = useState();
-  const [history, setHistoryValue] = useState();
-  const [profilePic, setProfilePic] = useState()
+  const [name, setNameValue] = useState(patient[1]);
+  const [email, setEmail] = useState(patient[0]);
+  const [genderValue, setGenderValue] = useState('');
+  const [height, setHeightValue] = useState('');
+  const [heightinches, setHeightInchesValue] = useState('');
+  const [weight, setWeightValue] = useState('');
+  const [DOB, setDOBValue] = useState(null);
+  const [history, setHistoryValue] = useState('');
+  const [profilePic, setProfilePic] = useState('');
   const fileInputRef = useRef(null);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [note, setNotes] = useState('');
+  const inputs = [name, email, genderValue, height, heightinches, weight, DOB, history];
+  const [complete, setComplete] = useState(false);
+  const [emailError, setEmailError] = useState('');
+  const [error, setError] = useState("");
 
-  const handleFirstNameChange = (event) => {
-    setFirstNameValue(event.target.value)
-  }
+  useEffect(() => {
+    // console.log(jwtDecode(props.token).patient.split("/"))
+    axios({
+        method: "GET",
+        url: props.proxy + "/download/demographic",
+        headers: {
+        Authorization: 'Bearer ' + props.token
+        }
+    })
+    .then((response) => {
+        const res = response.data
+        // console.log(res)
 
-  const handleLastNameChange = (event) => {
-    setLastNameValue(event.target.value)
+        setGenderValue(res.detail['gender'])
+        setHeightValue(res.detail['height'])
+        setHeightInchesValue(res.detail['heightInches'])
+        setWeightValue(res.detail['weight'])
+        // console.log(dayjs(res.detail['DOB'], "MM/DD/YYYY"))
+        setDOBValue(dayjs(res.detail['DOB'], "MM/DD/YYYY"))
+        setHistoryValue(res.detail['history'])
+      
+        if(res.hasOwnProperty("profile_pic")){
+          setProfilePic(res.profile_pic)
+        }
+        if (res.hasOwnProperty("med_note")){
+          // console.log(res.med_note)
+          setNotes(res.med_note)
+        }
+    }).catch((error) => {
+        if (error.response){
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)}
+    })
+  }, [props]);
+
+  const handleEmailChange = (e) => {
+    
+    setEmail(e.target.value);
+    if (!/^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$/.test(e.target.value)) {
+      setEmailError("Invalid email address");
+    } else {
+      setEmailError('');
+    }
   }
 
   const handleGenderChange = (event) => {
+    
     setGenderValue(event.target.value)
   }
 
-  const handleHeightChange = (event) => {
-    setHeightValue(event.target.value)
+  const [feetError, setFeetError] = useState('');
+  const handleHeightChange = (e) => {
+    
+    const value = e.target.value.replace(/[^0-9]/g, '')
+    setHeightValue(value);
+    if (value===''){
+      setFeetError('')
+    } else if (value>8 | value <1) {
+      setFeetError("Invalid height");
+    } else {
+      setFeetError('');
+    }
   }
 
-  const handleWeightChange = (event) => {
-    setWeightValue(event.target.value)
+  const [inchesError, setInchesError] = useState('');
+  const handleHeightInchesChange = (e) => {
+    
+    setHeightInchesValue(e.target.value.replace(/[^0-9]/g, ''));
+    if (e.target.value===''){
+      setInchesError('')
+    } else if (e.target.value>12 | e.target.value <0) {
+      setInchesError("Invalid height");
+    } else {
+      setInchesError('');
+    }
   }
 
+  const [weightError, setWeightError] = useState('');
+  const handleWeightChange = (e) => {
+    
+    const value = e.target.value.replace(/[^0-9]/g, '')
+    setWeightValue(value);
+    if (value===''){
+      setWeightError('');
+    } else if (value > 500 | value <2){
+      setWeightError("Invalid weight");
+    } else {
+      setWeightError('');
+    }
+  }
+
+  const [dobError, setdobError] = useState('');
   const handleDOBChange = (date) => {
+    
+    const currentDate = dayjs();
+    const selectedDate = date;
+  
+    const isWithin100Years = selectedDate.isAfter(currentDate.subtract(100, 'year')) && 
+                             selectedDate.isBefore(currentDate.add(1, 'year'));
     setDOBValue(date)
-  }
-  const handleAgeChange = (event) => {
-    setAgeValue(event.target.value)
+    if (isWithin100Years) {
+      setdobError('');
+    } else {
+      setdobError('Invalid age');
+    }
   }
 
   const handleHistoryChange = (event) => {
+    
     setHistoryValue(event.target.value)
   }
   
@@ -104,31 +171,51 @@ const DemographicMedPage = (props) => {
 
   const handleSave = (e) => {
      e.preventDefault();
-     const data = {}
-     data['gender'] = genderValue;
-     data['height'] = height;
-     data['weight'] = weight;
-     data['DOB'] = DOB.format("MM/DD/YYYY");
-     data['history'] = history;
-     console.log(data);
-     axios({
-      method:"POST",
-      url: props.proxy + "/upload_json",
-      data: {data: data, filename: '/demographic'},
-      headers: {
-        Authorization: 'Bearer ' + props.token
-        }
-    }).then((response) => {
-      const res =response.data;
-      localStorage.setItem('demographic', data);
-  })
-    .catch((error)=>{
-      if(error.response){
-        console.log(error.response)
-        console.log(error.response.status)
-        console.log(error.response.headers)
-      }
-    })
+      const filename = "/demographic/med_note";
+      axios({
+       method:"POST",
+       url: props.proxy + "/upload_json",
+       data: {data: note, filename: filename},
+       headers: {
+         Authorization: 'Bearer ' + props.token
+         }
+      }).then((response) => {
+        const data = {}
+        data['gender'] = genderValue;
+        data['height'] = height;
+        data['heightInches'] = heightinches;
+        data['weight'] = weight;
+        data['DOB'] = DOB.format("MM/DD/YYYY");
+        data['history'] = history;
+        // console.log(data);
+        axios({
+          method:"POST",
+          url: props.proxy + "/upload_json",
+          data: {data: data, filename: '/demographic/detail'},
+          headers: {
+            Authorization: 'Bearer ' + props.token
+            }
+        }).then((response) => {
+          setNavigate('/general');
+      })
+        .catch((error)=>{
+          setError("Upload failed, please try again")
+          if(error.response){
+            console.log(error.response)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+          }
+        })
+      }).catch((error)=>{
+          if(error.response){
+            setError("Upload failed, please try again")
+            console.log(error.response)
+            console.log(error.response.status)
+            console.log(error.response.headers)
+          }
+      })
+      
+     
   };
 
   const inputRefs = [
@@ -140,18 +227,21 @@ const DemographicMedPage = (props) => {
     useRef(null),
     useRef(null),
     useRef(null),
-    // Add more refs for additional text fields as needed
   ];
-   const [currentInputIndex, setCurrentInputIndex] = useState(0);
   
    const handleClick = () => {
-     const currentRef = inputRefs[currentInputIndex];
-  
-     if (currentRef && currentRef.current) {
-       currentRef.current.focus();
+     const nextInput = inputs.map((item, index)=> {
+      if (item === null | item === ''){
+        return index;
+      }
+     }).filter(index => index !== undefined);
+     if (nextInput.length > 0) {
+      const currentRef = inputRefs[nextInput[0]]
+      currentRef.current.focus();
+      currentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+     }else {
+      setComplete(true);
      }
-  
-     setCurrentInputIndex((prevIndex) => (prevIndex + 1) % inputRefs.length);
    };
 
   const handleImageUpload = (e) => {
@@ -165,7 +255,7 @@ const DemographicMedPage = (props) => {
     const formData = new FormData();
     formData.append('file', file, file.name);
     formData.append('location', "/profile_pic")
-    console.log(formData)
+    // console.log(formData)
     axios({
         method: "POST",
         url: props.proxy+"/upload_file",
@@ -175,11 +265,6 @@ const DemographicMedPage = (props) => {
         }
     }).then((response) => {
       const res = response.data
-      console.log(res)
-    
-      console.log('Server response:', response);
-      console.log('Image uploaded:', imageUrl);
-
     // Assuming the URL is nested within a 'data' property, modify this accordingly
     const imageUrl = response.data && response.data.url;
       
@@ -195,9 +280,10 @@ const DemographicMedPage = (props) => {
  
   return (
     <>
+    <div className="h-screen">
     <NavBar proxy={props.proxy} token={props.token}/>
       <div
-        className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans h-[1561px] items-center justify-start mx-auto pb-28 w-full"
+        className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans items-center justify-start mx-auto pb-28 w-full"
         style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
       >
         <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
@@ -207,50 +293,50 @@ const DemographicMedPage = (props) => {
             <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full"style={{
     paddingTop: '50px',
   }} >
-              <div className="flex flex-col gap-[41px] justify-start mb-60 w-[99%] md:w-full">
+              <div className="flex flex-col  justify-start w-[99%] md:w-full">
                 <div className="flex md:flex-col flex-row md:gap-10 items-start justify-start w-full">
-                  <div className="md:h-[560px] h-[580px] relative w-[50%] md:w-full">
+                  <div className="md:h-[560px]  relative w-[50%] md:w-full">
                       <div className="flex flex-col items-start justify-start w-full">
                         <List
-                          className="flex flex-col gap-[20px] md:ml-[0] ml-[50px] w-[49%]"
+                          className="flex flex-col gap-[10px] md:ml-[0] ml-[50px] w-[62%]"
                           orientation="vertical">      
                           <Text
                           className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
                           size="txtCairoBold34">
                           Demographics 
                           </Text>
-                          <div className="flex flex-row gap-[13px] items-center justify-between w-full" >
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-between w-full" >
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24">
                               Name:
                             </Text>
-                            <TextField  inputRef={inputRefs[0]} value = {firstname} onChange={handleFirstNameChange} required id="outlined-basic" label="required" variant="outlined" /> 
+                            <Text className="text-xl w-[63%] md:text-[22px] text-black-900 sm:text-xl">{name}</Text>
                           </div>
-                          <div className="flex flex-row gap-[15px] items-start justify-between w-full">
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-between w-full">
                             <Text
-                              className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24">
                               Email:
-                            </Text>                        
-                            <TextField  inputRef={inputRefs[1]} value = {lastname} onChange={handleLastNameChange} required id="outlined-basic" label="required" variant="outlined" />
+                            </Text>     
+                            <Text className="text-xl w-[63%] md:text-[22px] text-black-900 sm:text-xl">{email}</Text>                   
                           </div>
-                          <div className="flex flex-row gap-[15px] items-center justify-between w-full">
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-between w-full">
                              <Text
-                              className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24" 
                             >
                               Gender:
                             </Text>
                             <TextField
-                              className = "w-[70%]"
+                              className = "w-[63%] text-xl"
                               inputRef={inputRefs[2]}
                               value = {genderValue} 
                               onChange={handleGenderChange}
                               id="outlined-select-currency-native"
                               select
                               label=""
-                              defaultValue="no selection"
+                              // defaultValue="no selection"
                               SelectProps={{
                                 native: true,
                               }}
@@ -263,70 +349,72 @@ const DemographicMedPage = (props) => {
                               ))}
                             </TextField>
                           </div>
-                          <div className="flex flex-row gap-[15px] items-center justify-between w-full">
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-between w-full">
                              <Text
-                               className="mt-[5px] text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                                size="txtCairoBold24">
                                Height:
                              </Text>
+                             <div className ="flex flex-row w-[26%]"></div>
                             <TextField
+                              className = "w-[63%]"
                               id="outlined-start-adornment"
-                              sx={{ m: 1, width: '25ch' }}
                               InputProps={{
                                 endAdornment: <InputAdornment position="end">ft</InputAdornment>,
                               }}
                               inputRef={inputRefs[3]}
                               value = {height} 
+                              error={feetError !== ''}
+                              label={feetError}
                               onChange={handleHeightChange}/>
+                              <TextField
+                              className = "w-[63%]"
+                              id="outlined-start-adornment"
+                              InputProps={{
+                                endAdornment: <InputAdornment position="end">in</InputAdornment>,
+                              }}
+                              inputRef={inputRefs[4]}
+                              value = {heightinches} 
+                              error={inchesError !== ''}
+                              label={inchesError}
+                              onChange={handleHeightInchesChange}/>
                           </div>
-                          <div className="flex flex-row gap-[15px] items-center justify-between w-full">  
-                          <Text
-                              className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                              size="txtCairoBold24"
-                            >
-                              Weight:
-                            </Text>          
-                          <OutlinedInput 
-                            id="outlined-adornment-weight"
-                            endAdornment={<InputAdornment position="end">lbs</InputAdornment>}
-                            aria-describedby="outlined-weight-helper-text"
-                            inputProps={{
-                              'aria-label': 'weight',
-                            }}
-                            inputRef={inputRefs[4]}
-                            value = {weight} 
-                            onChange={handleWeightChange}
-                          />                      
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-between w-full">
+                             <Text
+                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                               size="txtCairoBold24">
+                               Weight:
+                             </Text>
+                            <TextField
+                              className = "w-[63%]"
+                              id="outlined-start-adornment"
+                              InputProps={{
+                                endAdornment: <InputAdornment position="end">lbs</InputAdornment>,
+                              }}
+                              inputRef={inputRefs[5]}
+                              value = {weight}
+                              error={weightError !== ''}
+                              label={weightError} 
+                              onChange={handleWeightChange}/>
                           </div>
-                           <div className="flex flex-row gap-[15px] items-center justify-between w-full">
+                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-between w-full">
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24"
                             >
-                              Date of Birth:{" "}
+                              Birthday:{" "}
                             </Text>
                             
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                              <DemoContainer components={['DatePicker']}>
-                                <DatePicker  inputRef={inputRefs[5]} label="" defaultValue={dayjs('1989-04-17')} onChange={handleDOBChange} />
+                              <DemoContainer  components={['DatePicker']}>
+                                <DatePicker inputRef={inputRefs[6]} value={DOB} error={dobError !== ''} label={dobError} onChange={handleDOBChange} />
                               </DemoContainer>
                             </LocalizationProvider>
                           </div>
-                         {/*  <div className="flex flex-row gap-[15px] items-center justify-between w-full">
-                            <Text
-                              className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                              size="txtCairoBold24"
-                            >
-                              Age:
-                            </Text>
-                            <TextField value = {age} onChange={handleAgeChange} inputRef={inputRefs[6]} required id="outlined-basic" label="required" variant="outlined" />
-                            
-                          </div>*/}
                         </List>
                       </div>
-                    {/* </div> */}
                   </div>
-                  <div className="flex flex-col h-full items-start justify-start w-[70%] mt-[80px]">  
+                  <div className="flex flex-col items-start justify-start w-[70%] mt-[80px]">  
                       <Img
                         className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
                         src= {profilePic}
@@ -351,9 +439,13 @@ const DemographicMedPage = (props) => {
                         <Text className="font-semibold ml-2.5 md:ml-[0] text-black-900 text-xl">Upload Profile Picture</Text>
                         </div>
                     </button>
-                    </div>
+                  </div>
+                  
                 </div>
-                <div className="flex flex-col items-start justify-start md:ml-[0] ml-[35px] w-[41%] md:w-full">
+                <div className="absolute left-[1218px] top-[240px]">
+                <MedTechNotes notes={note} token={props.token} proxy={props.proxy} tab="abdomen" setNotes={setNotes}/>
+                </div>
+                <div className="flex flex-col items-start justify-start mt-[25px] md:ml-[0] ml-[85px] w-[41%] md:w-full">
                   <Text style={{
     paddingBottom: '20px',  paddingLeft: '15px', 
   }}
@@ -364,14 +456,12 @@ const DemographicMedPage = (props) => {
                   </Text>
                   <TextField  value = {history} onChange={handleHistoryChange} fullWidth sx={{ m: 1 }}
           id="outlined-multiline-static"
-          label="Multiline"
+          // label="Multiline"
           multiline
           rows={4}
        
-          inputRef={inputRefs[6]}
+          inputRef={inputRefs[7]}
         />
-         
-           {/* <div style={{paddingTop: "2rem"}}>The values is {genderValue} {DOB}</div>  */}
                     <input
                       ref={fileInputRef}
                       type="file"
@@ -380,18 +470,30 @@ const DemographicMedPage = (props) => {
                       onChange={handleImageUpload}
                     />
                     <div style={{paddingTop: "2rem"}}>
-      <Stack spacing={2} direction="row">
-     <Button variant="contained" onClick={handleClick}>Next Input</Button>
-     <Link to="/general"><Button variant="outlined" onClick={(e) => handleSave(e)} >Save</Button>   </Link>
-   </Stack>
    </div>
                     
-               
                 </div>
+                <div className = 'flex flex-row items-center justify-start gap-[25px] ml-[90px] w-[41%]'>
+                
+                  {complete? <button className="bg-indigo-A200 flex md:flex-col flex-row md:gap-5 ml-5px items-center justify-center mt-2.5 w-[20%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                      onClick={(e) => handleSave(e)}
+                      >
+                      <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Save</Text>
+                  </button>:
+                  <button className="bg-indigo-A200 flex md:flex-col flex-row md:gap-5 ml-5px items-center justify-center mt-2.5 w-[20%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                  onClick={handleClick}
+                  >
+                  <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Next Input</Text>
+              </button>}
+              <Text className="font-semibold md:ml-[0] text-red-700 text-xl">{error}</Text>
+              {navigate ? (<Navigate replace to= {navigate} />) : null}
+                  
+        </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

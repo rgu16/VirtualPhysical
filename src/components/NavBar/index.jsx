@@ -12,35 +12,35 @@ const NavBar = (props) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [navigate, setNavigate] = useState(); 
 
-  useEffect(() => {
-    // const handleTokenExpiration = () => {
-    //   if (props.checkToken()) {
-    //     props.removeToken();
-    //     setNavigate("/")
-    //     localStorage.clear()
-    //   }
-    // };
-    axios({ 
-        method: "GET",
-        url: props.proxy + "/profile",
-        headers: {
-        Authorization: 'Bearer ' + token
-        }
-    })
-    .then((response) => {
-        const res = response.data
-        setUser(res.data);
-        setProfilePic(res.pic);
-    }).catch((error) => {
-        console.log(error.response)
-        console.log(error.response.status)
-        console.log(error.response.headers)
-        if (error.response && error.response.status === 401) {
-            setNavigate("/")
-            localStorage.clear()
-        }
-    })
-  }, [token, props.proxy]);
+  // useEffect(() => {
+  //   // const handleTokenExpiration = () => {
+  //   //   if (props.checkToken()) {
+  //   //     props.removeToken();
+  //   //     setNavigate("/")
+  //   //     localStorage.clear()
+  //   //   }
+  //   // };
+  //   axios({ 
+  //       method: "GET",
+  //       url: props.proxy + "/profile",
+  //       headers: {
+  //       Authorization: 'Bearer ' + token
+  //       }
+  //   })
+  //   .then((response) => {
+  //       const res = response.data
+  //       setUser(res.data);
+  //       setProfilePic(res.pic);
+  //   }).catch((error) => {
+  //       console.log(error.response)
+  //       console.log(error.response.status)
+  //       console.log(error.response.headers)
+  //       if (error.response && error.response.status === 401) {
+  //           setNavigate("/")
+  //           localStorage.clear()
+  //       }
+  //   })
+  // }, [token, props.proxy]);
   return (
     <>
       <header className={props.className}>

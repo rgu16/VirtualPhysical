@@ -92,7 +92,7 @@ export default function App() {
                         <ProtectedRoute isAllowed={!!token}>
                             {userType === 'physician' ? 
                             <DemographicPage proxy={proxy} token={token}/> : 
-                            <DemographicMedPage proxy={proxy} token={token}/>}
+                            <DemographicMedPage proxy={proxy} token={token} setToken={setToken}/>}
                         </ProtectedRoute>
                     }/>
                     <Route path="/general"

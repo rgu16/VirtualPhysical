@@ -13,6 +13,7 @@ const shapes = {
   round: "rounded-bl-none rounded-br-none rounded-tl-[12px] rounded-tr-[12px]",
 };
 const sizes = {
+  rxs: "pb-[5px] pl-[11px] pr-3 pt-[1px]",
   xs: "pb-[13px] pl-[11px] pr-3 pt-3",
   sm: "pb-[9px] pt-3.5 px-[9px]",
   md: "pb-3 pt-[15px] px-3",

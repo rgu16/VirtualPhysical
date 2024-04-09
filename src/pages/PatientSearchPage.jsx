@@ -192,7 +192,7 @@ const PatientSearchPage = (props) => {
               </div>
               <button className="bg-indigo-A200 flex flex-col h-[50px] mt-[20px] items-center justify-start md:px-10 sm:px-5 px-[93px] rounded-[20px] w-full"
                       onClick={handleSubmit}>
-                <Text className="flex flex-row font-bold items-center justify-center leading-[20.00px] mt-2.5 text-center text-white-A700 text-xl w-full">
+                <Text className="flex flex-row font-bold items-center justify-center leading-[20.00px] mt-2.5 text-center text-white-A700 text-xl w-full hover:bg-indigo-A700">
                   Search
                 </Text>
               </button>

@@ -28,22 +28,17 @@ export const DemographicPage = (props) => {
   const lastname = useState(patient[0]);
 
   const [genderValue, setGenderValue] = useState();
+  const [heightInches, setHeightInchesValue] = useState();
   const [height, setHeightValue] = useState();
   const [weight, setWeightValue] = useState();
   const [DOB, setDOBValue] = useState();
-  const [age, setAgeValue] = useState();
+  
   const [history, setHistoryValue] = useState();
 
   const [profilePic, setProfilePic] = useState()
-  // const fileInputRef = useRef(null);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [note, setNotes] = useState();
-
-    const [saveVariant, setSaveVariant] = useState('outlined');
-
-    const handleSaveClick = () => {
-      setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
-    };
+  const [medNote, setMedNotes] = useState();
 
     useEffect(() => {
       axios({
@@ -59,22 +54,20 @@ export const DemographicPage = (props) => {
 
           setGenderValue(res.detail['gender'])
           setHeightValue(res.detail['height'])
+          setHeightInchesValue(res.detail['heightInches'])
           setWeightValue(res.detail['weight'])
-          const temp = res.detail['DOB'].split("T")[0]
-
-          console.log(temp)
-          // setDOBValue(res.detail['DOB'])
-          setDOBValue(temp)
-          // setDOBValue(dayjs(res.detail['DOB']).format("MM/DD/YYYY"))
-
+          setDOBValue(res.detail['DOB'])
           setHistoryValue(res.detail['history'])
           
           if(res.hasOwnProperty("note")){
             setNotes(res.note)
-            console.log(res.note)
           }
           if(res.hasOwnProperty("profile_pic")){
             setProfilePic(res.profile_pic)
+          }
+          if (res.hasOwnProperty("med_note")){
+            console.log(res.med_note)
+            setMedNotes(res.med_note)
           }
       }).catch((error) => {
           if (error.response){
@@ -86,40 +79,33 @@ export const DemographicPage = (props) => {
 
   return (
     <>
+    <div className="h-screen">
       <NavBar proxy={props.proxy} token={props.token}/>
 
-    <div
-      className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans h-[1561px] items-center justify-start mx-auto pb-28 w-full"
-      style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
-    >
-      
-      <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
-       <div></div>
-        <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
-          <TabNav tab="demographic"></TabNav>
-      
-      <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full"
-        style={{
-        paddingTop: '50px',
-        }} >
-
-
-              <div className="flex flex-col gap-[41px] justify-start mb-60 w-[99%] md:w-full">
-                <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between w-full">
-                  <div className="md:h-[560px] h-[580px] w-[30%] md:w-full">
+      <div
+        className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans items-center justify-start mx-auto pb-28 w-full"
+        style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
+      >
+        <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
+         <div></div>
+          <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
+            <TabNav tab="demographic"></TabNav>
+            <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full"style={{
+    paddingTop: '50px',
+  }} >
+              <div className="flex flex-col  justify-start w-[99%] md:w-full">
+                <div className="flex md:flex-col flex-row md:gap-10 items-start justify-start w-full">
+                  <div className="md:h-[560px]  relative w-[100%] md:w-full">
                       <div className="flex flex-col items-start justify-start w-full">
-
                         <List
-                          className="flex flex-col gap-[20px] md:ml-[0] ml-[50px] w-full"
-                          orientation="vertical">    
-
+                          className="flex flex-col gap-[10px] md:ml-[0] ml-[50px] w-[62%]"
+                          orientation="vertical">      
                           <Text
-                            className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
-                            size="txtCairoBold34">
-                            Demographics 
+                          className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
+                          size="txtCairoBold34">
+                          Demographics 
                           </Text>
-
-                          <div className="flex flex-col items-start">  
+                          <div className="flex flex-col items-start ml-[50px]">  
                             <Img
                               className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
                               src= {profilePic}
@@ -134,143 +120,93 @@ export const DemographicPage = (props) => {
                               style = {{display: imageLoaded? "none": "block"}}
                               />
                           </div>
-
-
-                          <div className="flex flex-row gap-[13px] items-center justify-start w-full" >
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full" >
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24">
                               Name:
                             </Text>
-
-                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl" variant="outlined">{firstname}</Text>
+                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{firstname}</Text>
                           </div>
-
-                          <div className="flex flex-row gap-[15px] items-start justify-start w-full">
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
                             <Text
-                              className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24">
                               Email:
                             </Text>                        
                             <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl" variant="outlined">{lastname}</Text>
                           </div>
-
-                          <div className="flex flex-row gap-[15px] items-center justify-start w-full">
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
                              <Text
-                              className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24" 
                             >
                               Gender:
                             </Text>
-
-                            <Text
-                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                              value = {genderValue} 
-                              id="outlined-select-currency-native"
-                              select
-                              label=""
-                              defaultValue="no selection"
-                              SelectProps={{
-                                native: true,
-                              }}
-                              helperText=""
-                            >
-                            {genderValue} </Text>
+                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{genderValue}</Text>
                           </div>
-
-                          <div className="flex flex-row gap-[15px] items-center justify-start w-full">
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
                              <Text
-                               className="mt-[5px] text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                                size="txtCairoBold24">
                                Height:
                              </Text>
-
-                            <Text
-                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                              id="outlined-start-adornment"
-                              sx={{ m: 1, width: '25ch' }}
-                              // InputProps={{
-                              //   endAdornment: <InputAdornment position="end">ft</InputAdornment>,
-                              // }}
-                              value = {height} 
-                              >{height}</Text>
+                             <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{height} ft</Text>
+                             <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{heightInches} in</Text>
                           </div>
-
-                          <div className="flex flex-row gap-[15px] items-center justify-start w-full">  
-                          <Text
-                              className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                              size="txtCairoBold24"
-                            >
-                              Weight:
-                            </Text>  
-
-                            <Text
-                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                              id="outlined-start-adornment"
-                              sx={{ m: 1, width: '25ch' }}
-                              InputProps={{
-                                endAdornment: <InputAdornment position="end">ft</InputAdornment>,
-                              }}
-                              value = {height} 
-                              >{weight} lbs</Text>                
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
+                             <Text
+                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                               size="txtCairoBold24">
+                               Weight:
+                             </Text>
+                             <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{weight} lbs</Text>
                           </div>
-
-                           <div className="flex flex-row gap-[15px] items-center justify-start w-full">
+                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24"
                             >
-                              Date of Birth:{" "}
-                            </Text>
-
-                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl" variant="outlined">{DOB}</Text>
-                          </div>
-
-                          <div className="flex flex-row gap-[15px] items-center justify-between w-full">
-                            <Text
-                              className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                              size="txtCairoBold24"
-                            >
-                              Age:
-                            </Text>
-
-                            <Text value = {age} required id="outlined-basic" label="required" variant="outlined" />
-                          </div>
-
-                          <div className="flex flex-row gap-[15px] items-center justify-start w-full">
-                            <Text 
-                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                              size="txtCairoBold24"
-                            >
-                              Patient History:
+                              Birthday:{" "}
                             </Text>
                             
-                            <Text  
-                            className="flex flex-row gap-[15px] items-center justify-between w-full"
-                              id="outlined-multiline-static"
-                              label="Multiline"
-                              multiline
-                              rows={4}
-                            >
-                              {history}
-                            </Text>
+                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{DOB}</Text>
                           </div>
-
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-start justify-start w-full">
+                            <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24"
+                            >
+                              Patient History:{" "}
+                            </Text>
+                            
+                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{history}</Text>
+                          </div>
                         </List>
                       </div>
-                      
                   </div>
-
-                  <div>
+                  <div className="absolute left-[1218px] top-[320px]">
+                    {medNote !== "" && 
+                      <div className="flex flex-col items-start justify-start w-[400px] ml-[50px] mr-[50px] mb-[20px]">
+                      <Text
+                        className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                        size="txtCairoBold24"
+                      >
+                        Med Tech Notes:{" "}
+                      </Text>
+                      
+                      <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{medNote}</Text>
+                      </div>}
                     <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="/demographic"></PhysicianNotes>
                   </div>
-
                 </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    </div>
     </>
   );
 };
+

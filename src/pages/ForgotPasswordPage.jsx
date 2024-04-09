@@ -84,13 +84,15 @@ const ForgotPasswordPage = (props) => {
                       </div> 
                     </div>
                   </div>
-                  <button className="bg-indigo-A200 flex flex-col h-[50px] items-center justify-start md:px-10 sm:px-5 px-[93px] rounded-[20px] w-full"
+                  <div className="flex flex-col w-full h-full justify-start items-center">
+                  <button className="bg-indigo-A200 flex flex-col h-[50px] items-center justify-center md:px-10 sm:px-5 px-[93px] rounded-[20px] w-full hover:bg-indigo-A700"
                           type='submit'>
-                    <Text className="flex flex-row font-bold items-center justify-center leading-[20.00px] mt-2.5 text-center text-white-A700 text-xl w-full">
+                    <Text className="flex flex-row font-bold items-center justify-center leading-[20.00px] text-center text-white-A700 text-xl w-full">
                       Reset
                     </Text>
                   </button>
-                  <Link to="/"><button className='border-none bg-none text-blue-500 underline'>Return to login</button></Link>
+                  <Link to="/"><button className='border-none bg-none text-blue-500 underline mt-[15px]'>Return to login</button></Link>
+                  </div>
                 </form>
               </div>
             </div>

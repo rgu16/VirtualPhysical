@@ -58,13 +58,15 @@ const PatientSearchPage = (props) => {
                 alt="untitleddesign"
               />
             </div>
-            <div className="flex flex-col md:gap-10 items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full">
+            {/* <form onSubmit={handleSubmit} class = "flex flex-col md:gap-10 w-full items-center justify-start md:mt-0 mt-[22px] md:w-full"> */}
+            <form onSubmit={handleSubmit} class="flex flex-col md:gap-10 items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full">
               <div className="flex flex-col gap-2 items-center justify-start w-full">
                 <Text className="font-bold sm:text-4xl md:text-[38px] text-[40px] text-black-900 text-center">
                   Create Patient Chart
                 </Text>
                 <div className="flex flex-col font-helvetica relative w-full">
                 {error? <p>{error.data["msg"]}</p> : null}
+                
                   <div className="flex flex-col gap-[15px] items-center justify-start mx-auto w-full">
                     <div className="flex flex-col items-start justify-start pt-0.5 w-full">
                       <Text className="font-bold text-base text-black-900">Name</Text>
@@ -97,6 +99,7 @@ const PatientSearchPage = (props) => {
                           onChange={(e) => handleInputChange(e)} 
                           type="email"
                           placeholder="youremail@gmail.com"
+                          autoComplete="off" 
                           id="email" 
                           name="email" 
                           required
@@ -106,14 +109,16 @@ const PatientSearchPage = (props) => {
                   </div> 
                 </div>
               </div>
-              <button className="bg-indigo-A200 flex flex-col h-[50px] items-center justify-start md:px-10 sm:px-5 px-[93px] rounded-[20px] w-full mt-[20px]"
-                      onClick={handleSubmit}>
-                <Text className="flex flex-row font-bold items-center justify-center leading-[20.00px] mt-2.5 text-center text-white-A700 text-xl w-full">
+              <button className="bg-indigo-A200 flex flex-col h-[50px] items-center justify-center md:px-10 sm:px-5 px-[93px] rounded-[20px] w-full mt-[50px] hover:bg-indigo-A700"
+                      type='submit'>
+                <Text className="flex flex-row font-bold items-center justify-center leading-[20.00px] text-center text-white-A700 text-xl w-full">
                   Create Chart
                 </Text>
               </button>
+              
               {navigate ? (<Navigate replace to= {navigate} />) : null}
-            </div>
+            </form>
+            {/* </form> */}
           </div>
         </div>
       </div>
