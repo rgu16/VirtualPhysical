@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Img, Button } from 'components';
+import { jwtDecode } from "jwt-decode";
 
 const SendEmailComponent = (props) => {
   const [sendVariant, setSendVariant] = useState('text');
@@ -9,6 +10,7 @@ const SendEmailComponent = (props) => {
   const [cardiologistContact, setCardiologistContact] = useState(null);
 
   const token = props.token;
+
 
   // GET CARDIOLOGIST INFORMATION
   useEffect(() => {
@@ -26,13 +28,10 @@ const SendEmailComponent = (props) => {
       setCardiologistContact(response.data.email);
     })
     .catch((error) => {
-      props.removeToken();
-      localStorage.clear();
       console.log(error.response);
       console.log(error.response.status);
       console.log(error.response.headers);
     });
-    handleTokenExpiration();
   }, [token, props]);
 
   // GET PATIENT INFORMATION
