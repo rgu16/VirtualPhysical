@@ -28,6 +28,9 @@ const PulsesMedPage = (props) => {
  const [diastolic, setDiastolicValue] = useState();
  const [jvp, setJVPValue] = useState();
  const [heartrate, setHeartRateValue] = useState();
+ const [isCheckedCRT, setIsCheckedCRT] = useState(false);
+ const [isCheckedPulseOx, setIsCheckedPulseOx] = useState(false);
+ const [isCheckedThrills, setIsCheckedThrills] = useState(false);
 
  const handleRadialChange = (event) => {
    setRadialValue(event.target.value)
@@ -63,6 +66,16 @@ const handleJVPChange = (event) => {
 const handleHeartRateChange = (event) => {
   setHeartRateValue(event.target.value)
 }
+
+const handleCheckboxCRTChange = () => {
+  setIsCheckedCRT(!isCheckedCRT);
+};
+const handleCheckboxPulseOxChange = () => {
+  setIsCheckedPulseOx(!isCheckedPulseOx);
+};
+const handleCheckboxThrillsChange = () => {
+  setIsCheckedThrills(!isCheckedThrills);
+};
 
  const handleSave = (e) => {
    e.preventDefault();
@@ -217,67 +230,116 @@ const handleHeartRateChange = (event) => {
                 <div className="flex md:flex-1 flex-col md:gap-10 gap-[292px] items-end justify-start w-[79%] md:w-full">
                   <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between w-full">
                     <div className="flex flex-col items-center justify-start md:mt-0 mt-[9px]">
-                      {/*<Text
-                        className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                        size="txtCairoBold24"
-                      >
-                        Feel for tenderness and input grading for each region:{" "}
- </Text>*/}
+                    <div className="absolute top-0 left-20 w-1/2" style={{paddingTop: '50px',paddingLeft: '900px'}}>
+    <div className= "flex flex-col items-start justify-start w-[600px] h-full ">
+    <Text className="font-bold text-2xl text-black-900">References: </Text>
+ <div>
+ </div>
+   {isCheckedCRT && (
+        <div style={{ marginLeft: '10px' }}>
+          {/* Your images */}
+          <img
+            style={{
+              width: "100%", // Enlarge the width of the image
+              height: "auto", // Set height to auto to maintain aspect ratio
+              paddingTop: "5px",
+              marginRight: '80px',
+
+            }}
+            src="images/bloodpressure.png"
+            alt="screenshot20231"
+          />
+         
+         
+        </div>
+      )}
+      <div style={{ marginTop: '20px' }}>
+       <label>
+        <input
+          type="checkbox"
+          className="cboxes"
+          checked={isCheckedCRT}
+          onChange={handleCheckboxCRTChange}
+        />
+        Show how to measure systolic and diastolic blood pressure
+      </label>
+      </div>
+
+      {isCheckedPulseOx && (
+        <div style={{ marginLeft: '10px' }}>
+          {/* Your images */}
+          <img
+            style={{
+              width: "75%", // Enlarge the width of the image
+              height: "auto", // Set height to auto to maintain aspect ratio
+              paddingTop: "30px",
+              marginRight: '80px',
+
+            }}
+            src="images/jvp.png"
+            alt="screenshot20231"
+          />
+         
+         
+        </div>
+      )}
+      <div style={{ marginTop: '150px' }}>
+       <label>
+        <input
+          type="checkbox"
+          className="cboxes"
+          checked={isCheckedPulseOx}
+          onChange={handleCheckboxPulseOxChange}
+        />
+        Show how to measure jugular venous pressure (JVP)
+      </label>
+      </div>
+
+      {isCheckedThrills && (
+        <div style={{ marginLeft: '10px' }}>
+          {/* Your images */}
+          <img
+            style={{
+              width: "70%", // Enlarge the width of the image
+              height: "auto", // Set height to auto to maintain aspect ratio
+              paddingTop: "30px",
+              marginRight: '80px',
+
+            }}
+            src="images/bpm.png"
+            alt="screenshot20231"
+          />
+         
+         
+        </div>
+      )}
+      <div style={{ marginTop: '50px' }}>
+       <label>
+        <input
+          type="checkbox"
+          className="cboxes"
+          checked={isCheckedThrills}
+          onChange={handleCheckboxThrillsChange}
+        />
+        Show how to measure heart rate using pulse ox
+      </label>
+      </div>
+
+    </div>
+    </div>
                      
 
 
-                    </div>
-            
-                    <Img onMouseEnter={() => setIsHoveredOne(true)}
-                     onMouseLeave={() => setIsHoveredOne(false)}
-                      className="h-[43px] w-[43px]"
-                      src="images/img_profile_black_900.svg"
-                      alt="profile"
-                    />
-                   
+                    </div> 
                   </div>
-                 
-                  <Img onMouseEnter={() => setIsHoveredTwo(true)}
-                   onMouseLeave={() => setIsHoveredTwo(false)}
-                    className="h-[43px] w-[43px]"
-                    src="images/img_profile_black_900.svg"
-                    alt="profile_One"
-                  />
                 </div>
-                <Img onMouseEnter={() => setIsHoveredThree(true)}
-                    onMouseLeave={() => setIsHoveredThree(false)}
-                    className="h-[43px] w-[43px]"
-                    src="images/img_profile_black_900.svg"
-                    alt="profile_One"
-                  />
                   </div>
                 <div className="flex flex-col md:gap-10 gap-[301px] justify-start">
                 
                 </div>
               </div>
             </div>
-            <Img
-             style = {{ opacity: isHoveredOne ? 1 : 0, // Show the image if hovered, otherwise hide
-             transition: 'opacity 0.3s ease', }} // Add a smooth transition effect
-              className="absolute h-[300px] object-cover left-[75%] w-[27%]"
-              src="images/radial.png"
-              alt="screenshot20231"
-            />
-            <Img  style = {{width: '370px', height: '320px', opacity: isHoveredTwo ? 1 : 0, // Show the image if hovered, otherwise hide
-             transition: 'opacity 0.3s ease', }}
-              className="absolute bottom-[17%] h-[364px] object-cover bottom-[28%] left-[74%] w-[35%]"
-              src="images/brachialpulse.png"
-              alt="screenshot20231_One"
-           
-            />
           
-            <Img style = {{width: '380px', height: '280px', opacity: isHoveredThree ? 1 : 0, // Show the image if hovered, otherwise hide
-             transition: 'opacity 0.3s ease', }}
-              className="absolute bottom-[17%] h-[364px] object-cover top-[76%] left-[76%] w-[31%]"
-              src="images/carotidpulse.png"
-              alt="screenshot20231_One"
-           
-            />
             {/*  <div className="absolute bottom-[0] flex flex-col items-center justify-start left-[0] w-[47%]">*/}
              {/*   <div className="flex flex-col items-center justify-start w-full">*/}
                  {/* <div className="flex flex-col items-center justify-end w-full">*/}

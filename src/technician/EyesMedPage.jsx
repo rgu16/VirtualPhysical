@@ -12,9 +12,7 @@ import MedTechNotes from "../components/MedTechNotes";
 
 const EyesMedPage = (props) => {
     const [value, setValue] = useState("none");
-    const [isHoveredOne, setIsHoveredOne] = useState(false);
-    const [isHoveredTwo, setIsHoveredTwo] = useState(false);
-    const [isHoveredThree, setIsHoveredThree] = useState(false);
+
     const [note, setNotes] = useState();
     const [imageLoaded, setImageLoaded] = useState(false);
     const fileInputRef = useRef(null);

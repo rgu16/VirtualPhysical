@@ -21,11 +21,7 @@ const AbdomenMedPage= (props) => {
 
  const [lumbarL, setLumbarLValue] = useState("none");
  const [umbilical, setUmbilicalValue] = useState("none");
- const [lumbarR, setLumbarRValue] = useState("none");
- 
- const [iliacL, setIliacLValue] = useState("none");
- const [hypogastric, setHypogastricValue] = useState("none");
- const [iliacR, setIliacRValue] = useState("none");
+ const [lumbarL, setLumbarLValue] = useState("none");
 
 
  const handleHypochondriacLChange = (event) => {
@@ -148,46 +144,113 @@ const handleIliacRChange = (event) => {
 
                     </div>
             
-                    <Img
-                      className="h-[43px] w-[43px]"
-                      src="images/img_profile_black_900.svg"
-                      alt="profile"
-                    />
+                    
                   </div>
-                  <Img
-                    className="h-[43px] w-[43px]"
-                    src="images/img_profile_black_900.svg"
-                    alt="profile_One"
-                  />
+                  
                 </div>
                 <div className="flex flex-col md:gap-10 gap-[301px] justify-start">
-                  <Text
-                    className="md:ml-[0] ml-[18px] text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                    size="txtCairoBold24"
-                  >
-                    {" "}
-                    How to score{" "}
-                  </Text>
-                  <Text
-                    className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                    size="txtCairoBold24"
-                  >
-                    {" "}
-                    Location of each region{" "}
-                  </Text>
+                  
+                <div className="absolute top-10 left-20 w-1/2" style={{paddingTop: '10px',paddingLeft: '900px'}}>
+    <div className= "flex flex-col items-start justify-start w-[600px] h-full ">
+    <Text className="font-bold text-2xl text-black-900">References: </Text>
+ <div>
+ </div>
+   {isCheckedCRT && (
+        <div style={{ marginLeft: '10px' }}>
+          {/* Your images */}
+          <img
+            style={{
+              width: "80%", // Enlarge the width of the image
+              height: "auto", // Set height to auto to maintain aspect ratio
+              paddingTop: "5px",
+              marginRight: '80px',
+
+            }}
+            src="images/img_screenshot20231206_199x360.png"
+            alt="screenshot20231"
+          />
+         
+         
+        </div>
+      )}
+      <div style={{ marginTop: '20px' }}>
+       <label>
+        <input
+          type="checkbox"
+          className="cboxes"
+          checked={isCheckedCRT}
+          onChange={handleCheckboxCRTChange}
+        />
+        Show the grading scale
+      </label>
+      </div>
+
+      {isCheckedPulseOx && (
+        <div style={{ marginLeft: '10px' }}>
+          {/* Your images */}
+          <img
+            style={{
+              width: "75%", // Enlarge the width of the image
+              height: "auto", // Set height to auto to maintain aspect ratio
+              paddingTop: "5px",
+              marginRight: '80px',
+
+            }}
+            src="images/img_screenshot20231206_364x409.png"
+            alt="screenshot20231"
+          />
+         
+         
+        </div>
+      )}
+      <div style={{ marginTop: '20px' }}>
+       <label>
+        <input
+          type="checkbox"
+          className="cboxes"
+          checked={isCheckedPulseOx}
+          onChange={handleCheckboxPulseOxChange}
+        />
+        Show location of each region
+      </label>
+      </div>
+
+      {isCheckedThrills && (
+        <div style={{ marginLeft: '10px' }}>
+          {/* Your images */}
+          <img
+            style={{
+              width: "100%", // Enlarge the width of the image
+              height: "auto", // Set height to auto to maintain aspect ratio
+              paddingTop: "5px",
+              marginRight: '80px',
+
+            }}
+            src="images/palpation.png"
+            alt="screenshot20231"
+          />
+         
+         
+        </div>
+      )}
+      <div style={{ marginTop: '20px' }}>
+       <label>
+        <input
+          type="checkbox"
+          className="cboxes"
+          checked={isCheckedThrills}
+          onChange={handleCheckboxThrillsChange}
+        />
+        Show detailed steps on how to perform palpation
+      </label>
+      </div>
+
+    </div>
+    </div>
+
                 </div>
               </div>
             </div>
-            <Img
-              className="absolute h-[199px] object-cover right-[3%] top-[6%] w-[27%]"
-              src="images/img_screenshot20231206_199x360.png"
-              alt="screenshot20231"
-            />
-            <Img
-              className="absolute bottom-[17%] h-[364px] object-cover right-[0] w-[31%]"
-              src="images/img_screenshot20231206_364x409.png"
-              alt="screenshot20231_One"
-            />
             {/*  <div className="absolute bottom-[0] flex flex-col items-center justify-start left-[0] w-[47%]">*/}
              {/*   <div className="flex flex-col items-center justify-start w-full">*/}
                  {/* <div className="flex flex-col items-center justify-end w-full">*/}

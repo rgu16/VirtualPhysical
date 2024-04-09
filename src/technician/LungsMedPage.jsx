@@ -45,6 +45,10 @@ const LungsMedPage = (props) => {
 
   const [breathingValue, setBreathingValue] = useState('');
   const [breathingStatus, setBreathingStatus] = useState('');
+  const [isCheckedCRT, setIsCheckedCRT] = useState(false);
+  const [isCheckedPulseOx, setIsCheckedPulseOx] = useState(false);
+  const [isCheckedThrills, setIsCheckedThrills] = useState(false);
+
 
   const [saveVariant, setSaveVariant] = useState('outlined');
 
@@ -53,6 +57,16 @@ const LungsMedPage = (props) => {
   };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const handleCheckboxCRTChange = () => {
+    setIsCheckedCRT(!isCheckedCRT);
+  };
+  const handleCheckboxPulseOxChange = () => {
+    setIsCheckedPulseOx(!isCheckedPulseOx);
+  };
+  const handleCheckboxThrillsChange = () => {
+    setIsCheckedThrills(!isCheckedThrills);
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -195,6 +209,7 @@ return (
          <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full" >
                     
                 <div style={{paddingLeft: '150px', paddingTop: '50px'}} className="flex w-full min-h-screen p-5">
+   
    <div className="w-full max-w-md">
   
   
@@ -216,18 +231,109 @@ return (
                       size="txtCairoBold24"
                     >
                       Feel for tenderness and input grading for each region:{" "}
-</Text>*/}
+</Text>*/} <div className="absolute top-0 left-20 w-1/2" style={{paddingTop: '175px',paddingLeft: '900px'}}>
+    <div className= "flex flex-col items-start justify-start w-[600px] h-full ">
+    <Text className="font-bold text-2xl text-black-900">References: </Text>
+ <div>
+ </div>
+   {isCheckedCRT && (
+        <div style={{ marginLeft: '10px' }}>
+          {/* Your images */}
+          <img
+            style={{
+              width: "80%", // Enlarge the width of the image
+              height: "auto", // Set height to auto to maintain aspect ratio
+              paddingTop: "5px",
+              marginRight: '80px',
+
+            }}
+            src="images/breathingrate.png"
+            alt="screenshot20231"
+          />
+         
+         
+        </div>
+      )}
+      <div style={{ marginTop: '20px' }}>
+       <label>
+        <input
+          type="checkbox"
+          className="cboxes"
+          checked={isCheckedCRT}
+          onChange={handleCheckboxCRTChange}
+        />
+        Show how to measure breathing rate
+      </label>
+      </div>
+
+      {isCheckedPulseOx && (
+        <div style={{ marginLeft: '10px' }}>
+          {/* Your images */}
+          <img
+            style={{
+              width: "75%", // Enlarge the width of the image
+              height: "auto", // Set height to auto to maintain aspect ratio
+              paddingTop: "50px",
+              marginRight: '80px',
+
+            }}
+            src="images/breathinglabored.png"
+            alt="screenshot20231"
+          />
+         
+         
+        </div>
+      )}
+      <div style={{ marginTop: '70px' }}>
+       <label>
+        <input
+          type="checkbox"
+          className="cboxes"
+          checked={isCheckedPulseOx}
+          onChange={handleCheckboxPulseOxChange}
+        />
+        Show scale for labored breathing
+      </label>
+      </div>
+
+      {isCheckedThrills && (
+        <div style={{ marginLeft: '10px' }}>
+          {/* Your images */}
+          <img
+            style={{
+              width: "70%", // Enlarge the width of the image
+              height: "auto", // Set height to auto to maintain aspect ratio
+              paddingTop: "70px",
+              marginRight: '80px',
+
+            }}
+            src="images/lungrecordingref.jpg"
+            alt="screenshot20231"
+          />
+         
+         
+        </div>
+      )}
+      <div style={{ marginTop: '70px' }}>
+       <label>
+        <input
+          type="checkbox"
+          className="cboxes"
+          checked={isCheckedThrills}
+          onChange={handleCheckboxThrillsChange}
+        />
+        Show detailed steps on how to lung sounds
+      </label>
+      </div>
+
+    </div>
+    </div>
                    
 
 
                   </div>
           
-                  <Img onMouseEnter={() => setIsHoveredOne(true)}
-                   onMouseLeave={() => setIsHoveredOne(false)}
-                    className="h-[43px] w-[43px]"
-                    src="images/img_profile_black_900.svg"
-                    alt="profile"
-                  />
+                
                 </div>
                
                 {/*<Img onMouseEnter={() => setIsHoveredTwo(true)}
@@ -255,18 +361,7 @@ return (
               </div>
             </div>
           </div>
-          <Img style = {{ opacity: isHoveredOne ? 1 : 0, // Show the image if hovered, otherwise hide
-           transition: 'opacity 0.3s ease', }} // Add a smooth transition effect
-            className="absolute h-[350px] object-cover left-[75%] top-[6%] bottom-[50%] w-[30%]"
-            src="images/lungregion.png"
-            alt="screenshot20231"
-          />
-          <Img style = {{ opacity: isHoveredTwo ? 1 : 0, // Show the image if hovered, otherwise hide
-           transition: 'opacity 0.3s ease', }} // Add a smooth transition effect
-            className="absolute bottom-[10%] h-[465px] object-cover left-[73.5%] w-[31%]"
-            src="images/lungregion.png"
-            alt="screenshot20231_One"
-          />
+         
        <div style={{paddingLeft: '150px', paddingTop: '50px'}} className="flex w-full min-h-screen p-5">
   <div className="w-full max-w-md">
   <Text
