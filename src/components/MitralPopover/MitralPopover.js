@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
+import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import { orange } from '@mui/material/colors';
 import AudioPlayer from "components/AudioPlayer/AudioPlayer.js"
@@ -19,16 +20,14 @@ export default function MitralPopover(props) {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
-
-  
   return (
     <div>
       <Button 
         aria-describedby={id} 
         variant="contained" 
-        color="error"
+        color="inherit"
         onClick={handleClick} 
-        style={{ padding: 1, minWidth: 25 }}> 
+        style={{ padding: 1, minWidth: 25, backgroundColor: "#ce8a01", color:'#fafafa'}}> 
       M
       </Button>
       <Popover

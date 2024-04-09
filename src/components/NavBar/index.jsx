@@ -13,13 +13,6 @@ const NavBar = (props) => {
   const [navigate, setNavigate] = useState(); 
 
   // useEffect(() => {
-  //   // const handleTokenExpiration = () => {
-  //   //   if (props.checkToken()) {
-  //   //     props.removeToken();
-  //   //     setNavigate("/")
-  //   //     localStorage.clear()
-  //   //   }
-  //   // };
   //   axios({ 
   //       method: "GET",
   //       url: props.proxy + "/profile",
@@ -41,10 +34,12 @@ const NavBar = (props) => {
   //       }
   //   })
   // }, [token, props.proxy]);
+
   return (
     <>
       <header className={props.className}>
         <div className = "flex flex-row gap-5 items-start justify-start w-full bg-white-A700 h-[95px]">
+          <div className='w-[20px]'></div>
           <Img
             className="h-[35px] w-[35px] mt-[30px] ml-[100px]"
             src="images/img_settings.svg"

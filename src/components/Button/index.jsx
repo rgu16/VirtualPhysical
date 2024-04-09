@@ -50,7 +50,7 @@ Button.propTypes = {
     "black_900",
     "indigo_A200",
     "white_A700",
-    "gray_200_01",
+    "gray_200_01"
   ]),
 };
 

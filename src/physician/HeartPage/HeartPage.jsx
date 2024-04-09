@@ -5,7 +5,8 @@ import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import "./style.css";
 import Typography from '@mui/material/Typography';
-import { NavBar, PhysicianNotes, Img, Text } from 'components'
+import { NavBar, PhysicianNotes, Img, Text, List, TabNav } from 'components';
+import { Navigate } from 'react-router-dom';
 import AtrialPopover from 'components/AtrialPopover/AtrialPopover.js'
 import MitralPopover from 'components/MitralPopover/MitralPopover.js'
 import TricuspidPopover from 'components/TricuspidPopover/TricuspidPopover.jsx'
@@ -25,6 +26,7 @@ export const HeartPage = (props) => {
   const [apthrill, setApthrillValue] = useState();
   const [ecgimg, setEcgimgValue] = useState();
   const [note, setNotes] = useState();
+  const [medNote, setMedNotes] = useState("");
   // Popup values
   const [atrialdiaphragm, setAtrialdiaphragmValue] = useState();
   const [atrialbell, setAtrialbellValue] = useState();
@@ -34,6 +36,10 @@ export const HeartPage = (props) => {
   const [tricuspidbell, setTricuspidbellValue] = useState();
   const [mitraldiaphragm, setMitraldiaphragmValue] = useState();
   const [mitralbell, setMitralbellValue] = useState();
+
+  // const [navigate, setNavigate] = useState();
+  // const [complete, setComplete] = useState(false);
+  // const [error, setError] = useState("");
 
   useEffect(() => {
     axios({
@@ -111,200 +117,155 @@ export const HeartPage = (props) => {
 
 
   return (
-    <div className="heart-tab">
-      <div className="overlap-wrapper">
-        <div className="overlap">
-          <div className="overlap-group">
-            
-            <div className="div">
-              <div className="atrialpopover">
-                <AtrialPopover proxy={props.proxy} token={props.token} 
-                               diaphragm={atrialdiaphragm} bell={atrialbell}
-                               setStatus={setStatusAtrial} status={statusAtrial}
-                               tab={'heart'} name={'Atrial'}></AtrialPopover>
-              </div>
-              <div className="pulmonarypopover">
-                <PulmonaryPopover proxy={props.proxy} token={props.token} 
-                                  diaphragm={pulmonarydiaphragm} bell={pulmonarybell}
-                                  setStatus={setStatusPulmonary} status={statusPulmonary}
-                                  tab={'heart'} name={'Pulmonary'}></PulmonaryPopover>
-              </div>
-              <div className="tricuspidpopover">
-                <TricuspidPopover proxy={props.proxy} token={props.token} 
-                                  diaphragm={tricuspiddiaphragm} bell={tricuspidbell}
-                                  setStatus={setStatusTricuspid} status={statusTricuspid}
-                                  tab={'heart'} name={'Tricuspid'}></TricuspidPopover>
-              </div>
-              <div className="mitralpopover">
-                <MitralPopover proxy={props.proxy} token={props.token} 
-                               diaphragm={mitraldiaphragm} bell={mitralbell}
-                               setStatus={setStatusMitral} status={statusMitral}
-                               tab={'heart'} name={'Mitral'}></MitralPopover>
-              </div>                            
-            </div>
+<>
+    <div className="h-screen">
+      <NavBar proxy={props.proxy} token={props.token}/>
 
+      <div
+        className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans items-center justify-start mx-auto pb-28 w-full"
+        style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
+      >
+        <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
+         <div></div>
+          <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
+            <TabNav tab="heart"></TabNav>
+            <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full"style={{
+    paddingTop: '50px',
+  }} >
+              <div className="flex flex-col  justify-start w-[99%] md:w-full">
+                <div className="flex md:flex-col flex-row md:gap-10 items-start justify-start w-full">
+                  <div className="md:h-[560px]  relative w-[100%] md:w-full">
+                      <div className="flex flex-col items-start justify-start w-full">
+                        <List
+                          className="flex flex-col gap-[10px] md:ml-[0] ml-[50px] w-[62%]"
+                          orientation="vertical">      
+                          <Text
+                          className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
+                          size="txtCairoBold34">
+                          Heart
+                          </Text>
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full" >
+                            <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                              Parasternal heave:
+                            </Text>
+                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{paraheave}</Text>
+                          </div>
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
+                            <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                              Tricuspid/mitral thrill:
+                            </Text>                        
+                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl" variant="outlined">{tmthrill}</Text>
+                          </div>
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
+                             <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24" 
+                            >
+                              Pulmonary/tricuspid thrill:
+                            </Text>
+                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{ptthrill}</Text>
+                          </div>
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
+                             <Text
+                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                               size="txtCairoBold24">
+                               Aortic/pulmonary thrill:
+                             </Text>
+                             <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{apthrill}</Text>
+                          </div>
+                          <div className="flex flex-row ml-[50px] gap-[5px] mt-[20px]">
+                          <Text
+                               className="text-3xl md:text-[22px] text-black-900 sm:text-xl"
+                               size="txtCairoBold24">
+                               Heart Auscultation
+                             </Text>
+                             <Text
+                               className="text-3xl md:text-[22px] text-black-900 sm:text-xl"
+                               >
+                               (anterior only):
+                             </Text>
+                          </div>
 
-
-
-            <div className="heart-ausc">
-              <p className="heart-auscultation">
-                <span className="text-wrapper">Heart Auscultation </span>
-                <span className="span">(anterior only)</span>
-              </p>
-            </div>
-
-
-
-
-            <div className="thrill">
-              <p className="normal">
-                <text
-                  className="taylor"
-                  type="text"
-                  placeholder="no data available"
-                  >{apthrill}</text>
-              </p>
-              <p className="span-wrapper">
-                <span className="text-wrapper-3">Aortic/pulmonary thrill:</span>
-              </p>
-            </div>
-
-
-
-            <div className="thrill-2">
-              <p className="abnormal">
-                <text
-                  className="taylor"
-                  type="text"
-                  placeholder="no data available"
-                  >{ptthrill}</text>
-              </p>
-              <p className="span-wrapper">
-                <span className="text-wrapper-3">Pulmonary/tricuspid thrill:</span>
-              </p>
-            </div>
-
-
-            <div className="thrill-3">
-              <p className="p">
-                <text
-                  className="taylor"
-                  type="text"
-                  placeholder="no data available"
-              >{tmthrill}</text>
-              </p>
-              <p className="span-wrapper">
-                <span className="text-wrapper-3">Tricuspid/mitral thrill:</span>
-              </p>
-            </div>
-
-            {/* Pulmonary Tricuspid Thrill */}
-            <div className="parasternal-heave">
-              <p className="abnormal-2">
-                <text
-                  className="taylor"
-                  type="text"
-                  placeholder="no data available"
-              >{paraheave}</text>
-              </p>
-              <p className="span-wrapper">
-                <span className="text-wrapper-3">Parasternal heave:</span>
-              </p>
-
-            </div>
-
-
-
-            {/* Notes section */}
-            <div className="notes">
-              <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="heart"></PhysicianNotes>
-            </div>
-
-
-
-
-            {/* Interpreting ECG */}
-            <p className="normal-2">
-              <span className="text-wrapper-7">Normal?</span>
-            </p>
-            <span className="tick-circle">
-              <div>
-                <CheckandXButtons setStatus={setStatus} status={status}
-                                  proxy ={props.proxy} token={props.token} 
-                                  tab={'heart'} name={'EKG'}/>
-              </div>            
-            </span>
-
-          </div>
-
-
-
-          {/* TABS */}
-          <div className="tabs">
-            <div className="frame">
-              <a href="/demographics" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-8">Demographics</span>
-              </a>
-            </div>
-            <div className="general-wrapper">
-              <a href="/general" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-8">General</span>
-              </a>
-            </div>
-            <div className="lungs-wrapper">
-              <a href="/lungs" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-8">Lungs</span>
-              </a>
-            </div>
-            <div className="pulses-wrapper">
-              <a href="/pulses" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-8">Pulses</span>
-              </a>
-            </div>
-            <div className="abdomen-wrapper">
-              <a href="/abdomen" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-8">Abdomen</span>
-              </a>
-            </div>
-            <div className="heart-wrapper">
-              <a href="/heart" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-8">Heart</span>
-              </a>
-            </div>
-            <div className="legs-wrapper">
-              <a href="/legs" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-8">Legs</span>
-              </a>
-            </div>
-            <div className="summary-wrapper">
-              <a href="/summary" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-8">Summary</span>
-              </a>
+                          <div className="flex flex-row ml-[100px] h-[379px] w-[553px] justify-start items-start" 
+                        style={{ backgroundImage: "url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/tempimagefen4er-1-1@2x.png)" }}>
+                                  <div className="flex flex-col ml-[234px] justify-start items-start h-full mt-[115px]  gap-[43px]">
+                                      <AtrialPopover proxy={props.proxy} token={props.token} 
+                                                  diaphragm={atrialdiaphragm} bell={atrialbell}
+                                                  setStatus={setStatusAtrial} status={statusAtrial}
+                                                  tab={'heart'} name={'Atrial'}></AtrialPopover>
+                                      <TricuspidPopover proxy={props.proxy} token={props.token} 
+                                                        diaphragm={tricuspiddiaphragm} bell={tricuspidbell}
+                                                        setStatus={setStatusTricuspid} status={statusTricuspid}
+                                                        tab={'heart'} name={'Tricuspid'}></TricuspidPopover>
+                                </div>
+                                <div className="flex flex-col ml-[37px] mt-[115px]">
+                                  <PulmonaryPopover proxy={props.proxy} token={props.token} 
+                                                    diaphragm={pulmonarydiaphragm} bell={pulmonarybell}
+                                                    setStatus={setStatusPulmonary} status={statusPulmonary}
+                                                    tab={'heart'} name={'Pulmonary'}></PulmonaryPopover>
+                                </div>
+                                <div className="flex flex-col ml-[40px] mt-[240px]">
+                                  <MitralPopover proxy={props.proxy} token={props.token} 
+                                                  diaphragm={mitraldiaphragm} bell={mitralbell}
+                                                  setStatus={setStatusMitral} status={statusMitral}
+                                                  tab={'heart'} name={'Mitral'}></MitralPopover>
+                                </div>
+                          </div>
+                          <div className="flex flex-col gap-[5px] mt-[20px] ml-[50px] items-start justify-start w-full">
+                          <Text
+                               className="text-3xl md:text-[22px] text-black-900 sm:text-xl"
+                               size="txtCairoBold24">
+                               Single-Lead ECG Recording:
+                             </Text>
+                          <Img
+                              src= {ecgimg}
+                            />
+                          </div>
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
+                          <Text
+                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                               >
+                               Normal?
+                             </Text>
+                              {/* <span className="text-wrapper-7">Normal?</span> */}
+                            
+                            <span className="flex flex-row">
+                              <div>
+                                <CheckandXButtons setStatus={setStatus} status={status}
+                                                  proxy ={props.proxy} token={props.token} 
+                                                  tab={'heart'} name={'EKG'}/>
+                              </div>   
+                                     
+                            </span>
+                            </div>
+                        </List>
+                      </div>
+                  </div>
+                  <div className="absolute left-[1218px] top-[320px]">
+                    {(medNote !== "") && 
+                      <div className="flex flex-col items-start justify-start w-[400px] ml-[50px] mr-[50px] mb-[20px]">
+                      <Text
+                        className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                        size="txtCairoBold24"
+                      >
+                        Med Tech Notes:{" "}
+                      </Text>
+                      
+                      <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{medNote}</Text>
+                      </div>}
+                    <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="/heart"></PhysicianNotes>
+                  </div>
+                </div>
             </div>
           </div>
-          
-          <NavBar proxy={props.proxy} token={props.token} /> {/* Display NavBar at the top */}
-
-
         </div>
       </div>
-
-
-
-
-      <p className="single-lead-ECG">
-      <span className="text-wrapper">Single-Lead ECG Recording</span>
-      </p>
-
-      <div className="ecg-picture">
-        <Img
-          src= {ecgimg}
-        />
-      </div>
-
-
-
-
     </div>
+    </div>
+    </>
   );
 };

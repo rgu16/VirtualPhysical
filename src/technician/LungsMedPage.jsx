@@ -3,14 +3,14 @@ import React from "react";
 
 
 
-import { Img, Line, List, Text, NavBar, TabNav } from "components";
+import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes } from "components";
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { useRef, useState } from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import {Link } from "react-router-dom";
+import {Navigate } from "react-router-dom";
 import LungPopover from "components/LungPopover/LungPopover.jsx"
 import LungUploadLeftTop from "components/LungPopover/LungUploadLeftTop.js"
 import LungUploadLeftMiddle from "components/LungPopover/LungUploadLeftMiddle.js"
@@ -42,6 +42,11 @@ const gender = [
 
 
 const LungsMedPage = (props) => {
+
+  const [note, setNotes] = useState('');
+  const [navigate, setNavigate] = useState();
+  const [complete, setComplete] = useState(false);
+  const [error, setError] = useState("");
 
   const [breathingValue, setBreathingValue] = useState('');
   const [breathingStatus, setBreathingStatus] = useState('');
@@ -121,8 +126,24 @@ const [isHoveredTwo, setIsHoveredTwo] = useState(false);
       Authorization: 'Bearer ' + props.token
       }
   }).then((response) => {
-    const res =response.data;
-    localStorage.setItem('lungs', data);
+    axios({
+      method:"POST",
+      url: props.proxy + "/upload_json",
+      data: {data: note, filename: '/lungs/med_note'},
+      headers: {
+        Authorization: 'Bearer ' + props.token
+        }
+    }).then((response) => {
+      setNavigate('/pulses');
+  })
+    .catch((error)=>{
+      setError("Upload failed, please try again")
+      if(error.response){
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)
+      }
+    })
 })
   .catch((error)=>{
     if(error.response){
@@ -196,227 +217,207 @@ const inputRefs = [
 
 
 return (
- <>
- <NavBar proxy={props.proxy} token={props.token} />
-   <div
-     className="bg-cover bg-no-repeat bg-white-A700 flex flex-col font-dmsans h-[1561px] items-center justify-start mx-auto pb-28 w-full"
-     style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
-   >
-     <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
-     <div></div>
-       <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
-       <TabNav tab="lungs"></TabNav>
-         <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full" >
-                    
-                <div style={{paddingLeft: '150px', paddingTop: '50px'}} className="flex w-full min-h-screen p-5">
-   
-   <div className="w-full max-w-md">
-  
-  
-   <div className="absolute bg-white-A700 bottom-[8%] flex flex-col font-cairo gap-6 h-[1000px] md:h-auto inset-x-[0] justify-start max-w-[1695px] mx-auto pb-6 pt-8 px-5 rounded-bl-[12px] rounded-br-[12px] w-full">
-
-
-
-
-      <div className="md:h-[1277px] sm:h-[3072px] h-[370px] relative w-[84%] md:w-full">
-       
-        <div className="absolute md:h-[1277px] sm:h-[3072px] h-[925px] inset-[0] justify-center m-auto w-[98%] md:w-full">
-          <div className="absolute flex flex-col items-center justify-start left-[1%] top-[0] w-[92%]">
-            <div className="flex md:flex-col flex-row gap-[23px] items-center justify-between w-full">
-              <div className="flex md:flex-1 flex-col md:gap-10 gap-[292px] items-end justify-start w-[79%] md:w-full">
-                <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between w-full">
-                  <div className="flex flex-col items-center justify-start md:mt-0 mt-[9px]">
-                    <div className="absolute top-0 left-20 w-1/2" style={{paddingTop: '175px',paddingLeft: '900px'}}>
-    <div className= "flex flex-col items-start justify-start w-[600px] h-full ">
-    <Text className="font-bold text-2xl text-black-900">References: </Text>
- <div>
- </div>
-   {isCheckedCRT && (
-        <div style={{ marginLeft: '10px' }}>
-          {/* Your images */}
-          <img
-            style={{
-              width: "80%", // Enlarge the width of the image
-              height: "auto", // Set height to auto to maintain aspect ratio
-              paddingTop: "5px",
-              marginRight: '80px',
-
-            }}
-            src="images/breathingrate.png"
-            alt="screenshot20231"
-          />
-         
-         
-        </div>
-      )}
-      <div style={{ marginTop: '20px' }}>
-       <label>
-        <input
-          type="checkbox"
-          className="cboxes"
-          checked={isCheckedCRT}
-          onChange={handleCheckboxCRTChange}
-        />
-        Show how to measure breathing rate
-      </label>
-      </div>
-
-      {isCheckedPulseOx && (
-        <div style={{ marginLeft: '10px' }}>
-          {/* Your images */}
-          <img
-            style={{
-              width: "75%", // Enlarge the width of the image
-              height: "auto", // Set height to auto to maintain aspect ratio
-              paddingTop: "50px",
-              marginRight: '80px',
-
-            }}
-            src="images/breathinglabored.png"
-            alt="screenshot20231"
-          />
-         
-         
-        </div>
-      )}
-      <div style={{ marginTop: '70px' }}>
-       <label>
-        <input
-          type="checkbox"
-          className="cboxes"
-          checked={isCheckedPulseOx}
-          onChange={handleCheckboxPulseOxChange}
-        />
-        Show scale for labored breathing
-      </label>
-      </div>
-
-      {isCheckedThrills && (
-        <div style={{ marginLeft: '10px' }}>
-          {/* Your images */}
-          <img
-            style={{
-              width: "70%", // Enlarge the width of the image
-              height: "auto", // Set height to auto to maintain aspect ratio
-              paddingTop: "70px",
-              marginRight: '80px',
-
-            }}
-            src="images/lungrecordingref.jpg"
-            alt="screenshot20231"
-          />
-         
-         
-        </div>
-      )}
-      <div style={{ marginTop: '70px' }}>
-       <label>
-        <input
-          type="checkbox"
-          className="cboxes"
-          checked={isCheckedThrills}
-          onChange={handleCheckboxThrillsChange}
-        />
-        Show detailed steps on how to lung sounds
-      </label>
-      </div>
-
-    </div>
-    </div>
-                   
-
-
-                  </div>
-          
-                
-                </div>
-               
-
-              </div>
-              <div className="flex flex-col md:gap-10 gap-[301px] justify-start">
-                <Text
-                  className="md:ml-[0] ml-[18px] text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                  size="txtCairoBold24"
-                >
-                  {" "}
-                  {" "}
-                </Text>
-                <Text
-                  className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                  size="txtCairoBold24"
-                >
-                  {" "}
-                  {" "}
-                </Text>
-              </div>
-            </div>
-          </div>
-         
-       <div style={{paddingLeft: '150px', paddingTop: '50px'}} className="flex w-full min-h-screen p-5">
-  <div className="w-full max-w-md">
-  <Text
-                    className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
-                    size="txtCairoBold34"
-                  >
-                  
-                   Lungs Inspection
-                  </Text>
-    <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '22px'}}>
-        {" "}
-        Qualitative description on patient's breathing: {" "}
-    
-     </h4>
-     <div style={{paddingTop: '20px' }}  className="flex flex-row gap-[13px] items-center justify-between w-full" >
-          
+  <>
+  <div className="h-screen">
+  <NavBar proxy={props.proxy} token={props.token}/>
+    <div
+      className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans items-center justify-start mx-auto pb-28 w-full"
+      style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
+    >
+      <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
+       <div></div>
+        <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
+          <TabNav tab="lungs"></TabNav>
+          <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full"style={{
+  paddingTop: '50px',
+}} >
+            <div className="flex flex-col  justify-start w-[99%] md:w-full">
+              <div className="flex md:flex-col flex-row md:gap-10 items-start justify-start ">
+                <div className="md:h-[560px]  relative w-[70%] md:w-full">
+                    <div className="flex flex-col items-start justify-start w-full">
+                      <List
+                        className="flex flex-col gap-[10px] md:ml-[0] ml-[50px] w-[80%]"
+                        orientation="vertical">      
                         <Text
-                          className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                          size="txtCairoBold24"
-                        >
-                          Breathing Rate:
+                        className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
+                        size="txtCairoBold34">
+                        Lungs
                         </Text>
-                 
-     <TextField  value = {breathingrate}
-onChange={handleBreathingRateChange }
-     inputRef={inputRefs[0]}
-      variant="outlined"
-      id="outlined-number"
-      label="breaths/min"
-      type="number"
-      InputLabelProps={{
-        shrink: true,
-      }}
-    />
-   </div>
-  <div  style={{paddingTop: '45px'}} className="flex flex-row gap-[12px] items-center justify-between w-full" >
-                         <Text
-                          className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                          size="txtCairoBold24"
-                        >
-                          Is breathing labored?
-                        </Text>
-     
-    <TextField
-         inputRef={inputRefs[1]}
-         value = {breathinglabor}
-         onChange={handleBreathingLaborChange}
-         id="outlined-select-currency-native"
-         select
-         label="Native select"
-         defaultValue="no selection"
-         SelectProps={{
-           native: true,
-         }}
-         helperText="Please select one of the options"
-       >
-         {gender.map((option) => (
-           <option key={option.value} value={option.value}>
-             {option.label}
-           </option>
-         ))}
-       </TextField>
-     </div>
+                        <div className="flex flex-col gap-[13px] ml-[50px] items-start justify-between w-full" >
+                        <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                             Qualitative description on patient's breathing:
+                          </Text>
+                        </div>
+                        <div className="flex flex-col gap-[13px] ml-[80px] items-start justify-between w-full" >
+                            <div className="flex flex-row items-center gap-[10px] w-[50%] justify-between">
+                            <div className="flex flex-row gap-[13px]">
+                          <Text
+                              className="text-[22px] md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                             Breathing Rate:
+                          </Text>
+                          <div className="relative group flex flex-row">
+                            <button onClick={handleCheckboxCRTChange}>
+                              <img
+                              className="h-[36px] w-[36px]"
+                              src="images/img_profile_black_900.svg"
+                              alt="profile_One"/>
+                            </button>
+                            <span style={{ whiteSpace: 'nowrap' }}
+                            className=" absolute top-[20px] left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                              Show how to measure breathing rate
+                            </span>
+                          </div>
+                          </div>
+                          <TextField  value = {breathingrate}
+                              onChange={handleBreathingRateChange }
+                                  inputRef={inputRefs[0]}
+                                    variant="outlined"
+                                    id="outlined-number"
+                                    label="breaths/min"
+                                    type="number"
+                                    InputLabelProps={{
+                                      shrink: true,
+                                    }}
+                                  />
+                          </div>
+                        </div>
+                        {isCheckedCRT && (
+                            <div style={{ marginLeft: '10px' }}>
+                              <img
+                                style={{
+                                  width: "40%", // Enlarge the width of the image
+                                  height: "auto", // Set height to auto to maintain aspect ratio
+                                  paddingTop: "5px",
+                                  marginLeft: '80px',
 
-   <div className="lungs-tab" >
+                                }}
+                                src="images/breathingrate.png"
+                                alt="screenshot20231"
+                              />
+                            
+                            
+                            </div>
+                          )}
+                        <div className="flex flex-col gap-[13px] ml-[80px] items-start justify-between w-full" >
+                        <div className="flex flex-row items-center gap-[10px] w-[50%] justify-between">
+                          <div className="flex flex-row gap-[13px]">
+                          <Text
+                              className="text-[22px] md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                             Is breathing labored?
+                          </Text>
+                          <div className="relative group flex flex-row">
+                            <button onClick={handleCheckboxPulseOxChange}>
+                              <img
+                              className="h-[36px] w-[36px]"
+                              src="images/img_profile_black_900.svg"
+                              alt="profile_One"/>
+                            </button>
+                            <span style={{ whiteSpace: 'nowrap' }}
+                            className="absolute top-[20px] left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                            Show scale for labored breathing
+                            </span>
+                          </div>
+                          </div>
+                          <TextField
+                            className="w-[40%]"
+                            inputRef={inputRefs[1]}
+                            value = {breathinglabor}
+                            onChange={handleBreathingLaborChange}
+                            id="outlined-select-currency-native"
+                            select
+                            defaultValue="no selection"
+                            SelectProps={{
+                              native: true,
+                            }}
+                          >
+                            {gender.map((option) => (
+                              <option key={option.value} value={option.value}>
+                                {option.label}
+                              </option>
+                            ))}
+                          </TextField>
+                          </div>
+                        </div>
+                        {isCheckedPulseOx && (
+                          <div style={{ marginLeft: '10px' }}>
+                            <img
+                              style={{
+                                width: "75%", // Enlarge the width of the image
+                                height: "auto", // Set height to auto to maintain aspect ratio
+                                paddingTop: "50px",
+                                marginLeft: '80px',
+
+                              }}
+                              src="images/breathinglabored.png"
+                              alt="screenshot20231"
+                            />
+                          
+                          
+                          </div>
+
+                        )}
+                        <div className="flex flex-row gap-[13px] ml-[50px] items-start justify-start w-full" >
+                          <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                             Record posterior auscultation of lung sounds using diaphragm of stethoscope
+                          </Text>
+                          <div className="relative group flex flex-row">
+                            <button onClick={handleCheckboxThrillsChange}>
+                              <img
+                              className="h-[36px] w-[36px]"
+                              src="images/img_profile_black_900.svg"
+                              alt="profile_One"/>
+                            </button>
+                            <span style={{ whiteSpace: 'nowrap' }}
+                            className="absolute top-[20px] left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                            Show detailed steps on how to record lung sounds
+                            </span>
+                          </div>
+                        </div>
+                        <div className = "flex flex-row">
+                        
+                        <div className="flex flex-row ml-[80px] h-[478px] w-[100%]" 
+                        style={{ backgroundImage: "url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/lung-img-1@2x.png)" }}>
+                          <div className= "flex flex-col w-[37%]"></div>
+                          <div className= "flex flex-col h-full">
+                            <div className= "flex flex-col h-[60%]"></div>
+                          <LungUploadLeftTop proxy={props.proxy} token={props.token}></LungUploadLeftTop>
+                          <LungUploadLeftMiddle  proxy={props.proxy} token={props.token}></LungUploadLeftMiddle>
+                          <LungUploadLeftBottom proxy={props.proxy} token={props.token}></LungUploadLeftBottom>
+                          </div>
+                          <div className= "flex flex-col w-[16%]"></div>
+                          <div className= "flex flex-col h-full">
+                            <div className= "flex flex-col h-[60%]"></div>
+                          <LungUploadRightTop proxy={props.proxy} token={props.token}></LungUploadRightTop>
+                          <LungUploadRightMiddle  proxy={props.proxy} token={props.token}></LungUploadRightMiddle>
+                          <LungUploadRightBottom proxy={props.proxy} token={props.token}></LungUploadRightBottom>
+                          </div>
+
+                        </div>
+                        {isCheckedThrills? (
+                          <div >
+                            <img
+                              style={{
+                                width: "85%", // Enlarge the width of the image
+                                height: "auto", // Set height to auto to maintain aspect ratio
+                              }}
+                              src="images/lungrecordingref.jpg"
+                              alt="screenshot20231"
+                            />
+                          
+                          
+                          </div>
+                        ): <div className= "flex flex-col w-[81%]"></div>}
+                        </div>
+
+                        {/* <div className="lungs-tab" >
+  
+                          
             <div className="overlap-2">
 
               <div className="left-lung" >
@@ -467,37 +468,40 @@ onChange={handleBreathingRateChange }
 
             </div>
 
-    </div>
-   <div  style={{paddingTop: '24px', paddingBottom: '90px'}}><Text
-                          className="mt-0.5 text-2xl md:text-[20px] text-black-800 sm:text-xl"
-                          size="txtCairoBold24"
-                        >
-                          Record posterior auscultation of lung sounds using diaphragm of stethoscope:
-                        </Text></div>        
-                                
-    <div style={{paddingTop: "29rem"}}>
-    <Stack spacing={2} direction="row">
-   <Button variant="contained" onClick={handleClick}>Next Input</Button>
-   <Link to="/pulses"><Button variant="outlined" onClick={(e) => handleSave(e)} >Save</Button>   </Link>
- </Stack>
- </div>
-   </div>
-            
-</div>
+    </div> */}
+                      </List>
+                    </div>
+                </div>
+
+                
+              </div>
+              <div className="absolute left-[1218px] top-[240px]">
+              <MedTechNotes notes={note} token={props.token} proxy={props.proxy} tab="abdomen" setNotes={setNotes}/>
+              </div>
+              <div className = 'flex flex-row items-center justify-start gap-[25px] ml-[90px] w-[41%]'>
+              
+                {complete? <button className="bg-indigo-A200 flex md:flex-col flex-row md:gap-5 ml-5px items-center justify-center mt-2.5 w-[20%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                    onClick={(e) => handleSave(e)}
+                    >
+                    <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Save</Text>
+                </button>:
+                <button className="bg-indigo-A200 flex md:flex-col flex-row md:gap-5 ml-5px items-center justify-center mt-2.5 w-[20%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                onClick={handleClick}
+                >
+                <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Next Input</Text>
+            </button>}
+            <Text className="font-semibold md:ml-[0] text-red-700 text-xl">{error}</Text>
+            {navigate ? (<Navigate replace to= {navigate} />) : null}
+                
+      </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    </div>
+  </>
 
-
-   
-   </div>
-  
- </div>
-          </div>
-       </div>
-     </div>
-   </div>
- </>
 );
 };
 

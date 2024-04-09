@@ -162,7 +162,7 @@ const EyesMedPage = (props) => {
                           <div className="relative group flex flex-row">
                             <button onClick={handleCheckboxChange}>
                               <img
-                              className="h-[43px] w-[43px]"
+                              className="h-[36px] w-[36px]"
                               src="images/img_profile_black_900.svg"
                               alt="profile_One"/>
                             </button>

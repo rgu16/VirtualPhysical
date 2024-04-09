@@ -71,21 +71,23 @@ export default function LungPopover(props) {
 
   return (
     <div>
-     <Button aria-describedby={id} variant="contained" color="error" onClick={handleClick} style={{ padding: 1, minWidth: 25 }}> L
+     <Button aria-describedby={id} variant="contained" color="error" onClick={(e)=>setAnchorEl(e.currentTarget)} style={{ padding: 1, minWidth: 25 }}> L
       </Button>
       <Popover
         id={id}
+        disableScrollLock={true}
         open={open}
         anchorEl={anchorEl}
+        anchorReference="anchorEl"
         onClose={handleClose}
         anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
+          vertical: 'center',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
       >
             <Typography sx={{ p: 2 }}>
                 <div>
@@ -98,18 +100,16 @@ export default function LungPopover(props) {
                      accept="audio/*" // Accept only image files
                      onChange={handleAudioUpload}
                    />
-               <button
-  className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0 roundedButton"
-  style={{ background: '#5974F6',  borderRadius: '20px', width: '250px'}}
-  onClick={handleUploadClick}
->
-  <Img
-    className="h-7 md:ml-[0] ml-[0] md:mt-0 mt-1 w-7 "
-    src="images/audioupload.png"
-    alt="television"
-  />
-  <Text  style={{color: 'white' }} className="font-semibold ml-2.5 md:ml-[0] text-xl">Upload diaphram audio</Text>
-</button>
+                   <button className="bg-indigo-A200 justify-evenly flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0 h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                      onClick={handleUploadClick}
+                      >
+                        <Img
+                          className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
+                          src="images/img_television_white.svg"
+                          alt="television"
+                        />
+                      <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Upload diaphram audio</Text>
+                  </button>
 <br></br>
 
   <h2>Stethoscope Recording - Diaphragm</h2>
