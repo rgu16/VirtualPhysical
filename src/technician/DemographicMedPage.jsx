@@ -445,7 +445,7 @@ const DemographicMedPage = (props) => {
                 <div className="absolute left-[1218px] top-[240px]">
                 <MedTechNotes notes={note} token={props.token} proxy={props.proxy} tab="abdomen" setNotes={setNotes}/>
                 </div>
-                <div className="flex flex-col items-start justify-start mt-[25px] md:ml-[0] ml-[85px] w-[41%] md:w-full">
+                <div className="flex flex-col items-start justify-start mt-[25px] md:ml-[0] ml-[85px] w-[60%] md:w-full">
                   <Text style={{
     paddingBottom: '20px',  paddingLeft: '15px', 
   }}
