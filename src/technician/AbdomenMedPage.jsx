@@ -15,14 +15,38 @@ import axios from 'axios';
 
 
 const AbdomenMedPage= (props) => {
-  const [hypochondriacL, setHypochonriacLValue] = useState("none");
- const [epigastric, setEpigastricValue] = useState("none");
- const [hypochondriacR, setHypochonriacRValue] = useState("none");
+//   const [hypochondriacL, setHypochonriacLValue] = useState("none");
+//  const [epigastric, setEpigastricValue] = useState("none");
+//  const [hypochondriacR, setHypochonriacRValue] = useState("none");
 
- const [lumbarL, setLumbarLValue] = useState("none");
- const [umbilical, setUmbilicalValue] = useState("none");
- const [lumbarL, setLumbarLValue] = useState("none");
+//  const [lumbarL, setLumbarLValue] = useState("none");
+//  const [umbilical, setUmbilicalValue] = useState("none");
+//  const [lumbarL, setLumbarLValue] = useState("none");
+const [hypochondriacL, setHypochonriacLValue] = useState("none");
+const [epigastric, setEpigastricValue] = useState("none");
+const [hypochondriacR, setHypochonriacRValue] = useState("none");
 
+const [lumbarL, setLumbarLValue] = useState("none");
+const [umbilical, setUmbilicalValue] = useState("none");
+const [lumbarR, setLumbarRValue] = useState("none");
+
+const [iliacL, setIliacLValue] = useState("none");
+const [hypogastric, setHypogastricValue] = useState("none");
+const [iliacR, setIliacRValue] = useState("none");
+
+const [isCheckedCRT, setIsCheckedCRT] = useState(false);
+const [isCheckedPulseOx, setIsCheckedPulseOx] = useState(false);
+const [isCheckedThrills, setIsCheckedThrills] = useState(false);
+
+const handleCheckboxCRTChange = () => {
+  setIsCheckedCRT(!isCheckedCRT);
+};
+const handleCheckboxPulseOxChange = () => {
+  setIsCheckedPulseOx(!isCheckedPulseOx);
+};
+const handleCheckboxThrillsChange = () => {
+  setIsCheckedThrills(!isCheckedThrills);
+};
 
  const handleHypochondriacLChange = (event) => {
   setHypochonriacLValue(event.target.value)
