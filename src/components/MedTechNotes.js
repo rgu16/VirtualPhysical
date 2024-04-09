@@ -4,12 +4,6 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 const MedTechNotes = (props) => {
-
-  // useEffect(() => {
-  //   props.setNotes(props.notes);
-  // }, [props.notes]);
-
-  
   return (
     <>
         <div className= "flex flex-col items-start justify-start w-[400px] h-full m-[50px] mt-[80px]">

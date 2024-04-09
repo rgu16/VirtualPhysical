@@ -226,12 +226,7 @@ return (
               <div className="flex md:flex-1 flex-col md:gap-10 gap-[292px] items-end justify-start w-[79%] md:w-full">
                 <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between w-full">
                   <div className="flex flex-col items-center justify-start md:mt-0 mt-[9px]">
-                    {/*<Text
-                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                      size="txtCairoBold24"
-                    >
-                      Feel for tenderness and input grading for each region:{" "}
-</Text>*/} <div className="absolute top-0 left-20 w-1/2" style={{paddingTop: '175px',paddingLeft: '900px'}}>
+                    <div className="absolute top-0 left-20 w-1/2" style={{paddingTop: '175px',paddingLeft: '900px'}}>
     <div className= "flex flex-col items-start justify-start w-[600px] h-full ">
     <Text className="font-bold text-2xl text-black-900">References: </Text>
  <div>
@@ -336,12 +331,7 @@ return (
                 
                 </div>
                
-                {/*<Img onMouseEnter={() => setIsHoveredTwo(true)}
-                 onMouseLeave={() => setIsHoveredTwo(false)}
-                  className="h-[43px] w-[43px]"
-                  src="images/img_profile_black_900.svg"
-                  alt="profile_One"
-/>*/}
+
               </div>
               <div className="flex flex-col md:gap-10 gap-[301px] justify-start">
                 <Text
@@ -425,8 +415,7 @@ onChange={handleBreathingRateChange }
          ))}
        </TextField>
      </div>
-    {/*<div style={{paddingTop: "2rem"}}>The values is {breatingrate} {breathinglabor}</div>*/}
-   {/* <button onClick={handleClick} >Focus next input</button>*/}
+
    <div className="lungs-tab" >
             <div className="overlap-2">
 
@@ -478,10 +467,6 @@ onChange={handleBreathingRateChange }
 
             </div>
 
-           {/* <p className="lung-auscultation">
-              <span className="text-wrapper-4">Lung Auscultation </span>
-              <span className="text-wrapper-5">(posterior analysis only)</span>
-            </p>*/} 
     </div>
    <div  style={{paddingTop: '24px', paddingBottom: '90px'}}><Text
                           className="mt-0.5 text-2xl md:text-[20px] text-black-800 sm:text-xl"
@@ -492,7 +477,6 @@ onChange={handleBreathingRateChange }
                                 
     <div style={{paddingTop: "29rem"}}>
     <Stack spacing={2} direction="row">
-   {/*  <Link to="/eyes"> <Button variant="text">Previous Section</Button></Link>*/}
    <Button variant="contained" onClick={handleClick}>Next Input</Button>
    <Link to="/pulses"><Button variant="outlined" onClick={(e) => handleSave(e)} >Save</Button>   </Link>
  </Stack>
