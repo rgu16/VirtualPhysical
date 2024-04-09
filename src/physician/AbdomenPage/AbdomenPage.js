@@ -27,9 +27,9 @@ export const AbdomenPage = (props) => {
   const [note, setNotes] = useState();
 
   // Top row
-  const [hypochonriacRValue, setHypochonriacRValue] = useState();
+  const [hypochondriacRValue, setHypochondriacRValue] = useState();
   const [epigastricValue, setEpigastricValue] = useState();
-  const [hypochonriacLValue, setHypochonriacLValue] = useState();
+  const [hypochondriacLValue, setHypochondriacLValue] = useState();
   // Middle row
   const [lumbarRValue, setLumbarRValue] = useState();
   const [umbilicalValue, setUmbilicalValue] = useState();
@@ -53,9 +53,9 @@ export const AbdomenPage = (props) => {
         console.log(res)
 
         // Top row
-        setHypochonriacRValue(res.detail['hypochonriacR'])
+        setHypochondriacRValue(res.detail['hypochondriacR'])
         setEpigastricValue(res.detail['epigastric'])
-        setHypochonriacLValue(res.detail['hypochonriacL'])
+        setHypochondriacLValue(res.detail['hypochondriacL'])
         // Middle row
         setLumbarRValue(res.detail['lumbarR'])
         setUmbilicalValue(res.detail['umbilical'])
@@ -268,7 +268,7 @@ export const AbdomenPage = (props) => {
                   <p className="element">
                     <Text
                       className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                      value = {hypochonriacLValue} 
+                      value = {hypochondriacLValue} 
                       id="outlined-select-currency-native"
                       select
                       label=""
@@ -278,7 +278,7 @@ export const AbdomenPage = (props) => {
                       }}
                       helperText=""
                     >
-                    {hypochonriacLValue} </Text>
+                    {hypochondriacLValue} </Text>
                   </p>
 
                 </div>
@@ -322,7 +322,7 @@ export const AbdomenPage = (props) => {
                   <p className="element">
                     <Text
                       className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                      value = {hypochonriacRValue} 
+                      value = {hypochondriacRValue} 
                       id="outlined-select-currency-native"
                       select
                       label=""
@@ -332,7 +332,7 @@ export const AbdomenPage = (props) => {
                       }}
                       helperText=""
                     >
-                    {hypochonriacRValue} </Text>
+                    {hypochondriacRValue} </Text>
                   </p>
 
                 </div>

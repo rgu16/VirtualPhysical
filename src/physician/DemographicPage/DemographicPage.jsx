@@ -86,38 +86,66 @@ export const DemographicPage = (props) => {
 
   return (
     <>
-    <NavBar proxy={props.proxy} token={props.token}/>
+      <NavBar proxy={props.proxy} token={props.token}/>
+
     <div
       className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans h-[1561px] items-center justify-start mx-auto pb-28 w-full"
       style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
     >
+      
       <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
        <div></div>
         <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
           <TabNav tab="demographic"></TabNav>
-      <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full"style={{
-    paddingTop: '50px',
-  }} >
+      
+      <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full"
+        style={{
+        paddingTop: '50px',
+        }} >
+
+
               <div className="flex flex-col gap-[41px] justify-start mb-60 w-[99%] md:w-full">
                 <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between w-full">
                   <div className="md:h-[560px] h-[580px] w-[30%] md:w-full">
                       <div className="flex flex-col items-start justify-start w-full">
+
                         <List
                           className="flex flex-col gap-[20px] md:ml-[0] ml-[50px] w-full"
-                          orientation="vertical">      
+                          orientation="vertical">    
+
                           <Text
-                          className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
-                          size="txtCairoBold34">
-                          Demographics 
+                            className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
+                            size="txtCairoBold34">
+                            Demographics 
                           </Text>
+
+                          <div className="flex flex-col items-start">  
+                            <Img
+                              className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
+                              src= {profilePic}
+                              alt=""
+                              onLoad ={()=> setImageLoaded(true)}
+                              style={{ display: imageLoaded ? "block" : "none" }}
+                              />
+                            <Img
+                              className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
+                              src= "images/img_defaultprofile.jpg"
+                              alt="image"
+                              style = {{display: imageLoaded? "none": "block"}}
+                              />
+                          </div>
+
+
                           <div className="flex flex-row gap-[13px] items-center justify-start w-full" >
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24">
                               Name:
                             </Text>
+
                             <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl" variant="outlined">{firstname}</Text>
                           </div>
+
                           <div className="flex flex-row gap-[15px] items-start justify-start w-full">
                             <Text
                               className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
@@ -126,6 +154,7 @@ export const DemographicPage = (props) => {
                             </Text>                        
                             <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl" variant="outlined">{lastname}</Text>
                           </div>
+
                           <div className="flex flex-row gap-[15px] items-center justify-start w-full">
                              <Text
                               className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
@@ -133,6 +162,7 @@ export const DemographicPage = (props) => {
                             >
                               Gender:
                             </Text>
+
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               value = {genderValue} 
@@ -147,12 +177,14 @@ export const DemographicPage = (props) => {
                             >
                             {genderValue} </Text>
                           </div>
+
                           <div className="flex flex-row gap-[15px] items-center justify-start w-full">
                              <Text
                                className="mt-[5px] text-2xl md:text-[22px] text-black-900 sm:text-xl"
                                size="txtCairoBold24">
                                Height:
                              </Text>
+
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               id="outlined-start-adornment"
@@ -163,13 +195,15 @@ export const DemographicPage = (props) => {
                               value = {height} 
                               >{height}</Text>
                           </div>
+
                           <div className="flex flex-row gap-[15px] items-center justify-start w-full">  
                           <Text
                               className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24"
                             >
                               Weight:
-                            </Text>          
+                            </Text>  
+
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               id="outlined-start-adornment"
@@ -180,6 +214,7 @@ export const DemographicPage = (props) => {
                               value = {height} 
                               >{weight} lbs</Text>                
                           </div>
+
                            <div className="flex flex-row gap-[15px] items-center justify-start w-full">
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
@@ -187,8 +222,10 @@ export const DemographicPage = (props) => {
                             >
                               Date of Birth:{" "}
                             </Text>
+
                             <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl" variant="outlined">{DOB}</Text>
                           </div>
+
                           <div className="flex flex-row gap-[15px] items-center justify-between w-full">
                             <Text
                               className="mt-0.5 text-2xl md:text-[22px] text-black-900 sm:text-xl"
@@ -196,56 +233,44 @@ export const DemographicPage = (props) => {
                             >
                               Age:
                             </Text>
+
                             <Text value = {age} required id="outlined-basic" label="required" variant="outlined" />
-                            
                           </div>
+
+                          <div className="flex flex-row gap-[15px] items-center justify-start w-full">
+                            <Text 
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24"
+                            >
+                              Patient History:
+                            </Text>
+                            
+                            <Text  
+                            className="flex flex-row gap-[15px] items-center justify-between w-full"
+                              id="outlined-multiline-static"
+                              label="Multiline"
+                              multiline
+                              rows={4}
+                            >
+                              {history}
+                            </Text>
+                          </div>
+
                         </List>
                       </div>
+                      
                   </div>
-                  <div className="flex flex-col h-full items-start justify-start w-[20%] mt-[80px]">  
-                  <Img
-              className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
-              src= {profilePic}
-              alt=""
-              onLoad ={()=> setImageLoaded(true)}
-              style={{ display: imageLoaded ? "block" : "none" }}
-              />
-              <Img
-              className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
-              src= "images/img_defaultprofile.jpg"
-              alt="image"
-              style = {{display: imageLoaded? "none": "block"}}
-            />
-                    </div>
+
+                  <div>
                     <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="/demographic"></PhysicianNotes>
+                  </div>
+
                 </div>
-                <div className="flex flex-col items-start justify-start md:ml-[0] ml-[35px] w-[41%] md:w-full mt-[-285px]">
-                  <Text style={{
-    paddingBottom: '20px', paddingTop: '80px',  paddingLeft: '15px', 
-  }}
-                    className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                    size="txtCairoBold24"
-                  >
-                    Patient History:
-                  </Text>
-                  <Text  
-                  className="text-2xl md:text-[22px] text-black-900 sm:text-xl ml-[20px]"
-                    id="outlined-multiline-static"
-                    label="Multiline"
-                    multiline
-                    rows={4}
-                  >{history}</Text>
-         
-                    <div style={{paddingTop: "2rem"}}>
-   </div>
-                    
-               
-                </div>
-              </div>
             </div>
-              </div>
-              </div>
-            </div>
-            </>
+          </div>
+        </div>
+      </div>
+    </div>
+    </>
   );
 };

@@ -288,7 +288,7 @@ const DemographicMedPage = (props) => {
                             </Text>          
                           <OutlinedInput 
                             id="outlined-adornment-weight"
-                            endAdornment={<InputAdornment position="end">kg</InputAdornment>}
+                            endAdornment={<InputAdornment position="end">lbs</InputAdornment>}
                             aria-describedby="outlined-weight-helper-text"
                             inputProps={{
                               'aria-label': 'weight',

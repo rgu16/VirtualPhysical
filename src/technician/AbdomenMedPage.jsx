@@ -15,65 +15,68 @@ import axios from 'axios';
 
 
 const AbdomenMedPage= (props) => {
- const [hypochonriacR, setHypochonriacRValue] = useState("none");
+  const [hypochondriacL, setHypochonriacLValue] = useState("none");
  const [epigastric, setEpigastricValue] = useState("none");
- const [hypochonriacL, setHypochonriacLValue] = useState("none");
- const [lumbarR, setLumbarRValue] = useState("none");
+ const [hypochondriacR, setHypochonriacRValue] = useState("none");
+
+ const [lumbarL, setLumbarLValue] = useState("none");
  const [umbilical, setUmbilicalValue] = useState("none");
  const [lumbarL, setLumbarLValue] = useState("none");
- const [isCheckedCRT, setIsCheckedCRT] = useState(false);
-  const [isCheckedPulseOx, setIsCheckedPulseOx] = useState(false);
-  const [isCheckedThrills, setIsCheckedThrills] = useState(false);
 
-  const handleCheckboxCRTChange = () => {
-    setIsCheckedCRT(!isCheckedCRT);
-  };
-  const handleCheckboxPulseOxChange = () => {
-    setIsCheckedPulseOx(!isCheckedPulseOx);
-  };
-  const handleCheckboxThrillsChange = () => {
-    setIsCheckedThrills(!isCheckedThrills);
-  };
 
- const handleHypochonriacRChange = (event) => {
-   setHypochonriacRValue(event.target.value)
- }
-
+ const handleHypochondriacLChange = (event) => {
+  setHypochonriacLValue(event.target.value)
+}
 
  const handleEpigastricChange = (event) => {
    setEpigastricValue(event.target.value)
  }
 
-
- const handleHypochonriacLChange = (event) => {
-   setHypochonriacLValue(event.target.value)
- }
-
-
- const handleLumbarRChange = (event) => {
-   setLumbarRValue(event.target.value)
- }
+ const handleHypochondriacRChange = (event) => {
+  setHypochonriacRValue(event.target.value)
+}
 
 
- const handleUmbilicalChange = (event) => {
-   setUmbilicalValue(event.target.value)
- }
+const handleLumbarLChange = (event) => {
+  setLumbarLValue(event.target.value)
+}
+
+const handleUmbilicalChange = (event) => {
+  setUmbilicalValue(event.target.value)
+}
+
+const handleLumbarRChange = (event) => {
+  setLumbarRValue(event.target.value)
+}
 
 
- const handleLumbarLChange = (event) => {
-   setLumbarLValue(event.target.value)
- }
+const handleIliacLChange = (event) => {
+  setIliacLValue(event.target.value)
+}
+
+const handleHypogastricChange = (event) => {
+  setHypogastricValue(event.target.value)
+}
+
+const handleIliacRChange = (event) => {
+  setIliacRValue(event.target.value)
+}
 
 
  const handleSave = (e) => {
    e.preventDefault();
    const data = {}
-   data['hypochonriacR'] = hypochonriacR;
+   data['hypochondriacL'] = hypochondriacL;
    data['epigastric'] = epigastric;
-   data['hypochonriacL'] = hypochonriacL;
-   data['lumbarR'] = lumbarR;
-   data['umbilical'] = umbilical;
+   data['hypochondriacR'] = hypochondriacR;
+
    data['lumbarL'] = lumbarL;
+   data['umbilical'] = umbilical;
+   data['lumbarR'] = lumbarR;
+
+   data['iliacL'] = iliacL;
+   data['hypogastric'] = hypogastric;
+   data['iliacR'] = iliacR;
 
 
    console.log(data);
@@ -269,8 +272,8 @@ const AbdomenMedPage= (props) => {
           
         </h4>
         {/*i. Right hypochondriac region */}
-        <FormControl value = {hypochonriacR}
-   onChange={handleHypochonriacRChange}>
+        <FormControl value = {hypochondriacR}
+   onChange={handleHypochondriacRChange}>
         <FormLabel style={{paddingBottom: '10px', paddingTop: '15px', color: 'black' }} id="demo-row-radio-buttons-group-label">i. Right hypochondriac region</FormLabel>
      <RadioGroup
        row
@@ -288,7 +291,7 @@ const AbdomenMedPage= (props) => {
      </RadioGroup>
    </FormControl>
     
-      {/*ii. Epigastric hypochondriac region */}
+      {/*ii. Epigastric region */}
       <FormControl value = {epigastric}
    onChange={handleEpigastricChange}>
         <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">ii. Epigastric region</FormLabel>
@@ -310,8 +313,8 @@ const AbdomenMedPage= (props) => {
 
 
     {/*iii. Left hypochondriac region */}
-    <FormControl value = {hypochonriacL}
-   onChange={handleHypochonriacLChange}>
+    <FormControl value = {hypochondriacL}
+   onChange={handleHypochondriacLChange}>
         <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">iii. Left hypochondriac region</FormLabel>
      <RadioGroup
        row
@@ -372,7 +375,7 @@ const AbdomenMedPage= (props) => {
    </FormControl>
 
 
-   {/*v. Left lumbar region */}
+   {/*vi. Left lumbar region */}
    <FormControl value = {lumbarL}
    onChange={handleLumbarLChange}>
         <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">v. Left lumbar region </FormLabel>
@@ -391,19 +394,81 @@ const AbdomenMedPage= (props) => {
  <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
      </RadioGroup>
    </FormControl>
-     
-   {/*<div style={{paddingTop: "2rem"}}>The values is {hypochonriacR} {epigastric} {hypochonriacL} {lumbarR} {umbilical} {lumbarL}</div>  */}
+
+
+   {/*vii. Iliac L region */}
+   <FormControl value = {iliacL}
+   onChange={handleIliacLChange}>
+        <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">v. Umbilical region</FormLabel>
+     <RadioGroup
+       row
+       aria-labelledby="demo-row-radio-buttons-group-label"
+       name="row-radio-buttons-group"
+     >
+       <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
+       <FormControlLabel value="4" labelPlacement="bottom" control={<Radio />} label="4" />
+      
+ <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
+     </RadioGroup>
+   </FormControl>
+
+
+   {/*viii. Hypogastric region */}
+   <FormControl value = {hypogastric}
+   onChange={handleHypogastricChange}>
+        <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">v. Umbilical region</FormLabel>
+     <RadioGroup
+       row
+       aria-labelledby="demo-row-radio-buttons-group-label"
+       name="row-radio-buttons-group"
+     >
+       <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
+       <FormControlLabel value="4" labelPlacement="bottom" control={<Radio />} label="4" />
+      
+ <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
+     </RadioGroup>
+   </FormControl>
+
+
+   {/*ix. Iliac R region */}
+   <FormControl value = {iliacR}
+   onChange={handleIliacRChange}>
+        <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' }} id="demo-row-radio-buttons-group-label">v. Umbilical region</FormLabel>
+     <RadioGroup
+       row
+       aria-labelledby="demo-row-radio-buttons-group-label"
+       name="row-radio-buttons-group"
+     >
+       <FormLabel style={{paddingTop: '10px' , fontSize: '14px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
+       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
+       <FormControlLabel value="4" labelPlacement="bottom" control={<Radio />} label="4" />
+      
+ <FormLabel style={{paddingTop: '10px', fontSize: '14px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
+     </RadioGroup>
+   </FormControl>
+
+
+
+   {/*<div style={{paddingTop: "2rem"}}>The values is {hypochondriacR} {epigastric} {hypochondriacL} {lumbarR} {umbilical} {lumbarL}</div>  */}
    <div style={{paddingTop: "2rem"}}>
      <Stack spacing={2} direction="row">
      <Button variant="contained" >Next Input</Button>
    <Button variant="outlined" onClick={(e) => handleSave(e)}>Save</Button>
   </Stack>
   </div>   
-   {/* </div>*/}
-                       
+   {/* </div>*/}     
                        {/* </div>*/}
-                    
-                    
                     {/* </div>*/}
                    {/*</div>*/}
                {/*</div>*/}
@@ -412,13 +477,8 @@ const AbdomenMedPage= (props) => {
           </div>
         </div>
       </div>
-
-
-     
      </div>
-    
    </div>
-  
            </div>
          </div>
        </div>
@@ -427,7 +487,4 @@ const AbdomenMedPage= (props) => {
  );
 };
 
-
 export default AbdomenMedPage;
-
-

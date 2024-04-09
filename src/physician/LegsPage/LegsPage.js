@@ -42,7 +42,7 @@ export const LegsPage = (props) => {
   useEffect(() => {
     axios({
         method: "GET",
-        url: props.proxy + "/download/legs/detail",
+        url: props.proxy + "download/legs",
         headers: {
         Authorization: 'Bearer ' + props.token
         }

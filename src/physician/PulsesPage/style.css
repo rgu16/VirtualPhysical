@@ -70,7 +70,7 @@
     font-weight: 700;
     letter-spacing: 0;
     line-height: normal;
-    left: -5;
+    left: 0px;
   }
   
   .pulses-tab .div {
@@ -278,7 +278,7 @@
   
   .pulses-tab .radial {
     height: 45px;
-    left: 0;
+    left: 0px;
     position: absolute;
     top: 52px;
     width: 275px;
@@ -316,7 +316,7 @@
     font-family: "Helvetica Neue-Bold", Helvetica;
     font-size: 24px;
     font-weight: 700;
-    left: -48px;
+    left: -100px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;

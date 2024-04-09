@@ -143,9 +143,9 @@
 
 .general-tab .capillary-refill {
   height: 47px;
-  left: 71px;
+  left: 0px;
   position: absolute;
-  top: 370px;
+  top: 0px;
   width: 388px;
 }
 
@@ -186,16 +186,16 @@
   line-height: normal;
 }
 
-.general-tab .sec {
+.general-tab .cap-refill-res {
   color: #000000;
   font-family: "Cairo", Helvetica;
   font-size: 24px;
   font-weight: 700;
-  left: 347px;
+  left: 220px;
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
-  top: -1px;
+  top: 0px;
 }
 
 .general-tab .p {
@@ -341,13 +341,25 @@
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
-  top: -1px;
+  top: 300px;
+}
+
+.general-tab .cyanosis-res {
+  color: #000000;
+  font-family: "Cairo", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 195px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0px;
 }
 
 .general-tab .pulse-ox-title {
   color: #000000;
   font-family: "Cairo", Helvetica;
-  font-size: 21px;
+  font-size: 24px;
   font-weight: 700;
   left: 100;
   letter-spacing: 0;
@@ -356,10 +368,21 @@
   top: 200px;
 }
 
+.general-tab .pulse-ox-res {
+  color: #000000;
+  font-family: "Cairo", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 200px;
+  line-height: normal;
+  position: absolute;
+  top: 0px;
+}
+
 .general-tab .jaundice-title {
   color: #000000;
   font-family: "Cairo", Helvetica;
-  font-size: 21px;
+  font-size: 24px;
   font-weight: 700;
   left: 100;
   letter-spacing: 0;
@@ -368,28 +391,66 @@
   top: 400px;
 }
 
+.general-tab .jaundice-res {
+  color: #000000;
+  font-family: "Cairo", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 265px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0px;
+}
+
 .general-tab .general-pain-title {
   color: #000000;
   font-family: "Cairo", Helvetica;
-  font-size: 21px;
+  font-size: 24px;
   font-weight: 700;
-  left: 100;
+  left: 0px;
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
   top: 500px;
 }
 
+.general-tab .general-pain-res {
+  color: #000000;
+  font-family: "Cairo", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 150px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0px;
+  width: 800px;
+}
+
 .general-tab .pain-summary-title {
   color: #000000;
   font-family: "Cairo", Helvetica;
-  font-size: 21px;
+  font-size: 24px;
   font-weight: 700;
-  left: 100;
+  left: 0px;
   letter-spacing: 0;
   line-height: normal;
   position: absolute;
   top: 600px;
+}
+
+.general-tab .pain-summary-res {
+  color: #000000;
+  font-family: "Cairo", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 170px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0px;
+  width: 800px;
 }
 
 /* .general-tab .pallor {
@@ -452,7 +513,7 @@
   width: 24px;
 }
 
-.general-tab .cyanosis-pallor {
+.general-tab .cyanosis-pallor-jaundice-generalpain-painsummary {
   height: 155px;
   left: 71px;
   position: absolute;
@@ -486,6 +547,18 @@
   line-height: normal;
   position: absolute;
   top: 100px;
+}
+
+.general-tab .pallor-res {
+  color: #000000;
+  font-family: "Cairo", Helvetica;
+  font-size: 24px;
+  font-weight: 700;
+  left: 165px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 0px;
 }
 
 .general-tab .pallor {
