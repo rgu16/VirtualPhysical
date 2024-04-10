@@ -11,6 +11,7 @@ import { useRef, useState } from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
+import InputAdornment from '@mui/material/InputAdornment';
 import {Navigate } from "react-router-dom";
 import LungPopover from "components/LungPopover/LungPopover.jsx"
 import LungUploadLeftTop from "components/LungPopover/LungUploadLeftTop.js"
@@ -101,8 +102,25 @@ const LungsMedPage = (props) => {
 
 const [breathingrate, setBreathingRateValue] = useState(null);
 const [breathinglabor, setBreathingLaborValue] = useState("no selection");
-const handleBreathingRateChange = (event) => {
- setBreathingRateValue(event.target.value)
+const handleBreathingRateChange = (e) => {
+
+ const value = e.target.value.replace(/[^0-9]/g, '')
+ setBreathingRateValue(value)
+ const numericValue = parseInt(value, 10);
+  
+ // Determine the breathing status based on the specified criteria
+ let status = '';
+ if (numericValue >= 12 && numericValue <= 18) {
+   status = '';
+ } else if (numericValue < 12 ) {
+   status = 'Abnormal low';
+ } else if (numericValue > 25) {
+   status = "Abnormal high"
+ } else {
+  status = ''
+ }
+
+ setBreathingStatus(status);
 }
 const handleBreathingLaborChange = (event) => {
  setBreathingLaborValue(event.target.value)
@@ -287,7 +305,19 @@ return (
                             </span>
                           </div>
                           </div>
-                          <TextField  value = {breathingrate}
+                          <TextField
+                              inputRef={inputRefs[0]}
+                              id="outlined-start-adornment"
+                              sx={{width: '25ch', paddingBottom: '10px' }}
+                              InputProps={{
+                                endAdornment: <InputAdornment position="end">breaths/min</InputAdornment>,
+                              }}
+                              error={breathingStatus !== ''}
+                              label={breathingStatus}
+                              value = {breathingrate}
+                              onChange={handleBreathingRateChange }/>
+                              
+                          {/* <TextField  value = {breathingrate}
                               onChange={handleBreathingRateChange }
                                   inputRef={inputRefs[0]}
                                     variant="outlined"
@@ -297,7 +327,7 @@ return (
                                     InputLabelProps={{
                                       shrink: true,
                                     }}
-                                  />
+                                  /> */}
                           </div>
                         </div>
                         {isCheckedCRT && (

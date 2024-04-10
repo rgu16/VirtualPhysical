@@ -201,48 +201,6 @@ const [note, setNotes] = useState("");
  };
 
 
-//  const [profilePic, setProfilePic] = useState()
-//  const fileInputRef = useRef(null);
-//  const [imageLoaded, setImageLoaded] = useState(false);
-//  const handleUploadClick = () => {
-//    fileInputRef.current.click();
-//  };
-//   const handleImageUpload = (e) => {
-//    e.preventDefault();
-//    const file = e.target.files[0];
-//    setProfilePic(URL.createObjectURL(file))
-//    if (!file) {
-//        console.error('No file selected.');
-//        return;
-//    }
-//    const formData = new FormData();
-//    formData.append('file', file, file.name);
-//    formData.append('location', "/pulses/image")
-//    console.log(formData)
-//    axios({
-//        method: "POST",
-//        url: props.proxy+"/upload_file",
-//        data: formData,
-//        headers: {
-//            Authorization: 'Bearer ' + props.token
-//        }
-//    }).then((response) => {
-//      const res = response.data
-//      console.log(res)
-  
-//      console.log('Server response:', response);
-//      console.log('Image uploaded:', imageUrl);
-//     // Assuming the URL is nested within a 'data' property, modify this accordingly
-//    const imageUrl = response.data && response.data.url;
-    
-//    }).catch((error)=>{
-//        if(error.response){
-//            console.log(error.response)
-//            console.log(error.response.status)
-//            console.log(error.response.headers)
-//        }
-//    })
-//  };
  const [isCheckedPulse, setCheckboxPulse] = useState(false);
   return (
 <>
