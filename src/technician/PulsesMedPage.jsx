@@ -509,7 +509,7 @@ const handleCheckboxThrillsChange = () => {
         {/*<div className="overlap">*/}
           {/*<div className="overlap-group">*/}
            
-            <div className="popover" >
+            <div style={{ position: "fixed", top: "200px", left: "100%" }} className="popover" >
 
               <div className="carotidpopover">
                 <CarotidPopover proxy={props.proxy} token={props.token}></CarotidPopover>
