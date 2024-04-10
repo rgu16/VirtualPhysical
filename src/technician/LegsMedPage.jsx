@@ -1,8 +1,8 @@
 import React from "react";
 
 
-import { Img, Line, List, Text, NavBar, TabNav } from "components";
-import { Link } from 'react-router-dom';
+import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes, ToggleRadio } from "components";
+import { Link, Navigate } from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -27,6 +27,8 @@ const LegsMedPage = (props) => {
  const [isChecked, setIsChecked] = useState(false);
  const [isCheckedScale, setIsCheckedScale] = useState(false);
  const [isCheckedLeg, setIsCheckedLeg] = useState(false);
+
+ const inputs =[rightcalve, leftcalve]
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -119,314 +121,257 @@ const handleImageUpload = (e) => {
   })
  };
 {/*test */}
+const [navigate, setNavigate] = useState();
+const [complete, setComplete] = useState(false);
+const [error, setError] = useState("");
 
+const [isCheckedPulse, setCheckboxPulse] = useState(false);
+const inputRefs = [useRef(null),useRef(null),useRef(null),useRef(null), useRef(null),useRef(null),useRef(null),useRef(null),useRef(null)];
+
+const handleClick = () => {
+  console.log(inputs)
+  const nextInput = inputs.map((item, index)=> {
+    if (item === null | item === '' | item=== 'none'){
+      return index;
+    }
+   }).filter(index => index !== undefined);
+   console.log(nextInput)
+   if (nextInput.length > 0) {
+    const currentRef = inputRefs[nextInput[0]]
+    currentRef.current.focus();
+    currentRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+   }else {
+    setComplete(true);
+   }
+ };
  return (
-   <>
-   <NavBar proxy={props.proxy} token={props.token} />
-     <div
-       className="bg-cover bg-no-repeat bg-white-A700 flex flex-col font-dmsans h-[1561px] items-center justify-start mx-auto pb-28 w-full"
-       style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
-     >
-       <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
-       <div></div>
-         <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
-         <TabNav tab="legs"></TabNav>
-           <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full" >
-           
-                  <div style={{paddingLeft: '150px', paddingTop: '50px'}} className="flex w-full min-h-screen p-5">
-     <div className="w-full max-w-md">
-    
-     <div className="absolute bg-white-A700 bottom-[8%] flex flex-col font-cairo gap-6 h-[1000px] md:h-auto inset-x-[0] justify-start max-w-[1695px] mx-auto pb-6 pt-8 px-5 rounded-bl-[12px] rounded-br-[12px] w-full">
-
-
-
-
-        <div className="md:h-[1277px] sm:h-[3072px] h-[370px] relative w-[84%] md:w-full">
-         
-          <div className="absolute md:h-[1277px] sm:h-[3072px] h-[925px] inset-[0] justify-center m-auto w-[98%] md:w-full">
-            <div className="absolute flex flex-col items-center justify-start left-[1%] top-[0] w-[92%]">
-              <div className="flex md:flex-col flex-row gap-[23px] items-center justify-between w-full">
-                <div className="flex md:flex-1 flex-col md:gap-10 gap-[292px] items-end justify-start w-[79%] md:w-full">
-                  <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between w-full">
-                    <div className="flex flex-col items-center justify-start md:mt-0 mt-[9px]">
-                      {/*<Text
-                        className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                        size="txtCairoBold24"
-                      >
-                        Feel for tenderness and input grading for each region:{" "}
- </Text>*/}
-                     
-
-
+<>
+<div className="h-screen">
+<NavBar proxy={props.proxy} token={props.token}/>
+  <div
+    className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans items-center justify-start mx-auto pb-28 w-full"
+    style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
+  >
+    <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
+     <div></div>
+      <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
+        <TabNav tab="legs"></TabNav>
+        <div className="bg-white-A700 flex flex-col font-cairo items-start justify-start p-10 sm:px-5 w-full"style={{
+paddingTop: '50px',
+}} >
+          <div className="flex flex-col  justify-start w-[99%] md:w-full">
+            <div className="flex md:flex-col flex-col md:gap-10 items-start justify-start ">
+              <div className="flex flex-row md:h-[560px]  relative w-full md:w-full">
+                  <div className="flex flex-col items-start w-[70%] justify-start">
+                     <List
+                    className="flex flex-col md:ml-[0] ml-[50px] w-[80%]"
+                    orientation="vertical">      
+                    <Text
+                    className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
+                    size="txtCairoBold34">
+                    Legs
+                    </Text>
+                    <div className="flex flex-col ml-[80px] items-start justify-between w-full" >
+                        <div className="flex flex-row items-center w-[65%] justify-between">
+                        <div className="flex flex-row gap-[13px]">
+                      <Text
+                          className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                          size="txtCairoBold24">
+                          Pitting Edema:
+                      </Text>
+                      <div className="relative group flex flex-row">
+                        <button onClick={() => setCheckboxPulse(!isCheckedPulse)}>
+                          <img
+                          className="h-[36px] w-[36px]"
+                          src="images/img_profile_black_900.svg"
+                          alt="profile_One"/>
+                        </button>
+                        <span style={{ whiteSpace: 'nowrap' }}
+                        className=" absolute top-[20px] left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                          Show detailed steps
+                        </span>
+                      </div>
+                      </div>
+                      </div>
                     </div>
-            
-                   
+                    {/* {isCheckedPulse &&
+                    <div className="ml-[80px]">
+                    <img
+                          style={{
+                            width: "80%", // Enlarge the width of the image
+                            height: "auto", // Set height to auto to maintain aspect ratio
+                            paddingTop: "5px",
+                            marginLeft: '20px',
+                          }}
+                          src="images/pittingedema.png"
+                          alt="screenshot20231"
+                        /></div>} */}
+                  <div className = "flex flex-col justify-start items-start ml-[80px] gap-[10px] mt-[20px] w-[80%]">
+                        {isCheckedPulse && <div className = "flex flex-row justify-between items-start text-center gap-[5px] w-full">
+                        <div className="w-[4%]"></div>
+                        <div className ="flex flex-col items-center justify-center w-[15%] m-[2px]">
+                                            <img
+                                                style={{
+                                                  width: "100%"
+                                                }}
+                                              src="images/pitting1.png"
+                                              alt="screenshot20231"
+                                            />
+                                            <Text
+                                                className="text-[22px] md:text-[22px] text-black-900 sm:text-xl text-center"
+                                                size="txtCairoBold24">
+                                              None
+                                            </Text>
+                                            <Text
+                                                className="text-[15px] md:text-[22px] text-black-900 sm:text-xl text-center">
+                                              No pitting edema
+                                            </Text>
+                                            </div>
+                                            <div className ="flex flex-col items-center justify-center w-[15%] m-[2px]">
+                                            <img
+                                                style={{
+                                                  width: "100%"
+                                                }}
+                                              src="images/pitting2.png"
+                                              alt="screenshot20231"
+                                            />
+                                            <Text
+                                                className="text-[22px] md:text-[22px] text-black-900 sm:text-xl text-center"
+                                                size="txtCairoBold24">
+                                              Mild
+                                            </Text>
+                                            <Text
+                                                className="text-[15px] md:text-[22px] text-black-900 sm:text-xl text-center">
+                                              2mm despression disappears rapidly
+                                            </Text>
+                                            </div>
+                                            <div className ="flex flex-col items-center justify-center w-[15%] m-[2px]">
+                                            <img
+                                                style={{
+                                                  width: "100%"
+                                                }}
+                                              src="images/pitting3.png"
+                                              alt="screenshot20231"
+                                            />
+                                            <Text
+                                                className="text-[22px] md:text-[22px] text-black-900 sm:text-xl text-center"
+                                                size="txtCairoBold24">
+                                              Moderate
+                                            </Text>
+                                            <Text
+                                                className="text-[15px] md:text-[22px] text-black-900 sm:text-xl text-center">
+                                              4mm depression disappears in 10-15 seconds
+                                            </Text>
+                                            </div>
+                                            <div className ="flex flex-col items-center justify-center w-[15%] m-[2px]">
+                                            <img
+                                                style={{
+                                                  width: "100%"
+                                                }}
+                                              src="images/pitting4.png"
+                                              alt="screenshot20231"
+                                            />
+                                            <Text
+                                                className="text-[22px] md:text-[22px] text-black-900 sm:text-xl text-center"
+                                                size="txtCairoBold24">
+                                              Moderately Severe
+                                            </Text>
+                                            <Text
+                                                className="text-[15px] md:text-[22px] text-black-900 sm:text-xl text-center">
+                                             6mm depression may last more than 1 minute
+                                            </Text>
+                                            </div>
+                                            <div className ="flex flex-col items-center justify-center w-[15%] m-[2px]">
+                                            <img
+                                                style={{
+                                                  width: "100%"
+                                                }}
+                                              src="images/pitting5.png"
+                                              alt="screenshot20231"
+                                            />
+                                            <Text
+                                                className="text-[22px] md:text-[22px] text-black-900 sm:text-xl text-center"
+                                                size="txtCairoBold24">
+                                              Severe
+                                            </Text>
+                                            <Text
+                                                className="text-[15px] md:text-[22px] text-black-900 sm:text-xl text-center">
+                                              8mm depression that can last more than 2 minutes
+                                            </Text>
+                                            </div>
+                      
+                        <div className="w-[4%]"></div>
+                        </div> }
+                      </div>
+                  
+                  <div className= "flex flex-col w-[75%] ml-[100px]">
+                          <ToggleRadio  value= {rightcalve} onChange={handleRightCalfChange} inputRef={inputRefs[0]} 
+                                        title="i. Right calf" expand={isCheckedPulse} ></ToggleRadio>
+                          <ToggleRadio  value = {leftcalve} onChange={handleLeftCalfChange} inputRef={inputRefs[1]} 
+                                        title="ii. Left calf" expand={isCheckedPulse} ></ToggleRadio>
+                </div>
+                  </List>
                   </div>
-                 
-                </div>
-                <div className="flex flex-col md:gap-10 gap-[301px] justify-start">
-                  <Text
-                    className="md:ml-[0] ml-[18px] text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                    size="txtCairoBold24"
-                  >
-                    {" "}
-                    {" "}
-                  </Text>
-                  <Text
-                    className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                    size="txtCairoBold24"
-                  >
-                    {" "}
-                    {" "}
-                  </Text>
-                </div>
+                  
               </div>
-            </div>
-            
-            <div className="absolute top-30 right-20 w-1/2" style={{paddingLeft: '300px'}}>
- 
- <div className= "flex flex-col items-start justify-start w-[400px] h-full m-[50px] mt-[80px]">
- <Text className="font-bold text-2xl text-black-900">More References: </Text>
- <div>
-   {isCheckedScale && (
-        <div style={{ marginLeft: '50px' }}>
-          {/* Your images */}
-          <img
-            style={{
-              width: "300px", // Enlarge the width of the image
-              height: "280px", // Set height to auto to maintain aspect ratio
-              paddingTop: "5px",
-              marginRight: '15px'
-
-            }}
-            src="images/pedemascore.png"
-            alt="screenshot20231"
-          />
-         
-         
-        </div>
-      )}
-       <label>
-        <input
-          type="checkbox"
-          className="cboxes"
-          checked={isCheckedScale}
-          onChange={handleCheckboxScaleChange}
-        />
-        Show Detailed Scale
-      </label>
-    </div>
-
-    <div>
-   {isCheckedLeg && (
-        <div style={{ marginLeft: '50px' }}>
-          {/* Your images */}
-          <img
-            style={{
-              width: "300px", // Enlarge the width of the image
-              height: "350px", // Set height to auto to maintain aspect ratio
-              paddingTop: "5px",
-              marginRight: '15px'
-
-            }}
-            src="images/edemaleg.png"
-            alt="screenshot20231"
-          />
-         
-         
-        </div>
-      )}
-       <label>
-        <input
-          type="checkbox"
-          className="cboxes"
-          checked={isCheckedLeg}
-          onChange={handleCheckboxLegChange}
-        />
-        Show Example of normal vs edema leg
-      </label>
-    </div>
-       
-       
-        <Text className="font-bold text-2xl text-black-900" style={{ paddingTop: "2rem" }}>Notes: </Text>
-        <textarea className="w-full h-[200px] border border-gray-400 border-2 rounded-[14px] p-[10px]" 
-                  placeholder="Medical Technician notes"
-                  value={note}
-                  onChange={(e) => setNotes(e.target.value)}></textarea>
-       
-        {/*Upload Image */}
-        <div style={{ paddingTop: "2rem" }}>
-            <input 
-                    ref={fileInputRef}
-                    type="file"
-                    style={{ display: 'none'}}
-                    accept="image/*" // Accept only image files
-                    onChange={handleImageUpload}
-                  />
-                  <button
-  className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0 roundedButton"
-  style={{ background: '#5974F6',  borderRadius: '20px', width: '250px'}}
-  onClick={handleUploadClick}
->
-  <Img
-    className="h-7 md:ml-[0] ml-[0] md:mt-0 mt-1 w-7 "
-    src="images/audioupload.png"
-    alt="television"
-  />
-  <Text  style={{color: 'white' }} className="font-semibold ml-2.5 md:ml-[0] text-xl">Upload Image of Legs</Text>
-</button>
-                  <Img
-                      className="h-[130px] md:h-auto rounded-[50%] w-[130px] md:h-auto object-cover  w-full"
-                      src= {profilePic}
-                      alt=""
-                      onLoad ={()=> setImageLoaded(true)}
-                      // style = {{display: imageLoaded? "none": "block"}}
-                      />
-                      
-   
-
-    </div>
-
-        </div>
-               
-               </div>   
-               
-               
-            {/* 
-            <Img style = {{ opacity: isHoveredOne ? 1 : 0, // Show the image if hovered, otherwise hide
-             transition: 'opacity 0.3s ease', }} // Add a smooth transition effect
-              className="absolute h-[270px] object-cover right-[3%] top-[6%] w-[25%]"
-              src="images/pedemascore.png"
-              alt="screenshot20231"
-            />
-            <Img style = {{ opacity: isHoveredTwo ? 1 : 0, // Show the image if hovered, otherwise hide
-             transition: 'opacity 0.3s ease', }} // Add a smooth transition effect
-              className="absolute bottom-[10%] h-[465px] object-cover left-[73.5%] w-[31%]"
-              src="images/edema.png"
-              alt="screenshot20231_One"
-            />*/}
-            {/*  <div className="absolute bottom-[0] flex flex-col items-center justify-start left-[0] w-[47%]">*/}
-             {/*   <div className="flex flex-col items-center justify-start w-full">*/}
-                 {/* <div className="flex flex-col items-center justify-end w-full">*/}
-                  {/* <div className="flex flex-col items-end justify-end pb-[38px] sm:pl-5 pl-[38px] w-full">*/}
-                   {/* <div className="flex sm:flex-col flex-row sm:gap-10 gap-[85px] items-start justify-end w-[99%] md:w-full">*/}
-                      {/*<div className="flex flex-col gap-[47px] items-center justify-start sm:mt-0 mt-10 w-4/5 sm:w-full">*/}
-                      
-                      <div style={{paddingLeft: '150px', }} className="flex w-full min-h-screen p-5">
-     <div className="w-full max-w-md">
-     <Text
-                       className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
-                       size="txtCairoBold34"
-                     >
-                      Legs Inspection
-                     </Text>
-       <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold', fontSize: '19px'}}>
-           {" "}
-           Check for pitting edema and classify severity for each region: {" "}
-          
-        </h4>
-        <FormLabel style={{ paddingBottom: '25px', paddingTop: '5px', fontSize: '17px', color: 'black' }} id="demo-row-radio-buttons-group-label">Hint: Check the severity of swelling in the calves, caused by excess fluid, by applying pressure to the swollen area</FormLabel>
-        {/*i. Right calve */}
-        <FormControl value = {rightcalve}
-     onChange={handleRightCalfChange}>
-        <FormLabel style={{paddingBottom: '10px', paddingTop: '15px', color: 'black', fontSize: '20px'}} id="demo-row-radio-buttons-group-label">i. Right calve</FormLabel>
-     <RadioGroup
-       row
-       aria-labelledby="demo-row-radio-buttons-group-label"
-       name="row-radio-buttons-group"
-     >
-       <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
-       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
-       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
-       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
-      
- <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
-     </RadioGroup>
-   </FormControl>
-    
-      {/*ii. Left calve */}
-      <FormControl  value = {leftcalve}
-     onChange={handleLeftCalfChange}>
-        <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black', fontSize: '20px'}} id="demo-row-radio-buttons-group-label">ii. Left calve</FormLabel>
-     <RadioGroup
-       row
-       aria-labelledby="demo-row-radio-buttons-group-label"
-       name="row-radio-buttons-group"
-     >
-       <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-       <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
-       <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
-       <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
-       <FormControlLabel value="3" labelPlacement="bottom" control={<Radio />} label="3" />
-      
- <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
-     </RadioGroup>
-   </FormControl>
-
-   <div>
-   {isChecked && (
-        <div style={{ marginLeft: '50px' }}>
-          {/* Your images */}
-          <img
-            style={{
-              width: "350px", // Enlarge the width of the image
-              height: "220px", // Set height to auto to maintain aspect ratio
-              paddingTop: "5px",
-              marginRight: '15px'
-
-            }}
-            src="images/pittingedema.png"
-            alt="screenshot20231"
-          />
-         
-         
-        </div>
-      )}
-       <label>
-        <input
-          type="checkbox"
-          className="cboxes"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-        />
-        Show Reference Images
-      </label>
-    </div>
-  
-    <div style={{paddingTop: "2rem"}}>
-     <Stack spacing={2} direction="row">
-    {/*  <Link to="/eyes"> <Button variant="text">Previous Section</Button></Link>*/}
-    <Button variant="contained" >Next Input</Button>
-    <Button variant="outlined" onClick={(e) => handleSave(e)}>Save</Button> 
-  </Stack>
-  </div>
-        {/* </div>*/}
-   {/* </div>*/}
-                       
-                       {/* </div>*/}
-                    
-                    
-                    {/* </div>*/}
-                   {/*</div>*/}
-               {/*</div>*/}
-              </div>
+                
             </div>
           </div>
-        </div>
-      </div>
 
-
-     
-     </div>
-    
-   </div>
-  
+               <div className="absolute left-[1218px] top-[240px]">
+               <MedTechNotes notes={note} token={props.token} proxy={props.proxy} tab="pulses" setNotes={setNotes}/>
+               <div className ="flex flex-row gap-[10px] ml-[50px] mb-[50px] mr-[50px]">
+                     <input 
+                             ref={fileInputRef}
+                             type="file"
+                             style={{ display: 'none'}}
+                             accept="image/*" // Accept only image files
+                             onChange={handleImageUpload}
+                           />
+                     <button className="bg-indigo-A200 flex md:flex-col flex-row gap-[5px] md:gap-5 ml-5px items-center justify-center mt-2.5 w-[60%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                         onClick={handleUploadClick}
+                         >
+                           <Img
+                             className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
+                             src="images/img_television_white.svg"
+                             alt="television"
+                           />
+                         <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Upload Image of Legs</Text>
+                     </button>
+                     <Img
+                         className="h-[130px] md:h-auto w-[130px] md:h-auto object-cover  w-full"
+                         src= {profilePic}
+                         alt=""
+                         onLoad ={()=> setImageLoaded(true)}
+                         style = {{display: imageLoaded? "block": "none"}}
+                         />
+      
+   
+                   </div>
+               </div>
+              
+          <div className = 'flex flex-row items-start justify-start gap-[25px] ml-[120px] w-[41%] mt-[20px]'>
+              
+              {complete? <button className="bg-indigo-A200 flex md:flex-col flex-row md:gap-5 ml-5px items-center justify-center mt-2.5 w-[20%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                  onClick={(e) => handleSave(e)}
+                  >
+                  <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Save</Text>
+              </button>:
+              <button className="bg-indigo-A200 flex md:flex-col flex-row md:gap-5 ml-5px items-center justify-center mt-2.5 w-[20%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
+              onClick={handleClick}
+              >
+              <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Next Input</Text>
+          </button>}
+          <Text className="font-semibold md:ml-[0] text-red-700 text-xl">{error}</Text>
+          {navigate ? (<Navigate replace to= {navigate} />) : null}
+              
+          </div>
            </div>
-         </div>
+           </div>
+           </div>
        </div>
-     </div>
-   </>
+       </div>
+       </>
  );
 };
 

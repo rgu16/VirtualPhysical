@@ -16,10 +16,17 @@ import PulmonaryPopover from "./PulmonaryPopover/PulmonaryPopover";
 
 
 const ToggleRadio = (props) => {
+    let error
+
+    if (props.title.includes("calf")){
+        error = props.value === "2" | props.value === "3" | props.value === "4"
+    } else if (props.title.includes("region")){
+        error = (props.value !== '0') & (props.value !== "none")
+    }
  return (
     <>
         <FormControl value = {props.value}
-                     error = {(props.value !== '2') & (props.value !== "none")}
+                     error = {error}
                      onChange={props.onChange}>
             <div className="flex flex-row gap-[13px] items-start justify-start w-full mt-[30px]" >
             <FormLabel style={{paddingBottom: '10px', color: 'black' , fontSize: '20px', fontWeight: 'bold'}} id="demo-row-radio-buttons-group-label">{props.title}</FormLabel>

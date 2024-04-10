@@ -22,8 +22,8 @@ const HandsMedPage = (props) => {
 
   const [cyanosis, setCyanosisValue] = useState("none");
   const [pallor, setPallorValue] = useState("none");
-  const [capillaryrefill, setCRTValue] = useState("0");
-  const [pulseox, setPulseOxValue] = useState();
+  const [capillaryrefill, setCRTValue] = useState("");
+  const [pulseox, setPulseOxValue] = useState("");
   const [isChecked, setIsChecked] = useState(false);
   const [isCheckedScale, setIsCheckedScale] = useState(false);
   const [isCheckedCRT, setIsCheckedCRT] = useState(false);
@@ -57,13 +57,38 @@ const HandsMedPage = (props) => {
   const handlePallorChange = (event) => {
     setPallorValue(event.target.value)
   }
-
-  const handleCRTChange = (event) => {
-    setCRTValue(event.target.value)
+  const [crtError, setCRTError] = useState('')
+  const handleCRTChange = (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, '')
+    setCRTValue(value);
+    if (value === ''){
+      setCRTError('');
+    }
+    else if (value > 3) {
+      setCRTError("Highly Abnormal");
+    } else if (value > 2){
+      setCRTError('Abnormal (due to dehydration)');
+    } else {
+      setCRTError('');
+    }
   }
 
-  const handlePulseOxChange = (event) => {
-    setPulseOxValue(event.target.value)
+  const [poError, setPoError] = useState('')
+  const handlePulseOxChange = (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, '')
+    setPulseOxValue(value);
+    if (value === ''){
+      setPoError('');
+    }
+    else if (value < 90) {
+      setPoError("Highly Abnormal");
+    } else if (value < 94){
+      setPoError('Abnormal');
+    } else if (value >100){
+      setPoError('Invalid');
+    }else{
+      setPoError('');
+    }
   }
 
   const handleUploadClick = () => {
@@ -150,7 +175,7 @@ const HandsMedPage = (props) => {
     if (nextInput.length > 0) {
      const currentRef = inputRefs[nextInput[0]]
      currentRef.current.focus();
-     currentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+     currentRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }else {
      setComplete(true);
     }
@@ -411,7 +436,9 @@ const HandsMedPage = (props) => {
                             endAdornment: <InputAdornment position="end">sec</InputAdornment>,
                             }}
                             value = {capillaryrefill}
-                                      onChange={handleCRTChange}/>
+                                      onChange={handleCRTChange}
+                                      label={crtError}
+                                      error ={crtError !== ""}/>
                           </div>
                         </div>
                         {isCheckedCRT && (
@@ -461,7 +488,9 @@ const HandsMedPage = (props) => {
                             endAdornment: <InputAdornment position="end">%</InputAdornment>,
                             }}
                             value = {pulseox} 
-                            onChange={handlePulseOxChange}/>
+                            onChange={handlePulseOxChange}
+                            label={poError}
+                                      error ={poError !== ""}/>
                           </div>
                         </div>
                         {isCheckedPulseOx && (
@@ -505,7 +534,7 @@ const HandsMedPage = (props) => {
                              src="images/img_television_white.svg"
                              alt="television"
                            />
-                         <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Upload Image of Eyes</Text>
+                         <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Upload Image of Hands</Text>
                      </button>
                      <Img
                          className="h-[130px] md:h-auto w-[130px] md:h-auto object-cover  w-full"
