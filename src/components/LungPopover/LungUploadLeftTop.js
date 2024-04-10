@@ -75,17 +75,18 @@ export default function LungPopover(props) {
         id={id}
         disableScrollLock={true}
         open={open}
-        anchorEl={anchorEl}
-        anchorReference="anchorEl"
         onClose={handleClose}
+        anchorReference="anchorPosition"
+        anchorPosition={{ top: 2060, left: 328 }}
         anchorOrigin={{
-          vertical: 'center',
-          horizontal: 'center',
-        }}
-        transformOrigin={{
           vertical: 'bottom',
           horizontal: 'right',
         }}
+        transformOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        style={{ marginTop: "100px"}}
       >
             <Typography sx={{ p: 2 }}>
                 <div>

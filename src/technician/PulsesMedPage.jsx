@@ -229,7 +229,7 @@ paddingTop: '50px',
                     size="txtCairoBold34">
                     Pulses
                     </Text>
-                    <div className="flex flex-col ml-[80px] items-start justify-between w-full" >
+                    <div className="flex flex-col ml-[50px] items-start justify-between w-full" >
                         <div className="flex flex-row items-center w-[65%] justify-between">
                         <div className="flex flex-row gap-[13px]">
                       <Text
@@ -279,7 +279,7 @@ paddingTop: '50px',
                         />
                       </div>
                     )}
-                    <div className="flex flex-col gap-[13px] ml-[80px] items-start justify-between w-full" >
+                    <div className="flex flex-col gap-[13px] ml-[50px] items-start justify-between w-full" >
                     <div className="flex flex-row items-center gap-[10px] w-[65%] justify-between">
                       <div className="flex flex-row gap-[13px]">
                       <Text
@@ -329,7 +329,7 @@ paddingTop: '50px',
                         />
                       </div>
                     )}
-                    <div className="flex flex-col gap-[13px] ml-[80px] items-start justify-between w-full" >
+                    <div className="flex flex-col gap-[13px] ml-[50px] items-start justify-between w-full" >
                     <div className="flex flex-row items-center gap-[10px] w-[65%] justify-between">
                       <div className="flex flex-row gap-[13px]">
                       <Text
@@ -381,7 +381,7 @@ paddingTop: '50px',
                         
                       </div>
                     )}
-                    <div className="flex flex-col gap-[13px] ml-[80px] items-start justify-between w-full" >
+                    <div className="flex flex-col gap-[13px] ml-[50px] items-start justify-between w-full" >
                     <div className="flex flex-row items-center gap-[10px] w-[65%] justify-between">
                       <div className="flex flex-row gap-[13px]">
                       <Text
@@ -436,7 +436,34 @@ paddingTop: '50px',
                   </List>
                   </div>
               </div>
+              
                 <div className= "flex flex-col w-full ml-[50px]">
+                <div className="flex flex-row gap-[13px] ml-[50px] items-start justify-start w-full mt-[40px] mb-[20px]" >
+                          <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                            Carotid Auscultation 
+                          </Text>
+                          <div className="relative group flex flex-row">
+                            <button disable = {"true" }>
+                              <img
+                              className="h-[36px] w-[36px]"
+                              src="images/img_profile_black_900.svg"
+                              alt="profile_One"/>
+                            </button>
+                            <span style={{ whiteSpace: 'nowrap' }}
+                            className="absolute transform left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                            Auscultate the carotid pulse using the bell of the stethoscope
+                            </span>
+                          </div>
+                          
+                      </div>
+                      <div className="flex flex-row ml-[80px] h-[260px] w-[322px]" 
+                               style={{ backgroundImage: "url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/carotid-img-1@2x.png)" }}>
+                          <div className= "flex flex-col h-full mt-[150px] ml-[170px]">
+                          <CarotidPopover proxy={props.proxy} token={props.token}></CarotidPopover>
+                          </div>
+                      </div>
                   <div className="flex flex-row gap-[13px] ml-[50px] items-start justify-start w-full mt-[30px]" >
                           <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
@@ -660,32 +687,7 @@ paddingTop: '50px',
                           }
                         </div>
                       </div>
-                      <div className="flex flex-row gap-[13px] ml-[50px] items-start justify-start w-full mt-[40px] mb-[20px]" >
-                          <Text
-                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                              size="txtCairoBold24">
-                            Carotid Auscultation 
-                          </Text>
-                          <div className="relative group flex flex-row">
-                            <button disable = {"true" }>
-                              <img
-                              className="h-[36px] w-[36px]"
-                              src="images/img_profile_black_900.svg"
-                              alt="profile_One"/>
-                            </button>
-                            <span style={{ whiteSpace: 'nowrap' }}
-                            className="absolute transform left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
-                            Auscultate the carotid pulse using the bell of the stethoscope
-                            </span>
-                          </div>
-                          
-                      </div>
-                      <div className="flex flex-row ml-[80px] h-[260px] w-[322px]" 
-                               style={{ backgroundImage: "url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/carotid-img-1@2x.png)" }}>
-                          <div className= "flex flex-col h-full mt-[150px] ml-[170px]">
-                          <CarotidPopover proxy={props.proxy} token={props.token}></CarotidPopover>
-                          </div>
-                      </div>
+
                       <div className = 'flex flex-row items-center justify-start gap-[25px] ml-[90px] w-[41%] mt-[20px]'>
               
               {complete? <button className="bg-indigo-A200 flex md:flex-col flex-row md:gap-5 ml-5px items-center justify-center mt-2.5 w-[20%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"

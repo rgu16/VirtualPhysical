@@ -82,16 +82,18 @@ export default function CarotidPopover(props) {
       <Popover
         id={id}
         open={open}
-        anchorEl={anchorEl}
         onClose={handleClose}
+        anchorReference="anchorPosition"
+        anchorPosition={{ top: 2060, left: 600 }}
         anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        style={{ marginTop: "180px"}}
       >
             <Typography sx={{ p: 2 }}>
                 <div>
@@ -104,18 +106,16 @@ export default function CarotidPopover(props) {
                      accept="audio/*" // Accept only image files
                      onChange={handleAudioUpload}
                    />
-               <button
-  className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0 roundedButton"
-  style={{ background: '#5974F6',  borderRadius: '20px', width: '250px'}}
-  onClick={handleUploadClick}
->
-  <Img
-    className="h-7 md:ml-[0] ml-[0] md:mt-0 mt-1 w-7 "
-    src="images/audioupload.png"
-    alt="television"
-  />
-  <Text  style={{color: 'white' }} className="font-semibold ml-2.5 md:ml-[0] text-xl">Upload carotid audio</Text>
-</button>
+                <button className="bg-indigo-A200 justify-evenly flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0 h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                      onClick={handleUploadClick}
+                      >
+                        <Img
+                          className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
+                          src="images/img_television_white.svg"
+                          alt="television"
+                        />
+                      <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Upload carotid audio</Text>
+                  </button>
 <br></br>
 
   <h2>Audio Recording - Carotid</h2>

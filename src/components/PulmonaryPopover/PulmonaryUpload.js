@@ -128,16 +128,18 @@ const handleAudioUploadBell = (e) => {
       <Popover
         id={id}
         open={open}
-        anchorEl={anchorEl}
         onClose={handleClose}
+        anchorReference="anchorPosition"
+        anchorPosition={{ top: 2060, left: 748 }}
         anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'left',
-          }}
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+        transformOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        style={{ marginTop: "120px"}}
       >
             <Typography sx={{ p: 2 }}>
                 <div>
@@ -160,7 +162,7 @@ const handleAudioUploadBell = (e) => {
     src="images/audioupload.png"
     alt="television"
   />
-  <Text  style={{color: 'white' }} className="font-semibold ml-2.5 md:ml-[0] text-xl">Upload diaphram audio</Text>
+  <Text  style={{color: 'white' }} className="font-semibold ml-2.5 md:ml-[0] text-xl">Upload diaphragm audio</Text>
 </button>
 <br></br>
 
