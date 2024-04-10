@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Img, Line, List, Text, NavBar, TabNav } from "components";
-import { Link } from 'react-router-dom';
+import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes } from "components";
+import { Link, Navigate } from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -29,6 +29,11 @@ const HandsMedPage = (props) => {
   const [isCheckedCRT, setIsCheckedCRT] = useState(false);
   const [isCheckedPulseOx, setIsCheckedPulseOx] = useState(false);
 
+  const [navigate, setNavigate] = useState();
+  const [complete, setComplete] = useState(false);
+  const [error, setError] = useState("");
+
+  const inputs = [cyanosis, pallor, capillaryrefill, pulseox];
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
@@ -132,401 +137,412 @@ const HandsMedPage = (props) => {
      }
    })
   };
+  const [isCheckedPulse, setCheckboxPulse] = useState(false);
+  const inputRefs = [useRef(null),useRef(null),useRef(null),useRef(null)]
+  const handleClick = () => {
+   console.log(inputs)
+   const nextInput = inputs.map((item, index)=> {
+     if (item === null | item === '' | item=== 'none'){
+       return index;
+     }
+    }).filter(index => index !== undefined);
+    console.log(nextInput)
+    if (nextInput.length > 0) {
+     const currentRef = inputRefs[nextInput[0]]
+     currentRef.current.focus();
+     currentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }else {
+     setComplete(true);
+    }
+  };
   return (
     <>
-    <NavBar proxy={props.proxy} token={props.token} />
-      <div
-        className="bg-cover bg-no-repeat bg-white-A700 flex flex-col font-dmsans h-[1761px] items-center justify-start mx-auto pb-28 w-full"
-        style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
-      >
-        <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
-        <div></div>
-          <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
-          <TabNav tab="hands"></TabNav>
-            <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full" >
-                        
-                   <div style={{paddingLeft: '150px', paddingTop: '50px'}} className="flex w-full min-h-screen p-5">
-      <div className="w-full max-w-md">
-      
-      
-      <div className="absolute bg-white-A700 bottom-[8%] flex flex-col font-cairo gap-6 h-[1200px] md:h-auto inset-x-[0] justify-start max-w-[1695px] mx-auto pb-6 pt-8 px-5 rounded-bl-[12px] rounded-br-[12px] w-full">
-
-
-         <div className="md:h-[1277px] sm:h-[3072px] h-[370px] relative w-[84%] md:w-full">
-          {/* <div className="absolute bottom-[3%] h-[38px] right-[0] w-[10%]">
-             <div className="absolute bg-black-900 h-[35px] inset-[0] justify-center m-auto shadow-bs w-full"></div>
-             <Text
-               className="absolute h-full inset-[0] justify-center m-auto text-white-A700 text-xl w-max"
-               size="txtCairoRegular20WhiteA700"
-             >
-               Save
-             </Text>
-
-             
-           </div>*/}
-           <div className="absolute md:h-[1277px] sm:h-[3072px] h-[925px] inset-[0] justify-center m-auto w-[98%] md:w-full">
-             <div className="absolute flex flex-col items-center justify-start left-[1%] top-[0] w-[92%]">
-               <div className="flex md:flex-col flex-row gap-[23px] items-center justify-between w-full">
-                 <div className="flex md:flex-1 flex-col md:gap-10 gap-[292px] items-end justify-start w-[79%] md:w-full">
-                 <div className="flex md:flex-1 flex-col md:gap-10 gap-[292px] items-end justify-start w-[79%] md:w-full">
-                   <div className="flex md:flex-col flex-row md:gap-10 items-start justify-between w-full">
-                     <div className="flex flex-col items-center justify-start md:mt-0 mt-[9px]">
-                      
-                     <div className="absolute top-30 right-20 w-1/2" style={{paddingLeft: '390px'}}>
- 
- <div className= "flex flex-col items-start justify-start w-[400px] h-full m-[50px] mt-[80px]">
-
-        <Text className="font-bold text-2xl text-black-900" style={{ paddingTop: "2rem" }}>Notes: </Text>
-        <textarea className="w-full h-[200px] border border-gray-400 border-2 rounded-[14px] p-[10px]" 
-                  placeholder="Medical Technician notes"
-                  value={note}
-                  onChange={(e) => setNotes(e.target.value)}></textarea>
-                
-                  {/*Upload Image */}
-        <div style={{ paddingTop: "2rem" }}>
-            <input 
-                    ref={fileInputRef}
-                    type="file"
-                    style={{ display: 'none'}}
-                    accept="image/*" // Accept only image files
-                    onChange={handleImageUpload}
-                  />
-                  <button
-  className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0 roundedButton"
-  style={{ background: '#5974F6',  borderRadius: '20px', width: '250px'}}
-  onClick={handleUploadClick}
->
-  <Img
-    className="h-7 md:ml-[0] ml-[0] md:mt-0 mt-1 w-7 "
-    src="images/audioupload.png"
-    alt="television"
-  />
-  <Text  style={{color: 'white' }} className="font-semibold ml-2.5 md:ml-[0] text-xl">Upload Image of Hands</Text>
-</button>
-                  <Img
-                      className="h-[130px] md:h-auto rounded-[50%] w-[130px] md:h-auto object-cover  w-full"
-                      src= {profilePic}
-                      alt=""
-                      onLoad ={()=> setImageLoaded(true)}
-                      // style = {{display: imageLoaded? "none": "block"}}
-                      />
-                      
+    <div className="h-screen">
+       <NavBar proxy={props.proxy} token={props.token}/>
+         <div
+           className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans items-center justify-start mx-auto pb-28 w-full"
+           style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
+         >
+           <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
+            <div></div>
+             <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
+               <TabNav tab="hands"></TabNav>
+               <div className="min-h-screen bg-white-A700 flex flex-col font-cairo items-start justify-start p-10 sm:px-5 w-full"style={{
+       paddingTop: '50px',
+     }} >
+                 <div className="flex flex-col  justify-start w-[99%] md:w-full">
+                   <div className="flex md:flex-col flex-row md:gap-10 items-start justify-start w-full">
+                     <div className="md:h-[560px]  relative w-[80%] md:w-full">
+                         <div className="flex flex-col items-start justify-start w-full">
+                         <List
+                             className="flex flex-col gap-[10px] md:ml-[0] ml-[50px] w-[100%]"
+                             orientation="vertical">      
+                             <Text
+                             className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
+                             size="txtCairoBold34">
+                             Hands
+                             </Text>
+                             <div className="flex flex-col gap-[13px] ml-[50px] items-start justify-between w-full" >
+                               <div className="flex flex-row gap-[10px]">
+                             <Text
+                                 className="text-[22px] md:text-[22px] text-black-900 sm:text-xl"
+                                 size="txtCairoBold24">
+                                Cyanosis:
+                             </Text>
+                             <div className="relative group flex flex-row">
+                               <button onClick={() => setCheckboxPulse(!isCheckedPulse)}>
+                                 <img
+                                 className="h-[36px] w-[36px]"
+                                 src="images/img_profile_black_900.svg"
+                                 alt="profile_One"/>
+                               </button>
+                               <span className=" bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                                 Show cyanosis (bluish-purple skin color) scale 
+                               </span>
+                             </div>
+                             
+                             </div>
+                             
+                             </div>
+                             <div className="flex flex-col gap-[0px] ml-[80px] items-start justify-start w-[50%]" >
+                             <FormControl   
+                          error = {(cyanosis !== '0') & (cyanosis !== "none")}
+                            className = "flex flex-col justify-start items-start w-full" value = {cyanosis}
+                            onChange={handleCyanosisChange}
+                            >
+                          <RadioGroup className = "flex flex-row justify-between w-full" >
+                          <div className = {isCheckedPulse?"flex flex-row justify-between w-full ml-[-60px]":"flex flex-row justify-start"}>
+                          {isCheckedPulse? <div></div> :
+                          <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>}
+                            <FormControlLabel inputRef={inputRefs[0]} value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+                            <FormControlLabel inputRef={inputRefs[0]} value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+                            <FormControlLabel inputRef={inputRefs[0]} value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+                            {isCheckedPulse? <div></div> :
+                          <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>}
+                          </div>
+                           </RadioGroup>
+                          </FormControl>
    
-                      </div>  
-    </div>
-    <div className="absolute top-20 left-25 w-1/2" style={{paddingTop: '450px',paddingLeft: '50px'}}>
-    <div className= "flex flex-col items-start justify-start w-[600px] h-full ">
-    <Text className="font-bold text-2xl text-black-900">CRT and Pulse Ox References: </Text>
- <div>
- </div>
-   {isCheckedCRT && (
-        <div style={{ marginLeft: '10px' }}>
-          {/* Your images */}
-          <img
-            style={{
-              width: "100%", // Enlarge the width of the image
-              height: "auto", // Set height to auto to maintain aspect ratio
-              paddingTop: "5px",
-              marginRight: '80px',
-
-            }}
-            src="images/capillaryrefill.png"
-            alt="screenshot20231"
-          />
-         
-         
-        </div>
-      )}
-      <div style={{ marginTop: '20px' }}>
-       <label>
-        <input
-          type="checkbox"
-          className="cboxes"
-          checked={isCheckedCRT}
-          onChange={handleCheckboxCRTChange}
-        />
-        Show how to take the capillary refill time
-      </label>
-      </div>
-
-      {isCheckedPulseOx && (
-        <div style={{ marginLeft: '10px' }}>
-          {/* Your images */}
-          <img
-            style={{
-              width: "100%", // Enlarge the width of the image
-              height: "auto", // Set height to auto to maintain aspect ratio
-              paddingTop: "5px",
-              marginRight: '80px',
-
-            }}
-            src="images/pulseox.png"
-            alt="screenshot20231"
-          />
-         
-         
-        </div>
-      )}
-      <div style={{ marginTop: '60px' }}>
-       <label>
-        <input
-          type="checkbox"
-          className="cboxes"
-          checked={isCheckedPulseOx}
-          onChange={handleCheckboxPulseOxChange}
-        />
-        Show how to take the pulse ox measurement
-      </label>
-      </div>
-    </div>
-    </div>
-
-        </div>
-               
-           
-               {/*end */}
-                       
-
-                     </div>
-                     
+                             </div>
+                             {isCheckedPulse && (
+                                          <div className = "flex flex-row justify-between items-start w-[40%] ml-[80px] mr-[80px]">
+                                            <div className ="flex flex-col items-center justify-center w-[33%] m-[2px] text-center">
+                                            <img
+                                                style={{
+                                                  height: "60%"
+                                                }} 
+                                              src="images/cyanosis1.png"
+                                              alt="screenshot20231"
+                                            />
+                                            <Text
+                                                className="text-[22px] md:text-[22px] text-black-900 sm:text-xl"
+                                                size="txtCairoBold24">
+                                              None
+                                            </Text>
+                                            <Text
+                                                className="text-[15px] md:text-[22px] text-black-900 sm:text-xl text-center">
+                                              No sign of bluish discoloration of skin
+                                            </Text>
+                                            </div>
+                                            <div className ="flex flex-col items-center justify-center w-[33%]  m-[2px] text-center">
+                                            <img
+                                                style={{
+                                                  height: "60%"
+                                                }}
+                                              src="images/cyanosis2.png"
+                                              alt="screenshot20231"
+                                            />
+                                            <Text
+                                                className="text-[22px] md:text-[22px] text-black-900 sm:text-xl"
+                                                size="txtCairoBold24">
+                                              Mild
+                                            </Text>
+                                            <Text
+                                                className="text-[15px] md:text-[22px] text-black-900 sm:text-xl text-center">
+                                              Showing signs of bluish discoloration of skin, especially at fingernails
+                                            </Text>
+                                            </div>
+                                            <div className ="flex flex-col items-center justify-center w-[33%] m-[2px] text-center">
+                                            <img
+                                                style={{
+                                                  height: "60%"
+                                                }}
+                                              src="images/cyanosis3.png"
+                                              alt="screenshot20231"
+                                            />
+                                            <Text
+                                                className="text-[22px] md:text-[22px] text-black-900 sm:text-xl"
+                                                size="txtCairoBold24">
+                                              Severe
+                                            </Text>
+                                            <Text
+                                                className="text-[15px] md:text-[22px] text-black-900 sm:text-xl text-center">
+                                              Profound bluish discoloration of skin
+                                            </Text>
+                                            </div>
+                                          </div>
+                                      )}
+                              <div className="flex flex-col gap-[13px] ml-[50px] items-start justify-between w-full" >
+                               <div className="flex flex-row gap-[10px]">
+                             <Text
+                                 className="text-[22px] md:text-[22px] text-black-900 sm:text-xl"
+                                 size="txtCairoBold24">
+                                Pallor:
+                             </Text>
+                             <div className="relative group flex flex-row">
+                               <button onClick={handleCheckboxScaleChange}>
+                                 <img
+                                 className="h-[36px] w-[36px]"
+                                 src="images/img_profile_black_900.svg"
+                                 alt="profile_One"/>
+                               </button>
+                               <span className=" bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                                 Show pallor (skin paleness) scale
+                               </span>
+                             </div>
+                             
+                             </div>
+                             
+                             </div>
+                             <div className="flex flex-col gap-[0px] ml-[80px] items-start justify-start w-[50%]" >
+                             <FormControl   
+                          error = {(pallor !== '0') & (pallor !== "none")}
+                            className = "flex flex-col justify-start items-start w-full" value = {pallor}
+                            onChange={handlePallorChange}
+                            >
+                          <RadioGroup className = "flex flex-row justify-between w-full" >
+                          <div className = {isCheckedScale?"flex flex-row justify-between w-full ml-[-60px]":"flex flex-row justify-start"}>
+                          {isCheckedScale? <div></div> :
+                          <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>}
+                            <FormControlLabel inputRef={inputRefs[1]} value="0" labelPlacement="bottom" control={<Radio />} label="0" />
+                            <FormControlLabel inputRef={inputRefs[1]} value="1" labelPlacement="bottom" control={<Radio />} label="1" />
+                            <FormControlLabel inputRef={inputRefs[1]} value="2" labelPlacement="bottom" control={<Radio />} label="2" />
+                            {isCheckedScale? <div></div> :
+                          <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>}
+                          </div>
+                           </RadioGroup>
+                          </FormControl>
+   
+                             </div>
+                             {isCheckedScale && (
+                                          <div className = "flex flex-row justify-between items-start w-[40%] ml-[80px] mr-[80px]">
+                                            <div className ="flex flex-col items-center justify-center w-[33%] m-[2px] text-center">
+                                            <img
+                                                style={{
+                                                  height: "60%"
+                                                }} 
+                                              src="images/nopallor.png"
+                                              alt="screenshot20231"
+                                            />
+                                            <Text
+                                                className="text-[22px] md:text-[22px] text-black-900 sm:text-xl"
+                                                size="txtCairoBold24">
+                                              None
+                                            </Text>
+                                            <Text
+                                                className="text-[15px] md:text-[22px] text-black-900 sm:text-xl text-center">
+                                              No palmer pallor
+                                            </Text>
+                                            </div>
+                                            <div className ="flex flex-col items-center justify-center w-[33%]  m-[2px] text-center">
+                                            <img
+                                                style={{
+                                                  height: "60%"
+                                                }}
+                                              src="images/mildpallor.png"
+                                              alt="screenshot20231"
+                                            />
+                                            <Text
+                                                className="text-[22px] md:text-[22px] text-black-900 sm:text-xl"
+                                                size="txtCairoBold24">
+                                              Mild
+                                            </Text>
+                                            <Text
+                                                className="text-[15px] md:text-[22px] text-black-900 sm:text-xl text-center">
+                                              Palmer pallor
+                                            </Text>
+                                            </div>
+                                            <div className ="flex flex-col items-center justify-center w-[33%] m-[2px] text-center">
+                                            <img
+                                                style={{
+                                                  height: "60%"
+                                                }}
+                                              src="images/severepallor.png"
+                                              alt="screenshot20231"
+                                            />
+                                            <Text
+                                                className="text-[22px] md:text-[22px] text-black-900 sm:text-xl"
+                                                size="txtCairoBold24">
+                                              Severe
+                                            </Text>
+                                            <Text
+                                                className="text-[15px] md:text-[22px] text-black-900 sm:text-xl text-center">
+                                              Severe palmer pallor
+                                            </Text>
+                                            </div>
+                                          </div>
+                                      )}
+                             <div className="flex flex-col gap-[13px] ml-[50px] items-start justify-between w-full" >
+                            <div className="flex flex-row items-center gap-[10px] w-[40%] justify-between">
+                            <div className="flex flex-row gap-[13px]">
+                          <Text
+                              className="text-[22px] md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                             Capillary Refill Time (CRT):
+                          </Text>
+                          <div className="relative group flex flex-row">
+                            <button onClick={handleCheckboxCRTChange}>
+                              <img
+                              className="h-[36px] w-[36px]"
+                              src="images/img_profile_black_900.svg"
+                              alt="profile_One"/>
+                            </button>
+                            <span style={{ whiteSpace: 'nowrap' }}
+                            className=" absolute top-[20px] left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                              Show how to take the capillary refill time
+                            </span>
+                          </div>
+                          </div>
+                          <TextField
+                            inputRef = {inputRefs[2]}
+                            id="outlined-start-adornment"
+                              sx={{ m: 1, width: '14ch' }}
+                            InputProps={{
+                            endAdornment: <InputAdornment position="end">sec</InputAdornment>,
+                            }}
+                            value = {capillaryrefill}
+                                      onChange={handleCRTChange}/>
+                          </div>
+                        </div>
+                        {isCheckedCRT && (
+                            <div style={{ marginLeft: '10px' }}>
+                            {/* Your images */}
+                            <img
+                              style={{
+                                width: "40%", // Enlarge the width of the image
+                                height: "auto", // Set height to auto to maintain aspect ratio
+                                paddingTop: "5px",
+                                marginLeft: '80px',
+                  
+                              }}
+                              src="images/capillaryrefill.png"
+                              alt="screenshot20231"
+                            />
+                           
+                           
+                          </div>
+                          )}
+                          <div className="flex flex-col gap-[13px] ml-[50px] items-start justify-between w-full" >
+                            <div className="flex flex-row items-center gap-[10px] w-[40%] justify-between">
+                            <div className="flex flex-row gap-[13px]">
+                          <Text
+                              className="text-[22px] md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                             SpO2 Measurement:
+                          </Text>
+                          <div className="relative group flex flex-row">
+                            <button onClick={handleCheckboxPulseOxChange}>
+                              <img
+                              className="h-[36px] w-[36px]"
+                              src="images/img_profile_black_900.svg"
+                              alt="profile_One"/>
+                            </button>
+                            <span style={{ whiteSpace: 'nowrap' }}
+                            className=" absolute top-[20px] left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                              Show how to take pulse ox measurement
+                            </span>
+                          </div>
+                          </div>
+                          <TextField
+                            inputRef = {inputRefs[3]}
+                            id="outlined-start-adornment"
+                              sx={{ m: 1, width: '14ch' }}
+                            InputProps={{
+                            endAdornment: <InputAdornment position="end">%</InputAdornment>,
+                            }}
+                            value = {pulseox} 
+                            onChange={handlePulseOxChange}/>
+                          </div>
+                        </div>
+                        {isCheckedPulseOx && (
+                            <div style={{ marginLeft: '10px' }}>
+                            {/* Your images */}
+                            <img
+                              style={{
+                                width: "40%", // Enlarge the width of the image
+                                height: "auto", // Set height to auto to maintain aspect ratio
+                                paddingTop: "5px",
+                                marginLeft: '80px',
+                  
+                              }}
+                              src="images/pulseox.png"
+                              alt="screenshot20231"
+                            />
+                           
+                           
+                          </div>
+                          )}
+                             </List>
+                               </div>
+                           </div>
+                       </div>
                    </div>
-                   
-                 </div>
+                   <div className="absolute left-[1218px] top-[240px]">
+                   <MedTechNotes notes={note} token={props.token} proxy={props.proxy} tab="abdomen" setNotes={setNotes}/>
+                   <div className ="flex flex-row gap-[10px] ml-[50px] mb-[50px] mr-[50px]">
+                     <input 
+                             ref={fileInputRef}
+                             type="file"
+                             style={{ display: 'none'}}
+                             accept="image/*" // Accept only image files
+                             onChange={handleImageUpload}
+                           />
+                     <button className="bg-indigo-A200 flex md:flex-col flex-row gap-[5px] md:gap-5 ml-5px items-center justify-center mt-2.5 w-[60%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                         onClick={handleUploadClick}
+                         >
+                           <Img
+                             className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
+                             src="images/img_television_white.svg"
+                             alt="television"
+                           />
+                         <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Upload Image of Eyes</Text>
+                     </button>
+                     <Img
+                         className="h-[130px] md:h-auto w-[130px] md:h-auto object-cover  w-full"
+                         src= {profilePic}
+                         alt=""
+                         onLoad ={()=> setImageLoaded(true)}
+                         style = {{display: imageLoaded? "block": "none"}}
+                         />
+      
+   
                    </div>
-                 <div className="flex flex-col md:gap-10 gap-[301px] justify-start">
-                 
-       
-                 </div>
-               </div>
-             </div>
-             
-                        
-                       <div style={{paddingLeft: '150px', }} className="flex w-full min-h-screen p-5">
-      <div className="w-full max-w-md">
-      <Text
-                        className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
-                        size="txtCairoBold34"
+                   </div>
+                   <div className = 'flex flex-row items-start justify-start gap-[25px] ml-[120px] w-[41%] mt-[20px]'>
+              
+                      {complete? <button className="bg-indigo-A200 flex md:flex-col flex-row md:gap-5 ml-5px items-center justify-center mt-2.5 w-[20%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                          onClick={(e) => handleSave(e)}
+                          >
+                          <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Save</Text>
+                      </button>:
+                      <button className="bg-indigo-A200 flex md:flex-col flex-row md:gap-5 ml-5px items-center justify-center mt-2.5 w-[20%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                      onClick={handleClick}
                       >
-                       Hands Inspection
-                      </Text>
-        <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '20px'}}>
-            {" "}
-            Check for cyanosis and pallor and classify severity: {" "}
-            
-         </h4>
-         {/*i. Cyanosis*/}
-         <FormControl value = {cyanosis}
-    onChange={handleCyanosisChange}>
-         <FormLabel style={{paddingBottom: '10px', paddingTop: '15px', color: 'black' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">i. Cyanosis (Bluish-purple skin color)</FormLabel>
-      <RadioGroup
-        row
-        aria-labelledby="demo-row-radio-buttons-group-label"
-        name="row-radio-buttons-group"
-        style={{ flexWrap: 'nowrap' }}
-      >
-        <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-        <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} style={{ marginLeft: '15px', marginRight: '100px' }} label="0" />
-        <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} style={{ marginLeft: '50px', marginRight: '100px' }} label="1" />
-        <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} style={{ marginLeft: '50px', marginRight: '15px' }} label="2" />
-        
-  <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
-      </RadioGroup>
-    </FormControl>
-    <div style={{
-            marginLeft: '-200px',
-            marginTop: '10px'
-          }}>
-      {isChecked && (
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', marginLeft: '200px' }}>
-          {/* Your images */}
-          <img
-            style={{
-              width: "43%", // Set width to 100% to occupy the whole width
-              height: "60%", // Set height to auto to maintain aspect ratio
-              paddingTop: "0px",
-              paddingBottom: "20px",
-              marginLeft: '75px',
-              marginRight: '3px'
-           
-
-            }}
-            src="images/cyanosis1.png"
-            alt="screenshot20231"
-          />
-          <img
-            style={{
-              width: "47%", // Set width to 100% to occupy the whole width
-              height: "auto", // Set height to auto to maintain aspect ratio
-       
-              paddingBottom: "20px",
-              marginRight: '3px'
-            }}
-            src="images/cyanosis2.png"
-            alt="screenshot20231_One"
-          />
-          <img
-            style={{
-              width: "41%", // Set width to 100% to occupy the whole width
-              height: "60%", // Set height to auto to maintain aspect ratio
-              paddingBottom: "20px"
-            }}
-            src="images/cyanosis3.png"
-            alt="screenshot20231_One"
-          />
-        </div>
-      )}
-       <label>
-        <input
-          type="checkbox"
-          className="cboxes"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-        />
-        Show Reference Images for Cyanosis
-      </label>
-    </div>
-      
-       {/*ii. Pallor */}
-       <FormControl value = {pallor}
-    onChange={handlePallorChange}>
-         <FormLabel style={{paddingBottom: '10px', paddingTop: '45px', color: 'black' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">ii. Pallor (Skin Paleness)</FormLabel>
-      <RadioGroup
-        row
-        aria-labelledby="demo-row-radio-buttons-group-label"
-        name="row-radio-buttons-group"
-        style={{ flexWrap: 'nowrap' }}
-      >
-        <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>
-        <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} style={{ marginLeft: '15px', marginRight: '100px' }} label="0" />
-        <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} style={{ marginLeft: '50px', marginRight: '100px' }} label="1" />
-        <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} style={{ marginLeft: '50px', marginRight: '15px' }} label="2" />
-        
-  <FormLabel style={{paddingTop: '9px', fontSize: '20px' }} id="demo-row-radio-buttons-group-label">Severe</FormLabel>
-      </RadioGroup>
-    </FormControl>
-    <div  style={{
-            marginLeft: '-200px',
-            marginTop: '10px'
-          }}>
-      {isCheckedScale && (
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', marginLeft: '200px' }}>
-          {/* Your images */}
-          <img
-            style={{
-              width: "35%", // Set width to 100% to occupy the whole width
-              height: "60%", // Set height to auto to maintain aspect ratio
-              paddingTop: "15px",
-              paddingBottom: "20px",
-              marginLeft: '90px',
-              marginRight: '55px'
-           
-
-            }}
-            src="images/nopallor.png"
-            alt="screenshot20231"
-          />
-          <img
-            style={{
-              width: "35%", // Set width to 100% to occupy the whole width
-              height: "60%", // Set height to auto to maintain aspect ratio
-       
-              paddingBottom: "20px",
-              marginRight: '35px'
-            }}
-            src="images/mildpallor.png"
-            alt="screenshot20231_One"
-          />
-          <img
-            style={{
-              width: "39%", // Set width to 100% to occupy the whole width
-              height: "60%", // Set height to auto to maintain aspect ratio
-   
-            }}
-            src="images/severepallor.png"
-            alt="screenshot20231_One"
-          />
-        </div>
-      )}
-       <label>
-        <input
-          type="checkbox"
-          className="cboxes"
-          checked={isCheckedScale}
-          onChange={handleCheckboxScaleChange}
-         
-        />
-        Show Reference Images for Pallor 
-      </label>
-    </div>
-
-    <div style={{paddingTop: '60px'}} className="flex flex-row gap-[13px] items-center justify-between w-full" >
-                    
-                    <Text
-                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                      size="txtCairoBold24"
-                    >
-                      Enter capillary refill time (CRT):
-                    </Text>
- <TextField value = {capillaryrefill}
-    onChange={handleCRTChange}
-    sx={{ m: 1, width: '15ch' }}
-  id="outlined-number"
-  label="sec"
-  type="number"
-  InputLabelProps={{
-    shrink: true,
-  }}
-/>
-</div>
-<div className="flex flex-row gap-[15px] items-center justify-between w-full">
-<Text
-   className="mt-[5px] text-2xl md:text-[22px] text-black-900 sm:text-xl"
-   size="txtCairoBold24">
-   Pulse Ox Measurement:
-  </Text>
-  <TextField
-   id="outlined-start-adornment"
-    sx={{ m: 1, width: '14ch' }}
-   InputProps={{
-   endAdornment: <InputAdornment position="end">%</InputAdornment>,
-  }}
-  value = {pulseox} 
-  onChange={handlePulseOxChange}/>
-        </div>
-
-{/*<div style={{paddingTop: "2rem"}}>The values is {cyanosis} {pallor} {capillaryrefill}</div>*/}
-<div style={{paddingTop: "2rem"}}>
-      <Stack spacing={2} direction="row">
-      <Button variant="contained" >Next Input</Button>
-     <Link to="/legs"><Button variant="outlined" onClick={(e) => handleSave(e)} >Save</Button>   </Link>
-   </Stack>
-   </div>   
-   
-         {/* </div>*/}
-    {/* </div>*/}
-                         
-                        {/* </div>*/}
+                      <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Next Input</Text>
+                  </button>}
+                  <Text className="font-semibold md:ml-[0] text-red-700 text-xl">{error}</Text>
+                  {navigate ? (<Navigate replace to= {navigate} />) : null}
                       
-                      
-                     {/* </div>*/}
-                    {/*</div>*/}
-                {/*</div>*/}
+                  </div>
                </div>
-             </div>
+               </div>
+               </div>
+               
+              
+             
            </div>
-         </div>
-       </div>
-
-       
-      </div>
-      
-    </div>
-    
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+           </div>
+           </>
   );
 };
 

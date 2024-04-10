@@ -2,7 +2,8 @@ import React from "react";
 
 
 
-
+import Popover from '@mui/material/Popover';
+import Typography from '@mui/material/Typography';
 import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes } from "components";
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
@@ -98,7 +99,7 @@ const LungsMedPage = (props) => {
     setBreathingStatus(status);
   };
 
-const [breathingrate, setBreathingRateValue] = useState("0");
+const [breathingrate, setBreathingRateValue] = useState(null);
 const [breathinglabor, setBreathingLaborValue] = useState("no selection");
 const handleBreathingRateChange = (event) => {
  setBreathingRateValue(event.target.value)
@@ -160,11 +161,26 @@ const inputRefs = [
 ];
  const [currentInputIndex, setCurrentInputIndex] = useState(0);
  const handleClick = () => {
-   const currentRef = inputRefs[currentInputIndex];
-   if (currentRef && currentRef.current) {
-     currentRef.current.focus();
+  //  const nextInput = inputs.map((item, index)=> {
+  //   if (item === null | item === ''){
+  //     return index;
+  //   }
+  //  }).filter(index => index !== undefined);
+  let nextInput;
+   if (breathingrate === null | breathingrate === ""){
+    nextInput = 0;
+   } else if (breathinglabor === "no selection"){
+    nextInput =1;
+   } else {
+    nextInput = -1;
    }
-   setCurrentInputIndex((prevIndex) => (prevIndex + 1) % inputRefs.length);
+   if (nextInput >= 0) {
+    const currentRef = inputRefs[nextInput]
+    currentRef.current.focus();
+    currentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+   }else {
+    setComplete(true);
+   }
  };
  const [profilePic, setProfilePic] = useState()
  const fileInputRef = useRef(null);
@@ -374,7 +390,7 @@ return (
                               alt="profile_One"/>
                             </button>
                             <span style={{ whiteSpace: 'nowrap' }}
-                            className="absolute top-[20px] left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                            className="absolute transform -translate-x-1/2 top-[20px] left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
                             Show detailed steps on how to record lung sounds
                             </span>
                           </div>
@@ -383,7 +399,7 @@ return (
                         
                         <div className="flex flex-row ml-[80px] h-[478px] w-[100%]" 
                         style={{ backgroundImage: "url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/lung-img-1@2x.png)" }}>
-                          <div className= "flex flex-col w-[37%]"></div>
+                          <div className= "flex flex-col h-full w-[37%]"></div>
                           <div className= "flex flex-col h-full">
                             <div className= "flex flex-col h-[60%]"></div>
                           <LungUploadLeftTop proxy={props.proxy} token={props.token}></LungUploadLeftTop>

@@ -184,15 +184,21 @@ const EyesMedPage = (props) => {
                                         onChange={handleChange}
                                         style={{ flexWrap: 'nowrap' }}
                                     >
+                                      
                                       <div className = "flex flex-col">
+
                                         <div className ="flex flex-row justify-between">
-                                          <div></div>
+                                          {isChecked? 
+                                          <div></div> :
+                                          <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>}
                                           <FormControlLabel value="0" labelPlacement="bottom" control={<Radio />} label="0" />
                                           <div></div>
                                           <FormControlLabel value="1" labelPlacement="bottom" control={<Radio />} label="1" />
                                           <div></div>
                                           <FormControlLabel value="2" labelPlacement="bottom" control={<Radio />} label="2" />
-                                          <div></div>
+                                          {isChecked? 
+                                          <div></div>:
+                                          <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">Severe</FormLabel>}
                                         </div>
                                         {isChecked && (
                                           <div className = "flex flex-row justify-between items-center">
@@ -252,6 +258,7 @@ const EyesMedPage = (props) => {
                                             </div>
                                           </div>
                                       )}
+                                        
                                       </div>
 
                                         

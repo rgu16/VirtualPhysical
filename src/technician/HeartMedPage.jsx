@@ -1,14 +1,15 @@
 import React from "react";
 
 
-import { Img, Line, List, Text, NavBar, TabNav } from "components";
-import { Link } from 'react-router-dom';
+import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes } from "components";
+import { Link, Navigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
 import { useRef,  useState } from 'react';
 import TextField from '@mui/material/TextField';
 import "physician/HeartPage/style.css";
+// import TextField from '@mui/material/TextField';
 
 import AtrialPopover from 'components/AtrialPopover/AtrialUpload.js'
 import MitralPopover from 'components/MitralPopover/MitralUpload.js'
@@ -76,12 +77,27 @@ const parasternalHeave = [
 ];
 
 const HeartMedPage = (props) => {
+  const [navigate, setNavigate] = useState();
+const [complete, setComplete] = useState(false);
+const [error, setError] = useState("");
+const [note, setNotes] = useState("");
  const [profilePic, setProfilePic] = useState()
  const fileInputRef = useRef(null);
  const [imageLoaded, setImageLoaded] = useState(false);
  const [isCheckedCRT, setIsCheckedCRT] = useState(false);
   const [isCheckedPulseOx, setIsCheckedPulseOx] = useState(false);
   const [isCheckedThrills, setIsCheckedThrills] = useState(false);
+
+  const [atrialdiaphragm, setAtrialdiaphragmValue] = useState();
+  const [atrialbell, setAtrialbellValue] = useState();
+  const [pulmonarydiaphragm, setPulmonarydiaphragmValue] = useState();
+  const [pulmonarybell, setPulmonarybellValue] = useState();
+  const [tricuspiddiaphragm, setTricuspiddiaphragmValue] = useState();
+  const [tricuspidbell, setTricuspidbellValue] = useState();
+  const [mitraldiaphragm, setMitraldiaphragmValue] = useState();
+  const [mitralbell, setMitralbellValue] = useState();
+
+ 
 
   const handleCheckboxCRTChange = () => {
     setIsCheckedCRT(!isCheckedCRT);
@@ -92,7 +108,8 @@ const HeartMedPage = (props) => {
   const handleCheckboxThrillsChange = () => {
     setIsCheckedThrills(!isCheckedThrills);
   };
- const [heave, setParasternalValue] = useState();
+ const [heave, setParasternalValue] = useState('none');
+
 
 const handleparasternalHeave = (event) => {
   setParasternalValue(event.target.value)
@@ -186,153 +203,81 @@ function selectAll() {
    setSelected(listOptions);
  }
 }
-
+const inputs = [heave, selected]
 const [isHoveredOne, setIsHoveredOne] = useState(false);
 const [isHoveredTwo, setIsHoveredTwo] = useState(false);
+
+const inputRefs = [useRef(null),useRef(null)];
+const handleClick = () => {
+  console.log(inputs)
+  const nextInput = inputs.map((item, index)=> {
+    if (item === null | item=== 'none'){
+      return index;
+    }
+   }).filter(index => index !== undefined);
+   console.log(nextInput)
+   if (nextInput.length > 0) {
+    const currentRef = inputRefs[nextInput[0]]
+    currentRef.current.focus();
+    currentRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+   }else {
+    setComplete(true);
+   }
+ };
+
 return (
-  <>
-  <NavBar proxy={props.proxy} token={props.token} />
-    <div
-      className="bg-cover bg-no-repeat bg-white-A700 flex flex-col font-dmsans h-[1561px] items-center justify-start mx-auto pb-28 w-full"
-      style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
-    >
-      <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
-      <div></div>
-        <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
-        <TabNav tab="heart"></TabNav>
-          <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full" >
-                      
-                 <div style={{paddingLeft: '150px', paddingTop: '50px'}} className="flex w-full min-h-screen p-5">
-    <div className="w-full max-w-md">
-    
-    
-    <div className="absolute bg-white-A700 bottom-[8%] flex flex-col font-cairo gap-6 h-[1000px] md:h-auto inset-x-[0] justify-start max-w-[1695px] mx-auto pb-6 pt-8 px-5 rounded-bl-[12px] rounded-br-[12px] w-full">
-
-
-       <div className="md:h-[1277px] sm:h-[3072px] h-[370px] relative w-[84%] md:w-full">
-         
-         <div className="absolute md:h-[1277px] sm:h-[3072px] h-[925px] inset-[0] justify-center m-auto w-[98%] md:w-full">
-        
-         
-          
-                     <div style={{paddingLeft: '150px', }} className="flex w-full min-h-screen p-5">
-                     <div className="absolute top-10 left-25 w-1/2" style={{paddingTop: '10px',paddingLeft: '850px'}}>
-    <div className= "flex flex-col items-start justify-start w-[600px] h-full ">
-    <Text className="font-bold text-2xl text-black-900">References: </Text>
- <div>
- </div>
-   {isCheckedCRT && (
-        <div style={{ marginLeft: '10px' }}>
-          {/* Your images */}
-          <img
-            style={{
-              width: "100%", // Enlarge the width of the image
-              height: "auto", // Set height to auto to maintain aspect ratio
-              paddingTop: "5px",
-              marginRight: '80px',
-
-            }}
-            src="images/heave.png"
-            alt="screenshot20231"
-          />
-         
-         
-        </div>
-      )}
-      <div style={{ marginTop: '20px' }}>
-       <label>
-        <input
-          type="checkbox"
-          className="cboxes"
-          checked={isCheckedCRT}
-          onChange={handleCheckboxCRTChange}
-        />
-        Show how to access for parasternal heave
-      </label>
-      </div>
-
-      {isCheckedPulseOx && (
-        <div style={{ marginLeft: '10px' }}>
-          {/* Your images */}
-          <img
-            style={{
-              width: "100%", // Enlarge the width of the image
-              height: "auto", // Set height to auto to maintain aspect ratio
-              paddingTop: "5px",
-              marginRight: '80px',
-
-            }}
-            src="images/thrill.png"
-            alt="screenshot20231"
-          />
-         
-         
-        </div>
-      )}
-      <div style={{ marginTop: '20px' }}>
-       <label>
-        <input
-          type="checkbox"
-          className="cboxes"
-          checked={isCheckedPulseOx}
-          onChange={handleCheckboxPulseOxChange}
-        />
-        Show how to access for thrills in general
-      </label>
-      </div>
-
-      {isCheckedThrills && (
-        <div style={{ marginLeft: '10px' }}>
-          {/* Your images */}
-          <img
-            style={{
-              width: "100%", // Enlarge the width of the image
-              height: "auto", // Set height to auto to maintain aspect ratio
-              paddingTop: "5px",
-              marginRight: '80px',
-
-            }}
-            src="images/thrills.png"
-            alt="screenshot20231"
-          />
-         
-         
-        </div>
-      )}
-      <div style={{ marginTop: '20px' }}>
-       <label>
-        <input
-          type="checkbox"
-          className="cboxes"
-          checked={isCheckedThrills}
-          onChange={handleCheckboxThrillsChange}
-        />
-        Show where to access for each thrill
-      </label>
-      </div>
-
-    </div>
-    </div>
-
-    <div className="w-full max-w-md">
-    <div className="w-full max-w-md">
-      
-     <Text
-                       className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
-                       size="txtCairoBold34"
-                     >
-                      Heart Inspection
-                     </Text>
-        <div className="flex flex-row gap-[15px] items-center justify-between w-full">
-                             <Text
-                              className="mt-0.5 text-2xl md:text-[10px] text-black-900 sm:text-xl"
-                              size="txtCairoBold24" 
-                            >
-                              Parasternal heave:
-                            </Text>
-                            <TextField
-                              className = "w-[70%]"
+<>
+     {/* <NavBar proxy={props.proxy} token={props.token}/> */}
+     <div className="h-screen">
+    <NavBar proxy={props.proxy} token={props.token}/>
+      <div
+        className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans items-center justify-start mx-auto pb-28 w-full"
+        style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
+      >
+        <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
+         <div></div>
+          <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
+            <TabNav tab="heart"></TabNav>
+            <div className="bg-white-A700 flex flex-col font-cairo items-start justify-start p-10 sm:px-5 w-full"style={{
+    paddingTop: '50px',
+  }} >
+              <div className="flex flex-col  justify-start w-[99%] md:w-full">
+                <div className="flex md:flex-col flex-row md:gap-10 items-start justify-start w-full">
+                  <div className="md:h-[560px]  relative w-[65%] md:w-full">
+                      <div className="flex flex-col items-start justify-start w-full">
+                        <List
+                          className="flex flex-col gap-[10px] md:ml-[0] ml-[50px] w-[100%]"
+                          orientation="vertical">      
+                          <Text
+                          className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
+                          size="txtCairoBold34">
+                          Heart
+                          </Text>
+                          <div className="flex flex-col ml-[50px] items-start justify-between w-full" >
+                        <div className="flex flex-row items-center w-[65%] justify-between">
+                        <div className="flex flex-row gap-[13px]">
+                      <Text
+                          className="text-[22px] md:text-[22px] text-black-900 sm:text-xl"
+                          size="txtCairoBold24">
+                         Parasternal heave:
+                      </Text>
+                      <div className="relative group flex flex-row">
+                        <button onClick={handleCheckboxCRTChange}>
+                          <img
+                          className="h-[36px] w-[36px]"
+                          src="images/img_profile_black_900.svg"
+                          alt="profile_One"/>
+                        </button>
+                        <span style={{ whiteSpace: 'nowrap' }}
+                        className=" absolute top-[20px] left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                          Show how to assess for parasternal heave
+                        </span>
+                      </div>
+                      </div>
+                      <TextField
+                              className = "w-[40%]"
                               value = {heave} 
+                              inputRef= {inputRefs[0]}
                               onChange={handleparasternalHeave}
                               id="outlined-select-currency-native"
                               select
@@ -349,104 +294,178 @@ return (
                                 </option>
                               ))}
                             </TextField>
+                      </div>
+                      {isCheckedCRT && (
+                          <div style={{ marginLeft: '10px' }}>
+                            {/* Your images */}
+                            <img
+                              style={{
+                                width: "80%", // Enlarge the width of the image
+                                height: "auto", // Set height to auto to maintain aspect ratio
+                                paddingTop: "5px",
+                                marginRight: '80px',
+
+                              }}
+                              src="images/heave.png"
+                              alt="screenshot20231"
+                            />
+                          
+                          
                           </div>
-                          <h4  style={{paddingTop: '30px', paddingBottom: '15px', fontWeight: 'bold',fontSize: '22px'}}>
-           {" "}
-           Assess for thrills (palpable murmurs): {" "}
-          
-        </h4>
-       {listOptions.map((item) => (
-         <Checkbox key={item} name={item} value={selected.includes(item)} updateValue={handleSelect}>{item}</Checkbox>
-       ))}
-        <div className="-mx-5 px-5 py-0 rounded bg-gray-100 font-medium">
-         <Checkbox name="all" value={selected.length === listOptions.length} updateValue={selectAll}>Select All</Checkbox>
-       </div>
-      {/* <div style={{paddingTop: "2rem"}}>The checked values are {selected.join(" , ")}</div>*/} 
-     
-    <div className="heart-tab">
-
-            <div className="div" >
-
-              <div className="atrialpopover">
-                <AtrialPopover proxy={props.proxy} token={props.token}></AtrialPopover>
-              </div>
-
-              <div className="pulmonarypopover">
-                <PulmonaryPopover proxy={props.proxy} token={props.token}></PulmonaryPopover>
-              </div>
-
-              <div className="tricuspidpopover">
-                <TricuspidPopover proxy={props.proxy} token={props.token}></TricuspidPopover>
-              </div>
-
-              <div className="mitralpopover">
-                <MitralPopover proxy={props.proxy} token={props.token}></MitralPopover>
-              </div>                            
-
-            </div>
-
-
-            <div className="heart-ausc">
-              <p className="heart-auscultation">
-               {/* <span className="text-wrapper">Heart Auscultation </span>
-                <span className="span">(anterior only)</span>*/} 
-              </p>
-            </div>
-          
-          <div style={{ paddingTop: "30rem" }}>
-            <input 
-                    ref={fileInputRef}
-                    type="file"
-                    style={{ display: 'none'}}
-                    accept="image/*" // Accept only image files
-                    onChange={handleImageUpload}
-                  />
-                  <button
-  className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0 roundedButton"
-  style={{ background: '#5974F6',  borderRadius: '20px', width: '250px'}}
-  onClick={handleUploadClick}
->
-  <Img
-    className="h-7 md:ml-[0] ml-[0] md:mt-0 mt-1 w-7 "
-    src="images/audioupload.png"
-    alt="television"
-  />
-  <Text  style={{color: 'white' }} className="font-semibold ml-2.5 md:ml-[0] text-xl">Upload EKG Graph</Text>
-</button>
-                  <Img
-                      className="h-[130px] md:h-auto rounded-[50%] w-[130px] md:h-auto object-cover  w-full"
+                        )}
+                    </div>
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full" >
+                          <Text
+                              className="text-[22px] md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                              Assess for thrills (palpable murmurs):
+                          </Text>
+                          <div className="relative group flex flex-row">
+                        <button onClick={handleCheckboxPulseOxChange}>
+                          <img
+                          className="h-[36px] w-[36px]"
+                          src="images/img_profile_black_900.svg"
+                          alt="profile_One"/>
+                        </button>
+                        <span style={{ whiteSpace: 'nowrap' }}
+                        className=" absolute left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out">
+                          Show how to assess for thrills
+                        </span>
+                      </div>
+                          </div>
+                          {isCheckedPulseOx && (
+                              <div className="flex flex-row ml-[80px]">
+                                <div className = "w-[50%]" >
+                                  <img
+                                    style={{
+                                      width: "95%", // Enlarge the width of the image
+                                      height: "auto", // Set height to auto to maintain aspect ratio
+                                      paddingTop: "5px",
+                                    }}
+                                    src="images/thrill.png"
+                                    alt="screenshot20231"
+                                  />
+                                </div>
+                                <div className = "w-[50%]" >
+                                  <img
+                                    style={{
+                                      width: "95%", // Enlarge the width of the image
+                                      height: "auto", // Set height to auto to maintain aspect ratio
+                                      paddingTop: "5px",
+                                    }}
+                                    src="images/thrills.png"
+                                    alt="screenshot20231"
+                                  />
+                                </div>
+                              </div>
+                            )}
+                            <div className="flex flex-row">
+                          <div className="flex flex-col gap-[0px] ml-[100px] items-start justify-start w-full" >
+                          {listOptions.map((item) => (
+                              <Checkbox key={item} name={item} inputRef= {inputRefs[1]} value={selected.includes(item)} updateValue={handleSelect}>{item}</Checkbox>
+                            ))}
+                            <div className="flex flex-col -mx-5 px-5 py-0 rounded bg-gray-100 font-medium w-[70%] justify-start items-start"> 
+                              <Checkbox name="all" inputRef= {inputRefs[1]} value={selected.length === listOptions.length} updateValue={selectAll}>Select All</Checkbox>
+                            </div>
+                          </div>
+                          </div>
+                          <div className="flex flex-row gap-[13px] ml-[50px]">
+                      <Text
+                          className="text-2xl mt-[20px] md:text-[22px] text-black-900 sm:text-xl"
+                          size="txtCairoBold24">
+                         Heart Ausculation:
+                      </Text>
+                          </div>
+                          <div className="flex flex-row ml-[100px] h-[379px] w-[553px] justify-start items-start" 
+                        style={{ backgroundImage: "url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/tempimagefen4er-1-1@2x.png)" }}>
+                                  <div className="flex flex-col ml-[234px] justify-start items-start h-full mt-[115px]  gap-[43px]">
+                                      <AtrialPopover proxy={props.proxy} token={props.token} 
+                                                  diaphragm={atrialdiaphragm} bell={atrialbell}
+                                                  
+                                                  tab={'heart'} name={'Atrial'}></AtrialPopover>
+                                      <TricuspidPopover proxy={props.proxy} token={props.token} 
+                                                        diaphragm={tricuspiddiaphragm} bell={tricuspidbell}
+                                                        
+                                                        tab={'heart'} name={'Tricuspid'}></TricuspidPopover>
+                                </div>
+                                <div className="flex flex-col ml-[37px] mt-[115px]">
+                                  <PulmonaryPopover proxy={props.proxy} token={props.token} 
+                                                    diaphragm={pulmonarydiaphragm} bell={pulmonarybell}
+                                                   
+                                                    tab={'heart'} name={'Pulmonary'}></PulmonaryPopover>
+                                </div>
+                                <div className="flex flex-col ml-[40px] mt-[240px]">
+                                  <MitralPopover proxy={props.proxy} token={props.token} 
+                                                  diaphragm={mitraldiaphragm} bell={mitralbell}
+                                                  
+                                                  tab={'heart'} name={'Mitral'}></MitralPopover>
+                                </div>
+                          </div>
+                          </List>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute left-[1218px] top-[240px]">
+                <MedTechNotes notes={note} token={props.token} proxy={props.proxy} tab="abdomen" setNotes={setNotes}/>
+                </div>
+                <div className ='flex flex-col ml-[100px] w-full'>
+                <Text
+                          className="text-2xl mt-[20px] md:text-[22px] text-black-900 sm:text-xl"
+                          size="txtCairoBold24">
+                         Single Lead EKG:
+                      </Text>
+                <div className ="flex flex-row w-full gap-[10px] ml-[50px] mb-[50px] mr-[50px]">
+                      
+                  <input 
+                          ref={fileInputRef}
+                          type="file"
+                          style={{ display: 'none'}}
+                          accept="image/*" // Accept only image files
+                          onChange={handleImageUpload}
+                        />
+                  <button className="bg-indigo-A200 flex md:flex-col flex-row gap-[5px] md:gap-5 ml-5px items-center justify-center mt-2.5 w-[15%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                      onClick={handleUploadClick}
+                      >
+                        <Img
+                          className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
+                          src="images/img_television_white.svg"
+                          alt="television"
+                        />
+                      <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Upload EKG Graph</Text>
+                  </button>
+                 
+                </div>
+                <Img
+                      className="h-auto md:h-auto md:h-auto object-cover w-[85%]"
                       src= {profilePic}
                       alt=""
                       onLoad ={()=> setImageLoaded(true)}
-                      // style = {{display: imageLoaded? "none": "block"}}
+                      style = {{display: imageLoaded? "block": "none"}}
                       />
-   
-
-    </div></div>
-    <div >
-     <Stack spacing={2} direction="row">
-    <Link to="/hands"><Button variant="outlined" onClick={(e) => handleSave(e)}>Save</Button>   </Link>
-  </Stack>
-  </div>   
-
-     </div>
-    
-             </div>
+                </div>
+                <div className = 'flex flex-row items-start justify-start gap-[25px] ml-[120px] w-[41%] mt-[20px]'>
+              
+              {complete? <button className="bg-indigo-A200 flex md:flex-col flex-row md:gap-5 ml-5px items-center justify-center mt-2.5 w-[20%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                  onClick={(e) => handleSave(e)}
+                  >
+                  <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Save</Text>
+              </button>:
+              <button className="bg-indigo-A200 flex md:flex-col flex-row md:gap-5 ml-5px items-center justify-center mt-2.5 w-[20%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
+              onClick={handleClick}
+              >
+              <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Next Input</Text>
+          </button>}
+          <Text className="font-semibold md:ml-[0] text-red-700 text-xl">{error}</Text>
+          {navigate ? (<Navigate replace to= {navigate} />) : null}
+              
+          </div>
            </div>
          </div>
        </div>
      </div>
-
-     
-    </div>
-    
-  </div>
-  
-          </div>
-        </div>
-      </div>
-    </div>
-  </>
+     </div>
+   </>
 );
 };
 

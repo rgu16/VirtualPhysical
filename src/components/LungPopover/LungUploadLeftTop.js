@@ -14,8 +14,6 @@ export default function LungPopover(props) {
     setAnchorEl(event.currentTarget);
   };
 
-
-
   const handleClose = () => {
     setAnchorEl(null);
   };
