@@ -16,6 +16,7 @@ const SummaryPage = (props) => {
   const tabNames = ['demographic', "general", "eyes", "lungs", "pulses", "abdomen", "heart", "hands", "legs"]
   const [data, setData] = useState(Array.from({ length: 9 }, () => ''));
   const [notes, setNotes] = useState(Array.from({ length: 9 }, () => ''))
+  const [med_notes, setMedNotes] = useState(Array.from({ length: 9 }, () => ''))
   const [flagVariant, setFlagVariant] = useState(false);
 
   const handleFlagClick = () => {
@@ -38,7 +39,7 @@ const SummaryPage = (props) => {
     })
     .then((response) => {
         const res = response.data
-        // console.log(res)
+        console.log(res)
         tabNames.forEach((item, index) => {
           const noteKey = "note_" + item;
           if (res.hasOwnProperty(noteKey)) {
@@ -48,6 +49,17 @@ const SummaryPage = (props) => {
             setNotes(prevNotes => {
               const updatedNotes = [...prevNotes];
               updatedNotes[index] = noteValue;
+              return updatedNotes;
+            });
+          }
+          const mednoteKey = "med_note_" + item;
+          if (res.hasOwnProperty(mednoteKey)) {
+            // console.log(noteKey)
+            const mednoteValue = res[mednoteKey];
+            // console.log(noteValue)
+            setMedNotes(prevNotes => {
+              const updatedNotes = [...prevNotes];
+              updatedNotes[index] = mednoteValue;
               return updatedNotes;
             });
           }
@@ -71,6 +83,7 @@ const SummaryPage = (props) => {
 
 return (
   <>
+  <div className="h-screen">
   <NavBar proxy={props.proxy} token={props.token}/>
     <div
       className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans h-[1561px] items-center justify-start mx-auto pb-28 w-full"
@@ -125,7 +138,7 @@ return (
             >
                     {tabs.map((item, index) => (
                       <div key={index} className="w-full">
-                      <SummaryTab tab={item} data ={data[index]} notes={notes[index]} />
+                      <SummaryTab tab={item} data ={data[index]} notes={notes[index]} med_notes={med_notes[index]}/>
                       </div>
                   ))}      
             </List>
@@ -145,6 +158,7 @@ return (
         }
       `}
     </style>
+    </div>
   </>
 );
 };

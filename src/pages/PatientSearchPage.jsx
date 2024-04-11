@@ -8,6 +8,32 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs, { Dayjs } from 'dayjs';
 import DataTable from 'react-data-table-component';
 import { SelectOutlined } from '@ant-design/icons';
+const customStyles = {
+	rows: {
+		style: {
+      fontSize: '24px',
+      textAlign: 'center'
+		},
+	},
+	headCells: {
+		style: {
+      fontSize: '24px',
+      textAlign: 'center'
+		},
+	},
+	cells: {
+		style: {
+    fontSize: '24px',
+    textAlign: 'center'
+		},
+	},
+  header: {
+		style: {
+    fontSize: '36px',
+    textAlign: 'center'
+		},
+	},
+};
 
 const PatientSearchPage = (props) => {
     const [newUser, setNewUser] = useState({email: '', date: '', name:''});
@@ -190,9 +216,9 @@ const PatientSearchPage = (props) => {
                   </div> 
                 </div>
               </div>
-              <button className="bg-indigo-A200 flex flex-col h-[50px] mt-[20px] items-center justify-start md:px-10 sm:px-5 px-[93px] rounded-[20px] w-full"
+              <button className="bg-indigo-A200 flex flex-col h-[50px] mt-[20px] items-center justify-start md:px-10 sm:px-5 px-[93px] rounded-[20px] w-full hover:bg-indigo-A700"
                       onClick={handleSubmit}>
-                <Text className="flex flex-row font-bold items-center justify-center leading-[20.00px] mt-2.5 text-center text-white-A700 text-xl w-full hover:bg-indigo-A700">
+                <Text className="flex flex-row font-bold items-center justify-center leading-[20.00px] mt-2.5 text-center text-white-A700 text-xl w-full ">
                   Search
                 </Text>
               </button>
@@ -201,8 +227,8 @@ const PatientSearchPage = (props) => {
         </div>
       </div>
       <div className="flex flex-col items-center justify-start w-[80%] rounded-l-[20px] md:w-full" >
-        <div className="font-cairo ml-20 w-3/5">  
-                <DataTable title= "ALL USERS" columns={columns} data={data}/>
+        <div className="font-cairo text-[36px] ml-20 w-[80%]">  
+                <DataTable title= "Patient Charts" highlightOnHover customStyles={customStyles} columns={columns} data={data}/>
         </div>
         </div>
         {navigate ? (<Navigate replace to= {navigate} />) : null}

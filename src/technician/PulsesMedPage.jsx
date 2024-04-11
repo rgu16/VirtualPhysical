@@ -14,7 +14,7 @@ import { useRef,  useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
-import CarotidUpload from "components/CarotidPopover/CarotidPopover"
+import CarotidUpload from "components/CarotidPopover/CarotidUpload"
 
 const PulsesMedPage = (props) => {
  const [radial, setRadialValue] = useState("none");

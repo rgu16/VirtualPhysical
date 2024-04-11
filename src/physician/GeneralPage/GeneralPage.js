@@ -20,7 +20,7 @@ export const GeneralPage = (props) => {
   const [pulseox, setPulseOx] = useState();
   // Consolidated notes
   const [note, setNotes] = useState();
-
+  const [medNote, setMedNotes] = useState();
 
   useEffect(() => {
     
@@ -74,6 +74,10 @@ export const GeneralPage = (props) => {
         // Concatenate notes from all folders
         const allNotes = `${eyesNotes}${handsNotes}${generalNotes}`;
         setNotes(allNotes);
+        const generalmed_Notes = generalResponse.data.med_note || "";
+        const eyesmed_Notes = eyesResponse.data.med_note || "";
+        const handsmed_Notes = handsResponse.data.med_note || "";
+        setMedNotes(`${eyesmed_Notes}${handsmed_Notes}${generalmed_Notes}`)
 
     })).catch((error) => {
       console.error("Error fetching data:", error);
@@ -83,149 +87,133 @@ export const GeneralPage = (props) => {
 
 
   return (
-    <div className="general-tab">
-      <div className="overlap-wrapper">
-        <div className="overlap">
-          <div className="overlap-group">
+    <>
+    <div className="h-screen">
+      <NavBar proxy={props.proxy} token={props.token}/>
 
-            <div className="notes">
-              <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="general" />
-            </div>
-
-
-
-            <div className="cyanosis-pallor-jaundice-generalpain-painsummary">
-
-            <div className="capillary-refill">
-              <div className='cap-refill-res'>
-                <Text>{capillaryrefillvalue} sec</Text>
-              </div>
-              <p className="p">
-                <span className="span">Capillary Refill Time:</span>
-              </p>
-            </div>
-              
-
-              <p className="pallor-title">
-                <span className="span">Pallor (hands):</span>
-                <div className='pallor-res'>
-                <Text>+{pallorvalue}</Text>
+      <div
+        className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans items-center justify-start mx-auto pb-28 w-full"
+        style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
+      >
+        <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
+         <div></div>
+          <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
+            <TabNav tab="general"></TabNav>
+            <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full"style={{
+    paddingTop: '50px',
+  }} >
+              <div className="flex flex-col  justify-start w-[99%] md:w-full">
+                <div className="flex md:flex-col flex-row md:gap-10 items-start justify-start w-full">
+                  <div className="md:h-[560px] shrink relative w-[100%] md:w-full">
+                      <div className="flex flex-col items-start justify-start w-full">
+                        <List
+                          className="flex flex-col gap-[10px] md:ml-[0] ml-[50px] w-[62%]"
+                          orientation="vertical">      
+                          <Text
+                          className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
+                          size="txtCairoBold34">
+                          General
+                          </Text>
+                          
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full" >
+                            <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                              Capillary Refill Time:
+                            </Text>
+                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{capillaryrefillvalue} sec</Text>
+                          </div>
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
+                            <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                              Pallor (hands):
+                            </Text>                        
+                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl" variant="outlined">+{pallorvalue}</Text>
+                          </div>
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
+                             <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24" 
+                            >
+                              Pulse Ox Reading:
+                            </Text>
+                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{pulseox}%</Text>
+                          </div>
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
+                             <Text
+                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                               size="txtCairoBold24">
+                               Cyanosis (hands):
+                             </Text>
+                             <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">+{cyanosisvalue}</Text>
+                          </div>
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
+                             <Text
+                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                               size="txtCairoBold24">
+                              Jaundice Severity (eyes):
+                             </Text>
+                             <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">+{eyesvalue}</Text>
+                          </div>
+                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
+                            <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24"
+                            >
+                              General Pain:
+                            </Text>
+                            
+                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{generalpain}</Text>
+                          </div>
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-start justify-start w-full">
+                            <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24"
+                            >
+                              Pain Summary:
+                            </Text>
+                            
+                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{painsummary}</Text>
+                          </div>
+                        </List>
+                      </div>
+                      <div className="relative left-[1000px] top-[-300px] shrink">
+                    {medNote !== "" && 
+                      <div className="flex flex-col items-start justify-start w-[400px] ml-[50px] mr-[50px] mb-[20px]">
+                      <Text
+                        className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                        size="txtCairoBold24"
+                      >
+                        Med Tech Notes:{" "}
+                      </Text>
+                      
+                      <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{medNote}</Text>
+                      </div>}
+                    <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="general"></PhysicianNotes>
+                  </div>
+                  </div>
+                  {/* <div className="absolute left-[1218px] top-[320px]">
+                    {medNote !== "" && 
+                      <div className="flex flex-col items-start justify-start w-[400px] ml-[50px] mr-[50px] mb-[20px]">
+                      <Text
+                        className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                        size="txtCairoBold24"
+                      >
+                        Med Tech Notes:{" "}
+                      </Text>
+                      
+                      <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{medNote}</Text>
+                      </div>}
+                    <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="general"></PhysicianNotes>
+                  </div> */}
                 </div>
-              </p>
-
-              <div className="pulse-ox-title">
-                <span className="span">Pulse Ox Reading:</span>
-                <div className='pulse-ox-res'>
-                <Text>{pulseox}%</Text>
-                </div>
-              </div>
-
-              <p className="cyanosis-title">
-                <span className="span">Cyanosis (hands):</span>
-                <div className='cyanosis-res'>
-                <Text>+{cyanosisvalue}</Text>
-                </div>
-              </p>
-
-              <div className="jaundice-title">
-                <span className="span">Jaundice Severity (eyes):</span>
-                <div className='jaundice-res'>
-                <Text>+{eyesvalue}</Text>
-                </div>
-              </div>
-
-              <div className="general-pain-title">
-                <span className="span">General Pain:</span>
-                <div className='general-pain-res'>
-                <Text>{generalpain}</Text>
-                </div>
-              </div>
-
-              <div className="pain-summary-title">
-                <span className="span">Pain Summary:</span>
-                <div className='pain-summary-res'>
-                <Text>{painsummary}</Text>
-                </div>
-              </div>
-
-            </div>
-
-
-          </div>
-
-
-
-          <div className="tabs">
-            <div className="frame">
-              {/* <p className="span-wrapper-3">
-                <span className="text-wrapper-5">Demographics</span>
-              </p> */}
-              <a href="/demographics" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-5">Demographics</span>
-              </a>
-            </div>
-            <div className="general-wrapper">
-              {/* <p className="span-wrapper-3">
-                <span className="text-wrapper-5">General</span>
-              </p> */}
-              <a href="/general" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-5">General</span>
-              </a>
-            </div>
-            <div className="lungs-wrapper">
-              {/* <p className="span-wrapper-3">
-                <span className="text-wrapper-5">Lungs</span>
-              </p> */}
-              <a href="/lungs" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-5">Lungs</span>
-              </a>
-            </div>
-            <div className="pulses-wrapper">
-              {/* <p className="span-wrapper-3">
-                <span className="text-wrapper-5">Pulses</span>
-              </p> */}
-              <a href="/pulses" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-5">Pulses</span>
-              </a>
-            </div>
-            <div className="abdomen-wrapper">
-              {/* <p className="span-wrapper-3">
-                <span className="text-wrapper-5">Abdomen</span>
-              </p> */}
-              <a href="/abdomen" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-5">Abdomen</span>
-              </a>
-            </div>
-            <div className="heart-wrapper">
-              {/* <p className="span-wrapper-3">
-                <span className="text-wrapper-5">Heart</span>
-              </p> */}
-              <a href="/heart" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-5">Heart</span>
-              </a>
-            </div>
-            <div className="legs-wrapper">
-              {/* <p className="span-wrapper-3">
-                <span className="text-wrapper-5">Legs</span>
-              </p> */}
-              <a href="/legs" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-5">Legs</span>
-              </a>
-            </div>
-            <div className="summary-wrapper">
-              {/* <p className="span-wrapper-3">
-                <span className="text-wrapper-5">Summary</span>
-              </p> */}
-              <a href="/summary" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-5">Summary</span>
-              </a>
             </div>
           </div>
-          
-          <NavBar proxy={props.proxy} token={props.token} /> {/* Display NavBar at the top */}
-          
         </div>
       </div>
     </div>
+    </div>
+    </>
   );
 };

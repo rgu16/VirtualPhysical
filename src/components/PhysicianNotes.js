@@ -16,7 +16,7 @@ const PhysicianNotes = (props) => {
 
   const handleSave = (e) => {
     e.preventDefault();
-    const filename = props.tab === '/demographic' ? "/demographic_notes" : props.tab + "/note";
+    const filename = props.tab + "/note";
 
     axios({
       method: "POST",
@@ -37,7 +37,7 @@ const PhysicianNotes = (props) => {
 
   return (
     <>
-      <div className="flex flex-col items-start justify-start w-[400px] h-[500px] ml-[50px] mr-[50px]">
+      <div className="flex flex-col items-start justify-start w-[400px] ml-[50px] mr-[50px]">
         <Text className="font-bold text-2xl text-black-900">Notes: </Text>
         <TextareaAutosize
           className="w-full h-[200px] border border-gray-400 border-2 rounded-[14px] p-[5px] text-xl leading-normal"

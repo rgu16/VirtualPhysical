@@ -7,8 +7,9 @@ import axios from 'axios';
 import { useRef,  useState } from 'react';
 import { Img, Line, List, Text, NavBar, TabNav } from "components";
 import "./pulses.css";
+import Popup from 'reactjs-popup';
 
-export default function CarotidPopover(props) {
+export default function CarotidUpload(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -77,28 +78,14 @@ export default function CarotidPopover(props) {
 
   return (
     <div>
-     <Button aria-describedby={id} variant="contained" color="error" onClick={handleClick} style={{ padding: 1, minWidth: 25 }}> C
-      </Button>
-      <Popover
-        id={id}
-        open={open}
-        onClose={handleClose}
-        anchorReference="anchorPosition"
-        anchorPosition={{ top: 2060, left: 600 }}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        style={{ marginTop: "180px"}}
-      >
-            <Typography sx={{ p: 2 }}>
-                <div>
-                  <h1> Carotid Recording </h1>
-                  <br></br>
+    <Popup trigger={ <Button aria-describedby={id} variant="contained" color={profilePic?"success":"error"} onClick={(e) => handleClick(e)} style={{ padding: 1, minWidth: 25 }}> {props.position === "left top"? "L" : "R"}
+      </Button>} position= {props.position}>
+      <div className='flex flex-col items-center p-2 justify-start text-center mt-[100px] ml-[115px] bg-white-A700 shadow-lg border-solid border-2 border-black'>
+                  <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                             {props.title}
+                          </Text> 
                   <input
                      ref={fileInputRef}
                      type="file"
@@ -106,29 +93,21 @@ export default function CarotidPopover(props) {
                      accept="audio/*" // Accept only image files
                      onChange={handleAudioUpload}
                    />
-                <button className="bg-indigo-A200 justify-evenly flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0 h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                   <button className="bg-indigo-A200 justify-evenly flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[200px] md:w-full border-0 h-[50px] rounded-[20px] hover:bg-indigo-A700"
                       onClick={handleUploadClick}
                       >
-                        <Img
-                          className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
-                          src="images/img_television_white.svg"
-                          alt="television"
-                        />
-                      <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Upload carotid audio</Text>
+                      <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Upload audio</Text>
                   </button>
-<br></br>
-
-  <h2>Audio Recording - Carotid</h2>
-<audio controls>
-  <source src={profilePic} type="audio/wav" />
-  onLoad ={()=> setImageLoaded(true)}
-  
-</audio>
-
-                  {/*<AudioPlayer></AudioPlayer> */}  
+                          <Text
+                              className="text-xl md:text-[22px] text-black-900 sm:text-xl mt-[10px]">
+                             Stethoscope Recording - Diaphragm
+                          </Text> 
+                  <audio controls>
+                    {profilePic && <source src={profilePic} type="audio/wav" />}
+                    
+                  </audio>
                 </div>
-            </Typography>
-      </Popover>
+  </Popup>
     </div>
   );
 }

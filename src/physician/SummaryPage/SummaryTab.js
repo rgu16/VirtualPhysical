@@ -33,9 +33,12 @@ const SummaryTab = (props) => {
              {note}<br />
             </>
         </span>
-        <span className="text-black-900 font-cairo text-left font-bold">
+        {props.med_notes && <span className="text-black-900 font-cairo text-left font-bold">
+            Med Tech Notes: {props.med_notes}
+        </span>}
+        {props.notes && <span className="text-black-900 font-cairo text-left font-bold">
             Notes: {props.notes}
-        </span>
+        </span>}
         </Text>
     </div>
     </>

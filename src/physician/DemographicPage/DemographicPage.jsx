@@ -197,7 +197,7 @@ export const DemographicPage = (props) => {
                       
                       <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{medNote}</Text>
                       </div>}
-                    <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="/demographic"></PhysicianNotes>
+                    <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="demographic"></PhysicianNotes>
                   </div>
                 </div>
             </div>

@@ -5,7 +5,7 @@
     justify-content: center;
     width: 100%;
     position: relative;
-    top: -550px; /* Adjust the value to move it down by your desired amount */
+    /* top: -550px; Adjust the value to move it down by your desired amount */
   }
   
   .pulses-tab .overlap-wrapper {
