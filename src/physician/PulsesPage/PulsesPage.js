@@ -4,6 +4,7 @@ import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import CarotidPopover from "components/CarotidPopover/CarotidPopover.jsx"
+import { useHistory, useNavigate } from 'react-router-dom';
 
 import { Img, Line, List, Text, TabNav, NavBar } from "components";
 import { Link } from 'react-router-dom';
@@ -20,12 +21,15 @@ import { styled } from '@mui/material/styles';
 // import Button from '@mui/material/Button';
 // import Stack from '@mui/material/Stack';
 import { jwtDecode } from "jwt-decode";
+import { orange } from "@mui/material/colors";
 
 
 export const PulsesPage = (props) => {
   // State for the radial pulse value and whether it's out of range
   // const [radialPulseValue, setRadialPulseValue] = useState('');
   // const [isRadialOutOfRange, setIsRadialOutOfRange] = useState('');
+  const [submitVariant, setSubmitVariant] = useState('outlined');
+  const navigate = useNavigate();
 
   const [radialPulseValue, setRadialPulseValue] = useState('');
   const [radialStatus, setRadialStatus] = useState('');
@@ -36,10 +40,32 @@ export const PulsesPage = (props) => {
   const [dorsalisPulseValue, setDorsalisPulseValue] = useState('');
   const [dorsalisStatus, setDorsalisStatus] = useState('');
 
+  const [radialWarning, setRadialWarning] = useState('');
+  const [showRadialWarning, setShowRadialWarning] = useState(true);
+
+  const [brachialWarning, setBrachialWarning] = useState('');
+  const [showBrachialWarning, setShowBrachilWarning] = useState(true);
+
+  const [carotidWarning, setCarotidWarning] = useState('');
+  const [showCarotidWarning, setShowCarotidWarning] = useState(true);
+
+  const [dorsalisWarning, setDorsalisWarning] = useState('');
+  const [showDorsalisWarning, setShowDorsalisWarning] = useState(true);
+
   const [systolicPulseValue, setSystolicPulseValue] = useState('');
   const [systolicStatus, setSystolicStatus] = useState('');
   const [diastolicPulseValue, setDiastolicPulseValue] = useState('');
   const [diastolicStatus, setDiastolicStatus] = useState('');
+
+
+  const [HeartRateWarning, setHeartRateWarning] = useState('');
+  const [showHeartRateWarning, setShowHeartRateWarning] = useState(true);
+
+  const [diastolicWarning, setDistolicWarning] = useState('');
+  const [showDiastolicWarning, setShowDiastolicWarning] = useState(true);
+
+  const [systolicWarning, setSystolicWarning] = useState('');
+  const [showSystolicWarning, setShowSystolicWarning] = useState(true);
 
   const [heartRateValue, setheartRateValue] = useState('')
   const [heartRateStatus, setheartRateStatus] = useState('')
@@ -64,6 +90,25 @@ export const PulsesPage = (props) => {
     setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
   };
 
+  const handleSubmit = () => {
+    // Check if all fields are filled
+    if (!JugularValue || !heartRateValue || !radialPulseValue || !brachialPulseValue || !carotidPulseValue || !dorsalisPulseValue || !systolicPulseValue || !diastolicPulseValue) {
+      alert("Please fill in all required fields.");
+      // Here, you would also navigate back to the "Lungs" tab if your app supports tab navigation.
+      navigate('/pulses');
+      // This might involve calling a function passed down from the parent component that controls the active tab.
+      return;
+    }
+
+    // If all fields are filled, proceed with form submission logic
+    setSubmitVariant(submitVariant === 'outlined' ? 'contained' : 'outlined');
+
+    console.log("Form is ready to be submitted");
+    // setSaveVariant('contained');
+
+    // Reset form or navigate away upon successful submission
+  };
+
 
   const patient = jwtDecode(props.token).patient.split("/");
   // const firstname = useState(patient[1]);
@@ -76,7 +121,7 @@ export const PulsesPage = (props) => {
     useEffect(() => {
       axios({
           method: "GET",
-          url: props.proxy + "download/pulses",
+          url: props.proxy + "/download/pulses",
           headers: {
           Authorization: 'Bearer ' + props.token
           }
@@ -101,6 +146,7 @@ export const PulsesPage = (props) => {
           const heartRateValue = parseInt(res.detail['heartrate'], 10);
           setheartRateValue(heartRateValue)
 
+
           const JugularValue = res.detail['jvp']
           setJugularValue(JugularValue)
 
@@ -117,23 +163,45 @@ export const PulsesPage = (props) => {
             setJugularStatus(JugularStatus);
           }
 
-          let heartRateStatus = '';
-          // Check if the value is numeric
-          if (!isNaN(heartRateValue)) {
-            if (heartRateValue <= 59) {
-              heartRateStatus = 'Abnormally slow heart rate';
-            // } else if (numericValue >= 60 && numericValue <= 80) {
-            //   status = 'Normal';
-            } else if (heartRateValue >= 60 && heartRateValue <= 100) {
-              heartRateStatus = 'Normal';
-            } else if (heartRateValue >= 101) {
-              heartRateStatus = 'Abnormally fast heart rate';
-            }
-            setheartRateStatus(heartRateStatus);
-          } else {
-            // The input is non-numeric
+
+            let heartRateStatus = '';
+            // Reset warnings and status at the beginning of the validation
+            setHeartRateWarning('');
             setheartRateStatus('');
-          }
+
+            // Check if the input is non-numeric by trying to convert it to a number
+            // and checking if the result is NaN, or by directly testing against non-numeric regex
+            // if (!/^\d+$/.test(heartRateValue)) {
+            //     // The input is non-numeric
+            //     if (heartRateValue.trim() != '') {
+            //         // Only set a warning if the input field is not blank
+            //         setHeartRateWarning('Please enter a numeric value for the heart rate.');
+            //     }
+            //     // Ensure we don't attempt to evaluate the heart rate status for non-numeric input
+            //     return;
+            // }
+            if (heartRateValue.trim() !== '') {
+              // Use a regular expression to check if the input is numeric
+              const isNumeric = /^\d+$/.test(heartRateValue);
+          
+              if (!isNumeric) {
+                setHeartRateWarning('Please enter a numeric value for the heart rate.');
+                setheartRateStatus('');
+                return; // Exit the function if the input is not numeric
+              }
+            }
+
+            // Proceed with numeric evaluation since we have a numeric input
+            const numericHeartRateValue = parseInt(heartRateValue, 10);
+            if (numericHeartRateValue <= 59) {
+                heartRateStatus = 'Abnormally slow heart rate';
+            } else if (numericHeartRateValue >= 60 && numericHeartRateValue <= 100) {
+                heartRateStatus = 'Normal';
+            } else if (numericHeartRateValue >= 101) {
+                heartRateStatus = 'Abnormally fast heart rate';
+            }
+
+            setheartRateStatus(heartRateStatus);
 
 
           let systolicStatus = '';
@@ -206,80 +274,85 @@ export const PulsesPage = (props) => {
             default:
               brachialStatus = ''; // Adjust as needed for other values
           }
+
           // Update the brachial status state
           setBrachialStatus(brachialStatus);
 
         
-          // Determine the radial pulse status
-          let RadialStatus = '';
-          switch (RadialPulseValue) {
-            case 0:
-              RadialStatus = 'absent';
-              break;
-            case 1:
-              RadialStatus = 'weak';
-              break;
-            case 2:
-              RadialStatus = 'normal';
-              break;
-            case 3:
-              RadialStatus = 'increased';
-              break;
-            case 4:
-              RadialStatus = 'bounding';
-              break;
-            default:
-              RadialStatus = ''; // For values not in the 0-4 range or non-numeric values
-          }
-          setRadialStatus(RadialStatus);
+            // Determine the carotid pulse status
+            let RadialStatus = '';
+            switch (RadialPulseValue) {
+              case 0:
+                RadialStatus = 'absent';
+                break;
+              case 1:
+                RadialStatus = 'weak';
+                break;
+              case 2:
+                RadialStatus = 'normal';
+                break;
+              case 3:
+                RadialStatus = 'increased';
+                break;
+              case 4:
+                RadialStatus = 'bounding';
+                break;
+              default:
+                RadialStatus = ''; // For values not in the 0-4 range or non-numeric values
+            }
+        
+            setRadialStatus(RadialStatus);
 
         
-          // Determine the carotid pulse status
-          let CarotidStatus = '';
-          switch (CarotidPulseValue) {
-            case 0:
-              CarotidStatus = 'absent';
-              break;
-            case 1:
-              CarotidStatus = 'weak';
-              break;
-            case 2:
-              CarotidStatus = 'normal';
-              break;
-            case 3:
-              CarotidStatus = 'increased';
-              break;
-            case 4:
-              CarotidStatus = 'bounding';
-              break;
-            default:
-              CarotidStatus = ''; // For values not in the 0-4 range or non-numeric values
-          }
-          setCarotidStatus(CarotidStatus);
+        
+            // Determine the carotid pulse status
+            let CarotidStatus = '';
+            switch (CarotidPulseValue) {
+              case 0:
+                CarotidStatus = 'absent';
+                break;
+              case 1:
+                CarotidStatus = 'weak';
+                break;
+              case 2:
+                CarotidStatus = 'normal';
+                break;
+              case 3:
+                CarotidStatus = 'increased';
+                break;
+              case 4:
+                CarotidStatus = 'bounding';
+                break;
+              default:
+                CarotidStatus = ''; // For values not in the 0-4 range or non-numeric values
+            }
+        
+            setCarotidStatus(CarotidStatus);
           
 
-          // Determine the dorsalis pulse status
-          let DorsalisStatus = '';
-          switch (DorsalisPulseValue) {
-            case 0:
-              DorsalisStatus = 'absent';
-              break;
-            case 1:
-              DorsalisStatus = 'weak';
-              break;
-            case 2:
-              DorsalisStatus = 'normal';
-              break;
-            case 3:
-              DorsalisStatus = 'increased';
-              break;
-            case 4:
-              DorsalisStatus = 'bounding';
-              break;
-            default:
-              DorsalisStatus = ''; // For values not in the 0-4 range or non-numeric values
-          }
-          setDorsalisStatus(DorsalisStatus);
+            // Determine the carotid pulse status
+            let DorsalisStatus = '';
+            switch (DorsalisPulseValue) {
+              case 0:
+                DorsalisStatus = 'absent';
+                break;
+              case 1:
+                DorsalisStatus = 'weak';
+                break;
+              case 2:
+                DorsalisStatus = 'normal';
+                break;
+              case 3:
+                DorsalisStatus = 'increased';
+                break;
+              case 4:
+                DorsalisStatus = 'bounding';
+                break;
+              default:
+                DorsalisStatus = ''; // For values not in the 0-4 range or non-numeric values
+            }
+        
+            setDorsalisStatus(DorsalisStatus);
           
 
           if(res.hasOwnProperty("note")){
@@ -289,13 +362,12 @@ export const PulsesPage = (props) => {
           // if(res.hasOwnProperty("profile_pic")){
           //   setProfilePic(res.profile_pic)
           // }
-          }).catch((error) => {
+      }).catch((error) => {
           if (error.response){
           console.log(error.response)
           console.log(error.response.status)
           console.log(error.response.headers)}
-          })
-          
+      })
     }, [props]);
 
 
@@ -319,6 +391,25 @@ export const PulsesPage = (props) => {
   const handleRadialChange = (e) => {
     const value = e.target.value;
     setRadialPulseValue(value);
+
+    // Check if the text box is not blank before proceeding with further validation.
+    if (value.trim() === '') {
+      // If the text box is blank, do not set any warning or status, and exit early.
+      setRadialWarning('');
+      setRadialStatus('');
+      return;
+    }
+
+    // At this point, the input is not blank, so we proceed to check if it's numeric.
+    const isNumeric = /^\d+$/.test(value);
+    
+    if (!isNumeric) {
+      // If the input is not numeric, set the warning message.
+      setRadialWarning('Please enter a numeric value for the radial value.');
+      // Ensure the heart rate status is cleared as the input is invalid.
+      setRadialStatus('');
+      return; // Exit the function as the validation has concluded with a non-numeric input.
+    }
 
     // Convert the value to a number for comparison
     const numericValue = parseInt(value, 10);
@@ -352,6 +443,25 @@ export const PulsesPage = (props) => {
     const value = e.target.value;
     setCarotidPulseValue(value);
 
+      // Check if the text box is not blank before proceeding with further validation.
+      if (value.trim() === '') {
+        // If the text box is blank, do not set any warning or status, and exit early.
+        setCarotidWarning('');
+        setCarotidStatus('');
+        return;
+      }
+  
+      // At this point, the input is not blank, so we proceed to check if it's numeric.
+      const isNumeric = /^\d+$/.test(value);
+      
+      if (!isNumeric) {
+        // If the input is not numeric, set the warning message.
+        setCarotidWarning('Please enter a numeric value for the carotid value.');
+        // Ensure the heart rate status is cleared as the input is invalid.
+        setCarotidStatus('');
+        return; // Exit the function as the validation has concluded with a non-numeric input.
+      }
+
     // Convert the value to a number for comparison
     const numericValue = parseInt(value, 10);
 
@@ -380,10 +490,28 @@ export const PulsesPage = (props) => {
     setCarotidStatus(status);
   };
 
-
   const handleBrachialChange = (e) => {
     const value = e.target.value;
     setBrachialPulseValue(value);
+
+      // Check if the text box is not blank before proceeding with further validation.
+      if (value.trim() === '') {
+        // If the text box is blank, do not set any warning or status, and exit early.
+        setBrachialWarning('');
+        setBrachialStatus('');
+        return;
+      }
+  
+      // At this point, the input is not blank, so we proceed to check if it's numeric.
+      const isNumeric = /^\d+$/.test(value);
+      
+      if (!isNumeric) {
+        // If the input is not numeric, set the warning message.
+        setBrachialWarning('Please enter a numeric value for the brachial value.');
+        // Ensure the heart rate status is cleared as the input is invalid.
+        setBrachialStatus('');
+        return; // Exit the function as the validation has concluded with a non-numeric input.
+      }
 
     // Convert the value to a number for comparison
     const numericValue = parseInt(value, 10);
@@ -409,13 +537,32 @@ export const PulsesPage = (props) => {
       default:
         status = ''; // For values not in the 0-4 range or non-numeric values
     }
+
     setBrachialStatus(status);
   };
-
 
   const handleDorsalisChange = (e) => {
     const value = e.target.value;
     setDorsalisPulseValue(value);
+
+    // Check if the text box is not blank before proceeding with further validation.
+    if (value.trim() === '') {
+      // If the text box is blank, do not set any warning or status, and exit early.
+      setDorsalisWarning('');
+      setDorsalisStatus('');
+      return;
+    }
+
+    // At this point, the input is not blank, so we proceed to check if it's numeric.
+    const isNumeric = /^\d+$/.test(value);
+    
+    if (!isNumeric) {
+      // If the input is not numeric, set the warning message.
+      setDorsalisWarning('Please enter a numeric value for the dorsal value.');
+      // Ensure the heart rate status is cleared as the input is invalid.
+      setDorsalisStatus('');
+      return; // Exit the function as the validation has concluded with a non-numeric input.
+    }
 
     // Convert the value to a number for comparison
     const numericValue = parseInt(value, 10);
@@ -450,6 +597,24 @@ export const PulsesPage = (props) => {
     const value = e.target.value;
     setSystolicPulseValue(value);
 
+    // Check if the text box is not blank before proceeding with further validation.
+    if (value.trim() === '') {
+      // If the text box is blank, do not set any warning or status, and exit early.
+      setSystolicWarning('');
+      return;
+    }
+
+    // At this point, the input is not blank, so we proceed to check if it's numeric.
+    const isNumeric = /^\d+$/.test(value);
+    
+    if (!isNumeric) {
+      // If the input is not numeric, set the warning message.
+      setSystolicWarning('Please enter a numeric value for the systolic value.');
+      // Ensure the heart rate status is cleared as the input is invalid.
+      setSystolicStatus('');
+      return; // Exit the function as the validation has concluded with a non-numeric input.
+    }
+
     // Convert the value to a number for comparison
     const numericValue = parseInt(value, 10);
 
@@ -483,6 +648,24 @@ export const PulsesPage = (props) => {
     const value = e.target.value;
     setDiastolicPulseValue(value);
 
+    // Check if the text box is not blank before proceeding with further validation.
+    if (value.trim() === '') {
+      // If the text box is blank, do not set any warning or status, and exit early.
+      setDistolicWarning('');
+      return;
+    }
+
+    // At this point, the input is not blank, so we proceed to check if it's numeric.
+    const isNumeric = /^\d+$/.test(value);
+    
+    if (!isNumeric) {
+      // If the input is not numeric, set the warning message.
+      setDistolicWarning('Please enter a numeric value for the diastolic value.');
+      // Ensure the heart rate status is cleared as the input is invalid.
+      setDiastolicStatus('');
+      return; // Exit the function as the validation has concluded with a non-numeric input.
+    }
+
     // Convert the value to a number for comparison
     const numericValue = parseInt(value, 10);
 
@@ -510,10 +693,27 @@ export const PulsesPage = (props) => {
     }
   };
 
-
   const handleHeartRateChange = (e) => {
     const value = e.target.value;
     setheartRateValue(value);
+
+      // Check if the text box is not blank before proceeding with further validation.
+      if (value.trim() === '') {
+        // If the text box is blank, do not set any warning or status, and exit early.
+        setHeartRateWarning('');
+        return;
+      }
+
+      // At this point, the input is not blank, so we proceed to check if it's numeric.
+      const isNumeric = /^\d+$/.test(value);
+      
+      if (!isNumeric) {
+        // If the input is not numeric, set the warning message.
+        setHeartRateWarning('Please enter a numeric value for the heart rate.');
+        // Ensure the heart rate status is cleared as the input is invalid.
+        setheartRateStatus('');
+        return; // Exit the function as the validation has concluded with a non-numeric input.
+      }
 
     // Convert the value to a number for comparison
     const numericValue = parseInt(value, 10);
@@ -539,7 +739,6 @@ export const PulsesPage = (props) => {
     }
   }
 
-
   const handleJugularChange = (e) => {
     const value = e.target.value
     setJugularValue(value)
@@ -560,12 +759,35 @@ export const PulsesPage = (props) => {
         }
         setJugularStatus(status);
       }
+    //   else {
+    //     // The input is non-numeric
+    //     setJugularStatus('Invalid input');
+    //   }
+    // } else {
+    //   // The textbox is blank, reset the status or take no action
+    //   setheartRateStatus(''); // Resetting the status for blank input
+    // 
     }
   }
 
 
+
+  // Handler for radial pulse input changes
+  // const handleRadialChange = (e) => {
+  //   const value = e.target.value;
+  //   setRadialPulseValue(value);
+
+  //   // Check if the numeric value is out of the -3 to +3 range
+  //   const numericValue = parseInt(value, 10);
+  //   if (numericValue < 0 || numericValue > 4) {
+  //     setIsRadialOutOfRange(true);
+  //   } else {
+  //     setIsRadialOutOfRange(false);
+  //   }
+  // };
+
+
   return (
-    <div className = "bg-white flex flex-row justify-center w-full relative top-[550px]">
     <div className="pulses-tab">
       <div className="overlap-wrapper">
         <div className="overlap">
@@ -577,22 +799,44 @@ export const PulsesPage = (props) => {
                   <span className="text-wrapper">Systolic:</span>
                 </p>
                 <div className="div">
+                  {/* <img
+                    className="textbox-42"
+                    alt="Rectangle"
+                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
+                  /> */}
+                  {/* <p className="element">
+                    <span className="span">120</span>
+                  </p> */}
+
+
+                  {/* <input type="text" className="textbox-43" defaultValue="120" />
+                </div>
+                <p className="mm-hg">
+                  <span className="span">mmHg</span>
+                </p> */}
 
                 <input
                     type="text"
                     className={`textbox-43 ${systolicStatus && systolicStatus !== 'normal' ? 'input-error' : ''}`}
                     value={systolicPulseValue}
                     onChange={handleSystolicChange}
-                    placeholder="no data found"
+                    placeholder="135"
                   />
-                  {systolicStatus && systolicStatus !== 'normal' && (
-                    <div className="error-popup">Abnormal systolic value: {systolicStatus} </div>
+                  {systolicStatus && systolicStatus !== 'normal' && showSystolicWarning && (
+                    <div className="error-popup">Abnormal systolic value: {systolicStatus}. Consider re-measuring it and inputting the value again.
+                    <button onClick={() => setShowSystolicWarning(false)} style={{ marginLeft: '10px', cursor: 'pointer' }}>
+                        Hide
+                      </button>
+                    
+                    </div>
                   )}
+                  {systolicWarning && <div className="error-popup">{systolicWarning}</div>}
                 </div>
           
                 <p className="mm-hg">
                   <span className="span">mmHg</span>
                 </p>
+              {/* </div> */}
               </div>
               
               <div className="diastolic">
@@ -600,16 +844,26 @@ export const PulsesPage = (props) => {
                   <span className="text-wrapper">Diastolic:</span>
                 </p>
                 <div className="overlap-2">
+                  {/* <input type="text" className="textbox-43" defaultValue="80" />
+                </div>
+                <p className="mm-hg-2">
+                  <span className="span">mmHg</span>
+                </p> */}
                 <input
                     type="text"
                     className={`textbox-43 ${diastolicStatus && diastolicStatus !== 'normal' ? 'input-error' : ''}`}
                     value={diastolicPulseValue}
                     onChange={handleDiastolicChange}
-                    placeholder="no data found"
+                    placeholder="87"
                   />
-                  {diastolicStatus && diastolicStatus !== 'normal' && (
-                    <div className="error-popup">Abnormal diastolic value: {diastolicStatus}</div>
+                  {diastolicStatus && diastolicStatus !== 'normal' && showDiastolicWarning && (
+                    <div className="error-popup">Abnormal diastolic value: {diastolicStatus}. Consider re-measuring it and inputting the value again.
+                    <button onClick={() => setShowDiastolicWarning(false)} style={{ marginLeft: '10px', cursor: 'pointer' }}>
+                        Hide
+                      </button>
+                    </div>
                   )}
+                  {diastolicWarning && <div className="error-popup">{diastolicWarning}</div>}
                 </div>
           
                 <p className="mm-hg">
@@ -622,24 +876,32 @@ export const PulsesPage = (props) => {
                   <span className="text-wrapper">Heart Rate:</span>
                 </p>
                 <div className="overlap-3">
+                  {/* <input type="text" className="textbox-43" placeholder="80" /> */}
                   <input
                     type="text"
                     className={`textbox-43 ${heartRateStatus && heartRateStatus !== 'normal' ? 'input-error' : ''}`}
                     value={heartRateValue}
                     onChange={handleHeartRateChange}
-                    placeholder="no data found"
+                    placeholder="87"
                   />
-                  {heartRateStatus && heartRateStatus !== 'normal' && (
-                    <div className="error-popup">Abnormal heart rate value: {heartRateStatus}</div>
+
+                  {HeartRateWarning && <div className="error-popup">{HeartRateWarning}</div>}
+
+                  {heartRateStatus && heartRateStatus !== 'normal' && showHeartRateWarning && (
+                    <div className="error-popup">Abnormal heart rate value: {heartRateStatus}. Consider re-measuring it and inputting the value again.
+                    <button onClick={() => setShowHeartRateWarning(false)} style={{ marginLeft: '10px', cursor: 'pointer' }}>
+                        Hide
+                      </button>
+                  
+                    </div>
                   )}
+
                 </div>
                 <p className="bpm-2">
                   <span className="span">bpm</span>
                 </p>
               </div>
             </div>
-
-
 
 
             <div className="popover">
@@ -650,16 +912,11 @@ export const PulsesPage = (props) => {
 
             </div>
 
-
-
             <img
               className="carotid-img"
               alt="carotidimg"
               src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/carotid-img-1@2x.png"
             />
-
-
-
 
 
             <p className="carotid-auscultation">
@@ -673,21 +930,36 @@ export const PulsesPage = (props) => {
 
               <div className="radial">
                 <div className="overlap-4">
+                  <img
+                    className="textbox-42"
+                    alt="Rectangle"
+                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
+                  />
 
                   <input
                     type="text"
                     className={`textbox-42 ${radialStatus && radialStatus !== 'normal' ? 'input-error' : ''}`}
                     value={radialPulseValue}
                     onChange={handleRadialChange}
-                    placeholder="no data found"
+                    placeholder="1"
                   />
-                  {radialStatus && radialStatus !== 'normal' && (
-                    <div className="error-popup">Abnormal radial pulse status: {radialStatus}</div>
+
+                  {radialStatus && radialStatus !== 'normal' && showRadialWarning &&  (
+                    // setShowRadialWarning(true)
+                    <div className="error-popup">
+                      Abnormal radial pulse status: {radialStatus}. Consider re-measuring the radial pulse and inputting the value again.
+                      <button onClick={() => setShowRadialWarning(false)} style={{ marginLeft: '10px', cursor: 'pointer' }}>
+                        Hide
+                      </button>
+                    </div>
                   )}
+
+                  {radialWarning && <div className="error-popup">{radialWarning}</div>}
+
 
 
                 </div>
-                <p className="span-wrapper">
+                <p className="span-wrapper-2">
                   <span className="text-wrapper">Radial pulse:</span>
                 </p>
               </div>
@@ -695,16 +967,27 @@ export const PulsesPage = (props) => {
 
               <div className="brachial">
                 <div className="overlap-4">
+                  <img
+                    className="textbox-42"
+                    alt="Rectangle"
+                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
+                  />
+
                 <input
                     type="text"
-                    className={`textbox-42 ${carotidStatus && carotidStatus !== 'normal' ? 'input-error' : ''}`}
+                    className={`textbox-42 ${brachialStatus && brachialStatus !== 'normal' ? 'input-error' : ''}`}
                     value={brachialPulseValue}
                     onChange={handleBrachialChange}
-                    placeholder="no data found"
+                    placeholder="1"
                   />
-                  {brachialStatus && brachialStatus !== 'normal' && (
-                    <div className="error-popup">Abnormal posterior tibial status: {brachialStatus}</div>
+                  {brachialStatus && brachialStatus !== 'normal' && showBrachialWarning && (
+                    <div className="error-popup">Abnormal posterior tibial status: {brachialStatus}. Consider re-measuring it and inputting the value again.
+                    <button onClick={() => setShowBrachilWarning(false)} style={{ marginLeft: '10px', cursor: 'pointer' }}>
+                        Hide
+                      </button>
+                    </div>
                   )}
+                  {brachialWarning && <div className="error-popup">{brachialWarning}</div>}
                 </div>
           
                 <p className="span-wrapper">
@@ -714,16 +997,27 @@ export const PulsesPage = (props) => {
 
               <div className="carotid">
                 <div className="overlap-4">
+                  <img
+                    className="textbox-42"
+                    alt="Rectangle"
+                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
+                  />
+
                   <input
                     type="text"
                     className={`textbox-42 ${carotidStatus && carotidStatus !== 'normal' ? 'input-error' : ''}`}
                     value={carotidPulseValue}
                     onChange={handleCarotidChange}
-                    placeholder="no data found"
+                    placeholder="2"
                   />
-                  {carotidStatus && carotidStatus !== 'normal' && (
-                    <div className="error-popup">Abnormal carotid pulse status: {carotidStatus}</div>
+                  {carotidStatus && carotidStatus !== 'normal' && showCarotidWarning && (
+                    <div className="error-popup">Abnormal carotid pulse status: {carotidStatus}. Consider re-measuring it and inputting the value again.
+                    <button onClick={() => setShowCarotidWarning(false)} style={{ marginLeft: '10px', cursor: 'pointer' }}>
+                        Hide
+                      </button>
+                    </div>
                   )}
+                  {carotidWarning && <div className="error-popup">{carotidWarning}</div>}
                 </div>
                 
 
@@ -735,16 +1029,28 @@ export const PulsesPage = (props) => {
               <div className="dorsalis-pedis">
                 <div className="group">
                   <div className="overlap-4">
+                    <img
+                      className="textbox-42"
+                      alt="Rectangle"
+                      src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
+                    />
+
+
                   <input
                     type="text"
                     className={`textbox-42 ${dorsalisStatus && dorsalisStatus !== 'normal' ? 'input-error' : ''}`}
                     value={dorsalisPulseValue}
                     onChange={handleDorsalisChange}
-                    placeholder="no data found"
+                    placeholder="1"
                   />
-                  {dorsalisStatus && dorsalisStatus !== 'normal' && (
-                    <div className="error-popup">Abnormal dorsalis pedis pulse status: {dorsalisStatus}</div>
+                  {dorsalisStatus && dorsalisStatus !== 'normal' && showDorsalisWarning && (
+                    <div className="error-popup">Abnormal dorsalis pedis pulse status: {dorsalisStatus}. Consider re-measuring it and inputting the value again.
+                    <button onClick={() => setShowDorsalisWarning(false)} style={{ marginLeft: '10px', cursor: 'pointer' }}>
+                        Hide
+                      </button>
+                    </div>
                   )}
+                  {dorsalisWarning && <div className="error-popup">{dorsalisWarning}</div>}
                 </div>
                 
 
@@ -757,12 +1063,27 @@ export const PulsesPage = (props) => {
             </div>
             
             <div className="JVP">
+              {/* <p className="abnormal">
+                <span className="span">normal</span>
+              </p> */}
+              <img
+                    className="abnormal"
+                      alt="Rectangle"
+                      src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
+                    />
+              {/* <input
+                    type="text"
+                    className="abnormal"
+                    // value={radialPulseValue}
+                    // onChange={handleRadialChange}
+                    placeholder="Normal"
+              /> */}
               <input
                     type="text"
                     className={`abnormal ${JugularStatus && JugularStatus !== 'normal' ? 'input-error' : ''}`}
                     value={JugularValue}
                     onChange={handleJugularChange}
-                    placeholder="no data found"
+                    placeholder="Normal"
                   />
               {JugularStatus && JugularStatus !== 'normal' && (
                     <div className="error-popup">Abnormal jugular venous pressure status: {JugularStatus}</div>
@@ -775,60 +1096,111 @@ export const PulsesPage = (props) => {
             </div>
 
             <div className="notes">
-            <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="download/pulses"></PhysicianNotes>
+              <div className="specialty-physician-wrapper">
+                <p className="specialty-physician">
+                  {/* <span className="text-wrapper-3">[specialty physician notes on pulse mesasurements go here]</span> */}
+                
+                <textarea className="specialty-physician-textarea" 
+                style={{
+                  // width: '300px', // Set the desired width
+                  // height: '100px', // Set the desired height
+                  overflowY: 'auto', // Ensure vertical scroll is enabled when necessary
+                }}
+                placeholder="specialty physician notes on pulse mesasurements go here"></textarea>
+                </p>
+              </div>
+              <p className="notes-2">
+                <span className="text-wrapper-4">Notes:</span>
+              </p>
+
+              <button className="save-button">
+                <div className="overlap-group-2">
+                  <div className="background" />
+                  <Button variant={saveVariant} onClick={handleSaveClick}>
+                    {saveVariant === 'outlined' ? 'Save' : 'Saved'}
+                  </Button>
+
+                  <Button variant={submitVariant} onClick={handleSubmit}>
+                    {submitVariant === 'outlined' ? 'Submit' : 'Submitted'}
+              </Button>
+                </div>
+              </button>
+
             </div>
           </div>
 
           <div className="tabs">
             <div className="frame">
+              {/* <p className="span-wrapper-3">
+                <span className="text-wrapper-6">Demographics</span>
+              </p> */}
               <a href="/demographics" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
                   <span className="text-wrapper-6">Demographics</span>
               </a>
             </div>
             <div className="general-wrapper">
+              {/* <p className="span-wrapper-3">
+                <span className="text-wrapper-6">General</span>
+              </p> */}
               <a href="/general" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
                   <span className="text-wrapper-6">General</span>
               </a>
             </div>
             <div className="lungs-wrapper">
+              {/* <p className="span-wrapper-3">
+                <span className="text-wrapper-6">Lungs</span>
+              </p> */}
               <a href="/lungs" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
                   <span className="text-wrapper-6">Lungs</span>
               </a>
             </div>
             <div className="pulses-wrapper">
+              {/* <p className="span-wrapper-3">
+                <span className="text-wrapper-6">Pulses</span>
+              </p> */}
               <a href="/pulses" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
                   <span className="text-wrapper-6">Pulses</span>
               </a>
             </div>
             <div className="abdomen-wrapper">
+              {/* <p className="span-wrapper-3">
+                <span className="text-wrapper-6">Abdomen</span>
+              </p> */}
               <a href="/abdomen" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
                   <span className="text-wrapper-6">Abdomen</span>
               </a>
             </div>
             <div className="heart-wrapper">
+              {/* <p className="span-wrapper-3">
+                <span className="text-wrapper-6">Heart</span>
+              </p> */}
               <a href="/heart" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
                   <span className="text-wrapper-6">Heart</span>
               </a>
             </div>
             <div className="legs-wrapper">
+              {/* <p className="span-wrapper-3">
+                <span className="text-wrapper-6">Legs</span>
+              </p> */}
               <a href="/legs" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
                   <span className="text-wrapper-6">Legs</span>
               </a>
             </div>
             <div className="summary-wrapper">
+              {/* <p className="span-wrapper-3">
+                <span className="text-wrapper-6">Summary</span>
+              </p> */}
               <a href="/summary" className="span-wrapper-3" style={{ textDecoration: 'none' }}>
                   <span className="text-wrapper-6">Summary</span>
               </a>
             </div>
           </div>
           
+          <NavBar proxy={props.proxy} token={props.token} /> {/* Display NavBar at the top */}
 
-          {/* NavBar */}
-          <NavBar proxy={props.proxy} token={props.token} /> 
 
         </div>
       </div>
-    </div>
     </div>
   );
 };

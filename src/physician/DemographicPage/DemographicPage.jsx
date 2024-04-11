@@ -111,14 +111,14 @@ export const DemographicPage = (props) => {
                               src= {profilePic}
                               alt=""
                               onLoad ={()=> setImageLoaded(true)}
-                              style={{ display: imageLoaded ? "block" : "none" }}
+                              // style={{ display: imageLoaded ? "block" : "none" }}
                               />
-                            <Img
+                            {/* <Img
                               className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
                               src= "images/img_defaultprofile.jpg"
                               alt="image"
                               style = {{display: imageLoaded? "none": "block"}}
-                              />
+                              /> */}
                           </div>
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full" >
                             <Text

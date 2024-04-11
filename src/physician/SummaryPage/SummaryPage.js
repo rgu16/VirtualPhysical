@@ -25,11 +25,13 @@ const SummaryPage = (props) => {
   const handlePrintClick = () => {
       window.print();
   };
+  console.log("Summary page")
 
   useEffect(() => {
+    console.log("HERE")
     axios({
         method: "GET",
-        url: props.proxy + "download/summary",
+        url: props.proxy + "/download/summary",
         headers: {
         Authorization: 'Bearer ' + props.token
         }
@@ -98,7 +100,7 @@ return (
                 Flag patient as high-risk
               </div>
             </Button>
-            <SendEmailComponent token={props.token} patientEmail={props.patientEmail} />
+            <SendEmailComponent proxy= {props.proxy} token={props.token} patientEmail={props.patientEmail} />
             <Button
               className="cursor-pointer flex items-center justify-between min-w-[160px] rounded-[20px]"
               leftIcon={
