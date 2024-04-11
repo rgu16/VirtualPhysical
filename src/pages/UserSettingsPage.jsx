@@ -35,6 +35,7 @@ const UserSettingsPage = (props) => {
     .then((response) => {
         const res = response.data
         setOriginalUser(res.data)
+        console.log(res.data['name'])
         setProfilePic(res.pic)
     }).catch((error) => {
         props.removeToken();
