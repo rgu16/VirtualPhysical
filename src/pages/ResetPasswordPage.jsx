@@ -73,7 +73,7 @@ const ResetPasswordPage = (props) => {
                     alt="untitleddesign"
                   />
                 </div>
-                <form onSubmit={handleSubmit}  class="flex flex-col md:gap-10 gap-[66px] items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full">
+                <form onSubmit={handleSubmit}  className="flex flex-col md:gap-10 gap-[66px] items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full">
                   <div className="flex flex-col gap-2 items-center justify-start w-full">
                     <Text className="font-bold sm:text-4xl md:text-[38px] text-[40px] text-black-900 text-center">
                       Reset Password

@@ -8,7 +8,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
@@ -37,6 +37,43 @@ const [iliacR, setIliacRValue] = useState("none");
 const [isCheckedCRT, setIsCheckedCRT] = useState(false);
 const [isCheckedPulseOx, setIsCheckedPulseOx] = useState(false);
 const [isCheckedThrills, setIsCheckedThrills] = useState(false);
+useEffect(() => {
+  axios({
+      method: "GET",
+      url: props.proxy + "download/abdomen",
+      headers: {
+      Authorization: 'Bearer ' + props.token
+      }
+  })
+  .then((response) => {
+      const res = response.data
+      // console.log(res)
+
+      // Top row
+      setHypochonriacRValue(res.detail['hypochondriacR'])
+      setEpigastricValue(res.detail['epigastric'])
+      setHypochonriacLValue(res.detail['hypochondriacL'])
+      // Middle row
+      setLumbarRValue(res.detail['lumbarR'])
+      setUmbilicalValue(res.detail['umbilical'])
+      setLumbarLValue(res.detail['lumbarL'])
+      // Bottom row
+      setIliacRValue(res.detail['iliacR'])
+      setHypogastricValue(res.detail['hypogastric'])
+      setIliacLValue(res.detail['iliacL'])
+
+      if (res.hasOwnProperty("med_note")){
+        // console.log(res.med_note)
+        setNotes(res.med_note)
+      }
+      
+  }).catch((error) => {
+      if (error.response){
+      console.log(error.response)
+      console.log(error.response.status)
+      console.log(error.response.headers)}
+  })
+}, [props]);
 
 const inputs = [hypochondriacL,epigastric,hypochondriacR,lumbarL,umbilical,lumbarR,iliacL,hypogastric,iliacR];
 
@@ -105,7 +142,7 @@ const handleIliacRChange = (event) => {
    data['iliacR'] = iliacR;
 
 
-   console.log(data);
+  //  console.log(data);
    axios({
     method:"POST",
     url: props.proxy + "/upload_json",
@@ -114,10 +151,27 @@ const handleIliacRChange = (event) => {
       Authorization: 'Bearer ' + props.token
       }
   }).then((response) => {
-    const res =response.data;
-    localStorage.setItem('abdomen', data);
+    axios({
+      method:"POST",
+      url: props.proxy + "/upload_json",
+      data: {data: note, filename: '/abdomen/med_note'},
+      headers: {
+        Authorization: 'Bearer ' + props.token
+        }
+    }).then((response) => {
+      setNavigate('/heart');
+  })
+    .catch((error)=>{
+      setError("Upload failed, please try again")
+      if(error.response){
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)
+      }
+    })
 })
   .catch((error)=>{
+    setError("Upload failed, please try again")
     if(error.response){
       console.log(error.response)
       console.log(error.response.status)
@@ -135,13 +189,13 @@ const [isCheckedPulse, setCheckboxPulse] = useState(false);
 const inputRefs = [useRef(null),useRef(null),useRef(null),useRef(null), useRef(null),useRef(null),useRef(null),useRef(null),useRef(null)];
 
 const handleClick = () => {
-  console.log(inputs)
+  // console.log(inputs)
   const nextInput = inputs.map((item, index)=> {
     if (item === null | item === '' | item=== 'none'){
       return index;
     }
    }).filter(index => index !== undefined);
-   console.log(nextInput)
+  //  console.log(nextInput)
    if (nextInput.length > 0) {
     const currentRef = inputRefs[nextInput[0]]
     currentRef.current.focus();

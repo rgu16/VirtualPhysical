@@ -25,7 +25,7 @@ const LoginPage = (props) => {
           }
         })
         .then((response)=>{
-          console.log(response.data)
+          // console.log(response.data)
           props.setToken(response.data.access_token)
         }).catch((error)=>{
           if(error.response){
@@ -70,7 +70,7 @@ const LoginPage = (props) => {
                   alt="untitleddesign"
                 />
               </div>
-              <form  onSubmit={handleSubmit} class="flex flex-col md:gap-10 items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full">
+              <form  onSubmit={handleSubmit} className="flex flex-col md:gap-10 items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full">
                 <div className="flex flex-col items-center justify-start w-full">
                   <Text className="font-bold sm:text-4xl md:text-[38px] text-[40px] text-black-900 text-center">
                     Login

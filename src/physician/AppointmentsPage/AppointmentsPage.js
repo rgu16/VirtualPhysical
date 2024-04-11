@@ -4,8 +4,6 @@ import axios from 'axios';
 import Calendar from './calendar.js';
 import { NavBar } from 'components'
 
-console.log("AppointmentsPage.js file is being executed");
-
 
 export default function AppointmentsPage(props) { // Define props here
   const [events, setEvents] = useState([]);

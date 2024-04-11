@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 
 
@@ -38,6 +38,32 @@ const [navigate, setNavigate] = useState();
 const [complete, setComplete] = useState(false);
 const [error, setError] = useState("");
 
+useEffect(() => {
+  // console.log(jwtDecode(props.token).patient.split("/"))
+  axios({
+      method: "GET",
+      url: props.proxy + "/download/general",
+      headers: {
+      Authorization: 'Bearer ' + props.token
+      }
+  })
+  .then((response) => {
+      const res = response.data
+      // console.log(res)
+
+      setSelected(res.detail['generalpain'].split(" , "))
+      setPainSummaryValue(res.detail['painsummary'])
+      if (res.hasOwnProperty("med_note")){
+        // console.log(res.med_note)
+        setNotes(res.med_note)
+      }
+  }).catch((error) => {
+      if (error.response){
+      console.log(error.response)
+      console.log(error.response.status)
+      console.log(error.response.headers)}
+  })
+}, [props]);
 
 const handlePainSummaryChange = (event) => {
  setPainSummaryValue(event.target.value)
@@ -49,7 +75,7 @@ const handlePainSummaryChange = (event) => {
    const data = {}
    data['generalpain'] = selected.join(" , ");
    data['painsummary'] = painsummary;
-   console.log(data);
+  //  console.log(data);
    axios({
     method:"POST",
     url: props.proxy + "/upload_json",
@@ -173,7 +199,6 @@ function selectAll() {
                               onChange={handlePainSummaryChange}
                               multiline
                               rows={4}
-                              defaultValue=""
                               variant="outlined"
                             />
                 </div>

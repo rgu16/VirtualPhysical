@@ -8,7 +8,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
@@ -17,8 +17,8 @@ import axios from 'axios';
 const LegsMedPage = (props) => {
  const [isHoveredOne, setIsHoveredOne] = useState(false);
  const [isHoveredTwo, setIsHoveredTwo] = useState(false);
- const [rightcalve, setRightCalfValue] = useState();
- const [leftcalve, setLeftCalfValue] = useState();
+ const [rightcalve, setRightCalfValue] = useState("none");
+ const [leftcalve, setLeftCalfValue] = useState("none");
  const [note, setNotes] = useState();
     const [imageLoaded, setImageLoaded] = useState(false);
     const fileInputRef = useRef(null);
@@ -29,7 +29,33 @@ const LegsMedPage = (props) => {
  const [isCheckedLeg, setIsCheckedLeg] = useState(false);
 
  const inputs =[rightcalve, leftcalve]
-
+ useEffect(() => {
+  axios({
+      method: "GET",
+      url: props.proxy + "download/legs",
+      headers: {
+          Authorization: 'Bearer ' + props.token
+      }
+  })
+  .then((response) => {
+      const res = response.data;
+      console.log(res);
+      setRightCalfValue(res.detail['rightcalve'])
+      setLeftCalfValue(res.detail['leftcalve'])
+      setProfilePic(res.Image)
+      if(res.hasOwnProperty("med_note")){
+          setNotes(res.med_note);
+          // console.log(res.note);
+      }
+  })
+  .catch((error) => {
+      if (error.response){
+          console.log(error.response);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+      }
+  });
+}, [props]);
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
@@ -67,7 +93,7 @@ const handleImageUpload = (e) => {
   }
   const formData = new FormData();
   formData.append('file', file, file.name);
-  formData.append('location', "/eyes/Image")
+  formData.append('location', "/legs/Image")
   console.log(formData)
   axios({
       method: "POST",
@@ -109,8 +135,24 @@ const handleImageUpload = (e) => {
       Authorization: 'Bearer ' + props.token
       }
   }).then((response) => {
-    const res =response.data;
-    localStorage.setItem('legs', data);
+    axios({
+      method:"POST",
+      url: props.proxy + "/upload_json",
+      data: {data: note, filename: '/legs/med_note'},
+      headers: {
+        Authorization: 'Bearer ' + props.token
+        }
+    }).then((response) => {
+      // setNavigate('/legs');
+  })
+    .catch((error)=>{
+      setError("Upload failed, please try again")
+      if(error.response){
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)
+      }
+    })
  })
   .catch((error)=>{
     if(error.response){
@@ -343,7 +385,13 @@ paddingTop: '50px',
                          src= {profilePic}
                          alt=""
                          onLoad ={()=> setImageLoaded(true)}
-                         style = {{display: imageLoaded? "block": "none"}}
+                         style={{ display: imageLoaded ? "block" : "none" }}
+                         onError={(e) => {
+                           e.target.onerror = null; // Prevent infinite loop if the alt image also fails to load
+                           e.target.src = "images/white.png"; // Set a default image
+                           e.target.alt = "Alternate Image"; // Set an alternate alt text
+                           setImageLoaded(true); // Mark as loaded
+                         }}
                          />
       
    

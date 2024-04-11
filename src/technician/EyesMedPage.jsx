@@ -22,6 +22,35 @@ const EyesMedPage = (props) => {
     const [navigate, setNavigate] = useState();
     const [complete, setComplete] = useState(false);
     const [error, setError] = useState("");
+    useEffect(() => {
+      // console.log(jwtDecode(props.token).patient.split("/"))
+      axios({
+          method: "GET",
+          url: props.proxy + "/download/eyes",
+          headers: {
+          Authorization: 'Bearer ' + props.token
+          }
+      })
+      .then((response) => {
+          const res = response.data
+          console.log(res)
+          setValue(res.detail['eyes'])
+          // setSelected(res.detail['generalpain'].split(" , "))
+          // setPainSummaryValue(res.detail['painsummary'])
+          if (res.hasOwnProperty("med_note")){
+            // console.log(res.med_note)
+            setNotes(res.med_note)
+          }
+          if (res.hasOwnProperty("Image")){
+            setProfilePic(res.Image)
+          }
+      }).catch((error) => {
+          if (error.response){
+          console.log(error.response)
+          console.log(error.response.status)
+          console.log(error.response.headers)}
+      })
+    }, [props]);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -303,7 +332,13 @@ const EyesMedPage = (props) => {
                       src= {profilePic}
                       alt=""
                       onLoad ={()=> setImageLoaded(true)}
-                      style = {{display: imageLoaded? "block": "none"}}
+                      style={{ display: imageLoaded ? "block" : "none" }}
+                      onError={(e) => {
+                        e.target.onerror = null; // Prevent infinite loop if the alt image also fails to load
+                        e.target.src = "images/white.png"; // Set a default image
+                        e.target.alt = "Alternate Image"; // Set an alternate alt text
+                        setImageLoaded(true); // Mark as loaded
+                      }}
                       />
    
 

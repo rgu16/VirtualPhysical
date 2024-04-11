@@ -63,7 +63,7 @@ const DemographicMedPage = (props) => {
     })
     .then((response) => {
         const res = response.data
-        // console.log(res)
+        console.log(res)
 
         setGenderValue(res.detail['gender'])
         setHeightValue(res.detail['height'])
@@ -149,7 +149,7 @@ const DemographicMedPage = (props) => {
     
     const currentDate = dayjs();
     const selectedDate = date;
-  
+    // console.log(selectedDate.isBefore(currentDate.add(1, 'year')))
     const isWithin100Years = selectedDate.isAfter(currentDate.subtract(100, 'year')) && 
                              selectedDate.isBefore(currentDate.add(1, 'year'));
     setDOBValue(date)
@@ -238,7 +238,7 @@ const DemographicMedPage = (props) => {
      if (nextInput.length > 0) {
       const currentRef = inputRefs[nextInput[0]]
       currentRef.current.focus();
-      currentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      currentRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
      }else {
       setComplete(true);
      }
@@ -254,7 +254,7 @@ const DemographicMedPage = (props) => {
     }
     const formData = new FormData();
     formData.append('file', file, file.name);
-    formData.append('location', "/profile_pic")
+    formData.append('location', "/demographic/profile_pic")
     // console.log(formData)
     axios({
         method: "POST",
@@ -415,19 +415,33 @@ const DemographicMedPage = (props) => {
                       </div>
                   </div>
                   <div className="flex flex-col items-start justify-start w-[70%] mt-[80px]">  
-                      <Img
+                      {/* <Img
                         className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
-                        src= {profilePic}
+                        src= {imageLoaded? profilePic: "images/img_defaultprofile.jpg"}
                         alt=""
                         onLoad ={()=> setImageLoaded(true)}
                         style = {{display: imageLoaded? "block": "none"}}
-                        />
+                        /> */}
                         <Img
+  className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
+  src={profilePic}
+  alt=""
+  onLoad={() => setImageLoaded(true)}
+  style={{ display: imageLoaded ? "block" : "none" }}
+  onError={(e) => {
+    e.target.onerror = null; // Prevent infinite loop if the alt image also fails to load
+    e.target.src = "images/img_defaultprofile.jpg"; // Set a default image
+    e.target.alt = "Alternate Image"; // Set an alternate alt text
+    setImageLoaded(true); // Mark as loaded
+  }}
+/>
+
+                        {/* <Img
                         className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
                         src= "images/img_defaultprofile.jpg"
                         alt="image"
                         style = {{display: imageLoaded? "none": "block"}}
-                      />
+                      /> */}
                       <button className="flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[96%] md:w-full border-0"
                               onClick = {handleUploadClick}>
                         <div className = "flex flex-row">

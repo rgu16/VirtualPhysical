@@ -1,12 +1,12 @@
 import React from "react";
 
 
-import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes } from "components";
+import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes, HeartUpload } from "components";
 import { Link, Navigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
-import { useRef,  useState } from 'react';
+import { useRef,  useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import "physician/HeartPage/style.css";
 // import TextField from '@mui/material/TextField';
@@ -96,9 +96,47 @@ const [note, setNotes] = useState("");
   const [tricuspidbell, setTricuspidbellValue] = useState();
   const [mitraldiaphragm, setMitraldiaphragmValue] = useState();
   const [mitralbell, setMitralbellValue] = useState();
+  const [selected, setSelected] = React.useState([]);
 
- 
-
+  const [heave, setParasternalValue] = useState('none');
+  useEffect(() => {
+    axios({
+        method: "GET",
+        url: props.proxy + "download/heart",
+        headers: {
+            Authorization: 'Bearer ' + props.token
+        }
+    })
+    .then((response) => {
+        const res = response.data;
+        console.log(res);
+        // Split the 'thrills' string into an array
+        setSelected(res.thrills['thrills'].split(" , "));
+        setParasternalValue(res.thrills['heave'])
+        // Other state updates
+        setProfilePic(res.EKGgraph);
+        setAtrialdiaphragmValue(res.atrialdiaphram);
+        setAtrialbellValue(res.atrialbell);
+        setPulmonarydiaphragmValue(res.pulmonarydiaphram);
+        setPulmonarybellValue(res.pulmonarybell);
+        setTricuspiddiaphragmValue(res.tricuspiddiaphram);
+        setTricuspidbellValue(res.tricuspidbell);
+        setMitraldiaphragmValue(res.mitraldiaphram);
+        setMitralbellValue(res.mitralbell);
+        
+        if(res.hasOwnProperty("med_note")){
+            setNotes(res.med_note);
+            // console.log(res.note);
+        }
+    })
+    .catch((error) => {
+        if (error.response){
+            console.log(error.response);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+        }
+    });
+  }, [props]);
   const handleCheckboxCRTChange = () => {
     setIsCheckedCRT(!isCheckedCRT);
   };
@@ -108,7 +146,7 @@ const [note, setNotes] = useState("");
   const handleCheckboxThrillsChange = () => {
     setIsCheckedThrills(!isCheckedThrills);
   };
- const [heave, setParasternalValue] = useState('none');
+
 
 
 const handleparasternalHeave = (event) => {
@@ -158,7 +196,7 @@ const handleparasternalHeave = (event) => {
  };
 
 
- const [selected, setSelected] = React.useState([]);
+
 
  const handleSave = (e) => {
   e.preventDefault();
@@ -174,10 +212,27 @@ const handleparasternalHeave = (event) => {
      Authorization: 'Bearer ' + props.token
      }
  }).then((response) => {
-   const res =response.data;
-   localStorage.setItem('general', data);
+  axios({
+    method:"POST",
+    url: props.proxy + "/upload_json",
+    data: {data: note, filename: '/heart/med_note'},
+    headers: {
+      Authorization: 'Bearer ' + props.token
+      }
+  }).then((response) => {
+    setNavigate('/hands');
+})
+  .catch((error)=>{
+    setError("Upload failed, please try again")
+    if(error.response){
+      console.log(error.response)
+      console.log(error.response.status)
+      console.log(error.response.headers)
+    }
+  })
 })
  .catch((error)=>{
+  setError("Upload failed, please try again")
    if(error.response){
      console.log(error.response)
      console.log(error.response.status)
@@ -282,7 +337,6 @@ return (
                               id="outlined-select-currency-native"
                               select
                               label=""
-                              defaultValue="none"
                               SelectProps={{
                                 native: true,
                               }}
@@ -379,26 +433,39 @@ return (
                           <div className="flex flex-row ml-[100px] h-[379px] w-[553px] justify-start items-start" 
                         style={{ backgroundImage: "url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/tempimagefen4er-1-1@2x.png)" }}>
                                   <div className="flex flex-col ml-[234px] justify-start items-start h-full mt-[115px]  gap-[43px]">
-                                      <AtrialPopover proxy={props.proxy} token={props.token} 
+                                  <HeartUpload proxy={props.proxy} token={props.token} 
+                                      title="Atrial Upload" location ="/heart/atrial" letter="A"
+                                      position="left top" audio={atrialdiaphragm} audiobell={atrialbell}></HeartUpload>
+                                  <HeartUpload proxy={props.proxy} token={props.token} 
+                                      title="Tricuspid Upload" location ="/heart/tricuspid" letter="T"
+                                      position="left top" audio={tricuspiddiaphragm} audiobell={tricuspidbell}></HeartUpload>
+                                      {/* <AtrialPopover proxy={props.proxy} token={props.token} 
                                                   diaphragm={atrialdiaphragm} bell={atrialbell}
                                                   
-                                                  tab={'heart'} name={'Atrial'}></AtrialPopover>
-                                      <TricuspidPopover proxy={props.proxy} token={props.token} 
+                                                  tab={'heart'} name={'Atrial'}></AtrialPopover> */}
+                                      {/* <TricuspidPopover proxy={props.proxy} token={props.token} 
                                                         diaphragm={tricuspiddiaphragm} bell={tricuspidbell}
                                                         
-                                                        tab={'heart'} name={'Tricuspid'}></TricuspidPopover>
+                                                        tab={'heart'} name={'Tricuspid'}></TricuspidPopover> */}
                                 </div>
                                 <div className="flex flex-col ml-[37px] mt-[115px]">
-                                  <PulmonaryPopover proxy={props.proxy} token={props.token} 
+                                <HeartUpload proxy={props.proxy} token={props.token} 
+                                      title="Pulmonary Upload" location ="/heart/pulmonary" letter="P"
+                                      position="left top" audio={pulmonarydiaphragm} audiobell={pulmonarybell}></HeartUpload>
+                                
+                                  {/* <PulmonaryPopover proxy={props.proxy} token={props.token} 
                                                     diaphragm={pulmonarydiaphragm} bell={pulmonarybell}
                                                    
-                                                    tab={'heart'} name={'Pulmonary'}></PulmonaryPopover>
+                                                    tab={'heart'} name={'Pulmonary'}></PulmonaryPopover> */}
                                 </div>
                                 <div className="flex flex-col ml-[40px] mt-[240px]">
-                                  <MitralPopover proxy={props.proxy} token={props.token} 
+                                <HeartUpload proxy={props.proxy} token={props.token} 
+                                      title="Mitral Upload" location ="/heart/mitral" letter="M"
+                                      position="left top" audio={mitraldiaphragm} audiobell={mitralbell}></HeartUpload>
+                                  {/* <MitralPopover proxy={props.proxy} token={props.token} 
                                                   diaphragm={mitraldiaphragm} bell={mitralbell}
                                                   
-                                                  tab={'heart'} name={'Mitral'}></MitralPopover>
+                                                  tab={'heart'} name={'Mitral'}></MitralPopover> */}
                                 </div>
                           </div>
                           </List>

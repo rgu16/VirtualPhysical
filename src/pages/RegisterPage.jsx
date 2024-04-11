@@ -80,7 +80,7 @@ const RegisterPage = (props) => {
               />
             </div>
             {/* <div className="flex flex-col md:gap-10 items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full"> */}
-              <form onSubmit={handleSubmit} class = "flex flex-col md:gap-10 items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full">
+              <form onSubmit={handleSubmit} className = "flex flex-col md:gap-10 items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full">
               <div className="flex flex-col gap-2 items-center justify-start w-full">
                 <Text className="font-bold sm:text-4xl md:text-[38px] text-[40px] text-black-900 text-center">
                   Register
@@ -143,7 +143,7 @@ const RegisterPage = (props) => {
                           name="password" 
                           required
                         ></Input>
-                        <button type="button" class= "border-none outline-none absolute top-[20%] right-[5%] bg-transparent" onClick={handleToggle} >
+                        <button type="button" className= "border-none outline-none absolute top-[20%] right-[5%] bg-transparent" onClick={handleToggle} >
                         {showPassword? 
                           <EyeTwoTone style={{fontSize: '32px'}} twoToneColor='#8a8a8a'/> : 
                           <EyeInvisibleTwoTone style={{fontSize: '32px'}} twoToneColor='#8a8a8a'/> }
@@ -156,7 +156,7 @@ const RegisterPage = (props) => {
                         <Text className="font-bold text-base text-black-900">Account Type</Text>
                         <div className="flex items-center">
                           <Input
-                            color="bg-blue-50"
+                            color="blue_50"
                             size="xs"
                             variant="fill"
                             value="physician"
@@ -171,8 +171,8 @@ const RegisterPage = (props) => {
                         </div>
                         <div className="flex items-center">
                           <Input
-                            color="bg-blue-50"
-                            size="rxs"
+                            color="blue_50"
+                            size="xs"
                             variant="fill"
                             value="medical-tech"
                             onChange={(e) => handleInputChange(e)} 

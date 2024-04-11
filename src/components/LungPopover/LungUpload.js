@@ -1,10 +1,10 @@
 import * as React from 'react';
-import Popover from '@mui/material/Popover';
+import Popup from 'reactjs-popup';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import AudioPlayer from "components/AudioPlayer/AudioPlayer.js"
 import axios from 'axios';
-import { useRef,  useState } from 'react';
+import { useRef,  useState, useEffect } from 'react';
 import { Img, Line, List, Text, NavBar, TabNav } from "components";
 
 export default function LungPopover(props) {
@@ -21,7 +21,10 @@ export default function LungPopover(props) {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
-  const [profilePic, setProfilePic] = useState(null)
+  const [profilePic, setProfilePic] = useState(null);
+  useEffect(() => {
+    setProfilePic(props.audio);
+  }, [props.audio]);
  const fileInputRef = useRef(null);
  const [imageLoaded, setImageLoaded] = useState(false);
  const handleUploadClick = () => {
@@ -40,7 +43,7 @@ export default function LungPopover(props) {
   }
   const formData = new FormData();
   formData.append('file', file, file.name);
-  formData.append('location', "/lungs/topleftaudio")
+  formData.append('location', props.location)
   console.log(formData)
   axios({
       method: "POST",
@@ -66,37 +69,18 @@ export default function LungPopover(props) {
       }
   })
 };
-
+    const classname = props.position === "left top"? 'flex flex-col items-center p-2 justify-start text-center mt-[100px] ml-[115px] bg-white-A700 shadow-lg border-solid border-2 border-black':
+    'flex flex-col items-center p-2 justify-start text-center mt-[100px] bg-white-A700 ml-[175px] shadow-lg border-solid border-2 border-black';
   return (
     <div>
-     <Button aria-describedby={id} variant="contained" color="error" onClick={(e) => handleClick(e)} style={{ padding: 1, minWidth: 25 }}> L
-      </Button>
-      <Popover
-        id={id}
-        disableScrollLock={true}
-        open={open}
-        onClose={handleClose}
-        anchorReference="anchorPosition"
-        anchorPosition={{ top: 1060, left:0}}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        transformOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        style={{ marginTop: "290px", marginLeft: "120px"}}
-      >
-            {/* <Typography sx={{ p: 2 }}> */}
-                <div className='flex flex-col items-center p-2 justify-start text-center'>
-                  {/* <h1> Top Lung Area Recording </h1> */}
+    <Popup trigger={ <Button aria-describedby={id} variant="contained" color={profilePic?"success":"error"} onClick={(e) => handleClick(e)} style={{ padding: 1, minWidth: 25 }}> {props.position === "left top"? "L" : "R"}
+      </Button>} position= {props.position}>
+      <div className={classname}>
                   <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24">
-                             Top Left Lung Area Recording
+                             {props.title}
                           </Text> 
-                  {/* <br></br> */}
                   <input
                      ref={fileInputRef}
                      type="file"
@@ -104,30 +88,21 @@ export default function LungPopover(props) {
                      accept="audio/*" // Accept only image files
                      onChange={handleAudioUpload}
                    />
-                   <button className="bg-indigo-A200 justify-evenly flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[270px] md:w-full border-0 h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                   <button className="bg-indigo-A200 justify-evenly flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[200px] md:w-full border-0 h-[50px] rounded-[20px] hover:bg-indigo-A700"
                       onClick={handleUploadClick}
                       >
-                        <Img
-                          className="h-6 md:ml-[0] ml-[0] md:mt-0 mt-1 w-6"
-                          src="images/img_television_white.svg"
-                          alt="television"
-                        />
-                      <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Upload diaphram audio</Text>
+                      <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Upload audio</Text>
                   </button>
-{/* <br></br> */}
                           <Text
                               className="text-xl md:text-[22px] text-black-900 sm:text-xl mt-[10px]">
                              Stethoscope Recording - Diaphragm
                           </Text> 
-
-  {/* <h2>Stethoscope Recording - Diaphragm</h2> */}
                   <audio controls>
                     {profilePic && <source src={profilePic} type="audio/wav" />}
                     
                   </audio>
                 </div>
-            {/* </Typography> */}
-      </Popover>
+  </Popup>
     </div>
   );
 }

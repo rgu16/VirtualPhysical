@@ -7,6 +7,7 @@ const variants = {
     white_A700: "bg-white-A700 text-gray-600",
     white_A700_99: "bg-white-A700_99 shadow-bs1 text-indigo-A700",
     gray_200_01: "bg-gray-200_01 text-gray-900_01",
+    blue_50: "bg-blue-50"
   },
 };
 const shapes = {
@@ -82,7 +83,7 @@ Input.propTypes = {
   shape: PropTypes.oneOf(["round"]),
   size: PropTypes.oneOf(["xs", "sm", "md", "lg"]),
   variant: PropTypes.oneOf(["fill"]),
-  color: PropTypes.oneOf(["white_A700", "white_A700_99", "gray_200_01"]),
+  color: PropTypes.oneOf(["white_A700", "white_A700_99", "gray_200_01", "blue_50"]),
 };
 
 export { Input };

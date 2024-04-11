@@ -7,7 +7,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
@@ -32,7 +32,35 @@ const HandsMedPage = (props) => {
   const [navigate, setNavigate] = useState();
   const [complete, setComplete] = useState(false);
   const [error, setError] = useState("");
-
+  useEffect(() => {
+    axios({
+        method: "GET",
+        url: props.proxy + "download/hands",
+        headers: {
+            Authorization: 'Bearer ' + props.token
+        }
+    })
+    .then((response) => {
+        const res = response.data;
+        console.log(res);
+        setCyanosisValue(res.detail["cyanosis"]);
+        setPallorValue(res.detail["pallor"]);
+        setCRTValue(res.detail["capillaryrefill"]);
+        setPulseOxValue(res.detail["pulseox"]);
+        setProfilePic(res.Image)
+        if(res.hasOwnProperty("med_note")){
+            setNotes(res.med_note);
+            // console.log(res.note);
+        }
+    })
+    .catch((error) => {
+        if (error.response){
+            console.log(error.response);
+            console.log(error.response.status);
+            console.log(error.response.headers);
+        }
+    });
+  }, [props]);
   const inputs = [cyanosis, pallor, capillaryrefill, pulseox];
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
@@ -106,7 +134,7 @@ const HandsMedPage = (props) => {
     }
     const formData = new FormData();
     formData.append('file', file, file.name);
-    formData.append('location', "/eyes/Image")
+    formData.append('location', "/hands/Image")
     console.log(formData)
     axios({
         method: "POST",
@@ -116,15 +144,10 @@ const HandsMedPage = (props) => {
             Authorization: 'Bearer ' + props.token
         }
     }).then((response) => {
-      const res = response.data
-      console.log(res)
-   
-      console.log('Server response:', response);
-      console.log('Image uploaded:', imageUrl);
-     // Assuming the URL is nested within a 'data' property, modify this accordingly
-    const imageUrl = response.data && response.data.url;
+
      
     }).catch((error)=>{
+      setError("Upload failed, please try again")
         if(error.response){
             console.log(error.response)
             console.log(error.response.status)
@@ -151,10 +174,27 @@ const HandsMedPage = (props) => {
        Authorization: 'Bearer ' + props.token
        }
    }).then((response) => {
-     const res =response.data;
-     localStorage.setItem('hands', data);
+    axios({
+      method:"POST",
+      url: props.proxy + "/upload_json",
+      data: {data: note, filename: '/hands/med_note'},
+      headers: {
+        Authorization: 'Bearer ' + props.token
+        }
+    }).then((response) => {
+      setNavigate('/legs');
+  })
+    .catch((error)=>{
+      setError("Upload failed, please try again")
+      if(error.response){
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)
+      }
+    })
   })
    .catch((error)=>{
+    setError("Upload failed, please try again")
      if(error.response){
        console.log(error.response)
        console.log(error.response.status)
@@ -231,11 +271,11 @@ const HandsMedPage = (props) => {
                              </div>
                              <div className="flex flex-col gap-[0px] ml-[80px] items-start justify-start w-[50%]" >
                              <FormControl   
-                          error = {(cyanosis !== '0') & (cyanosis !== "none")}
-                            className = "flex flex-col justify-start items-start w-full" value = {cyanosis}
-                            onChange={handleCyanosisChange}
+                          error = {Boolean((cyanosis !== '0') & (cyanosis !== "none"))}
+                            className = "flex flex-col justify-start items-start w-full" 
                             >
-                          <RadioGroup className = "flex flex-row justify-between w-full" >
+                          <RadioGroup className = "flex flex-row justify-between w-full" value = {cyanosis}
+                            onChange={handleCyanosisChange}>
                           <div className = {isCheckedPulse?"flex flex-row justify-between w-full ml-[-60px]":"flex flex-row justify-start"}>
                           {isCheckedPulse? <div></div> :
                           <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>}
@@ -331,11 +371,11 @@ const HandsMedPage = (props) => {
                              </div>
                              <div className="flex flex-col gap-[0px] ml-[80px] items-start justify-start w-[50%]" >
                              <FormControl   
-                          error = {(pallor !== '0') & (pallor !== "none")}
-                            className = "flex flex-col justify-start items-start w-full" value = {pallor}
-                            onChange={handlePallorChange}
+                          error = {Boolean((pallor !== '0') & (pallor !== "none"))}
+                            className = "flex flex-col justify-start items-start w-full" 
                             >
-                          <RadioGroup className = "flex flex-row justify-between w-full" >
+                          <RadioGroup className = "flex flex-row justify-between w-full" value = {pallor}
+                            onChange={handlePallorChange} >
                           <div className = {isCheckedScale?"flex flex-row justify-between w-full ml-[-60px]":"flex flex-row justify-start"}>
                           {isCheckedScale? <div></div> :
                           <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>}
@@ -541,7 +581,14 @@ const HandsMedPage = (props) => {
                          src= {profilePic}
                          alt=""
                          onLoad ={()=> setImageLoaded(true)}
-                         style = {{display: imageLoaded? "block": "none"}}
+                         style={{ display: imageLoaded ? "block" : "none" }}
+  onError={(e) => {
+    e.target.onerror = null; // Prevent infinite loop if the alt image also fails to load
+    e.target.src = "images/white.png"; // Set a default image
+    e.target.alt = "Alternate Image"; // Set an alternate alt text
+    setImageLoaded(true); // Mark as loaded
+  }}
+                        //  style = {{display: imageLoaded? "block": "none"}}
                          />
       
    

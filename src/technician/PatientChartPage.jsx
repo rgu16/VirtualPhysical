@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useState} from "react";
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { Img, Input, Text, NavBar} from "../components";
-import { jwtDecode } from 'jwt-decode';
+// import { jwtDecode } from 'jwt-decode';
 
 const PatientSearchPage = (props) => {
     const [newUser, setNewUser] = useState({email: '', date: '', name:''});
@@ -59,7 +59,7 @@ const PatientSearchPage = (props) => {
               />
             </div>
             {/* <form onSubmit={handleSubmit} class = "flex flex-col md:gap-10 w-full items-center justify-start md:mt-0 mt-[22px] md:w-full"> */}
-            <form onSubmit={handleSubmit} class="flex flex-col md:gap-10 items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full">
+            <form onSubmit={handleSubmit} className="flex flex-col md:gap-10 items-center justify-start md:mt-0 mt-[22px] w-[41%] md:w-full">
               <div className="flex flex-col gap-2 items-center justify-start w-full">
                 <Text className="font-bold sm:text-4xl md:text-[38px] text-[40px] text-black-900 text-center">
                   Create Patient Chart

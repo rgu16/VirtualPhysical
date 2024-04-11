@@ -10,11 +10,11 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { useRef,  useState } from 'react';
+import { useRef,  useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
-import CarotidPopover from "components/CarotidPopover/CarotidUpload.js"
+import CarotidUpload from "components/CarotidPopover/CarotidPopover"
 
 const PulsesMedPage = (props) => {
  const [radial, setRadialValue] = useState("none");
@@ -30,10 +30,43 @@ const PulsesMedPage = (props) => {
  const [isCheckedThrills, setIsCheckedThrills] = useState(false);
  const [isCheckedDiastolic, setCheckedDiastolic] = useState(false);
  const inputs = [systolic, diastolic, heartrate, jvp, radial, brachial, carotid, pedis];
+ const [lt, setlt] = useState(null);
+ useEffect(() => {
+  axios({
+      method: "GET",
+      url: props.proxy + "/download/pulses",
+      headers: {
+      Authorization: 'Bearer ' + props.token
+      }
+  })
+  .then((response) => {
+      const res = response.data
+      console.log(res)
+      if (res.hasOwnProperty("med_note")){
+        // console.log(res.med_note)
+        setNotes(res.med_note)
+      }
+      setRadialValue(res.detail['radial'])
+      setBrachialValue(res.detail['brachial'])
+      setCarotidValue(res.detail['carotid'])
+      setPedisValue(res.detail['pedis'])
+      setSystolicValue(res.detail['systolic'])
+      setDiastolicValue(res.detail['diastolic'])
+      setJVPValue(res.detail['jvp'])
+      setHeartRateValue(res.detail['heartrate'])
 
+      setlt(res.carotid)
+  }).catch((error) => {
+      if (error.response){
+      console.log(error.response)
+      console.log(error.response.status)
+      console.log(error.response.headers)}
+  })
+}, [props]);
  const [radialError, setRadialError] = useState(false)
  const handleRadialChange = (e) => {
    setRadialValue(e.target.value)
+   console.log(e.target.value)
    setRadialError(!(e.target.value === '2'))
  }
  const [brachialError, setBrachialError] = useState(false)
@@ -142,7 +175,7 @@ const [note, setNotes] = useState("");
    data['jvp'] = jvp;
    data['heartrate'] = heartrate;
 
-   console.log(data);
+  //  console.log(data);
    axios({
     method:"POST",
     url: props.proxy + "/upload_json",
@@ -184,13 +217,13 @@ const [note, setNotes] = useState("");
  const inputRefs = [useRef(null),useRef(null),useRef(null),useRef(null), useRef(null),useRef(null),useRef(null),useRef(null)];
 
  const handleClick = () => {
-  console.log(inputs)
+  // console.log(inputs)
   const nextInput = inputs.map((item, index)=> {
     if (item === null | item === '' | item=== 'none'){
       return index;
     }
    }).filter(index => index !== undefined);
-   console.log(nextInput)
+  //  console.log(nextInput)
    if (nextInput.length > 0) {
     const currentRef = inputRefs[nextInput[0]]
     currentRef.current.focus();
@@ -461,7 +494,9 @@ paddingTop: '50px',
                       <div className="flex flex-row ml-[80px] h-[260px] w-[322px]" 
                                style={{ backgroundImage: "url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/carotid-img-1@2x.png)" }}>
                           <div className= "flex flex-col h-full mt-[150px] ml-[170px]">
-                          <CarotidPopover proxy={props.proxy} token={props.token}></CarotidPopover>
+                          <CarotidUpload proxy={props.proxy} token={props.token} 
+                                      title="Carotid" location ="/pulses/carotid"
+                                      position="right top" audio={lt}></CarotidUpload>
                           </div>
                       </div>
                   <div className="flex flex-row gap-[13px] ml-[50px] items-start justify-start w-full mt-[30px]" >
@@ -512,8 +547,7 @@ paddingTop: '50px',
                         <div className="flex flex-col w-[80%]">
                           <FormControl   
                           error = {radialError}
-                            className = "flex flex-col justify-start items-start w-full" value = {radial}
-                            onChange={handleRadialChange}
+                            className = "flex flex-col justify-start items-start w-full" 
                             >
                               <div className="flex flex-row gap-[13px] items-start justify-start w-full mt-[30px]" >
                               <FormLabel style={{paddingBottom: '10px', color: 'black' , fontSize: '20px', fontWeight: 'bold'}} id="demo-row-radio-buttons-group-label">i. Radial pulse</FormLabel>
@@ -530,7 +564,9 @@ paddingTop: '50px',
                               </span>
                             </div>
                               </div>
-                          <RadioGroup className = "flex flex-row justify-between w-full" >
+                          <RadioGroup value = {radial}
+                            onChange={handleRadialChange}
+                            className = "flex flex-row justify-between w-full" >
                           <div className = {isCheckedPulse?"flex flex-row justify-between w-full":"flex flex-row justify-start"}>
                           {isCheckedPulse? <div></div> :
                           <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>}
@@ -547,8 +583,7 @@ paddingTop: '50px',
                           {/*ii. Brachial */}
                           <FormControl  
                           error = {brachialError}
-                          className = "flex flex-col justify-start items-start w-full"value = {brachial}
-                            onChange={handleBrachialChange} >
+                          className = "flex flex-col justify-start items-start w-full" >
                               <div className="flex flex-row gap-[13px] items-start justify-start w-full mt-[30px]" >
                               <FormLabel style={{paddingBottom: '10px',color: 'black' , fontSize: '20px', fontWeight: 'bold'}} id="demo-row-radio-buttons-group-label">ii. Brachial</FormLabel>
                             <div className="relative group flex flex-row">
@@ -565,7 +600,8 @@ paddingTop: '50px',
                             </div>
                               </div>
 
-                              <RadioGroup className = "flex flex-row justify-between w-full" >
+                              <RadioGroup className = "flex flex-row justify-between w-full" value = {brachial}
+                            onChange={handleBrachialChange} >
                           <div className = {isCheckedPulse?"flex flex-row justify-between w-full":"flex flex-row justify-start"}>
                           {isCheckedPulse? <div></div> :
                           <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>}
@@ -582,8 +618,7 @@ paddingTop: '50px',
                           {/*iii. Carotid */}
                           <FormControl 
                           error = {carotidError}
-                          className = "flex flex-col justify-start items-start w-full" value = {carotid}
-                            onChange={handleCarotidChange} >
+                          className = "flex flex-col justify-start items-start w-full"  >
                               <div className="flex flex-row gap-[13px] items-start justify-start w-full mt-[30px]" >
                               <FormLabel style={{paddingBottom: '10px', color: 'black', fontSize: '20px', fontWeight: 'bold'}} id="demo-row-radio-buttons-group-label">iii. Carotid</FormLabel>
                               <div className="relative group flex flex-row">
@@ -599,7 +634,8 @@ paddingTop: '50px',
                                 </span>
                               </div>
                                 </div>
-                                <RadioGroup className = "flex flex-row justify-between w-full" >
+                                <RadioGroup className = "flex flex-row justify-between w-full" value = {carotid}
+                            onChange={handleCarotidChange}>
                           <div className = {isCheckedPulse?"flex flex-row justify-between w-full":"flex flex-row justify-start"}>
                           {isCheckedPulse? <div></div> :
                           <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>}
@@ -616,8 +652,7 @@ paddingTop: '50px',
                           {/*iv. Right lumbar region */}
                           <FormControl   
                           error = {pedisError}
-                          className = "flex flex-col justify-start items-start w-full" value = {pedis}
-                          onChange={handlePedisChange} >
+                          className = "flex flex-col justify-start items-start w-full"  >
                             <div className="flex flex-row gap-[13px] items-start justify-start w-full mt-[30px]" >
                             <FormLabel style={{paddingBottom: '10px', color: 'black', fontSize: '20px', fontWeight: 'bold' }} id="demo-row-radio-buttons-group-label">iv. Dorsalis pedis pulse </FormLabel>
                               <div className="relative group flex flex-row">
@@ -633,7 +668,8 @@ paddingTop: '50px',
                                 </span>
                               </div>
                                 </div>
-                          <RadioGroup className = "flex flex-row justify-between w-full">
+                          <RadioGroup className = "flex flex-row justify-between w-full" value = {pedis}
+                          onChange={handlePedisChange}>
                           <div className = {isCheckedPulse?"flex flex-row justify-between w-full":"flex flex-row justify-start"}>
                           {isCheckedPulse? <div></div> :
                           <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>}

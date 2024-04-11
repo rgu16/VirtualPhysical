@@ -1,13 +1,10 @@
 import React from "react";
-
-
-
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
-import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes } from "components";
+import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes, LungUpload } from "components";
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
@@ -49,15 +46,54 @@ const LungsMedPage = (props) => {
   const [navigate, setNavigate] = useState();
   const [complete, setComplete] = useState(false);
   const [error, setError] = useState("");
-
+  const [breathingrate, setBreathingRateValue] = useState("");
+  const [breathinglabor, setBreathingLaborValue] = useState("no selection");
   const [breathingValue, setBreathingValue] = useState('');
   const [breathingStatus, setBreathingStatus] = useState('');
   const [isCheckedCRT, setIsCheckedCRT] = useState(false);
   const [isCheckedPulseOx, setIsCheckedPulseOx] = useState(false);
   const [isCheckedThrills, setIsCheckedThrills] = useState(false);
 
-
+  const [lt, setlt] = useState(null)
+  const [lm, setlm] = useState(null)
+  const [lb, setlb] = useState(null)
+  const [rt, setrt] = useState(null)
+  const [rm, setrm] = useState(null)
+  const [rb, setrb] = useState(null)
   const [saveVariant, setSaveVariant] = useState('outlined');
+  useEffect(() => {
+    axios({
+        method: "GET",
+        url: props.proxy + "/download/lungs",
+        headers: {
+        Authorization: 'Bearer ' + props.token
+        }
+    })
+    .then((response) => {
+        const res = response.data
+        // console.log(res)
+        if (res.hasOwnProperty("med_note")){
+          // console.log(res.med_note)
+          setNotes(res.med_note)
+        }
+        setlt(res.topleftaudio)
+        setlm(res.middleleftaudio)
+        setlb(res.bottomleftaudio)
+        setrt(res.toprightaudio)
+        setrm(res.middlerightaudio)
+        setrb(res.bottomrightaudio)
+        const breathingValue = parseInt(res.detail['breathingrate'], 10);
+        setBreathingRateValue( breathingValue )
+
+        const LaboredBreathing = res.detail['breathinglabor']
+        setBreathingLaborValue(LaboredBreathing)
+    }).catch((error) => {
+        if (error.response){
+        console.log(error.response)
+        console.log(error.response.status)
+        console.log(error.response.headers)}
+    })
+  }, [props]);
 
   const handleSaveClick = () => {
     setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
@@ -100,8 +136,7 @@ const LungsMedPage = (props) => {
     setBreathingStatus(status);
   };
 
-const [breathingrate, setBreathingRateValue] = useState(null);
-const [breathinglabor, setBreathingLaborValue] = useState("no selection");
+
 const handleBreathingRateChange = (e) => {
 
  const value = e.target.value.replace(/[^0-9]/g, '')
@@ -195,7 +230,7 @@ const inputRefs = [
    if (nextInput >= 0) {
     const currentRef = inputRefs[nextInput]
     currentRef.current.focus();
-    currentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    currentRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
    }else {
     setComplete(true);
    }
@@ -375,7 +410,7 @@ return (
                             onChange={handleBreathingLaborChange}
                             id="outlined-select-currency-native"
                             select
-                            defaultValue="no selection"
+                            // defaultValue="no selection"
                             SelectProps={{
                               native: true,
                             }}
@@ -432,16 +467,29 @@ return (
                           <div className= "flex flex-col h-full w-[37%]"></div>
                           <div className= "flex flex-col h-full">
                             <div className= "flex flex-col h-[60%]"></div>
-                          <LungUploadLeftTop proxy={props.proxy} token={props.token}></LungUploadLeftTop>
-                          <LungUploadLeftMiddle  proxy={props.proxy} token={props.token}></LungUploadLeftMiddle>
-                          <LungUploadLeftBottom proxy={props.proxy} token={props.token}></LungUploadLeftBottom>
+                            
+                          <LungUpload proxy={props.proxy} token={props.token} 
+                                      title="Top Left Lung Upload" location ="/lungs/topleftaudio"
+                                      position="left top" audio={lt}></LungUpload>
+                          <LungUpload proxy={props.proxy} token={props.token} 
+                                      title="Middle Left Lung Upload" location ="/lungs/middleleftaudio"
+                                      position="left top" audio={lm}></LungUpload>
+                          <LungUpload proxy={props.proxy} token={props.token} 
+                                      title="Bottom Left Lung Upload" location ="/lungs/bottomleftaudio"
+                                      position="left top" audio={lb}></LungUpload>
                           </div>
                           <div className= "flex flex-col w-[16%]"></div>
                           <div className= "flex flex-col h-full">
                             <div className= "flex flex-col h-[60%]"></div>
-                          <LungUploadRightTop proxy={props.proxy} token={props.token}></LungUploadRightTop>
-                          <LungUploadRightMiddle  proxy={props.proxy} token={props.token}></LungUploadRightMiddle>
-                          <LungUploadRightBottom proxy={props.proxy} token={props.token}></LungUploadRightBottom>
+                          <LungUpload proxy={props.proxy} token={props.token} 
+                                      title="Top Right Lung Upload" location ="/lungs/toprightaudio"
+                                      position="right top" audio={rt}></LungUpload>
+                          <LungUpload proxy={props.proxy} token={props.token} 
+                                      title="Middle Right Lung Upload" location ="/lungs/middlerightaudio"
+                                      position="right top" audio={rm}></LungUpload>
+                          <LungUpload proxy={props.proxy} token={props.token} 
+                                      title="Bottom Right Lung Upload" location ="/lungs/bottomrightaudio"
+                                      position="right top" audio={rb}></LungUpload>
                           </div>
 
                         </div>
@@ -460,61 +508,6 @@ return (
                           </div>
                         ): <div className= "flex flex-col w-[81%]"></div>}
                         </div>
-
-                        {/* <div className="lungs-tab" >
-  
-                          
-            <div className="overlap-2">
-
-              <div className="left-lung" >
-
-                <div className="popover">
-                  <div className="lungpopover-1">
-                  <LungUploadLeftBottom proxy={props.proxy} token={props.token}></LungUploadLeftBottom>
-                  </div>                      
-                </div>
-
-               
-                  <div className="lungpopover-2">
-                  <LungUploadLeftMiddle  proxy={props.proxy} token={props.token}></LungUploadLeftMiddle>
-                  </div>                      
-         
-
-
-                <div className="popover">
-                  <div className="lungpopover-3">
-                    <LungUploadLeftTop proxy={props.proxy} token={props.token}></LungUploadLeftTop>
-                  </div>                      
-                </div>
-
-
-              </div>
-
-              <div className="right-lung">          
-              <div className="popover">
-                  <div className="lungpopover-4">
-                  <LungUploadRightBottom proxy={props.proxy} token={props.token}></LungUploadRightBottom>
-                  </div>                      
-                </div>
-
-                <div className="popover">
-                  <div className="lungpopover-5">
-                  <LungUploadRightMiddle proxy={props.proxy} token={props.token}></LungUploadRightMiddle>
-                  </div>                      
-                </div>
-
-
-                <div className="popover">
-                  <div className="lungpopover-6">
-                  <LungUploadRightTop proxy={props.proxy} token={props.token}></LungUploadRightTop>
-                  </div>                      
-                </div>
-
-              </div>
-
-            </div>
-
-    </div> */}
                       </List>
                     </div>
                 </div>

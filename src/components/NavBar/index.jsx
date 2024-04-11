@@ -35,6 +35,37 @@ const NavBar = (props) => {
   //   })
   // }, [token, props.proxy]);
 
+  useEffect(() => {
+    let isMounted = true; // Flag to track whether the component is mounted
+
+    axios({ 
+        method: "GET",
+        url: props.proxy + "/profile",
+        headers: {
+            Authorization: 'Bearer ' + token
+        }
+    })
+    .then((response) => {
+        if (isMounted) {
+            const res = response.data;
+            setUser(res.data);
+            setProfilePic(res.pic);
+        }
+    }).catch((error) => {
+        console.error("Error fetching profile data:", error);
+        if (error.response) {
+            setNavigate("/");
+            localStorage.clear();
+        }
+    });
+
+    // Cleanup function to cancel any ongoing tasks when the component is unmounted
+    return () => {
+        isMounted = false; // Set the flag to false when the component is unmounted
+    };
+}, [token, props.proxy]);
+
+
   return (
     <>
       <header className={props.className}>
