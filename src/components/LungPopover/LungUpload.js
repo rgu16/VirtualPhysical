@@ -22,14 +22,16 @@ export default function LungPopover(props) {
   const id = open ? 'simple-popover' : undefined;
 
   const [profilePic, setProfilePic] = useState(null);
+
   useEffect(() => {
     setProfilePic(props.audio);
   }, [props.audio]);
- const fileInputRef = useRef(null);
- const [imageLoaded, setImageLoaded] = useState(false);
- const handleUploadClick = () => {
-   fileInputRef.current.click();
- };
+
+  const fileInputRef = useRef(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const handleUploadClick = () => {
+    fileInputRef.current.click();
+  };
 
 
  const handleAudioUpload = (e) => {
@@ -69,23 +71,38 @@ export default function LungPopover(props) {
       }
   })
 };
+
     const classname = props.position === "left top"? 'flex flex-col items-center p-2 justify-start text-center mt-[100px] ml-[115px] bg-white-A700 shadow-lg border-solid border-2 border-black':
     'flex flex-col items-center p-2 justify-start text-center mt-[100px] bg-white-A700 ml-[175px] shadow-lg border-solid border-2 border-black';
+ 
+
   return (
     <div>
-    <Popup trigger={ <Button aria-describedby={id} variant="contained" color={profilePic?"success":"error"} onClick={(e) => handleClick(e)} style={{ padding: 1, minWidth: 25 }}> {props.position === "left top"? "L" : "R"}
-      </Button>} position= {props.position}>
+
+    <Popup trigger={ 
+      <Button 
+        aria-describedby={id} 
+        variant="contained" 
+        color={profilePic?"success":"error"} 
+        onClick={(e) => handleClick(e)} 
+        style={{ padding: 1, minWidth: 25 }}>
+          {props.position === "left top"? "L" : "R"}
+      </Button>} 
+      
+      position= {props.position}>
+
       <div className={classname}>
                   <Text
-                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                              size="txtCairoBold24">
-                             {props.title}
-                          </Text> 
+                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                      size="txtCairoBold24">
+                      {props.title}
+                  </Text> 
+
                   <input
                      ref={fileInputRef}
                      type="file"
                      style={{ display: 'none' }}
-                     accept="audio/*" // Accept only image files
+                     accept="audio/*" // Accept only audio files
                      onChange={handleAudioUpload}
                    />
                    <button className="bg-indigo-A200 justify-evenly flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[200px] md:w-full border-0 h-[50px] rounded-[20px] hover:bg-indigo-A700"
@@ -97,10 +114,12 @@ export default function LungPopover(props) {
                               className="text-xl md:text-[22px] text-black-900 sm:text-xl mt-[10px]">
                              Stethoscope Recording - Diaphragm
                           </Text> 
+
                   <audio controls>
                     {profilePic && <source src={profilePic} type="audio/wav" />}
                     
                   </audio>
+
                 </div>
   </Popup>
     </div>
