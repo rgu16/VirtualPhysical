@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Img, Button } from 'components';
 import { jwtDecode } from "jwt-decode";
+
 const SendEmailComponent = (props) => {
   const [sendVariant, setSendVariant] = useState('text');
   const [cardiologistName, setCardiologistName] = useState(null);
@@ -44,15 +45,20 @@ const SendEmailComponent = (props) => {
       url: "https://virtualphysical.pythonanywhere.com/" + "send_message",
       data: {
         email: patientEmail,
-        msg: `Dear ${patientName},
-              I hope this message finds you well.
-              I have reviewed the notes from your recent check-up on ${checkupDate}. I want to discuss the results with you and address any concerns you may have in a timely manner through a virtual consultation.
-              To set up this virtual consultation, I kindly request that you schedule a Zoom call at your earliest convenience using the following link: https://calendar.app.google/jBwKghtErjq5XENbA.
-              Thank you for your cooperation and prompt attention to this matter. If you have any questions on scheduling the virtual consultation, please contact me at ${cardiologistContact}.
-              Best regards,
-              ${cardiologistName}
-              ${cardiologistWorkplace}
-              ${cardiologistContact}`,
+        msg: 
+`Dear ${patientName},
+
+I hope this message finds you well. I have reviewed the notes from your recent check-up on ${checkupDate}. I want to discuss the results with you and address any concerns you may have in a timely manner through a virtual consultation.
+
+To set up this virtual consultation, I kindly request that you schedule a Zoom call at your earliest convenience using the following link: https://calendar.app.google/jBwKghtErjq5XENbA.
+
+Thank you for your cooperation and prompt attention to this matter. If you have any questions on scheduling the virtual consultation, please contact me at ${cardiologistContact}.
+
+Best regards,
+
+${cardiologistName}
+${cardiologistWorkplace}
+${cardiologistContact}`,
       },
       headers: {
         Authorization: 'Bearer ' + token
