@@ -11,7 +11,6 @@ import { jwtDecode } from "jwt-decode";
 
 const SummaryPage = (props) => {
   const patient = jwtDecode(props.token).patient.split("/");
-  const name = useState(patient[1]);
   const tabs = ['Demographics', "General", "Eyes", "Lungs", "Pulses", "Abdomen", "Heart", "Hands", "Legs"]
   const tabNames = ['demographic', "general", "eyes", "lungs", "pulses", "abdomen", "heart", "hands", "legs"]
   const [data, setData] = useState(Array.from({ length: 9 }, () => ''));
@@ -40,7 +39,9 @@ const SummaryPage = (props) => {
     .then((response) => {
         const res = response.data
         console.log(res)
+
         tabNames.forEach((item, index) => {
+
           const noteKey = "note_" + item;
           if (res.hasOwnProperty(noteKey)) {
             // console.log(noteKey)
@@ -71,8 +72,18 @@ const SummaryPage = (props) => {
               return updatedData;
             });
           }
+
         })
-        // console.log(notes)
+
+        console.log(notes)
+
+
+
+
+
+
+
+
     }).catch((error) => {
         if (error.response){
         console.log(error.response)
@@ -132,16 +143,27 @@ return (
           </div>
 
           <div className="bg-white-A700 flex flex-col items-start justify-start mb-[17px] ml-6 mr-[50px] md:ml-[0] w-[97%] md:w-full">
+            
             <List
               className="flex flex-col gap-2.5 items-center pt-[20px] w-full"
               orientation="vertical"
             >
+
                     {tabs.map((item, index) => (
                       <div key={index} className="w-full">
-                      <SummaryTab tab={item} data ={data[index]} notes={notes[index]} med_notes={med_notes[index]}/>
+
+                      <SummaryTab 
+                        tab={item} 
+                        data ={data[index]} 
+                        notes={notes[index]} 
+                        med_notes={med_notes[index]}
+                      />
+
                       </div>
-                  ))}      
+                  ))}   
+
             </List>
+
           </div>
         </div>
       </div>
