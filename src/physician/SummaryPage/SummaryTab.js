@@ -2,19 +2,17 @@ import React from "react";
 import { Line, Text } from "components";
 
 const SummaryTab = (props) => {
-  // Function to split the string into parts before and after the first asterisk
+
+  // Function to split the string into parts before and after asterisk(s)
   const splitString = (value) => {
-    const index = value.indexOf('*');
-    if (index === -1) {
-      return value; // If no asterisk found, return the original value
-    } else {
-      return [
-        value.substring(0, index), // Text before the asterisk
-        <span key="asterisk" className="red-text">*</span>, // Red asterisk
-        value.substring(index + 1), // Text after the asterisk
-      ];
-    }
-  };
+    const parts = value.split('*');
+    return parts.map((part, index) => (
+        <span key={index} className={index % 2 === 0 ? 'black-text' : 'red-text'}>
+            {part}
+            {index < parts.length - 1 && <span className="red-text">*</span>}
+        </span>
+    )); 
+    };
 
   return (
     <>
