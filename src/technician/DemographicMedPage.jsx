@@ -36,7 +36,7 @@ const DemographicMedPage = (props) => {
   const [navigate, setNavigate] = useState();
   const patient = jwtDecode(props.token).patient.split("/");
   const name = patient[1];
-  const [email, setEmail] = useState(patient[0]);
+  const email= patient[0];
   const [genderValue, setGenderValue] = useState('');
   const [height, setHeightValue] = useState('');
   const [heightinches, setHeightInchesValue] = useState('');

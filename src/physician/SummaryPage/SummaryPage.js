@@ -4,7 +4,6 @@ import axios from 'axios';
 import SendEmailComponent from './SendEmailComponent'; // Import SendEmailComponent
 import {  Img, Button, List, NavBar, TabNav } from "components";
 import SummaryTab from "./SummaryTab";
-import { jwtDecode } from "jwt-decode";
 
 const SummaryPage = (props) => {
   const tabs = ['Demographics', "General", "Eyes", "Lungs", "Pulses", "Abdomen", "Heart", "Hands", "Legs"]

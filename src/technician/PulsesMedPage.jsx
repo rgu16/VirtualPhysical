@@ -220,6 +220,7 @@ const [note, setNotes] = useState("");
     if (item === null | item === '' | item=== 'none'){
       return index;
     }
+    return null;
    }).filter(index => index !== undefined);
   //  console.log(nextInput)
    if (nextInput.length > 0) {

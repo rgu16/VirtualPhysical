@@ -13,10 +13,6 @@ const LegsMedPage = (props) => {
     const fileInputRef = useRef(null);
     const [profilePic, setProfilePic] = useState()
 
- const [isChecked, setIsChecked] = useState(false);
- const [isCheckedScale, setIsCheckedScale] = useState(false);
- const [isCheckedLeg, setIsCheckedLeg] = useState(false);
-
  const inputs =[rightcalve, leftcalve]
  useEffect(() => {
   axios({

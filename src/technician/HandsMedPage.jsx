@@ -22,7 +22,6 @@ const HandsMedPage = (props) => {
   const [pallor, setPallorValue] = useState("none");
   const [capillaryrefill, setCRTValue] = useState("");
   const [pulseox, setPulseOxValue] = useState("");
-  const [isChecked, setIsChecked] = useState(false);
   const [isCheckedScale, setIsCheckedScale] = useState(false);
   const [isCheckedCRT, setIsCheckedCRT] = useState(false);
   const [isCheckedPulseOx, setIsCheckedPulseOx] = useState(false);

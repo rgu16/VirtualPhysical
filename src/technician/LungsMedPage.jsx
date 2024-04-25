@@ -47,7 +47,6 @@ const LungsMedPage = (props) => {
   const [rt, setrt] = useState(null)
   const [rm, setrm] = useState(null)
   const [rb, setrb] = useState(null)
-  const [saveVariant, setSaveVariant] = useState('outlined');
 
   useEffect(() => {
     axios({
