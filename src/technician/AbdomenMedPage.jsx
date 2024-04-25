@@ -172,7 +172,7 @@ const handleClick = () => {
       return index;
     }
     return null;
-   }).filter(index => index !== undefined);
+   }).filter(index => index !== null);
   //  console.log(nextInput)
    if (nextInput.length > 0) {
     const currentRef = inputRefs[nextInput[0]]
