@@ -5,8 +5,6 @@ import { Img, List, Text, TabNav, NavBar } from "components";
 import { useState, useEffect } from 'react';
 import { PhysicianNotes } from "components";
 import axios from 'axios';
-import { jwtDecode } from "jwt-decode";
-
 
 
 export const LegsPage = (props) => {

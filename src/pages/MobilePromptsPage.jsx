@@ -1,6 +1,5 @@
 import axios from 'axios';
 import React, { useState, useEffect, useRef} from "react";
-import {  useNavigate } from 'react-router-dom';
 import { Img, Text} from "../components";
 import DataTable from 'react-data-table-component';
 import { FileAddOutlined } from '@ant-design/icons';

@@ -87,13 +87,7 @@ export default function HeartUpload(props) {
             Authorization: 'Bearer ' + props.token
         }
     }).then((response) => {
-      const res = response.data
-      console.log(res)
-   
-      console.log('Server response:', response);
-      console.log('Image uploaded:', imageUrl);
-     // Assuming the URL is nested within a 'data' property, modify this accordingly
-    const imageUrl = response.data && response.data.url;
+
   
     }).catch((error)=>{
         if(error.response){

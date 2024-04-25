@@ -48,9 +48,6 @@ export default function LungPopover(props) {
           Authorization: 'Bearer ' + props.token
       }
   }).then((response) => {
-    const res = response.data
-   // Assuming the URL is nested within a 'data' property, modify this accordingly
-  const imageUrl = response.data && response.data.url;
 
   }).catch((error)=>{
       if(error.response){

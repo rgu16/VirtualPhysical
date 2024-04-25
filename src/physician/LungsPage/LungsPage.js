@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 import { PhysicianNotes } from "components";
 import LungPopover from "components/LungPopover/LungPopover";
 import axios from 'axios';
-import { jwtDecode } from "jwt-decode";
 
 export const LungsPage = (props) => {
   const [breathingValue, setBreathingValue] = useState('');

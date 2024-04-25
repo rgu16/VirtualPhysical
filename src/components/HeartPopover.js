@@ -1,8 +1,7 @@
 import * as React from 'react';
 import Popup from 'reactjs-popup';
 import Button from '@mui/material/Button';
-import axios from 'axios';
-import { useRef,  useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {Text} from "components";
 import CheckandXButtons from "components/CheckandXButtons";
 
@@ -25,80 +24,6 @@ export default function HeartUpload(props) {
     setProfilePic1(props.audiobell);
     // console.log(props.audiobell)
   }, [props.audio, props.audiobell]);
- const fileInputRef = useRef(null);
- const fileInputRef2 = useRef(null);
-
- const handleAudioUpload = (e) => {
-    e.preventDefault();
-    console.log("handleAudioUpload")
-    const file = e.target.files[0];
-    setProfilePic(URL.createObjectURL(file))
-    if (!file) {
-        console.error('No file selected.');
-        return;
-    }
-    const formData = new FormData();
-    formData.append('file', file, file.name);
-    formData.append('location', props.location+"diaphram")
-    console.log(formData)
-    axios({
-        method: "POST",
-        url: props.proxy+"/upload_file",
-        data: formData,
-        headers: {
-            Authorization: 'Bearer ' + props.token
-        }
-    }).then((response) => {
-      const res = response.data
-     // Assuming the URL is nested within a 'data' property, modify this accordingly
-    const imageUrl = response.data && response.data.url;
-  
-    }).catch((error)=>{
-        if(error.response){
-            console.log(error.response)
-            console.log(error.response.status)
-            console.log(error.response.headers)
-        }
-    })
-  };
-  
-  const handleAudioUploadBell = (e) => {
-    e.preventDefault();
-    const file = e.target.files[0];
-    console.log('UploadAudioUploadBell')
-    setProfilePic1(URL.createObjectURL(file))
-    if (!file) {
-        console.error('No file selected.');
-        return;
-    }
-    const formData = new FormData();
-    formData.append('file', file, file.name);
-    formData.append('location', props.location+"bell")
-    console.log(formData)
-    axios({
-        method: "POST",
-        url: props.proxy+"/upload_file",
-        data: formData,
-        headers: {
-            Authorization: 'Bearer ' + props.token
-        }
-    }).then((response) => {
-      const res = response.data
-      console.log(res)
-   
-      console.log('Server response:', response);
-      console.log('Image uploaded:', imageUrl);
-     // Assuming the URL is nested within a 'data' property, modify this accordingly
-    const imageUrl = response.data && response.data.url;
-  
-    }).catch((error)=>{
-        if(error.response){
-            console.log(error.response)
-            console.log(error.response.status)
-            console.log(error.response.headers)
-        }
-    })
-  };
   
   let popupbutton
   switch(props.letter) {
