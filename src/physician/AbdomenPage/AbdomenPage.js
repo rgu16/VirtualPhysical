@@ -1,29 +1,16 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import Button from '@mui/material/Button';
 import "./style.css";
 import {  PhysicianNotes } from "components";
 import { NavBar } from 'components'
-import Grade from "./Grade.png"
-import Popover from '@mui/material/Popover';
-import {  Img, Line, List, Text, TabNav } from "components";
+import {  List, Text, TabNav } from "components";
 
 
 
 export const AbdomenPage = (props) => {
 
-  // For Question Mark Popover
-  const [questionMarkAnchorEl, setQuestionMarkAnchorEl] = useState(null);
-  const questionMarkOpen = Boolean(questionMarkAnchorEl);
   const [medNote, setMedNotes] = useState();
 
-  const handleQuestionMarkPopoverOpen = (event) => {
-    setQuestionMarkAnchorEl(event.currentTarget);
-  };
-
-  const handleQuestionMarkPopoverClose = () => {
-    setQuestionMarkAnchorEl(null);
-  };
 
   const [note, setNotes] = useState();
 
@@ -120,56 +107,56 @@ export const AbdomenPage = (props) => {
         backgroundRepeat: "no-repeat"}}>
                         <div className ="ml-[65px] w-[39%] h-[60%] mt-[110px] gap-4 grid grid-cols-3 items-center justify-center text-center">
                             <Text
-                              className={hypochondriacR==0?"col-start-1 col-span-1 row-start-1 row-span-1 text-2xl md:text-[22px] text-black-900 text-center sm:text-xl":
+                              className={hypochondriacR===0?"col-start-1 col-span-1 row-start-1 row-span-1 text-2xl md:text-[22px] text-black-900 text-center sm:text-xl":
                               "col-start-1 col-span-1 row-start-1 row-span-1 text-2xl md:text-[22px] text-red-A700 text-center sm:text-xl"
                                         }
                               size="txtCairoBold24">
                               {hypochondriacR}
                             </Text>
                             <Text
-                              className={epigastric==0?"col-start-2 col-span-1 row-start-1 row-span-1 text-2xl md:text-[22px] text-black-900 text-center sm:text-xl":
+                              className={epigastric===0?"col-start-2 col-span-1 row-start-1 row-span-1 text-2xl md:text-[22px] text-black-900 text-center sm:text-xl":
                               "col-start-2 col-span-1 row-start-1 row-span-1 text-2xl md:text-[22px] text-red-A700 text-center sm:text-xl"}
                               size="txtCairoBold24">
                               {epigastric}
                             </Text>
                             <Text
-                              className={hypochondriacL==0?" col-start-3 col-span-1 row-start-1 row-span-1 text-2xl md:text-[22px] text-black-900  text-center sm:text-xl":
+                              className={hypochondriacL===0?" col-start-3 col-span-1 row-start-1 row-span-1 text-2xl md:text-[22px] text-black-900  text-center sm:text-xl":
                               " col-start-3 col-span-1 row-start-1 row-span-1 text-2xl md:text-[22px] text-red-A700  text-center sm:text-xl"}
                               size="txtCairoBold24">
                               {hypochondriacL}
                             </Text>
                             <Text
-                              className={lumbarR==0?"mt-2 col-start-1 col-span-1 row-start-3 row-span-1 text-2xl md:text-[22px] text-black-900 text-center sm:text-xl"
+                              className={lumbarR===0?"mt-2 col-start-1 col-span-1 row-start-3 row-span-1 text-2xl md:text-[22px] text-black-900 text-center sm:text-xl"
                                         :"mt-2 col-start-1 col-span-1 row-start-3 row-span-1 text-2xl md:text-[22px] text-red-A700 text-center sm:text-xl"}
                               size="txtCairoBold24">
                               {lumbarR}
                             </Text>
                             <Text
-                              className={umbilical==0?"mt-2 col-start-2 col-span-1 row-start-3 row-span-1  text-2xl md:text-[22px] text-black-900 text-center sm:text-xl"
+                              className={umbilical===0?"mt-2 col-start-2 col-span-1 row-start-3 row-span-1  text-2xl md:text-[22px] text-black-900 text-center sm:text-xl"
                                         :"mt-2 col-start-2 col-span-1 row-start-3 row-span-1  text-2xl md:text-[22px] text-red-A700 text-center sm:text-xl"}
                               size="txtCairoBold24">
                               {umbilical} 
                             </Text>
                             <Text
-                              className={lumbarL==0?"mt-2 col-start-3 col-span-1 row-start-3 row-span-1  text-2xl md:text-[22px] text-black-900  text-center sm:text-xl"
+                              className={lumbarL===0?"mt-2 col-start-3 col-span-1 row-start-3 row-span-1  text-2xl md:text-[22px] text-black-900  text-center sm:text-xl"
                                         :"mt-2 col-start-3 col-span-1 row-start-3 row-span-1  text-2xl md:text-[22px] text-red-A700  text-center sm:text-xl"}
                               size="txtCairoBold24">
                               {lumbarL}
                             </Text>
                             <Text
-                              className={iliacR==0?"col-start-1 col-span-1 row-start-5 row-span-1 text-2xl md:text-[22px] text-black-900 text-center sm:text-xl"
+                              className={iliacR===0?"col-start-1 col-span-1 row-start-5 row-span-1 text-2xl md:text-[22px] text-black-900 text-center sm:text-xl"
                                         :"col-start-1 col-span-1 row-start-5 row-span-1 text-2xl md:text-[22px] text-red-A700 text-center sm:text-xl"}
                               size="txtCairoBold24">
                               {iliacR}
                             </Text>
                             <Text
-                              className={hypogastric==0?"col-start-2 col-span-1 row-start-5 row-span-1 text-2xl md:text-[22px] text-black-900 text-center sm:text-xl"
+                              className={hypogastric===0?"col-start-2 col-span-1 row-start-5 row-span-1 text-2xl md:text-[22px] text-black-900 text-center sm:text-xl"
                                         :"col-start-2 col-span-1 row-start-5 row-span-1 text-2xl md:text-[22px] text-red-A700 text-center sm:text-xl"}
                               size="txtCairoBold24">
                               {hypogastric} 
                             </Text>
                             <Text
-                              className={iliacL==0?" col-start-3 col-span-1 row-start-5 row-span-1 text-2xl md:text-[22px] text-black-900  text-center sm:text-xl"
+                              className={iliacL===0?" col-start-3 col-span-1 row-start-5 row-span-1 text-2xl md:text-[22px] text-black-900  text-center sm:text-xl"
                                         :" col-start-3 col-span-1 row-start-5 row-span-1 text-2xl md:text-[22px] text-red-A700  text-center sm:text-xl"}
                               size="txtCairoBold24">
                               {iliacL}

@@ -1,16 +1,8 @@
 import React from "react";
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Button from '@mui/material/Button';
-import FormControl from '@mui/material/FormControl';
 import "./style.css";
-import Typography from '@mui/material/Typography';
 import { NavBar, PhysicianNotes, Img, Text, List, TabNav} from 'components';
-import { Navigate } from 'react-router-dom';
-import AtrialPopover from 'components/AtrialPopover/AtrialPopover.js'
-import MitralPopover from 'components/MitralPopover/MitralPopover.js'
-import TricuspidPopover from 'components/TricuspidPopover/TricuspidPopover.jsx'
-import PulmonaryPopover from 'components/PulmonaryPopover/PulmonaryPopover.jsx'
 import CheckandXButtons from "components/CheckandXButtons";
 import HeartUpload from "components/HeartPopover"
 
@@ -104,18 +96,6 @@ export const HeartPage = (props) => {
     });
   }, [props]);
 
-  
-  // for popover buttons
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const open = Boolean(anchorEl);
-  const id = open ? 'image-popover' : undefined;
-
 
   return (
 <>
@@ -151,7 +131,7 @@ export const HeartPage = (props) => {
                               size="txtCairoBold24">
                               Parasternal heave:
                             </Text>
-                            <Text className={paraheave == "normal"?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                            <Text className={paraheave === "normal"?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
                           "text-2xl md:text-[22px] text-red-A700 sm:text-xl"}>{paraheave}</Text>
                           </div>
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
@@ -160,7 +140,7 @@ export const HeartPage = (props) => {
                               size="txtCairoBold24">
                               Tricuspid/mitral thrill:
                             </Text>                        
-                            <Text className={tmthrill == "No"?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                            <Text className={tmthrill === "No"?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
                           "text-2xl md:text-[22px] text-red-A700 sm:text-xl"} variant="outlined">{tmthrill}</Text>
                           </div>
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
@@ -170,7 +150,7 @@ export const HeartPage = (props) => {
                             >
                               Pulmonary/tricuspid thrill:
                             </Text>
-                            <Text className={ptthrill == "No"?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                            <Text className={ptthrill === "No"?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
                           "text-2xl md:text-[22px] text-red-A700 sm:text-xl"} >{ptthrill}</Text>
                           </div>
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
@@ -179,7 +159,7 @@ export const HeartPage = (props) => {
                                size="txtCairoBold24">
                                Aortic/pulmonary thrill:
                              </Text>
-                             <Text className={apthrill == "No"?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                             <Text className={apthrill === "No"?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
                           "text-2xl md:text-[22px] text-red-A700 sm:text-xl"}>{apthrill}</Text>
                           </div>
                           <div className="flex flex-row ml-[50px] gap-[5px] mt-[20px]">
@@ -208,14 +188,6 @@ export const HeartPage = (props) => {
                                       position="left top" audio={tricuspiddiaphragm} audiobell={tricuspidbell}
                                       setStatus={setStatusTricuspid} status={statusTricuspid}
                                       tab={'heart'} name={'Tricuspid'}></HeartUpload>
-                                      {/* <AtrialPopover proxy={props.proxy} token={props.token} 
-                                                  diaphragm={atrialdiaphragm} bell={atrialbell}
-                                                  
-                                                  tab={'heart'} name={'Atrial'}></AtrialPopover> */}
-                                      {/* <TricuspidPopover proxy={props.proxy} token={props.token} 
-                                                        diaphragm={tricuspiddiaphragm} bell={tricuspidbell}
-                                                        
-                                                        tab={'heart'} name={'Tricuspid'}></TricuspidPopover> */}
                                 </div>
                                 <div className="flex flex-col ml-[37px] mt-[115px]">
                                 <HeartUpload proxy={props.proxy} token={props.token} 
@@ -223,11 +195,6 @@ export const HeartPage = (props) => {
                                       position="left top" audio={pulmonarydiaphragm} audiobell={pulmonarybell}
                                       setStatus={setStatusPulmonary} status={statusPulmonary}
                                       tab={'heart'} name={'Pulmonary'}></HeartUpload>
-                                
-                                  {/* <PulmonaryPopover proxy={props.proxy} token={props.token} 
-                                                    diaphragm={pulmonarydiaphragm} bell={pulmonarybell}
-                                                   
-                                                    tab={'heart'} name={'Pulmonary'}></PulmonaryPopover> */}
                                 </div>
                                 <div className="flex flex-col ml-[40px] mt-[240px]">
                                 <HeartUpload proxy={props.proxy} token={props.token} 
@@ -235,37 +202,8 @@ export const HeartPage = (props) => {
                                       position="left top" audio={mitraldiaphragm} audiobell={mitralbell}
                                       setStatus={setStatusMitral} status={statusMitral}
                                       tab={'heart'} name={'Mitral'}></HeartUpload>
-                                  {/* <MitralPopover proxy={props.proxy} token={props.token} 
-                                                  diaphragm={mitraldiaphragm} bell={mitralbell}
-                                                  
-                                                  tab={'heart'} name={'Mitral'}></MitralPopover> */}
                                 </div>
                           </div>
-                          {/* <div className="flex flex-row ml-[100px] h-[379px] w-[553px] justify-start items-start" 
-                        style={{ backgroundImage: "url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/tempimagefen4er-1-1@2x.png)" }}>
-                                  <div className="flex flex-col ml-[234px] justify-start items-start h-full mt-[115px]  gap-[43px]">
-                                      <AtrialPopover proxy={props.proxy} token={props.token} 
-                                                  diaphragm={atrialdiaphragm} bell={atrialbell}
-                                                  setStatus={setStatusAtrial} status={statusAtrial}
-                                                  tab={'heart'} name={'Atrial'}></AtrialPopover>
-                                      <TricuspidPopover proxy={props.proxy} token={props.token} 
-                                                        diaphragm={tricuspiddiaphragm} bell={tricuspidbell}
-                                                        setStatus={setStatusTricuspid} status={statusTricuspid}
-                                                        tab={'heart'} name={'Tricuspid'}></TricuspidPopover>
-                                </div>
-                                <div className="flex flex-col ml-[37px] mt-[115px]">
-                                  <PulmonaryPopover proxy={props.proxy} token={props.token} 
-                                                    diaphragm={pulmonarydiaphragm} bell={pulmonarybell}
-                                                    setStatus={setStatusPulmonary} status={statusPulmonary}
-                                                    tab={'heart'} name={'Pulmonary'}></PulmonaryPopover>
-                                </div>
-                                <div className="flex flex-col ml-[40px] mt-[240px]">
-                                  <MitralPopover proxy={props.proxy} token={props.token} 
-                                                  diaphragm={mitraldiaphragm} bell={mitralbell}
-                                                  setStatus={setStatusMitral} status={statusMitral}
-                                                  tab={'heart'} name={'Mitral'}></MitralPopover>
-                                </div>
-                          </div> */}
                           <div className="flex flex-col gap-[5px] mt-[20px] ml-[50px] items-start justify-start w-full">
                           <Text
                                className="text-3xl md:text-[22px] text-black-900 sm:text-xl"

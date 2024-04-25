@@ -16,7 +16,6 @@ export const PatientContact= (props) => {
     <div className="flex flex-row h-[70px] w-[300px] items-center justify-between">
     <img
       className=" h-[60px] w-[60px] ml-[30px]"
-      alt="profile picture"
       src = {picture} 
     />
     <div className="flex flex-col mr-[30px] items-center justify-start">

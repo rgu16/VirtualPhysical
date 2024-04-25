@@ -1,12 +1,9 @@
 import React from "react";
 
 
-import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes } from "components";
+import { List, Text, NavBar, TabNav, MedTechNotes } from "components";
 import { Navigate } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 

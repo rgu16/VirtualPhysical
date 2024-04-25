@@ -1,58 +1,16 @@
 import React from "react";
 import "./style.css";
-// import { useState } from 'react';
-import Popover from '@mui/material/Popover';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-// import LungPopover from "components/LungPopover/LungPopover.jsx"
-
-import { Img, Line, List, Text, TabNav, NavBar } from "components";
-import { Link } from 'react-router-dom';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import Stack from '@mui/material/Stack';
-import { useState, useRef, useEffect } from 'react';
-import { PhysicianNotes, LungUpload } from "components";
+import { List, Text, TabNav, NavBar } from "components";
+import { useState, useEffect } from 'react';
+import { PhysicianNotes } from "components";
 import LungPopover from "components/LungPopover/LungPopover";
 import axios from 'axios';
-import { styled } from '@mui/material/styles';
-// import Button from '@mui/material/Button';
-// import Stack from '@mui/material/Stack';
 import { jwtDecode } from "jwt-decode";
-// import { SettingsRemoteSharp } from "@mui/icons-material";
-
-
 
 export const LungsPage = (props) => {
   const [breathingValue, setBreathingValue] = useState('');
   const [breathingStatus, setBreathingStatus] = useState('');
-
-  const [saveVariant, setSaveVariant] = useState('outlined');
   const [medNote, setMedNotes] = useState();
-
-  const handleSaveClick = () => {
-    setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
-  };
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const open = Boolean(anchorEl);
-  const id = open ? 'image-popover' : undefined;
-
-
-
-  const patient = jwtDecode(props.token).patient.split("/");
-  // const firstname = useState(patient[1]);
-  // const lastname = useState(patient[0]);
-  // const [BreathingRate, setBreathingRate] = useState();
   const [LaboredBreathing, setLaboredBreathing] = useState('');
 
   const [lt, setlt] = useState(null)
@@ -67,15 +25,6 @@ export const LungsPage = (props) => {
   const [statusrt, setStatusrt] = useState(null)
   const [statusrm, setStatusrm] = useState(null)
   const [statusrb, setStatusrb] = useState(null)
-
-  const [L1Value, setL1Value] = useState();
-  const [L2Value, setL2Value] = useState();
-  const [L3Value, setL3Value] = useState();
-  const [L4Value, setL4Value] = useState();
-  const [L5Value, setL5Value] = useState();
-  const [L6Value, setL6Value] = useState()
-  // const fileInputRef = useRef(null);
-  // const [imageLoaded, setImageLoaded] = useState(false);
   const [note, setNotes] = useState();
 
   
@@ -122,7 +71,7 @@ export const LungsPage = (props) => {
           } else if (breathingValue < 12 || breathingValue > 25) {
             breathingStatus = 'abnormal';
           }
-          else if (breathingValue == '') {
+          else if (breathingValue === '') {
             // Handle the case for an empty input
             breathingStatus = ''; // or any other default status you want to set for no input
           } else {
@@ -152,32 +101,6 @@ export const LungsPage = (props) => {
       })
     }, [props]);
 
-
-    const handleBreathingChange = (e) => {
-      const value = e.target.value;
-      setBreathingValue(value);
-    
-      // Convert the value to a number for comparison
-      const numericValue = parseInt(value, 10);
-    
-      // Determine the breathing status based on the specified criteria
-      let status = '';
-      if (numericValue >= 12 && numericValue <= 18) {
-        status = 'normal';
-      } else if (numericValue < 12 || numericValue > 25) {
-        status = 'abnormal';
-      }
-      // else if (numericValue == '') {
-      //   // Handle the case for an empty input
-      //   status = 'normal'; // or any other default status you want to set for no input
-      // } 
-      else {
-        // Handle the case for non-numeric input
-        status = 'normal'; // or any other status for invalid input
-      }
-    
-      setBreathingStatus(status);
-    };
 
 
   return (

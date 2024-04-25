@@ -1,8 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./style.css";
-import { Img, Input, Text, NavBar} from "components";
+import { Text, NavBar} from "components";
 import { PatientContact } from "./PatientContact";
-import { SendOutlined } from '@ant-design/icons';
 import axios from 'axios';
 export const MessagesPage = (props) => {
   const [msg, setMsg] = useState([])
@@ -62,7 +61,6 @@ export const MessagesPage = (props) => {
       }
   })
     .then((response) => {
-        const res = response.data
         alert('Email sent successfully!');
     }).catch((error) => {
         console.log(error.response)

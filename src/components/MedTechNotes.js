@@ -1,7 +1,5 @@
-import React, {useState, useEffect} from "react";
-import { Button, Img, Line, List, Text } from "./";
-import { Link } from 'react-router-dom';
-import axios from 'axios';
+import React from "react";
+import {Text } from "./";
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 const MedTechNotes = (props) => {
   return (

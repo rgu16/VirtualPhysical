@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Img, Line, List, Text } from "./";
+import { Button } from "./";
 import { Link } from 'react-router-dom';
 import { jwtDecode } from 'jwt-decode';
 const TabNav = (props) => {
@@ -20,7 +20,7 @@ const TabNav = (props) => {
                     <Button className="cursor-pointer font-medium leading-[normal] min-w-[131px] text-center text-lg" shape="round"
                     color = {props.tab === "general"?"white_A700":"gray_200_01"}> 
                     General </Button> </Link>
-                {type == "medical-tech" &&
+                {type === "medical-tech" &&
                 <Link to="/eyes">
                     <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round"
                     color = {props.tab === "eyes"?"white_A700":"gray_200_01"}> 
@@ -46,7 +46,7 @@ const TabNav = (props) => {
                     <Button className="cursor-pointer font-medium leading-[normal] min-w-[112px] text-center text-lg" shape="round"
                     color = {props.tab === "heart"?"white_A700":"gray_200_01"}> 
                      Heart </Button> </Link>
-                {type == "medical-tech" &&
+                {type === "medical-tech" &&
                 <Link to="/hands">
                     <Button className="cursor-pointer font-medium leading-[normal] min-w-[103px] text-center text-lg" shape="round"
                     color = {props.tab === "hands"?"white_A700":"gray_200_01"}> 

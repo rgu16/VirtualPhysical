@@ -1,25 +1,12 @@
 import React from "react";
 
 
-import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes, HeartUpload } from "components";
-import { Link, Navigate } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
+import { Img, List, Text, NavBar, TabNav, MedTechNotes, HeartUpload } from "components";
+import {Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { useRef,  useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
 import "physician/HeartPage/style.css";
-// import TextField from '@mui/material/TextField';
-
-import AtrialPopover from 'components/AtrialPopover/AtrialUpload.js'
-import MitralPopover from 'components/MitralPopover/MitralUpload.js'
-import TricuspidPopover from 'components/TricuspidPopover/TricuspidUpload.js'
-import PulmonaryPopover from 'components/PulmonaryPopover/PulmonaryUpload.js'
-
-import InputAdornment from '@mui/material/InputAdornment';
-
-import CheckandXButtons from "components/CheckandXButtons";
-//import ECG from "./ECG.png"
 
 // Checkbox component
 function Checkbox({ name, value = false, updateValue = () => {}, children }) {
@@ -28,22 +15,6 @@ function Checkbox({ name, value = false, updateValue = () => {}, children }) {
    updateValue(!value, name);
  };
 
- //popup from speciality physician UI
- const [anchorEl, setAnchorEl] = React.useState(null);
- const handleClick = (event) => {
-   setAnchorEl(event.currentTarget);
- };
- const handleClose = () => {
-   setAnchorEl(null);
- };
- const open = Boolean(anchorEl);
- const id = open ? 'image-popover' : undefined;
-
- const [saveVariant, setSaveVariant] = useState('outlined');
-
- const handleSaveClick = () => {
-   setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
- };
 
 
  // render the checkbox
@@ -86,7 +57,6 @@ const [note, setNotes] = useState("");
  const [imageLoaded, setImageLoaded] = useState(false);
  const [isCheckedCRT, setIsCheckedCRT] = useState(false);
   const [isCheckedPulseOx, setIsCheckedPulseOx] = useState(false);
-  const [isCheckedThrills, setIsCheckedThrills] = useState(false);
 
   const [atrialdiaphragm, setAtrialdiaphragmValue] = useState();
   const [atrialbell, setAtrialbellValue] = useState();
@@ -142,9 +112,6 @@ const [note, setNotes] = useState("");
   };
   const handleCheckboxPulseOxChange = () => {
     setIsCheckedPulseOx(!isCheckedPulseOx);
-  };
-  const handleCheckboxThrillsChange = () => {
-    setIsCheckedThrills(!isCheckedThrills);
   };
 
 
@@ -259,8 +226,6 @@ function selectAll() {
  }
 }
 const inputs = [heave, selected]
-const [isHoveredOne, setIsHoveredOne] = useState(false);
-const [isHoveredTwo, setIsHoveredTwo] = useState(false);
 
 const inputRefs = [useRef(null),useRef(null)];
 const handleClick = () => {

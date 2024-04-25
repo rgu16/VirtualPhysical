@@ -1,16 +1,14 @@
 import axios from 'axios';
 import React, { useState, useEffect, useRef} from "react";
-import { Link, useNavigate } from 'react-router-dom';
-import { Img, Input, Text} from "../components";
+import {  useNavigate } from 'react-router-dom';
+import { Img, Text} from "../components";
 import DataTable from 'react-data-table-component';
-import { DeleteFilled, CloseCircleTwoTone, CheckCircleTwoTone, CameraOutlined, VideoCameraOutlined, FileAddOutlined } from '@ant-design/icons';
+import { FileAddOutlined } from '@ant-design/icons';
 const MobilePromptsPage = (props) => {
-  const token = props.token
   const imageInputRef = useRef(null);
   const audioInputRef = useRef(null);
   const videoInputRef = useRef(null);
   const [folder,setFolder] = useState();
-  const navigate = useNavigate();
   const [data, setData] = useState([]);
   const columns = [ { name: 'Tab',
                       selector: row => row.tab,
@@ -56,7 +54,6 @@ const MobilePromptsPage = (props) => {
             Authorization: 'Bearer ' + props.token
         }
     }).then((response) => {
-      const res = response.data
       alert('File successfully uploaded!');
     }).catch((error)=>{
         if(error.response){

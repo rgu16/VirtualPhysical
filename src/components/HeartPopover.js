@@ -1,11 +1,9 @@
 import * as React from 'react';
 import Popup from 'reactjs-popup';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import AudioPlayer from "components/AudioPlayer/AudioPlayer.js"
 import axios from 'axios';
 import { useRef,  useState, useEffect } from 'react';
-import { Img, Line, List, Text, NavBar, TabNav } from "components";
+import {Text} from "components";
 import CheckandXButtons from "components/CheckandXButtons";
 
 export default function HeartUpload(props) {
@@ -16,9 +14,6 @@ export default function HeartUpload(props) {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
@@ -32,14 +27,6 @@ export default function HeartUpload(props) {
   }, [props.audio, props.audiobell]);
  const fileInputRef = useRef(null);
  const fileInputRef2 = useRef(null);
- const [imageLoaded, setImageLoaded] = useState(false);
- const handleUploadClick = () => {
-   fileInputRef.current.click();
- };
- const handleUploadClick2 = () => {
-    fileInputRef2.current.click();
-  };
-
 
  const handleAudioUpload = (e) => {
     e.preventDefault();
@@ -63,10 +50,6 @@ export default function HeartUpload(props) {
         }
     }).then((response) => {
       const res = response.data
-      console.log(res)
-   
-      console.log('Server response:', response);
-      console.log('Image uploaded:', imageUrl);
      // Assuming the URL is nested within a 'data' property, modify this accordingly
     const imageUrl = response.data && response.data.url;
   
@@ -168,18 +151,6 @@ export default function HeartUpload(props) {
                               size="txtCairoBold24">
                              {props.title}
                           </Text> 
-                  <input
-                     ref={fileInputRef}
-                     type="file"
-                     style={{ display: 'none' }}
-                     accept="audio/*" // Accept only image files
-                     onChange={handleAudioUpload}
-                   />
-                   {/* <button className="bg-indigo-A200 justify-evenly flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[200px] md:w-full border-0 h-[50px] rounded-[20px] hover:bg-indigo-A700"
-                      onClick={handleUploadClick}
-                      >
-                      <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Upload audio</Text>
-                  </button> */}
                           <Text
                               className="text-xl md:text-[22px] text-black-900 sm:text-xl mt-[10px]">
                              Stethoscope Recording - Diaphragm
@@ -188,18 +159,7 @@ export default function HeartUpload(props) {
                     {profilePic && <source src={profilePic} type="audio/wav" />}
                     
                   </audio>
-                  <input
-                     ref={fileInputRef2}
-                     type="file"
-                     style={{ display: 'none' }}
-                     accept="audio/*" // Accept only image files
-                     onChange={handleAudioUploadBell}
-                   />
-                  {/* <button className="bg-indigo-A200 justify-evenly flex md:flex-col flex-row md:gap-5 items-center mt-2.5 w-[200px] md:w-full border-0 h-[50px] rounded-[20px] hover:bg-indigo-A700"
-                      onClick={handleUploadClick2}
-                      >
-                      <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Upload audio</Text>
-                  </button> */}
+                
                           <Text
                               className="text-xl md:text-[22px] text-black-900 sm:text-xl mt-[10px]">
                              Stethoscope Recording - Bell

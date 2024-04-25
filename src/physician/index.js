@@ -1,9 +1,7 @@
 export { AbdomenPage } from "./AbdomenPage/AbdomenPage";
 export { default as AppointmentsPage } from "./AppointmentsPage/AppointmentsPage";
 export { DemographicPage } from "./DemographicPage/DemographicPage";
-export { EyesPage } from "./EyesPage/EyesPage";
 export { GeneralPage } from "./GeneralPage/GeneralPage";
-export { HandsPage } from "./HandsPage/HandsPage";
 export { HeartPage } from "./HeartPage/HeartPage";
 export { LegsPage } from "./LegsPage/LegsPage";
 export { LungsPage } from "./LungsPage/LungsPage";

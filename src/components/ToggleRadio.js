@@ -1,18 +1,9 @@
 import React from "react";
-
-
-import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes } from "components";
-import { Link, Navigate } from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import { useState } from 'react';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
-import axios from 'axios';
-import PulmonaryPopover from "./PulmonaryPopover/PulmonaryPopover";
 
 
 const ToggleRadio = (props) => {

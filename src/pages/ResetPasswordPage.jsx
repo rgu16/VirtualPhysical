@@ -16,7 +16,7 @@ const ResetPasswordPage = (props) => {
       if (!token){
         setNavigate("/")
       }
-    }, []);
+    }, [token]);
 
     const handleToggle = () => {
       setShowPassword(!showPassword);

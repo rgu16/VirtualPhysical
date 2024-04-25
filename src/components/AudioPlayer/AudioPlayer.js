@@ -1,6 +1,5 @@
 import React from 'react';
 import CheckandXButtons from 'components/CheckandXButtons';
-import Eko from './Eko.wav';
 
 function AudioPlayer(props) {
   return (

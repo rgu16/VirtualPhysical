@@ -13,7 +13,7 @@ export default function CheckandXButtons(props) {
     console.log(props.status);
     const button = props.status === 'normal'? 'check':(props.status === 'abnormal'? 'cross':null);
     setActiveButton(button);
-  }, [props.status]);
+  }, [props.status, props.name]);
 
   const handleButtonClick = (button) => {
     setActiveButton(button);

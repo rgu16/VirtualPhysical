@@ -4,7 +4,6 @@ import { Img, Button } from 'components';
 import { jwtDecode } from "jwt-decode";
 
 const SendEmailComponent = (props) => {
-  const [sendVariant, setSendVariant] = useState('text');
   const [cardiologistName, setCardiologistName] = useState(null);
   const [cardiologistWorkplace, setCardiologistWorkplace] = useState(null);
   const [cardiologistContact, setCardiologistContact] = useState(null);
@@ -66,7 +65,6 @@ ${cardiologistContact}`,
     })
     .then((response) => {
       // Handle response if needed
-      setSendVariant('contained');
       alert('Scheduling email sent successfully!');
     })
     .catch((error) => {

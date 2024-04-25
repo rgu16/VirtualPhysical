@@ -5,10 +5,8 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import Button from '@mui/material/Button';
 import axios from 'axios';
-import { Img, Line, List, Text, TabNav, NavBar,  MedTechNotes} from "components";
-// import MedTechNotes from "../components/MedTechNotes";
+import { Img, List, Text, TabNav, NavBar,  MedTechNotes} from "components";
 
 const EyesMedPage = (props) => {
     const [value, setValue] = useState("none");
@@ -20,7 +18,6 @@ const EyesMedPage = (props) => {
 
     const [isChecked, setIsChecked] = useState(false);
     const [navigate, setNavigate] = useState();
-    const [complete, setComplete] = useState(false);
     const [error, setError] = useState("");
     useEffect(() => {
       // console.log(jwtDecode(props.token).patient.split("/"))
@@ -60,9 +57,6 @@ const EyesMedPage = (props) => {
         setValue(event.target.value);
     }
 
-    const handleNotes = (event) => {
-      setNotes(event.target.value);
-  }
   const handleUploadClick = () => {
     fileInputRef.current.click();
   };

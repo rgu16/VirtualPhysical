@@ -1,26 +1,9 @@
 import React from "react";
 
-import {  Img, Line, List, Text, NavBar, TabNav, PhysicianNotes } from "components";
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
-import Box from '@mui/material/Box';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
-import FormControl from '@mui/material/FormControl';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs, { Dayjs } from 'dayjs';
-import { Link } from 'react-router-dom';
-import { useState, useRef, useEffect } from 'react';
+import {  Img, List, Text, NavBar, TabNav, PhysicianNotes } from "components";
+import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { styled } from '@mui/material/styles';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import { jwtDecode } from "jwt-decode";
-import { SettingsRemoteSharp, WrapText } from "@mui/icons-material";
 
 export const DemographicPage = (props) => {
   const patient = jwtDecode(props.token).patient.split("/");
@@ -36,7 +19,6 @@ export const DemographicPage = (props) => {
   const [history, setHistoryValue] = useState();
 
   const [profilePic, setProfilePic] = useState()
-  const [imageLoaded, setImageLoaded] = useState(false);
   const [note, setNotes] = useState();
   const [medNote, setMedNotes] = useState();
 
@@ -110,7 +92,6 @@ export const DemographicPage = (props) => {
                               className="h-[200px] w-[200px] md:h-auto object-cover rounded-bl-[14px] rounded-[14px] w-full"
                               src= {profilePic}
                               alt=""
-                              onLoad ={()=> setImageLoaded(true)}
                               // style={{ display: imageLoaded ? "block" : "none" }}
                               />
                             {/* <Img

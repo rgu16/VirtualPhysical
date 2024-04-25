@@ -1,18 +1,16 @@
 import React from "react";
 
 
-import {Img, Line, List, Text, NavBar, TabNav, MedTechNotes} from "components";
+import { List, Text, NavBar, TabNav, MedTechNotes} from "components";
 import TextField from '@mui/material/TextField';
 import InputAdornment from '@mui/material/InputAdornment';
-import { Navigate, Link } from 'react-router-dom';
+import { Navigate} from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useRef,  useState, useEffect } from 'react';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import axios from 'axios';
 import CarotidUpload from "components/CarotidPopover/CarotidUpload"
 

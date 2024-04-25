@@ -1,22 +1,10 @@
 import React from "react";
-import Popover from '@mui/material/Popover';
-import Typography from '@mui/material/Typography';
-import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes, LungUpload } from "components";
+import { List, Text, NavBar, TabNav, MedTechNotes, LungUpload } from "components";
 import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
 import { useRef, useState, useEffect } from 'react';
 import axios from 'axios';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import InputAdornment from '@mui/material/InputAdornment';
 import { Navigate } from "react-router-dom";
-import LungPopover from "components/LungPopover/LungPopover.jsx"
-import LungUploadLeftTop from "components/LungPopover/LungUploadLeftTop.js"
-import LungUploadLeftMiddle from "components/LungPopover/LungUploadLeftMiddle.js"
-import LungUploadLeftBottom from "components/LungPopover/LungUploadLeftBottom.js"
-import LungUploadRightBottom from "components/LungPopover/LungUploadRightBottom.js"
-import LungUploadRightMiddle from "components/LungPopover/LungUploadRightMiddle.js"
-import LungUploadRightTop from "components/LungPopover/LungUploadRightTop.js"
 
 const gender = [
 {
@@ -48,7 +36,6 @@ const LungsMedPage = (props) => {
   const [error, setError] = useState("");
   const [breathingrate, setBreathingRateValue] = useState("");
   const [breathinglabor, setBreathingLaborValue] = useState("no selection");
-  const [breathingValue, setBreathingValue] = useState('');
   const [breathingStatus, setBreathingStatus] = useState('');
   const [isCheckedCRT, setIsCheckedCRT] = useState(false);
   const [isCheckedPulseOx, setIsCheckedPulseOx] = useState(false);
@@ -112,30 +99,7 @@ const LungsMedPage = (props) => {
     setIsCheckedThrills(!isCheckedThrills);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const open = Boolean(anchorEl);
-  const id = open ? 'image-popover' : undefined;
 
-
-  const handleBreathingChange = (e) => {
-    const value = e.target.value;
-    setBreathingValue(value);
-  
-    // Convert the value to a number for comparison
-    const numericValue = parseInt(value, 10);
-  
-    // Determine the breathing status based on the specified criteria
-    let status = '';
-    if (numericValue >= 12 && numericValue <= 18) {
-      status = 'normal';
-    } else if (numericValue < 12 || numericValue > 25) {
-      status = 'abnormal';
-    }
-  
-    setBreathingStatus(status);
-  };
 
 
 const handleBreathingRateChange = (e) => {
@@ -163,8 +127,6 @@ const handleBreathingLaborChange = (event) => {
 }
 
 
-const [isHoveredOne, setIsHoveredOne] = useState(false);
-const [isHoveredTwo, setIsHoveredTwo] = useState(false);
 
 
  const handleSave = (e) => {
@@ -236,54 +198,6 @@ const inputRefs = [
     setComplete(true);
    }
  };
- const [profilePic, setProfilePic] = useState()
- const fileInputRef = useRef(null);
- const [imageLoaded, setImageLoaded] = useState(false);
- const handleUploadClick = () => {
-   fileInputRef.current.click();
- };
-
-
-
-
- const handleImageUpload = (e) => {
-   e.preventDefault();
-   const file = e.target.files[0];
-   setProfilePic(URL.createObjectURL(file))
-   if (!file) {
-       console.error('No file selected.');
-       return;
-   }
-   const formData = new FormData();
-   formData.append('file', file, file.name);
-   formData.append('location', "/lungs/image")
-   console.log(formData)
-   axios({
-       method: "POST",
-       url: props.proxy+"/upload_file",
-       data: formData,
-       headers: {
-           Authorization: 'Bearer ' + props.token
-       }
-   }).then((response) => {
-     const res = response.data
-     console.log(res)
-  
-     console.log('Server response:', response);
-     console.log('Image uploaded:', imageUrl);
-    // Assuming the URL is nested within a 'data' property, modify this accordingly
-   const imageUrl = response.data && response.data.url;
-    
-   }).catch((error)=>{
-       if(error.response){
-           console.log(error.response)
-           console.log(error.response.status)
-           console.log(error.response.headers)
-       }
-   })
- };
-
-
 
 
 return (

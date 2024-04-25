@@ -1,13 +1,9 @@
 import * as React from 'react';
-import Popover from '@mui/material/Popover';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import AudioPlayer from "components/AudioPlayer/AudioPlayer.js"
-import axios from 'axios';
 import { useRef,  useState } from 'react';
-import { Img, Line, List, Text, NavBar, TabNav } from "components";
-import "./pulses.css";
+import { Text} from "components";
 import Popup from 'reactjs-popup';
+import axios from 'axios';
 
 export default function CarotidUpload(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -16,26 +12,15 @@ export default function CarotidUpload(props) {
     setAnchorEl(event.currentTarget);
   };
 
-
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
   const [profilePic, setProfilePic] = useState()
  const fileInputRef = useRef(null);
- const fileInputRef2 = useRef(null);
- const [imageLoaded, setImageLoaded] = useState(false);
  const handleUploadClick = () => {
    fileInputRef.current.click();
  };
 
- const handleUploadClick2 = () => {
-  fileInputRef2.current.click();
-};
 
 
  const handleAudioUpload = (e) => {
@@ -60,10 +45,6 @@ export default function CarotidUpload(props) {
       }
   }).then((response) => {
     const res = response.data
-    console.log(res)
- 
-    console.log('Server response:', response);
-    console.log('Image uploaded:', imageUrl);
    // Assuming the URL is nested within a 'data' property, modify this accordingly
   const imageUrl = response.data && response.data.url;
 

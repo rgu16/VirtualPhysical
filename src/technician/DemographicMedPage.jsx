@@ -255,7 +255,6 @@ const DemographicMedPage = (props) => {
     const formData = new FormData();
     formData.append('file', file, file.name);
     formData.append('location', "/demographic/profile_pic")
-    // console.log(formData)
     axios({
         method: "POST",
         url: props.proxy+"/upload_file",

@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { useState} from "react";
 import { Navigate } from 'react-router-dom';
 import { Img, Input, Text, NavBar} from "../components";
-// import { jwtDecode } from 'jwt-decode';
 
 const PatientSearchPage = (props) => {
     const [newUser, setNewUser] = useState({email: '', date: '', name:''});

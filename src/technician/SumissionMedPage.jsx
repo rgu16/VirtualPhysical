@@ -1,31 +1,17 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import Stack from '@mui/material/Stack';
-// import Button from '@mui/material/Button';
-import {  Img, Button, Line, List, Text, NavBar, TabNav, PhysicianNotes } from "components";
+import {  List, Text, NavBar, TabNav } from "components";
 import SummaryTab from "../physician/SummaryPage/SummaryTab";
 import { jwtDecode } from "jwt-decode";
 import { Navigate } from 'react-router-dom';
-// import { NavBar } from 'components'
 
 const SubmissionMedPage = (props) => {
-  const patient = jwtDecode(props.token).patient.split("/");
-  const name = useState(patient[1]);
   const tabs = ['Demographics', "General", "Eyes", "Lungs", "Pulses", "Abdomen", "Heart", "Hands", "Legs"]
   const tabNames = ['demographic', "general", "eyes", "lungs", "pulses", "abdomen", "heart", "hands", "legs"]
   const [data, setData] = useState(Array.from({ length: 9 }, () => ''));
   const [notes, setNotes] = useState(Array.from({ length: 9 }, () => ''))
   const [med_notes, setMedNotes] = useState(Array.from({ length: 9 }, () => ''))
-  const [flagVariant, setFlagVariant] = useState(false);
   const [navigate, setNavigate] = useState();
-
-  const handleFlagClick = () => {
-    setFlagVariant(!flagVariant);
-  };
-
-  const handlePrintClick = () => {
-      window.print();
-  };
 
   useEffect(() => {
     axios({

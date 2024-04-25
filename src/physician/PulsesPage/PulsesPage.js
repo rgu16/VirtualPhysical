@@ -1,64 +1,25 @@
 import React from "react";
 import "./style.css";
-import Popover from '@mui/material/Popover';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import CarotidPopover from "components/CarotidPopover/CarotidPopover.jsx"
-import { useHistory, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-import { Img, Line, List, Text, TabNav, NavBar } from "components";
-import { Link } from 'react-router-dom';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
-import Stack from '@mui/material/Stack';
-import { useState, useRef, useEffect } from 'react';
+import { List, Text, TabNav, NavBar } from "components";
+import { useState, useEffect } from 'react';
 import {  PhysicianNotes } from "components";
 import axios from 'axios';
-import { styled } from '@mui/material/styles';
-// import Button from '@mui/material/Button';
-// import Stack from '@mui/material/Stack';
-import { jwtDecode } from "jwt-decode";
-import { orange } from "@mui/material/colors";
-// import CarotidUpload from "components/CarotidPopover/CarotidUpload"
 import LungPopover from "components/LungPopover/LungPopover";
 
 export const PulsesPage = (props) => {
-  // State for the radial pulse value and whether it's out of range
-  // const [radialPulseValue, setRadialPulseValue] = useState('');
-  // const [isRadialOutOfRange, setIsRadialOutOfRange] = useState('');
-  const [submitVariant, setSubmitVariant] = useState('outlined');
-  const navigate = useNavigate();
   const [medNote, setMedNotes] = useState();
   const [lt, setlt] = useState(null);
   const [statuslb, setStatuslb] = useState(null)
-
   const [radialPulseValue, setRadialPulseValue] = useState('');
-  const [radialStatus, setRadialStatus] = useState('');
   const [brachialPulseValue, setBrachialPulseValue] = useState('');
-  const [brachialStatus, setBrachialStatus] = useState('');
   const [carotidPulseValue, setCarotidPulseValue] = useState('');
-  const [carotidStatus, setCarotidStatus] = useState('');
   const [dorsalisPulseValue, setDorsalisPulseValue] = useState('');
-  const [dorsalisStatus, setDorsalisStatus] = useState('');
-
   const [systolicPulseValue, setSystolicPulseValue] = useState('');
-  const [systolicStatus, setSystolicStatus] = useState('');
   const [diastolicPulseValue, setDiastolicPulseValue] = useState('');
-  const [diastolicStatus, setDiastolicStatus] = useState('');
-
-
-  const [HeartRateWarning, setHeartRateWarning] = useState('');
-
   const [heartRateValue, setheartRateValue] = useState('')
-  const [heartRateStatus, setheartRateStatus] = useState('')
-
   const [JugularValue, setJugularValue] = useState('');
-  const [JugularStatus, setJugularStatus] = useState('');
-
-
   const [note, setNotes] = useState();
 
   
@@ -100,9 +61,6 @@ export const PulsesPage = (props) => {
             setNotes(res.note)
             console.log(res.note)
           }
-          // if(res.hasOwnProperty("profile_pic")){
-          //   setProfilePic(res.profile_pic)
-          // }
       }).catch((error) => {
           if (error.response){
           console.log(error.response)
@@ -148,7 +106,7 @@ export const PulsesPage = (props) => {
                               size="txtCairoBold24">
                               Radial Pulse:
                             </Text>
-                            <Text className= { radialPulseValue == 2 ?
+                            <Text className= { radialPulseValue === 2 ?
                                                   "text-2xl md:text-[22px] text-black-900 sm:text-xl":
                                                   "text-2xl md:text-[22px] text-red-A700 sm:text-xl"}
                             >+{radialPulseValue} </Text>
@@ -159,7 +117,7 @@ export const PulsesPage = (props) => {
                               size="txtCairoBold24">
                               Brachial Pulse:
                             </Text>
-                            <Text className= { brachialPulseValue == 2 ?
+                            <Text className= { brachialPulseValue === 2 ?
                                                   "text-2xl md:text-[22px] text-black-900 sm:text-xl":
                                                   "text-2xl md:text-[22px] text-red-A700 sm:text-xl"}
                             >+{brachialPulseValue} </Text>
@@ -170,7 +128,7 @@ export const PulsesPage = (props) => {
                               size="txtCairoBold24">
                               Carotid Pulse:
                             </Text>
-                            <Text className= { carotidPulseValue == 2 ?
+                            <Text className= { carotidPulseValue === 2 ?
                                                   "text-2xl md:text-[22px] text-black-900 sm:text-xl":
                                                   "text-2xl md:text-[22px] text-red-A700 sm:text-xl"}
                             >+{carotidPulseValue} </Text>
@@ -181,7 +139,7 @@ export const PulsesPage = (props) => {
                               size="txtCairoBold24">
                               Dorsalis pedis Pulse:
                             </Text>
-                            <Text className= { dorsalisPulseValue == 2 ?
+                            <Text className= { dorsalisPulseValue === 2 ?
                                                   "text-2xl md:text-[22px] text-black-900 sm:text-xl":
                                                   "text-2xl md:text-[22px] text-red-A700 sm:text-xl"}
                             >+{dorsalisPulseValue} </Text>

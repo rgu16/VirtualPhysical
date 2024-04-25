@@ -1,27 +1,13 @@
 import React from "react";
 
 
-import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes, ToggleRadio } from "components";
-import { Link, Navigate } from 'react-router-dom';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import { List, Text, NavBar, TabNav, MedTechNotes, ToggleRadio } from "components";
+import { Navigate } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import axios from 'axios';
 
 
 const AbdomenMedPage= (props) => {
-//   const [hypochondriacL, setHypochonriacLValue] = useState("none");
-//  const [epigastric, setEpigastricValue] = useState("none");
-//  const [hypochondriacR, setHypochonriacRValue] = useState("none");
-
-//  const [lumbarL, setLumbarLValue] = useState("none");
-//  const [umbilical, setUmbilicalValue] = useState("none");
-//  const [lumbarL, setLumbarLValue] = useState("none");
 const [hypochondriacL, setHypochonriacLValue] = useState("none");
 const [epigastric, setEpigastricValue] = useState("none");
 const [hypochondriacR, setHypochonriacRValue] = useState("none");
@@ -34,9 +20,7 @@ const [iliacL, setIliacLValue] = useState("none");
 const [hypogastric, setHypogastricValue] = useState("none");
 const [iliacR, setIliacRValue] = useState("none");
 
-const [isCheckedCRT, setIsCheckedCRT] = useState(false);
 const [isCheckedPulseOx, setIsCheckedPulseOx] = useState(false);
-const [isCheckedThrills, setIsCheckedThrills] = useState(false);
 useEffect(() => {
   axios({
       method: "GET",
@@ -77,16 +61,9 @@ useEffect(() => {
 
 const inputs = [hypochondriacL,epigastric,hypochondriacR,lumbarL,umbilical,lumbarR,iliacL,hypogastric,iliacR];
 
-const handleCheckboxCRTChange = () => {
-  setIsCheckedCRT(!isCheckedCRT);
-};
 const handleCheckboxPulseOxChange = () => {
   setIsCheckedPulseOx(!isCheckedPulseOx);
 };
-const handleCheckboxThrillsChange = () => {
-  setIsCheckedThrills(!isCheckedThrills);
-};
-
  const handleHypochondriacLChange = (event) => {
   setHypochonriacLValue(event.target.value)
 }

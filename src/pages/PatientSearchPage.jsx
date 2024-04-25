@@ -1,11 +1,11 @@
 import axios from 'axios';
 import React, { useState} from "react";
-import { Link, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import { Img, Input, Text, NavBar} from "../components";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import DataTable from 'react-data-table-component';
 import { SelectOutlined } from '@ant-design/icons';
 const customStyles = {
@@ -39,7 +39,6 @@ const PatientSearchPage = (props) => {
     const [newUser, setNewUser] = useState({email: '', date: '', name:''});
     const [navigate, setNavigate] = useState();
     const [error, setError] = useState();
-    const [selectedDate, setSelectedDate] = useState(dayjs());
     const [data, setData] = useState([]  );
     const columns = [ { name: 'Email',
                         selector: row => row.email,
@@ -62,10 +61,6 @@ const PatientSearchPage = (props) => {
                     ];
 
     const handleDateChange = (date) => {
-      // Update the state with the selected date
-      setSelectedDate(date);
-      // Log the selected date
-      console.log("Selected date:", date.format('YYYY-MM-DD'));
       setNewUser({
         ...newUser,
         ['date']: date.format('YYYY-MM-DD'),
@@ -123,7 +118,6 @@ const PatientSearchPage = (props) => {
         }
       })
       setNewUser({email: '', date: '', name:''});
-      setSelectedDate(dayjs());
     }
 
     const handleInputChange = (e) => {

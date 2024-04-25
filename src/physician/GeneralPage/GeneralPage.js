@@ -1,10 +1,7 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import "./style.css";
-import {  Img, Line, List, Text, NavBar, TabNav, PhysicianNotes, Display } from "components";
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
-import { InputSharp } from '@mui/icons-material';
+import {  Img, List, Text, NavBar, TabNav, PhysicianNotes } from "components";
 
 export const GeneralPage = (props) => {
 
@@ -148,7 +145,7 @@ export const GeneralPage = (props) => {
                       />
                             </div> 
                           </div>                     
-                            <Text className={pallorvalue==0?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                            <Text className={pallorvalue===0?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
                           "text-2xl md:text-[22px] text-red-A700 sm:text-xl"} variant="outlined">+{pallorvalue}</Text>
                           </div>
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
@@ -181,7 +178,7 @@ export const GeneralPage = (props) => {
                       />
                             </div> 
                           </div>   
-                             <Text className={cyanosisvalue==0?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                             <Text className={cyanosisvalue===0?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
                           "text-2xl md:text-[22px] text-red-A700 sm:text-xl"}>+{cyanosisvalue}</Text>
                           </div>
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
@@ -204,7 +201,7 @@ export const GeneralPage = (props) => {
                       />
                             </div> 
                           </div>   
-                             <Text className={eyesvalue==0?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                             <Text className={eyesvalue===0?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
                           "text-2xl md:text-[22px] text-red-A700 sm:text-xl"}>+{eyesvalue}</Text>
                           </div>
                            <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">

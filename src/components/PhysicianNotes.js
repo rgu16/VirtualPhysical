@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { Button, Img, Line, List, Text } from ".";
-import { Link } from 'react-router-dom';
+import { Text } from ".";
 import axios from 'axios';
 import Alert from '@mui/material/Alert';
 import CheckIcon from '@mui/icons-material/Check';

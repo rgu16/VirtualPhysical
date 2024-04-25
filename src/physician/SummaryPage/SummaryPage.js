@@ -1,17 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 import axios from 'axios';
-import Stack from '@mui/material/Stack';
-// import Button from '@mui/material/Button';
 import SendEmailComponent from './SendEmailComponent'; // Import SendEmailComponent
-import {  Img, Button, Line, List, Text, NavBar, TabNav, PhysicianNotes } from "components";
+import {  Img, Button, List, NavBar, TabNav } from "components";
 import SummaryTab from "./SummaryTab";
 import { jwtDecode } from "jwt-decode";
-// import { NavBar } from 'components'
 
 const SummaryPage = (props) => {
   const patient = jwtDecode(props.token).patient.split("/");
-  const name = useState(patient[1]);
   const tabs = ['Demographics', "General", "Eyes", "Lungs", "Pulses", "Abdomen", "Heart", "Hands", "Legs"]
   const tabNames = ['demographic', "general", "eyes", "lungs", "pulses", "abdomen", "heart", "hands", "legs"]
   const [data, setData] = useState(Array.from({ length: 9 }, () => ''));
@@ -79,7 +75,7 @@ const SummaryPage = (props) => {
         console.log(error.response.status)
         console.log(error.response.headers)}
     })
-  }, [props]);
+  }, [props, tabNames]);
 
 return (
   <>

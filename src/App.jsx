@@ -1,10 +1,10 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet, } from 'react-router-dom';
-import {LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage, UserSettingsPage, AdminHomePage, PatientSearchPage, CameraPage, MobileLoginPage, VideoPage, MobilePromptsPage, LoadingPage} from "./pages";
+import {LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage, UserSettingsPage, AdminHomePage, PatientSearchPage, MobileLoginPage, MobilePromptsPage, LoadingPage} from "./pages";
 import {useToken} from './components';
 import { jwtDecode } from 'jwt-decode';
-import {AbdomenPage, AppointmentsPage, DemographicPage, EyesPage, GeneralPage, HandsPage, HeartPage, LegsPage, LungsPage, MessagesPage, PulsesPage, SummaryPage} from "./physician"
+import {AbdomenPage, AppointmentsPage, DemographicPage, GeneralPage, HeartPage, LegsPage, LungsPage, MessagesPage, PulsesPage, SummaryPage} from "./physician"
 import {LegsMedPage, HandsMedPage, AbdomenMedPage, HeartMedPage, PulsesMedPage, GeneralMedPage, DemographicMedPage, EyesMedPage, LungsMedPage, PatientChartPage, SubmissionMedPage} from "./technician"
 import NotFound from "pages/NotFound";
 // import {default as Test} from "physician/SummaryPage/Test"
@@ -60,18 +60,6 @@ export default function App() {
                 <Routes>
                     <Route exact path="/" element={!token?<MobileLoginPage proxy={proxy} setToken={setToken}/>:
                                                           <MobilePromptsPage proxy={proxy} token={token} setToken={setToken} removeToken={removeToken}/> }/>
-                    <Route path="/camera"
-                        element={
-                        <ProtectedRoute isAllowed={!!token}>
-                            <CameraPage proxy={proxy} token={token} />
-                        </ProtectedRoute>
-                    }/>
-                    <Route path="/video"
-                        element={
-                        <ProtectedRoute isAllowed={!!token}>
-                            <VideoPage proxy={proxy} token={token} />
-                        </ProtectedRoute>
-                    }/>
                     <Route path="*" element={<NotFound />} />
                 </Routes> :
                 <Routes>
@@ -105,18 +93,14 @@ export default function App() {
                     }/>
                     <Route path="/eyes"
                         element={
-                        <ProtectedRoute isAllowed={!!token}>
-                            {userType === 'physician' ? 
-                            <EyesPage proxy={proxy} token={token}/> : 
-                            <EyesMedPage proxy={proxy} token={token}/>}
+                        <ProtectedRoute isAllowed={!!token && userType === "med-tech"}>
+                            <EyesMedPage proxy={proxy} token={token}/>
                         </ProtectedRoute>
                     }/>
                     <Route path="/hands"
                         element={
-                        <ProtectedRoute isAllowed={!!token}>
-                            {userType === 'physician' ? 
-                            <HandsPage proxy={proxy} token={token}/> : 
-                            <HandsMedPage proxy={proxy} token={token}/>}
+                        <ProtectedRoute isAllowed={!!token && userType === "med-tech"}>
+                            <HandsMedPage proxy={proxy} token={token}/>
                         </ProtectedRoute>
                     }/>
                     <Route path="/heart"
