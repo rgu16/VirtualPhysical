@@ -29,10 +29,6 @@ export const HeartPage = (props) => {
   const [mitraldiaphragm, setMitraldiaphragmValue] = useState();
   const [mitralbell, setMitralbellValue] = useState();
 
-  // const [navigate, setNavigate] = useState();
-  // const [complete, setComplete] = useState(false);
-  // const [error, setError] = useState("");
-
   useEffect(() => {
     axios({
         method: "GET",
@@ -63,14 +59,9 @@ export const HeartPage = (props) => {
         const thrills = res.thrills['thrills'];
         // Assign values to variables using indexes
         setParaheaveValue(res.thrills['heave']); // Index 0 for setParaheaveValue
-        // console.log(paraheave)
         setTmthrillValue(thrills.includes("Tricuspid/mitral")? "Yes" : "No"); // Index 1 for setTmthrillValue
-        // console.log(tmthrill)
         setPtthrillValue(thrills.includes("Pulmonary/tricuspid")? "Yes" : "No"); // Index 2 for setPtthrillValue
-        // console.log(ptthrill)
         setApthrillValue(thrills.includes("Aortic/pulmonary")? "Yes" : "No");// Index 3 for setApthrillValue
-        // console.log(apthrill)
-        // Other state updates
         setEcgimgValue(res.EKGgraph);
         setAtrialdiaphragmValue(res.atrialdiaphram);
         setAtrialbellValue(res.atrialbell);
