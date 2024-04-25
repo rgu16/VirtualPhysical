@@ -93,13 +93,13 @@ export default function App() {
                     }/>
                     <Route path="/eyes"
                         element={
-                        <ProtectedRoute isAllowed={!!token && userType === "med-tech"}>
+                        <ProtectedRoute isAllowed={!!token && userType === "medical-tech"}>
                             <EyesMedPage proxy={proxy} token={token}/>
                         </ProtectedRoute>
                     }/>
                     <Route path="/hands"
                         element={
-                        <ProtectedRoute isAllowed={!!token && userType === "med-tech"}>
+                        <ProtectedRoute isAllowed={!!token && userType === "medical-tech"}>
                             <HandsMedPage proxy={proxy} token={token}/>
                         </ProtectedRoute>
                     }/>
