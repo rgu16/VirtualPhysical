@@ -3,7 +3,16 @@ import React from "react";
 import {Line,Text} from "components";
 
 const SummaryTab = (props) => {
-
+        // Function to split the string into parts before and after the asterisk
+        const splitString = (value) => {
+            const parts = value.split('*');
+            return parts.map((part, index) => (
+                <span key={index} className={index > 0 ? 'red-text' : 'black-text'}>
+                {part}
+                {index < parts.length - 1 && <span className="red-text">*</span>}
+                </span>
+            ));
+            };
   return (
     <>
     <div className="flex md:flex-1 flex-col gap-[5px] items-start justify-start w-full md:w-full">
@@ -22,7 +31,7 @@ const SummaryTab = (props) => {
         >
         <span className="text-black-900 font-cairo text-left font-normal">
             <>
-            {props.data}<br />
+            {splitString(props.data)} <br></br>
             </>
         </span>
         {props.med_notes && <span className="text-black-900 font-cairo text-left font-bold">

@@ -566,4 +566,6 @@
   line-height: normal;
 }
 
-
+.red-text {
+  color: red;
+}
