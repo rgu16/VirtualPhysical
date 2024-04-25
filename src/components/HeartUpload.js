@@ -17,13 +17,16 @@ export default function HeartUpload(props) {
 
   const [profilePic, setProfilePic] = useState(null);
   const [profilePic1, setProfilePic1] = useState(null);
+
   useEffect(() => {
     setProfilePic(props.audio);
     setProfilePic1(props.audiobell);
     // console.log(props.audiobell)
   }, [props.audio, props.audiobell]);
+
  const fileInputRef = useRef(null);
  const fileInputRef2 = useRef(null);
+ 
  const handleUploadClick = () => {
    fileInputRef.current.click();
  };
