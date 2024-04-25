@@ -56,9 +56,11 @@ export default function CarotidUpload(props) {
 
   return (
     <div>
-    <Popup trigger={ profilePic?<Button aria-describedby={id} variant="contained" color={profilePic?"success":"error"} onClick={(e) => handleClick(e)} style={{ backgroundColor: 'green',
-                      color: 'white', padding: 1, minWidth: 25 }}></Button>:<Button aria-describedby={id} variant="contained" color={profilePic?"success":"error"} onClick={(e) => handleClick(e)} style={{ backgroundColor: 'red',
-                      color: 'white', padding: 1, minWidth: 25 }}> {props.position === "left top"? "L" : "R"}
+    <Popup trigger={ profilePic?
+    <Button aria-describedby={id} variant="contained" color={profilePic?"success":"error"} onClick={(e) => handleClick(e)} style={{ backgroundColor: 'green',
+                      color: 'white', padding: 1, minWidth: 25 }}> C </Button>:
+      <Button aria-describedby={id} variant="contained" color={profilePic?"success":"error"} onClick={(e) => handleClick(e)} style={{ backgroundColor: 'red',
+                      color: 'white', padding: 1, minWidth: 25 }}> C
       </Button>} position= {props.position}>
       <div className='flex flex-col items-center p-2 justify-start text-center mt-[100px] ml-[115px] bg-white-A700 shadow-lg border-solid border-2 border-black'>
                   <Text
