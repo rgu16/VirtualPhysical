@@ -52,8 +52,7 @@ const PulsesMedPage = (props) => {
       setDiastolicValue(res.detail['diastolic'])
       setJVPValue(res.detail['jvp'])
       setHeartRateValue(res.detail['heartrate'])
-
-      setlt(res.carotid)
+      setlt(res.carotidaudio)
   }).catch((error) => {
       if (error.response){
       console.log(error.response)

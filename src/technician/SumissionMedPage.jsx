@@ -67,7 +67,6 @@ const SubmissionMedPage = (props) => {
   const handleClick = (e) => {
     e.preventDefault();
     setNavigate('/');
-    localStorage.clear();
   };
 
 return (
