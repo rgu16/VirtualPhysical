@@ -88,6 +88,7 @@ export const HeartPage = (props) => {
         setTricuspidbellValue(res.tricuspidbell);
         setMitraldiaphragmValue(res.mitraldiaphram);
         setMitralbellValue(res.mitralbell);
+        setMedNotes(res.med_note)
         
         if(res.hasOwnProperty("note")){
             setNotes(res.note);
@@ -150,7 +151,8 @@ export const HeartPage = (props) => {
                               size="txtCairoBold24">
                               Parasternal heave:
                             </Text>
-                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{paraheave}</Text>
+                            <Text className={paraheave == "normal"?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                          "text-2xl md:text-[22px] text-red-A700 sm:text-xl"}>{paraheave}</Text>
                           </div>
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
                             <Text
@@ -158,7 +160,8 @@ export const HeartPage = (props) => {
                               size="txtCairoBold24">
                               Tricuspid/mitral thrill:
                             </Text>                        
-                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl" variant="outlined">{tmthrill}</Text>
+                            <Text className={tmthrill == "No"?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                          "text-2xl md:text-[22px] text-red-A700 sm:text-xl"} variant="outlined">{tmthrill}</Text>
                           </div>
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
                              <Text
@@ -167,7 +170,8 @@ export const HeartPage = (props) => {
                             >
                               Pulmonary/tricuspid thrill:
                             </Text>
-                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{ptthrill}</Text>
+                            <Text className={ptthrill == "No"?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                          "text-2xl md:text-[22px] text-red-A700 sm:text-xl"} >{ptthrill}</Text>
                           </div>
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
                              <Text
@@ -175,7 +179,8 @@ export const HeartPage = (props) => {
                                size="txtCairoBold24">
                                Aortic/pulmonary thrill:
                              </Text>
-                             <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{apthrill}</Text>
+                             <Text className={apthrill == "No"?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                          "text-2xl md:text-[22px] text-red-A700 sm:text-xl"}>{apthrill}</Text>
                           </div>
                           <div className="flex flex-row ml-[50px] gap-[5px] mt-[20px]">
                           <Text
@@ -292,7 +297,7 @@ export const HeartPage = (props) => {
                       </div>
                   </div>
                   <div className="absolute left-[1218px] top-[320px]">
-                    {(medNote !== "") && 
+                    {(medNote !== "") && medNote &&
                       <div className="flex flex-col items-start justify-start w-[400px] ml-[50px] mr-[50px] mb-[20px]">
                       <Text
                         className="text-2xl md:text-[22px] text-black-900 sm:text-xl"

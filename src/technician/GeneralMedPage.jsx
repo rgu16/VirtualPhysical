@@ -135,6 +135,27 @@ function selectAll() {
  }
 }
 
+const inputs = [selected, painsummary];
+const inputRefs = [
+  useRef(null),
+  useRef(null)
+];
+
+ const handleClick = () => {
+   const nextInput = inputs.map((item, index)=> {
+    if (item === null | item === ''){
+      return index;
+    }
+   }).filter(index => index !== undefined);
+   if (nextInput.length > 0) {
+    const currentRef = inputRefs[nextInput[0]]
+    currentRef.current.focus();
+    currentRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+   }else {
+    setComplete(true);
+   }
+ };
+
  return (
    <>
      {/* <NavBar proxy={props.proxy} token={props.token}/> */}
@@ -172,11 +193,11 @@ function selectAll() {
                           </div>
                           <div className="flex flex-col gap-[0px] ml-[100px] items-start justify-start w-full" >
                             {listOptions.map((item) => (
-                              <Checkbox key={item} name={item} value={selected.includes(item)} 
+                              <Checkbox inputRef={inputRefs[0]} key={item} name={item} value={selected.includes(item)} 
                                         updateValue={handleSelect}>{item}</Checkbox>
                             ))}
                             <div className="flex flex-col -mx-5 px-5 py-0 rounded bg-gray-100 font-medium w-[50%] justify-start items-start"> 
-                              <Checkbox name="all" value={selected.length === listOptions.length} updateValue={selectAll}>Select All</Checkbox>
+                              <Checkbox inputRef={inputRefs[0]} name="all" value={selected.length === listOptions.length} updateValue={selectAll}>Select All</Checkbox>
                             </div>
                           </div>
                           </List>
@@ -194,6 +215,7 @@ function selectAll() {
                                 Adjust the head of the bed to a 45° angle, adequately expose the patient, ask if the patient has any pain before proceeding (if yes, input where)
                             </Text>
                             <TextField fullWidth
+                            inputRef={inputRefs[1]}
                               id="outlined-multiline-static"
                               value = {painsummary}
                               onChange={handlePainSummaryChange}
@@ -203,12 +225,16 @@ function selectAll() {
                             />
                 </div>
                 <div className = 'flex flex-row items-center justify-start gap-[25px] ml-[90px] w-[41%] mt-[20px]'>
-                
-                  <button className="bg-indigo-A200 flex md:flex-col flex-row md:gap-5 ml-5px items-center justify-center mt-2.5 w-[20%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                {complete? <button className="bg-indigo-A200 flex md:flex-col flex-row md:gap-5 ml-5px items-center justify-center mt-2.5 w-[20%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
                       onClick={(e) => handleSave(e)}
                       >
                       <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Save</Text>
-                  </button>
+                  </button>:
+                  <button className="bg-indigo-A200 flex md:flex-col flex-row md:gap-5 ml-5px items-center justify-center mt-2.5 w-[20%] md:w-full h-[50px] rounded-[20px] hover:bg-indigo-A700"
+                  onClick={handleClick}
+                  >
+                  <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Next Input</Text>
+              </button>}
               <Text className="font-semibold md:ml-[0] text-red-700 text-xl">{error}</Text>
               {navigate ? (<Navigate replace to= {navigate} />) : null}
                   

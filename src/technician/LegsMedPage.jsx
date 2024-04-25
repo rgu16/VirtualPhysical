@@ -143,7 +143,7 @@ const handleImageUpload = (e) => {
         Authorization: 'Bearer ' + props.token
         }
     }).then((response) => {
-      // setNavigate('/legs');
+      setNavigate('/summary');
   })
     .catch((error)=>{
       setError("Upload failed, please try again")

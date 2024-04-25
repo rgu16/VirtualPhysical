@@ -124,9 +124,9 @@ const handleJVPChange = (e) => {
   if (value === ''){
     setJVPError('');
   }
-  else if (value < 59) {
+  else if (value < 7) {
     setJVPError("Abnormal Low");
-  } else if (value > 90){
+  } else if (value > 9){
     setJVPError('Abnormal High');
   } else {
     setJVPError('');
@@ -227,7 +227,7 @@ const [note, setNotes] = useState("");
    if (nextInput.length > 0) {
     const currentRef = inputRefs[nextInput[0]]
     currentRef.current.focus();
-    currentRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    currentRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
    }else {
     setComplete(true);
    }
@@ -440,7 +440,7 @@ paddingTop: '50px',
                        id="outlined-start-adornment"
                        sx={{ m: 1, width: '25ch' , paddingBottom: '10px'}}
                        InputProps={{
-                         endAdornment: <InputAdornment position="end">mmHg</InputAdornment>,
+                         endAdornment: <InputAdornment position="end">cm H2O</InputAdornment>,
                        }}
                        value = {jvp} 
                        error={jvpError !== ''}

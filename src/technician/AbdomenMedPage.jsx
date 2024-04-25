@@ -330,11 +330,11 @@ paddingTop: '50px',
                                         title="v. Umbilical region" expand={isCheckedPulse} ></ToggleRadio>
                           <ToggleRadio  value = {lumbarL} onChange={handleLumbarLChange} inputRef={inputRefs[5]} 
                                         title="vi. Left lumbar region" expand={isCheckedPulse} ></ToggleRadio>
-                          <ToggleRadio  value = {iliacL} onChange={handleIliacLChange} inputRef={inputRefs[6]} 
+                          <ToggleRadio  value = {iliacR} onChange={handleIliacRChange} inputRef={inputRefs[6]} 
                                         title="vii. Right iliac region" expand={isCheckedPulse} ></ToggleRadio>
                           <ToggleRadio  value = {hypogastric} onChange={handleHypogastricChange} inputRef={inputRefs[7]} 
                                         title="viii. Hypogastric region" expand={isCheckedPulse} ></ToggleRadio>
-                          <ToggleRadio   value = {iliacR} onChange={handleIliacRChange} inputRef={inputRefs[8]} 
+                          <ToggleRadio   value = {iliacL} onChange={handleIliacLChange} inputRef={inputRefs[8]} 
                                         title="ix. Left iliac region" expand={isCheckedPulse} ></ToggleRadio> 
                 </div>
                   </List>

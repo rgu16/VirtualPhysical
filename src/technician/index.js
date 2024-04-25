@@ -8,3 +8,4 @@ export {default as DemographicMedPage} from "./DemographicMedPage";
 export {default as EyesMedPage} from "./EyesMedPage";
 export {default as LungsMedPage} from "./LungsMedPage";
 export {default as PatientChartPage} from "./PatientChartPage";
+export {default as SubmissionMedPage} from "./SumissionMedPage"

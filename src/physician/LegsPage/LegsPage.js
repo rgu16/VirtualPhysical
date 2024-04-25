@@ -29,6 +29,9 @@ export const LegsPage = (props) => {
   const [L_pittingStatus, setL_pittingStatus] = useState('');
   const [R_pittingValue, setR_pittingValue] = useState('');
   const [R_pittingStatus, setR_pittingStatus] = useState('');
+  const [handPic, setHandPic] = useState('');
+
+  const [medNote, setMedNote] = useState();
 
   
   const [note, setNotes] = useState();
@@ -50,7 +53,8 @@ export const LegsPage = (props) => {
     .then((response) => {
         const res = response.data
         console.log(res)
-
+        setHandPic(res.Image)
+        setMedNote(res.med_note)
         // setL_pittingValue(res.detail[ 'leftcalve' ])
         const L_pittingValue = parseInt(res.detail['leftcalve'], 10);
         setL_pittingValue(L_pittingValue)
@@ -156,175 +160,98 @@ export const LegsPage = (props) => {
 
 
   return (
-    <div className="legs-tab">
-      <div className="overlap-wrapper-3">
-        <div className="overlap-15">
-        
-          <div className="overlap-16">
+    <>
+    <div className="h-screen">
+      <NavBar proxy={props.proxy} token={props.token}/>
 
-            <div className="notes-5">
-                <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="legs"></PhysicianNotes>
-            </div>
-
-            <p className="pitting-edema-3">
-              <span className="text-wrapper-41">Pitting Edema</span>
-            </p>
-            <p className="right-calve-3">
-              <span className="text-wrapper-39">Right calve:</span>
-            </p>
-            <p className="left-calve-3">
-              <span className="text-wrapper-39">Left calve:</span>
-            </p>
-
-
-            <div className="overlap-18">
-              <img className="textbox-42" alt="Rectangle" src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png" />
-              {/* <p className="element-13">
-                <span className="text-wrapper-42">+3</span>
-              </p> */}
-              {/* <input type="text" className="textbox-42" defaultValue="+3" /> */}
-              <input
-                    type="text"
-                    className={`textbox-42 ${R_pittingStatus && R_pittingStatus !== 'normal' ? 'input-error' : ''}`}
-                    value={R_pittingValue}
-                    onChange={handleR_pittingChange}
-                    placeholder="0" //CHANGE THIS LATER
-                  />
-                  {R_pittingStatus && R_pittingStatus !== 'normal' && (
-                    <div className="error-popup">Abnormal pitting edema value: {R_pittingStatus}</div>
-                  )}
-
-            </div>
-
-            <div className="overlap-19">
-              <img className="textbox-42" alt="Rectangle" src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png" />
-              <input
-                    type="text"
-                    className={`textbox-42 ${L_pittingStatus && L_pittingStatus !== 'normal' ? 'input-error' : ''}`}
-                    value={L_pittingValue}
-                    onChange={handleL_pittingChange}
-                    placeholder="0" //CHANGE THIS LATER
-                  />
-                  {L_pittingStatus && L_pittingStatus !== 'normal' && (
-                    <div className="error-popup">Abnormal pitting edema value: {L_pittingStatus}</div>
-                  )}
-            </div>
-
-
-
-            <div>
-            <img
-              className="mdi-question-mark-3"
-              alt="Mdi question mark"
-              src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/mdi-question-mark-circle-outline-1@2x.png"
-              onMouseEnter={handleQuestionMarkPopoverOpen}
-              onMouseLeave={handleQuestionMarkPopoverClose}
-            />
-            <Popover
-              id="mouse-over-popover"
-              sx={{
-                pointerEvents: 'none',
-              }}
-              open={questionMarkOpen}
-              anchorEl={questionMarkAnchorEl}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              onClose={handleQuestionMarkPopoverClose}
-              disableRestoreFocus
-            >
-              <img
-                src={Grade}
-                alt="Grade"
-                style={{ width: '50%', height: '50%' }}
-              />
-            </Popover>
-          </div>
-
-
-
-
-          </div>
-
-
-
-          <div className="tabs-5">
-            <div className="frame-40">
-              {/* <p className="span-wrapper-9">
-                <span className="text-wrapper-43">Demographics</span>
-              </p> */}
-              <a href="/demographics" className="span-wrapper-9" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-43">Demographics</span>
-              </a>
-            </div>
-            <div className="frame-41">
-              {/* <p className="span-wrapper-9">
-                <span className="text-wrapper-43">General</span>
-              </p> */}
-              <a href="/general" className="span-wrapper-9" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-43">General</span>
-              </a>
-            </div>
-            <div className="frame-42">
-              {/* <p className="span-wrapper-9">
-                <span className="text-wrapper-43">Lungs</span>
-              </p> */}
-              <a href="/lungs" className="span-wrapper-9" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-43">Lungs</span>
-              </a>
-            </div>
-            <div className="frame-43">
-              {/* <p className="span-wrapper-9">
-                <span className="text-wrapper-43">Pulses</span>
-              </p> */}
-              <a href="/pulses" className="span-wrapper-9" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-43">Pulses</span>
-              </a>
-            </div>
-            <div className="frame-44">
-              {/* <p className="span-wrapper-9">
-                <span className="text-wrapper-43">Abdomen</span>
-              </p> */}
-              <a href="/abdomen" className="span-wrapper-9" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-43">Abdomen</span>
-              </a>
-            </div>
-            <div className="frame-45">
-              {/* <p className="span-wrapper-9">
-                <span className="text-wrapper-43">Heart</span>
-              </p> */}
-              <a href="/heart" className="span-wrapper-9" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-43">Heart</span>
-              </a>
-            </div>
-            <div className="frame-46">
-              {/* <p className="span-wrapper-9">
-                <span className="text-wrapper-43">Legs</span>
-              </p> */}
-              <a href="/legs" className="span-wrapper-9" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-43">Legs</span>
-              </a>
-            </div>
-            <div className="frame-47">
-              {/* <p className="span-wrapper-9">
-                <span className="text-wrapper-43">Summary</span>
-              </p> */}
-              <a href="/summary" className="span-wrapper-9" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-43">Summary</span>
-              </a>
+      <div
+        className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans items-center justify-start mx-auto pb-28 w-full"
+        style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
+      >
+        <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
+         <div></div>
+          <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
+            <TabNav tab="legs"></TabNav>
+            <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full"style={{
+    paddingTop: '50px',
+  }} >
+              <div className="flex flex-col  justify-start w-[99%] md:w-full">
+                <div className="flex md:flex-col flex-row md:gap-10 items-start justify-start w-full">
+                  <div className="md:h-[560px] shrink relative w-[100%] md:w-full">
+                      <div className="flex flex-col items-start justify-start w-full">
+                        <List
+                          className="flex flex-col gap-[10px] md:ml-[0] ml-[50px] w-[62%]"
+                          orientation="vertical">      
+                          <Text
+                          className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
+                          size="txtCairoBold34">
+                          Legs
+                          </Text>
+                          
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full" >
+                            <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                              Pitting Edema:
+                            </Text>
+                            <div className="relative group flex flex-row">
+                            <button >
+                              <img
+                              className="h-[36px] w-[36px]"
+                              src="images/img_profile_black_900.svg"
+                              alt="profile_One"/>
+                            </button>
+                            <div  className="z-10 absolute top-[20px] left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 w-[250px] transition-all duration-300 ease-in-out">
+                            <Img
+                      src= {handPic}
+                      alt=""
+                      />
+                            </div> 
+                          </div>  
+                          </div>
+                          <div className="flex flex-row gap-[13px] ml-[80px] items-center justify-start w-full">
+                            <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                              Right:
+                            </Text>                        
+                            <Text className={R_pittingValue==0||R_pittingValue==1?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                             "text-2xl md:text-[22px] text-red-A700 sm:text-xl"} variant="outlined">+{R_pittingValue}</Text>
+                          </div>
+                          <div className="flex flex-row gap-[13px] ml-[80px] items-center justify-start w-full">
+                            <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                              Left:
+                            </Text>                        
+                            <Text className={L_pittingValue==0||L_pittingValue==1?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                             "text-2xl md:text-[22px] text-red-A700 sm:text-xl"} variant="outlined">+{L_pittingValue}</Text>
+                          </div>
+                        </List>
+                      </div>
+                      
+                  </div>
+                  <div className="relative mt-[50px]">
+                    {medNote !== "" && 
+                      <div className="flex flex-col items-start justify-start w-[400px] ml-[50px] mr-[50px] mb-[20px]">
+                      <Text
+                        className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                        size="txtCairoBold24"
+                      >
+                        Med Tech Notes:{" "}
+                      </Text>
+                      
+                      <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{medNote}</Text>
+                      </div>}
+                    <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="general"></PhysicianNotes>
+                  </div>
+                </div>
             </div>
           </div>
-          
-          <NavBar proxy={props.proxy} token={props.token} /> {/* Display NavBar at the top */}
-
-
         </div>
       </div>
     </div>
+    </div>
+    </>
   );
 };

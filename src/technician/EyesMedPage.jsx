@@ -204,7 +204,7 @@ const EyesMedPage = (props) => {
                           <FormLabel style={{ paddingBottom: '25px', paddingTop: '5px', fontSize: '17px', color: 'black' }} id="demo-row-radio-buttons-group-label">Symptoms may include: jaundice (liver disease), opisthotonos (dramatic abnormal posture) or poor feeding</FormLabel>
                           </div>
                           <div className="flex flex-col gap-[0px] ml-[50px] items-start justify-start w-[50%]" >
-                          <FormControl >                       
+                          <FormControl error = {value != '0'} >                       
                                     <RadioGroup
                                         row
                                         aria-labelledby="demo-row-radio-buttons-group-label"

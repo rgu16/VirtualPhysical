@@ -4,7 +4,7 @@ import "./style.css";
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import LungPopover from "components/LungPopover/LungPopover.jsx"
+// import LungPopover from "components/LungPopover/LungPopover.jsx"
 
 import { Img, Line, List, Text, TabNav, NavBar } from "components";
 import { Link } from 'react-router-dom';
@@ -15,7 +15,8 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Stack from '@mui/material/Stack';
 import { useState, useRef, useEffect } from 'react';
-import { PhysicianNotes } from "components";
+import { PhysicianNotes, LungUpload } from "components";
+import LungPopover from "components/LungPopover/LungPopover";
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
 // import Button from '@mui/material/Button';
@@ -30,6 +31,7 @@ export const LungsPage = (props) => {
   const [breathingStatus, setBreathingStatus] = useState('');
 
   const [saveVariant, setSaveVariant] = useState('outlined');
+  const [medNote, setMedNotes] = useState();
 
   const handleSaveClick = () => {
     setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
@@ -53,6 +55,19 @@ export const LungsPage = (props) => {
   // const [BreathingRate, setBreathingRate] = useState();
   const [LaboredBreathing, setLaboredBreathing] = useState('');
 
+  const [lt, setlt] = useState(null)
+  const [lm, setlm] = useState(null)
+  const [lb, setlb] = useState(null)
+  const [rt, setrt] = useState(null)
+  const [rm, setrm] = useState(null)
+  const [rb, setrb] = useState(null)
+  const [statuslt, setStatuslt] = useState(null)
+  const [statuslm, setStatuslm] = useState(null)
+  const [statuslb, setStatuslb] = useState(null)
+  const [statusrt, setStatusrt] = useState(null)
+  const [statusrm, setStatusrm] = useState(null)
+  const [statusrb, setStatusrb] = useState(null)
+
   const [L1Value, setL1Value] = useState();
   const [L2Value, setL2Value] = useState();
   const [L3Value, setL3Value] = useState();
@@ -75,6 +90,9 @@ export const LungsPage = (props) => {
       .then((response) => {
           const res = response.data
           console.log(res)
+          console.log(res.med_note)
+          setMedNotes(res.med_note)
+          setNotes(res.note)
 
           const breathingValue = parseInt(res.detail['breathingrate'], 10);
           setBreathingValue( breathingValue )
@@ -82,21 +100,19 @@ export const LungsPage = (props) => {
           const LaboredBreathing = res.detail['breathinglabor']
           setLaboredBreathing(LaboredBreathing)
 
-          setL1Value(res.detail[''])
-          setL2Value(res.detail[''])
-          setL3Value(res.detail[''])
-          setL4Value(res.detail[''])
-          setL5Value(res.detail[''])
-          setL6Value(res.detail[''])
+          setlt(res.topleftaudio)
+          setlm(res.middleleftaudio)
+          setlb(res.bottomleftaudio)
+          setrt(res.toprightaudio)
+          setrm(res.middlerightaudio)
+          setrb(res.bottomrightaudio)
 
-          // let breathingStatus = '';
-          // if (BreatingRate >= 12 && BreatingRate <= 18) {
-          //   breathingStatus = 'normal';
-          // } else if (BreatingRate < 12 || BreatingRate > 25) {
-          //   breathingStatus = 'abnormal';
-          // }
-        
-          // setBreathingStatus(breathingStatus)
+          setStatuslt(res.statuslt['status'])
+          setStatuslm(res.statuslm['status'])
+          setStatuslb(res.statuslb['status'])
+          setStatusrt(res.statusrt['status'])
+          setStatusrm(res.statusrm['status'])
+          setStatusrb(res.statusrb['status'])
 
           let breathingStatus = '';
           // Ensure BreathingRate is a number and not empty
@@ -120,6 +136,11 @@ export const LungsPage = (props) => {
             setNotes(res.note)
             console.log(res.note)
           }
+          if (res.hasOwnProperty("med_note")){
+            
+            
+          }
+
           // if(res.hasOwnProperty("profile_pic")){
           //   setProfilePic(res.profile_pic)
           // }
@@ -160,211 +181,131 @@ export const LungsPage = (props) => {
 
 
   return (
-    // <NavBar proxy={props.proxy} token={props.token}/>
+    <>
+    <div className="h-screen">
+      <NavBar proxy={props.proxy} token={props.token}/>
 
+      <div
+        className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans items-center justify-start mx-auto pb-28 w-full"
+        style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
+      >
+        <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
+         <div></div>
+          <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
+            <TabNav tab="lungs"></TabNav>
+            <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full"style={{
+    paddingTop: '50px',
+  }} >
+              <div className="flex flex-col  justify-start w-[99%] md:w-full">
+                <div className="flex md:flex-col flex-row md:gap-10 items-start justify-start w-full">
+                  <div className="md:h-[560px] shrink relative w-[100%] md:w-full">
+                      <div className="flex flex-col items-start justify-start w-full">
+                        <List
+                          className="flex flex-col gap-[10px] md:ml-[0] ml-[50px] w-[62%]"
+                          orientation="vertical">      
+                          <Text
+                          className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
+                          size="txtCairoBold34">
+                          Lungs
+                          </Text>
+                          
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full" >
+                            <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                              Breathing rate:
+                            </Text>
+                            <Text className= { breathingStatus === 'normal' ?
+                                                  "text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                                                  "text-2xl md:text-[22px] text-red-A700 sm:text-xl"}
+                            >{breathingValue} breaths/min</Text>
+                          </div>
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
+                            <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                              Labored breathing?
+                            </Text>                        
+                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl" variant="outlined">{LaboredBreathing}</Text>
+                          </div>
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-start justify-start w-full" >
+                          <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                             Lung Ausculatation (posterior analysis only)
+                          </Text>
+                        </div>
+                        <div className = "flex flex-row">
+                        
+                        <div className="flex flex-row ml-[80px] h-[478px] w-[68%]" 
+                        style={{ backgroundImage: "url(https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/lung-img-1@2x.png)" }}>
+                          <div className= "flex flex-col h-full w-[37%]"></div>
+                          <div className= "flex flex-col h-full">
+                            <div className= "flex flex-col h-[60%]"></div>
+                            
+                          <LungPopover proxy={props.proxy} token={props.token} 
+                                      title="Top Left Lung Upload" location ="/lungs/topleftaudio"
+                                      position="left top" audio={lt}
+                                      setStatus={setStatuslt} status={statuslt}
+                                      tab={'lungs'} name={'lt'}></LungPopover>
+                          <LungPopover proxy={props.proxy} token={props.token} 
+                                      title="Middle Left Lung Upload" location ="/lungs/middleleftaudio"
+                                      position="left top" audio={lm}
+                                      setStatus={setStatuslm} status={statuslm}
+                                      tab={'lungs'} name={'lm'}></LungPopover>
+                          <LungPopover proxy={props.proxy} token={props.token} 
+                                      title="Bottom Left Lung Upload" location ="/lungs/bottomleftaudio"
+                                      position="left top" audio={lb}
+                                      setStatus={setStatuslb} status={statuslb}
+                                      tab={'lungs'} name={'lb'}></LungPopover>
+                          </div>
+                          <div className= "flex flex-col w-[16%]"></div>
+                          <div className= "flex flex-col h-full">
+                            <div className= "flex flex-col h-[60%]"></div>
+                          <LungPopover proxy={props.proxy} token={props.token} 
+                                      title="Top Right Lung Upload" location ="/lungs/toprightaudio"
+                                      position="right top" audio={rt}
+                                      setStatus={setStatusrt} status={statusrt}
+                                      tab={'lungs'} name={'rt'}></LungPopover>
+                          <LungPopover proxy={props.proxy} token={props.token} 
+                                      title="Middle Right Lung Upload" location ="/lungs/middlerightaudio"
+                                      position="right top" audio={rm}
+                                      setStatus={setStatusrm} status={statusrm}
+                                      tab={'lungs'} name={'rm'}></LungPopover>
+                          <LungPopover proxy={props.proxy} token={props.token} 
+                                      title="Bottom Right Lung Upload" location ="/lungs/bottomrightaudio"
+                                      position="right top" audio={rb}
+                                      setStatus={setStatusrb} status={statusrb}
+                                      tab={'lungs'} name={'rb'}></LungPopover>
+                          </div>
 
-
-    <div className="lungs-tab">
-      <div className="overlap-wrapper">
-        <div className="overlap">
-          <div className="overlap-group">
-            <div className="labored-breathing">
-            {/* <p className="moderate">
-              no
-            </p> */}
-            <input
-                    type="text"
-                    className="moderate"
-                    value={LaboredBreathing}
-                    // onChange={handleRadialChange}
-                    placeholder="No"
-              />
-              <p className="span-wrapper">
-                <span className="span">Labored breathing?</span>
-              </p>
-            </div>
-            <div className="brething-rate">
-              <div className="div">
-                {/* <img
-                  className="rectangle"
-                  alt="Rectangle"
-                  src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
-                />
-                <p className="element">
-                  <span className="text-wrapper">30</span>
-                </p> */}
-
-                {/* <input
-                type="text"
-                className="rectangle"
-                defaultValue=""
-                style={{
-                    width: 'same width as the image',
-                    height: 'same height as the image',
-                    // Additional styling to make it look like a rectangle
-                }}
-                /> */}
-                <input
-                    type="text"
-                    className={`rectangle ${breathingStatus && breathingStatus !== 'normal' ? 'input-error' : ''}`}
-                    value={breathingValue}
-                    onChange={handleBreathingChange}
-                    placeholder="13"
-                    style={{
-                      width: 'same width as the image',
-                      height: 'same height as the image',
-                      // Additional styling to make it look like a rectangle
-                  }}
-                  />
-                  {breathingStatus && breathingStatus !== 'normal' && (
-                    <div className="error-popup">Abnormal breathing value: {breathingStatus}</div>
-                  )}
-                {/* </div> */}
-              </div>
-
-              <p className="breaths-min">
-                <span className="span">breaths/min</span>
-              </p>
-              <p className="breathing-rate">
-                <span className="span">Breathing rate:</span>
-              </p>
-
-            </div>
-
-
-            <div className="notes">
-            <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="lungs"></PhysicianNotes>
-            </div>
-
-            <div className="overlap-2">
-
-              <div className="left-lung">
-
-                <div className="popover">
-                  <div className="lungpopover-1">
-                    <LungPopover></LungPopover>
-                  </div>                      
+                        </div>
+                        </div>
+                        </List>
+                      </div>
+                      
+                  </div>
+                  <div className="relative mt-[50px]">
+                    {medNote !== "" && 
+                      <div className="flex flex-col items-start justify-start w-[400px] ml-[50px] mr-[50px] mb-[20px]">
+                      <Text
+                        className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                        size="txtCairoBold24"
+                      >
+                        Med Tech Notes:{" "}
+                      </Text>
+                      
+                      <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{medNote}</Text>
+                      </div>}
+                    <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="lungs"></PhysicianNotes>
+                  </div>
                 </div>
-
-                <div className="popover">
-                  <div className="lungpopover-2">
-                    <LungPopover></LungPopover>
-                  </div>                      
-                </div>
-
-
-                <div className="popover">
-                  <div className="lungpopover-3">
-                    <LungPopover></LungPopover>
-                  </div>                      
-                </div>
-
-
-              </div>
-
-
-
-              <div className="right-lung">
-               
-              <div className="popover">
-                  <div className="lungpopover-4">
-                    <LungPopover></LungPopover>
-                  </div>                      
-                </div>
-
-                <div className="popover">
-                  <div className="lungpopover-5">
-                    <LungPopover></LungPopover>
-                  </div>                      
-                </div>
-
-
-                <div className="popover">
-                  <div className="lungpopover-6">
-                    <LungPopover></LungPopover>
-                  </div>                      
-                </div>
-
-              </div>
-
-            </div>
-
-            <p className="lung-auscultation">
-              <span className="text-wrapper-4">Lung Auscultation </span>
-              <span className="text-wrapper-5">(posterior analysis only)</span>
-            </p>
-          </div>
-          <div className="tabs">
-            <div className="frame">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-6">Demographics</span>
-              </p> */}
-              <a href="/demographics" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-6">Demographics</span>
-              </a>
-            </div>
-            <div className="general-wrapper">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-6">General</span>
-              </p> */}
-              <a href="/general" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-6">General</span>
-              </a>
-            </div>
-            <div className="lungs-wrapper">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-6">Lungs</span>
-              </p> */}
-              <a href="/lungs" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-6">Lungs</span>
-              </a>
-            </div>
-            <div className="pulses-wrapper">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-6">Pulses</span>
-              </p> */}
-              <a href="/pulses" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-6">Pulses</span>
-              </a>
-            </div>
-            <div className="abdomen-wrapper">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-6">Abdomen</span>
-              </p> */}
-              <a href="/abdomen" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-6">Abdomen</span>
-              </a>
-            </div>
-            <div className="heart-wrapper">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-6">Heart</span>
-              </p> */}
-              <a href="/heart" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-6">Heart</span>
-              </a>
-            </div>
-            <div className="legs-wrapper">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-6">Legs</span>
-              </p> */}
-              <a href="/legs" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-6">Legs</span>
-              </a>
-            </div>
-            <div className="summary-wrapper">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-6">Summary</span>
-              </p> */}
-              <a href="/summary" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-6">Summary</span>
-              </a>
             </div>
           </div>
-          
-          <NavBar proxy={props.proxy} token={props.token} /> {/* Display NavBar at the top */}
-
         </div>
       </div>
     </div>
+    </div>
+    </>
   );
 };

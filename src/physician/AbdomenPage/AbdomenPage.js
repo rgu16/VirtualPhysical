@@ -15,6 +15,7 @@ export const AbdomenPage = (props) => {
   // For Question Mark Popover
   const [questionMarkAnchorEl, setQuestionMarkAnchorEl] = useState(null);
   const questionMarkOpen = Boolean(questionMarkAnchorEl);
+  const [medNote, setMedNotes] = useState();
 
   const handleQuestionMarkPopoverOpen = (event) => {
     setQuestionMarkAnchorEl(event.currentTarget);
@@ -26,18 +27,17 @@ export const AbdomenPage = (props) => {
 
   const [note, setNotes] = useState();
 
-  // Top row
-  const [hypochondriacRValue, setHypochondriacRValue] = useState();
-  const [epigastricValue, setEpigastricValue] = useState();
-  const [hypochondriacLValue, setHypochondriacLValue] = useState();
-  // Middle row
-  const [lumbarRValue, setLumbarRValue] = useState();
-  const [umbilicalValue, setUmbilicalValue] = useState();
-  const [lumbarLValue, setLumbarLValue] = useState();
-  // Bottom row
-  const [iliacRValue, setIliacRValue] = useState();
-  const [hypogastricValue, setHypogastricValue] = useState();
-  const [iliacLValue, setIliacLValue] = useState();
+  const [hypochondriacL, setHypochondriacLValue] = useState("none");
+  const [epigastric, setEpigastricValue] = useState("none");
+  const [hypochondriacR, setHypochondriacRValue] = useState("none");
+  
+  const [lumbarL, setLumbarLValue] = useState("none");
+  const [umbilical, setUmbilicalValue] = useState("none");
+  const [lumbarR, setLumbarRValue] = useState("none");
+  
+  const [iliacL, setIliacLValue] = useState("none");
+  const [hypogastric, setHypogastricValue] = useState("none");
+  const [iliacR, setIliacRValue] = useState("none");
 
 
   useEffect(() => {
@@ -64,6 +64,7 @@ export const AbdomenPage = (props) => {
         setIliacRValue(res.detail['iliacR'])
         setHypogastricValue(res.detail['hypogastric'])
         setIliacLValue(res.detail['iliacL'])
+        setMedNotes(res.med_note)
 
         if(res.hasOwnProperty("note")){
           setNotes(res.note)
@@ -79,376 +80,128 @@ export const AbdomenPage = (props) => {
 
 
   return (
-    <div className="abdomen-tab-question">
-      <div className="overlap-wrapper">
-        <div className="overlap">
-          <div className="overlap-group">
-            <div className="notes">
-              <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="abdomen"></PhysicianNotes>
-            </div>
+    <>
+    <div className="h-screen">
+      <NavBar proxy={props.proxy} token={props.token}/>
 
-            <div className="pulse">
-              <p className="abdominal-palpation">
-                <span className="text-wrapper-3">Abdominal Palpation</span>
-              </p>
-            </div>
+      <div
+        className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans items-center justify-start mx-auto pb-28 w-full"
+        style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
+      >
+        <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
+         <div></div>
+          <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
+            <TabNav tab="abdomen"></TabNav>
+            <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full"style={{
+    paddingTop: '50px',
+  }} >
+              <div className="flex flex-col  justify-start w-[99%] md:w-full">
+                <div className="flex md:flex-col flex-row md:gap-10 items-start justify-start w-full">
+                  <div className="md:h-[560px]  relative w-[100%] md:w-full">
+                      <div className="flex flex-col items-start justify-start w-full">
+                        <List
+                          className="flex flex-col gap-[10px] md:ml-[0] ml-[50px] w-full"
+                          orientation="vertical">      
+                          <Text
+                          className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
+                          size="txtCairoBold34">
+                          Abdomen
+                          </Text>
+                          <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full" >
+                            <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                              Palpation:
+                            </Text>
+                          </div>
+                          <div className="ml-[80px] h-[500px] items-center justify-center" 
+                        style={{ backgroundImage: "url(images/abodomencard.png)", 
+                        backgroundSize: "contain", // or "contain" depending on your preference
+        backgroundRepeat: "no-repeat"}}>
+                        <div className ="ml-[65px] w-[39%] h-[60%] mt-[110px] gap-4 grid grid-cols-3 items-center justify-center text-center">
+                            <Text
+                              className={hypochondriacR==0?"col-start-1 col-span-1 row-start-1 row-span-1 text-2xl md:text-[22px] text-black-900 text-center sm:text-xl":
+                              "col-start-1 col-span-1 row-start-1 row-span-1 text-2xl md:text-[22px] text-red-A700 text-center sm:text-xl"
+                                        }
+                              size="txtCairoBold24">
+                              {hypochondriacR}
+                            </Text>
+                            <Text
+                              className={epigastric==0?"col-start-2 col-span-1 row-start-1 row-span-1 text-2xl md:text-[22px] text-black-900 text-center sm:text-xl":
+                              "col-start-2 col-span-1 row-start-1 row-span-1 text-2xl md:text-[22px] text-red-A700 text-center sm:text-xl"}
+                              size="txtCairoBold24">
+                              {epigastric}
+                            </Text>
+                            <Text
+                              className={hypochondriacL==0?" col-start-3 col-span-1 row-start-1 row-span-1 text-2xl md:text-[22px] text-black-900  text-center sm:text-xl":
+                              " col-start-3 col-span-1 row-start-1 row-span-1 text-2xl md:text-[22px] text-red-A700  text-center sm:text-xl"}
+                              size="txtCairoBold24">
+                              {hypochondriacL}
+                            </Text>
+                            <Text
+                              className={lumbarR==0?"mt-2 col-start-1 col-span-1 row-start-3 row-span-1 text-2xl md:text-[22px] text-black-900 text-center sm:text-xl"
+                                        :"mt-2 col-start-1 col-span-1 row-start-3 row-span-1 text-2xl md:text-[22px] text-red-A700 text-center sm:text-xl"}
+                              size="txtCairoBold24">
+                              {lumbarR}
+                            </Text>
+                            <Text
+                              className={umbilical==0?"mt-2 col-start-2 col-span-1 row-start-3 row-span-1  text-2xl md:text-[22px] text-black-900 text-center sm:text-xl"
+                                        :"mt-2 col-start-2 col-span-1 row-start-3 row-span-1  text-2xl md:text-[22px] text-red-A700 text-center sm:text-xl"}
+                              size="txtCairoBold24">
+                              {umbilical} 
+                            </Text>
+                            <Text
+                              className={lumbarL==0?"mt-2 col-start-3 col-span-1 row-start-3 row-span-1  text-2xl md:text-[22px] text-black-900  text-center sm:text-xl"
+                                        :"mt-2 col-start-3 col-span-1 row-start-3 row-span-1  text-2xl md:text-[22px] text-red-A700  text-center sm:text-xl"}
+                              size="txtCairoBold24">
+                              {lumbarL}
+                            </Text>
+                            <Text
+                              className={iliacR==0?"col-start-1 col-span-1 row-start-5 row-span-1 text-2xl md:text-[22px] text-black-900 text-center sm:text-xl"
+                                        :"col-start-1 col-span-1 row-start-5 row-span-1 text-2xl md:text-[22px] text-red-A700 text-center sm:text-xl"}
+                              size="txtCairoBold24">
+                              {iliacR}
+                            </Text>
+                            <Text
+                              className={hypogastric==0?"col-start-2 col-span-1 row-start-5 row-span-1 text-2xl md:text-[22px] text-black-900 text-center sm:text-xl"
+                                        :"col-start-2 col-span-1 row-start-5 row-span-1 text-2xl md:text-[22px] text-red-A700 text-center sm:text-xl"}
+                              size="txtCairoBold24">
+                              {hypogastric} 
+                            </Text>
+                            <Text
+                              className={iliacL==0?" col-start-3 col-span-1 row-start-5 row-span-1 text-2xl md:text-[22px] text-black-900  text-center sm:text-xl"
+                                        :" col-start-3 col-span-1 row-start-5 row-span-1 text-2xl md:text-[22px] text-red-A700  text-center sm:text-xl"}
+                              size="txtCairoBold24">
+                              {iliacL}
+                            </Text>
+                            </div>
 
-            <div className="overlap-2">
-              <div className="region">
-                <div className="overlap-3">
-                  <img
-                    className="rectangle"
-                    alt="Rectangle"
-                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
-                  />
-
-                  <p className="element">
-                    <Text
-                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                      value = {iliacLValue} 
-                      id="outlined-select-currency-native"
-                      select
-                      label=""
-                      defaultValue="no selection"
-                      SelectProps={{
-                        native: true,
-                      }}
-                      helperText=""
-                    >
-                    {iliacLValue} </Text>
-                  </p>
-
+                          </div>
+                          
+                        </List>
+                      </div>
+                  </div>
+                  <div className="relative mt-[50px]">
+                    {medNote !== "" && medNote &&
+                      <div className="flex flex-col items-start justify-start w-[400px] ml-[50px] mr-[50px] mb-[20px]">
+                      <Text
+                        className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                        size="txtCairoBold24"
+                      >
+                        Med Tech Notes:{" "}
+                      </Text>
+                      
+                      <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{medNote}</Text>
+                      </div>}
+                    <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="abdomen"></PhysicianNotes>
+                  </div>
                 </div>
-              </div>
-
-              <div className="overlap-group-wrapper">
-                <div className="overlap-3">
-                  <img
-                    className="rectangle"
-                    alt="Rectangle"
-                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
-                  />
-
-                  <p className="element">
-                    <Text
-                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                      value = {hypogastricValue} 
-                      id="outlined-select-currency-native"
-                      select
-                      label=""
-                      defaultValue="no selection"
-                      SelectProps={{
-                        native: true,
-                      }}
-                      helperText=""
-                    >
-                    {hypogastricValue} </Text>
-                  </p>
-
-                </div>
-              </div>
-
-              <div className="div-wrapper">
-                <div className="overlap-3">
-                  <img
-                    className="rectangle"
-                    alt="Rectangle"
-                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
-                  />
-
-                  <p className="element">
-                    <Text
-                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                      value = {iliacRValue} 
-                      id="outlined-select-currency-native"
-                      select
-                      label=""
-                      defaultValue="no selection"
-                      SelectProps={{
-                        native: true,
-                      }}
-                      helperText=""
-                    >
-                    {iliacRValue} </Text>
-                  </p>
-
-
-                </div>
-              </div>
-
-              <div className="region-2">
-                <div className="overlap-3">
-                  <img
-                    className="rectangle"
-                    alt="Rectangle"
-                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
-                  />
-
-                  <p className="element">
-                    <Text
-                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                      value = {lumbarLValue} 
-                      id="outlined-select-currency-native"
-                      select
-                      label=""
-                      defaultValue="no selection"
-                      SelectProps={{
-                        native: true,
-                      }}
-                      helperText=""
-                    >
-                    {lumbarLValue} </Text>
-                  </p>
-
-                </div>
-              </div>
-
-              <div className="region-3">
-                <div className="overlap-3">
-                  <img
-                    className="rectangle"
-                    alt="Rectangle"
-                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
-                  />
-
-                  <p className="element">
-                    <Text
-                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                      value = {umbilicalValue} 
-                      id="outlined-select-currency-native"
-                      select
-                      label=""
-                      defaultValue="no selection"
-                      SelectProps={{
-                        native: true,
-                      }}
-                      helperText=""
-                    >
-                    {umbilicalValue} </Text>
-                  </p>
-
-                </div>
-              </div>
-
-              <div className="region-4">
-                <div className="overlap-3">
-                  <img
-                    className="rectangle"
-                    alt="Rectangle"
-                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
-                  />
-
-                  <p className="element">
-                    <Text
-                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                      value = {lumbarRValue} 
-                      id="outlined-select-currency-native"
-                      select
-                      label=""
-                      defaultValue="no selection"
-                      SelectProps={{
-                        native: true,
-                      }}
-                      helperText=""
-                    >
-                    {lumbarRValue} </Text>
-                  </p>
-
-                </div>
-              </div>
-
-              <div className="region-5">
-                <div className="overlap-3">
-                  <img
-                    className="rectangle"
-                    alt="Rectangle"
-                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
-                  />
-
-                  <p className="element">
-                    <Text
-                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                      value = {hypochondriacLValue} 
-                      id="outlined-select-currency-native"
-                      select
-                      label=""
-                      defaultValue="no selection"
-                      SelectProps={{
-                        native: true,
-                      }}
-                      helperText=""
-                    >
-                    {hypochondriacLValue} </Text>
-                  </p>
-
-                </div>
-              </div>
-
-              <div className="region-6">
-                <div className="overlap-3">
-                  <img
-                    className="rectangle"
-                    alt="Rectangle"
-                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
-                  />
-
-                  <p className="element">
-                    <Text
-                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                      value = {epigastricValue} 
-                      id="outlined-select-currency-native"
-                      select
-                      label=""
-                      defaultValue="no selection"
-                      SelectProps={{
-                        native: true,
-                      }}
-                      helperText=""
-                    >
-                    {epigastricValue} </Text>
-                  </p>
-
-                </div>
-              </div>
-
-              <div className="region-7">
-                <div className="overlap-3">
-                  <img
-                    className="rectangle"
-                    alt="Rectangle"
-                    src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/rectangle-8-13@2x.png"
-                  />
-
-                  <p className="element">
-                    <Text
-                      className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                      value = {hypochondriacRValue} 
-                      id="outlined-select-currency-native"
-                      select
-                      label=""
-                      defaultValue="no selection"
-                      SelectProps={{
-                        native: true,
-                      }}
-                      helperText=""
-                    >
-                    {hypochondriacRValue} </Text>
-                  </p>
-
-                </div>
-              </div>
-            </div>
-
-
-            <div>
-              <img
-                className="mdi-question-mark"
-                alt="Mdi question mark"
-                src="https://cdn.animaapp.com/projects/65a945881c395bf52b1e3e78/releases/65a9e82814bc0dc531a973f2/img/mdi-question-mark-circle-outline-1@2x.png"
-                onMouseEnter={handleQuestionMarkPopoverOpen}
-                onMouseLeave={handleQuestionMarkPopoverClose}
-              />
-              <Popover
-                id="mouse-over-popover"
-                sx={{
-                  pointerEvents: 'none',
-                }}
-                open={questionMarkOpen}
-                anchorEl={questionMarkAnchorEl}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'left',
-                }}
-                onClose={handleQuestionMarkPopoverClose}
-                disableRestoreFocus
-              >
-                <img
-                  src={Grade}
-                  alt="Grade"
-                  style={{ width: '50%', height: '50%' }}
-                />
-              </Popover>
-            </div>
-            </div>
-
-
-          <div className="tabs">
-            <div className="frame">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-7">Demographics</span>
-              </p> */}
-              <a href="/demographics" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-7">Demographics</span>
-              </a>
-            </div>
-            <div className="general-wrapper">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-7">General</span>
-              </p> */}
-              <a href="/general" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-7">General</span>
-              </a>
-            </div>
-            <div className="lungs-wrapper">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-7">Lungs</span>
-              </p> */}
-              <a href="/lungs" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-7">Lungs</span>
-              </a>
-            </div>
-            <div className="pulses-wrapper">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-7">Pulses</span>
-              </p> */}
-              <a href="/pulses" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-7">Pulses</span>
-              </a>
-            </div>
-            <div className="abdomen-wrapper">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-7">Abdomen</span>
-              </p> */}
-              <a href="/abdomen" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-7">Abdomen</span>
-              </a>
-            </div>
-            <div className="heart-wrapper">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-7">Heart</span>
-              </p> */}
-              <a href="/heart" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-7">Heart</span>
-              </a>
-            </div>
-            <div className="legs-wrapper">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-7">Legs</span>
-              </p> */}
-              <a href="/legs" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-7">Legs</span>
-              </a>
-            </div>
-            <div className="summary-wrapper">
-              {/* <p className="span-wrapper-2">
-                <span className="text-wrapper-7">Summary</span>
-              </p> */}
-              <a href="/summary" className="span-wrapper-2" style={{ textDecoration: 'none' }}>
-                  <span className="text-wrapper-7">Summary</span>
-              </a>
             </div>
           </div>
-
-          
-          <NavBar proxy={props.proxy} token={props.token} /> {/* Display NavBar at the top */}
-
-
         </div>
       </div>
     </div>
+    </div>
+    </>
   );
 };

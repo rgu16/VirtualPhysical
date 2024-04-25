@@ -20,7 +20,7 @@ import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { jwtDecode } from "jwt-decode";
-import { SettingsRemoteSharp } from "@mui/icons-material";
+import { SettingsRemoteSharp, WrapText } from "@mui/icons-material";
 
 export const DemographicPage = (props) => {
   const patient = jwtDecode(props.token).patient.split("/");
@@ -98,7 +98,7 @@ export const DemographicPage = (props) => {
                   <div className="md:h-[560px]  relative w-[100%] md:w-full">
                       <div className="flex flex-col items-start justify-start w-full">
                         <List
-                          className="flex flex-col gap-[10px] md:ml-[0] ml-[50px] w-[62%]"
+                          className="flex flex-col gap-[10px] md:ml-[0] ml-[50px] w-full"
                           orientation="vertical">      
                           <Text
                           className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
@@ -176,6 +176,7 @@ export const DemographicPage = (props) => {
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24"
+                              style={{ whiteSpace: 'nowrap' }}
                             >
                               Patient History:{" "}
                             </Text>
@@ -185,7 +186,7 @@ export const DemographicPage = (props) => {
                         </List>
                       </div>
                   </div>
-                  <div className="absolute left-[1218px] top-[320px]">
+                  <div className="relative mt-[50px]">
                     {medNote !== "" && 
                       <div className="flex flex-col items-start justify-start w-[400px] ml-[50px] mr-[50px] mb-[20px]">
                       <Text

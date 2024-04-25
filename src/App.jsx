@@ -5,7 +5,7 @@ import {LoginPage, RegisterPage, ForgotPasswordPage, ResetPasswordPage, UserSett
 import {useToken} from './components';
 import { jwtDecode } from 'jwt-decode';
 import {AbdomenPage, AppointmentsPage, DemographicPage, EyesPage, GeneralPage, HandsPage, HeartPage, LegsPage, LungsPage, MessagesPage, PulsesPage, SummaryPage} from "./physician"
-import {LegsMedPage, HandsMedPage, AbdomenMedPage, HeartMedPage, PulsesMedPage, GeneralMedPage, DemographicMedPage, EyesMedPage, LungsMedPage, PatientChartPage} from "./technician"
+import {LegsMedPage, HandsMedPage, AbdomenMedPage, HeartMedPage, PulsesMedPage, GeneralMedPage, DemographicMedPage, EyesMedPage, LungsMedPage, PatientChartPage, SubmissionMedPage} from "./technician"
 import NotFound from "pages/NotFound";
 // import {default as Test} from "physician/SummaryPage/Test"
 
@@ -161,8 +161,11 @@ export default function App() {
                     }/>
                     <Route path="/summary"
                     element={
-                    <ProtectedRoute isAllowed={!!token && userType === 'physician'}>
-                        <SummaryPage proxy={proxy} token={token}/> 
+                    <ProtectedRoute isAllowed={!!token}>
+                        {userType === 'physician' ? 
+                            <SummaryPage proxy={proxy} token={token}/>  : 
+                            <SubmissionMedPage proxy={proxy} token={token}/>}
+                        
                     </ProtectedRoute>
                     }/>
                     <Route path="/messages"

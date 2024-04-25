@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import "./style.css";
-import {  Img, Line, List, Text, NavBar, TabNav, PhysicianNotes } from "components";
+import {  Img, Line, List, Text, NavBar, TabNav, PhysicianNotes, Display } from "components";
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import { InputSharp } from '@mui/icons-material';
@@ -21,6 +21,8 @@ export const GeneralPage = (props) => {
   // Consolidated notes
   const [note, setNotes] = useState();
   const [medNote, setMedNotes] = useState();
+  const [eyePic, setEyePic] = useState();
+  const [handPic, setHandPic] = useState();
 
   useEffect(() => {
     
@@ -32,8 +34,8 @@ export const GeneralPage = (props) => {
     ]).then(axios.spread((generalResponse, eyesResponse, handsResponse) => {
 
       console.log("general response", generalResponse.data.detail)
-      console.log("eyes response", eyesResponse.data.detail)
-      console.log("hands response", handsResponse.data.detail)
+      console.log("eyes response", eyesResponse.data)
+      console.log("hands response", handsResponse.data)
 
       // Check if the generalResponse has the detail property
       if (generalResponse.data.detail) {
@@ -77,7 +79,10 @@ export const GeneralPage = (props) => {
         const generalmed_Notes = generalResponse.data.med_note || "";
         const eyesmed_Notes = eyesResponse.data.med_note || "";
         const handsmed_Notes = handsResponse.data.med_note || "";
-        setMedNotes(`${eyesmed_Notes}${handsmed_Notes}${generalmed_Notes}`)
+        setMedNotes(`${eyesmed_Notes} ${handsmed_Notes} ${generalmed_Notes}`)
+
+        setEyePic(eyesResponse.data.Image)
+        setHandPic(handsResponse.data.Image)
 
     })).catch((error) => {
       console.error("Error fetching data:", error);
@@ -107,29 +112,44 @@ export const GeneralPage = (props) => {
                   <div className="md:h-[560px] shrink relative w-[100%] md:w-full">
                       <div className="flex flex-col items-start justify-start w-full">
                         <List
-                          className="flex flex-col gap-[10px] md:ml-[0] ml-[50px] w-[62%]"
+                          className="flex flex-col gap-[10px] md:ml-[0] ml-[50px] w-[80%]"
                           orientation="vertical">      
                           <Text
                           className="sm:text-3xl md:text-[32px] text-[34px] text-gray-900_02"
                           size="txtCairoBold34">
                           General
                           </Text>
-                          
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full" >
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24">
                               Capillary Refill Time:
                             </Text>
-                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{capillaryrefillvalue} sec</Text>
+                            <Text className={capillaryrefillvalue<9 && capillaryrefillvalue>7?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                          "text-2xl md:text-[22px] text-red-A700 sm:text-xl"}>{capillaryrefillvalue} sec</Text>
                           </div>
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24">
                               Pallor (hands):
-                            </Text>                        
-                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl" variant="outlined">+{pallorvalue}</Text>
+                            </Text>   
+                            <div className="relative group flex flex-row">
+                            <button >
+                              <img
+                              className="h-[36px] w-[36px]"
+                              src="images/img_profile_black_900.svg"
+                              alt="profile_One"/>
+                            </button>
+                            <div  className="z-10 absolute top-[20px] left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 w-[250px] transition-all duration-300 ease-in-out">
+                            <Img
+                      src= {handPic}
+                      alt=""
+                      />
+                            </div> 
+                          </div>                     
+                            <Text className={pallorvalue==0?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                          "text-2xl md:text-[22px] text-red-A700 sm:text-xl"} variant="outlined">+{pallorvalue}</Text>
                           </div>
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
                              <Text
@@ -138,7 +158,8 @@ export const GeneralPage = (props) => {
                             >
                               Pulse Ox Reading:
                             </Text>
-                            <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{pulseox}%</Text>
+                            <Text className={pulseox>94?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                          "text-2xl md:text-[22px] text-red-A700 sm:text-xl"}>{pulseox}%</Text>
                           </div>
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
                              <Text
@@ -146,7 +167,22 @@ export const GeneralPage = (props) => {
                                size="txtCairoBold24">
                                Cyanosis (hands):
                              </Text>
-                             <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">+{cyanosisvalue}</Text>
+                             <div className="relative group flex flex-row">
+                            <button >
+                              <img
+                              className="h-[36px] w-[36px]"
+                              src="images/img_profile_black_900.svg"
+                              alt="profile_One"/>
+                            </button>
+                            <div  className="z-10 absolute top-[20px] left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 w-[250px] transition-all duration-300 ease-in-out">
+                            <Img
+                      src= {handPic}
+                      alt=""
+                      />
+                            </div> 
+                          </div>   
+                             <Text className={cyanosisvalue==0?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                          "text-2xl md:text-[22px] text-red-A700 sm:text-xl"}>+{cyanosisvalue}</Text>
                           </div>
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
                              <Text
@@ -154,12 +190,28 @@ export const GeneralPage = (props) => {
                                size="txtCairoBold24">
                               Jaundice Severity (eyes):
                              </Text>
-                             <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">+{eyesvalue}</Text>
+                             <div className="relative group flex flex-row">
+                            <button >
+                              <img
+                              className="h-[36px] w-[36px]"
+                              src="images/img_profile_black_900.svg"
+                              alt="profile_One"/>
+                            </button>
+                            <div  className="z-10 absolute top-[20px] left-full bg-gray-100 text-gray-700 px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 w-[250px] transition-all duration-300 ease-in-out">
+                            <Img
+                      src= {eyePic}
+                      alt=""
+                      />
+                            </div> 
+                          </div>   
+                             <Text className={eyesvalue==0?"text-2xl md:text-[22px] text-black-900 sm:text-xl":
+                          "text-2xl md:text-[22px] text-red-A700 sm:text-xl"}>+{eyesvalue}</Text>
                           </div>
                            <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24"
+                              style={{ whiteSpace: 'nowrap' }}
                             >
                               General Pain:
                             </Text>
@@ -170,6 +222,7 @@ export const GeneralPage = (props) => {
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
                               size="txtCairoBold24"
+                              style={{ whiteSpace: 'nowrap' }}
                             >
                               Pain Summary:
                             </Text>
@@ -178,7 +231,9 @@ export const GeneralPage = (props) => {
                           </div>
                         </List>
                       </div>
-                      <div className="relative left-[1000px] top-[-300px] shrink">
+                      
+                  </div>
+                  <div className="relative mt-[50px]">
                     {medNote !== "" && 
                       <div className="flex flex-col items-start justify-start w-[400px] ml-[50px] mr-[50px] mb-[20px]">
                       <Text
@@ -192,21 +247,6 @@ export const GeneralPage = (props) => {
                       </div>}
                     <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="general"></PhysicianNotes>
                   </div>
-                  </div>
-                  {/* <div className="absolute left-[1218px] top-[320px]">
-                    {medNote !== "" && 
-                      <div className="flex flex-col items-start justify-start w-[400px] ml-[50px] mr-[50px] mb-[20px]">
-                      <Text
-                        className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                        size="txtCairoBold24"
-                      >
-                        Med Tech Notes:{" "}
-                      </Text>
-                      
-                      <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{medNote}</Text>
-                      </div>}
-                    <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="general"></PhysicianNotes>
-                  </div> */}
                 </div>
             </div>
           </div>
