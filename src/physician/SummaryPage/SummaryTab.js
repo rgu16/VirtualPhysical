@@ -14,8 +14,6 @@ const SummaryTab = (props) => {
     )); 
     };
 
-  };
-
   return (
     <>
       <div className="flex md:flex-1 flex-col gap-[5px] items-start justify-start w-full md:w-full">
