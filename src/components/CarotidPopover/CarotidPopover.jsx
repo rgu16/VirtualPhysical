@@ -20,7 +20,8 @@ export default function CarotidPopover() {
 
   return (
     <div>
-      <Button aria-describedby={id} variant="contained" color="error" onClick={handleClick} style={{ padding: 1, minWidth: 25 }}> C
+      <Button aria-describedby={id} variant="contained" color="error" onClick={handleClick} style={{ backgroundColor: 'red',
+                      color: 'white', padding: 1, minWidth: 25 }}> C
       </Button>
       <Popover
         id={id}

@@ -65,13 +65,22 @@ export default function LungPopover(props) {
   return (
     <div>
 
-    <Popup trigger={ 
+    <Popup trigger={ profilePic?
       <Button 
         aria-describedby={id} 
         variant="contained" 
         color={profilePic?"success":"error"} 
         onClick={(e) => handleClick(e)} 
-        style={{ padding: 1, minWidth: 25 }}>
+        style={{  backgroundColor: 'green',
+        color: 'white',  padding: 1, minWidth: 25 }}>
+          {props.position === "left top"? "L" : "R"}
+      </Button>: <Button 
+        aria-describedby={id} 
+        variant="contained" 
+        color={profilePic?"success":"error"} 
+        onClick={(e) => handleClick(e)} 
+        style={{  backgroundColor: 'red',
+        color: 'white',  padding: 1, minWidth: 25 }}>
           {props.position === "left top"? "L" : "R"}
       </Button>} 
       

@@ -24,7 +24,8 @@ export default function LungPopover(props) {
     'flex flex-col items-center p-2 justify-start text-center mt-[100px] bg-white-A700 ml-[175px] shadow-lg border-solid border-2 border-black';
   return (
     <div>
-    <Popup trigger={ <Button aria-describedby={id} variant="contained" color="error" onClick={(e) => handleClick(e)} style={{ padding: 1, minWidth: 25 }}> {props.position === "left top"? "L" : "R"}
+    <Popup trigger={ <Button aria-describedby={id} variant="contained" color="error" onClick={(e) => handleClick(e)} style={{  backgroundColor: 'red',
+                      color: 'white',  padding: 1, minWidth: 25 }}> {props.position === "left top"? "L" : "R"}
       </Button>} position= {props.position}>
       <div className={classname}>
                   <Text
