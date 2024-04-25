@@ -4,6 +4,7 @@ import { Img, Input, Text, NavBar} from "../components";
 import { Navigate } from 'react-router-dom';
 import { EditOutlined, EyeInvisibleTwoTone, EyeTwoTone } from '@ant-design/icons';
 import { jwtDecode } from 'jwt-decode';
+
 const UserSettingsPage = (props) => {
   const token = props.token
   const [user, setUser] = useState({name:'', email:'', workplace:'',timezone:'',zoomlink:''});

@@ -9,7 +9,7 @@ import axios from 'axios';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import InputAdornment from '@mui/material/InputAdornment';
-import {Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import LungPopover from "components/LungPopover/LungPopover.jsx"
 import LungUploadLeftTop from "components/LungPopover/LungUploadLeftTop.js"
 import LungUploadLeftMiddle from "components/LungPopover/LungUploadLeftMiddle.js"
@@ -61,6 +61,7 @@ const LungsMedPage = (props) => {
   const [rm, setrm] = useState(null)
   const [rb, setrb] = useState(null)
   const [saveVariant, setSaveVariant] = useState('outlined');
+
   useEffect(() => {
     axios({
         method: "GET",
