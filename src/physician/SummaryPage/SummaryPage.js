@@ -78,12 +78,6 @@ const SummaryPage = (props) => {
         console.log(notes)
 
 
-
-
-
-
-
-
     }).catch((error) => {
         if (error.response){
         console.log(error.response)
