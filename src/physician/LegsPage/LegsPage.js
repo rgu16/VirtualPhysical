@@ -129,7 +129,7 @@ export const LegsPage = (props) => {
                       
                       <Text className="text-2xl md:text-[22px] text-black-900 sm:text-xl">{medNote}</Text>
                       </div>}
-                    <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="general"></PhysicianNotes>
+                    <PhysicianNotes notes={note} token={props.token} proxy={props.proxy} tab="legs"></PhysicianNotes>
                   </div>
                 </div>
             </div>
