@@ -144,7 +144,7 @@ const inputRefs = [
       return index;
     }
     return null;
-   }).filter(index => index !== undefined);
+   }).filter(index => index !== null);
    if (nextInput.length > 0) {
     const currentRef = inputRefs[nextInput[0]]
     currentRef.current.focus();
