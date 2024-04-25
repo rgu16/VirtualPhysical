@@ -143,6 +143,7 @@ const inputRefs = [
     if (item === null | item === ''){
       return index;
     }
+    return null;
    }).filter(index => index !== undefined);
    if (nextInput.length > 0) {
     const currentRef = inputRefs[nextInput[0]]

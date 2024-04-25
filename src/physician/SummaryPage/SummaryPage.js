@@ -7,9 +7,8 @@ import SummaryTab from "./SummaryTab";
 import { jwtDecode } from "jwt-decode";
 
 const SummaryPage = (props) => {
-  const patient = jwtDecode(props.token).patient.split("/");
   const tabs = ['Demographics', "General", "Eyes", "Lungs", "Pulses", "Abdomen", "Heart", "Hands", "Legs"]
-  const tabNames = ['demographic', "general", "eyes", "lungs", "pulses", "abdomen", "heart", "hands", "legs"]
+  
   const [data, setData] = useState(Array.from({ length: 9 }, () => ''));
   const [notes, setNotes] = useState(Array.from({ length: 9 }, () => ''))
   const [med_notes, setMedNotes] = useState(Array.from({ length: 9 }, () => ''))
@@ -25,6 +24,7 @@ const SummaryPage = (props) => {
   console.log("Summary page")
 
   useEffect(() => {
+    const tabNames = ['demographic', "general", "eyes", "lungs", "pulses", "abdomen", "heart", "hands", "legs"]
     console.log("HERE")
     axios({
         method: "GET",
@@ -75,7 +75,7 @@ const SummaryPage = (props) => {
         console.log(error.response.status)
         console.log(error.response.headers)}
     })
-  }, [props, tabNames]);
+  }, [props]);
 
 return (
   <>

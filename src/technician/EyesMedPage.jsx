@@ -82,13 +82,6 @@ const EyesMedPage = (props) => {
             Authorization: 'Bearer ' + props.token
         }
     }).then((response) => {
-      const res = response.data
-      console.log(res)
-   
-      console.log('Server response:', response);
-      console.log('Image uploaded:', imageUrl);
-     // Assuming the URL is nested within a 'data' property, modify this accordingly
-    const imageUrl = response.data && response.data.url;
      
     }).catch((error)=>{
         if(error.response){
@@ -198,7 +191,7 @@ const EyesMedPage = (props) => {
                           <FormLabel style={{ paddingBottom: '25px', paddingTop: '5px', fontSize: '17px', color: 'black' }} id="demo-row-radio-buttons-group-label">Symptoms may include: jaundice (liver disease), opisthotonos (dramatic abnormal posture) or poor feeding</FormLabel>
                           </div>
                           <div className="flex flex-col gap-[0px] ml-[50px] items-start justify-start w-[50%]" >
-                          <FormControl error = {value != '0'} >                       
+                          <FormControl error = {value !== '0'} >                       
                                     <RadioGroup
                                         row
                                         aria-labelledby="demo-row-radio-buttons-group-label"

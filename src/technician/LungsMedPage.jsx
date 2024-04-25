@@ -83,12 +83,6 @@ const LungsMedPage = (props) => {
     })
   }, [props]);
 
-  const handleSaveClick = () => {
-    setSaveVariant(saveVariant === 'outlined' ? 'contained' : 'outlined');
-  };
-
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
   const handleCheckboxCRTChange = () => {
     setIsCheckedCRT(!isCheckedCRT);
   };
@@ -175,7 +169,6 @@ const inputRefs = [
   useRef(null),
   // Add more refs for additional text fields as needed
 ];
- const [currentInputIndex, setCurrentInputIndex] = useState(0);
  const handleClick = () => {
   //  const nextInput = inputs.map((item, index)=> {
   //   if (item === null | item === ''){

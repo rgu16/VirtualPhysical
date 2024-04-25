@@ -145,14 +145,6 @@ const handleparasternalHeave = (event) => {
            Authorization: 'Bearer ' + props.token
        }
    }).then((response) => {
-     const res = response.data
-     console.log(res)
-  
-     console.log('Server response:', response);
-     console.log('Image uploaded:', imageUrl);
-    // Assuming the URL is nested within a 'data' property, modify this accordingly
-   const imageUrl = response.data && response.data.url;
-    
    }).catch((error)=>{
        if(error.response){
            console.log(error.response)
@@ -234,6 +226,7 @@ const handleClick = () => {
     if (item === null | item=== 'none'){
       return index;
     }
+    return null;
    }).filter(index => index !== undefined);
    console.log(nextInput)
    if (nextInput.length > 0) {

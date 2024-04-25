@@ -35,7 +35,7 @@ const gender = [
 const DemographicMedPage = (props) => {
   const [navigate, setNavigate] = useState();
   const patient = jwtDecode(props.token).patient.split("/");
-  const [name, setNameValue] = useState(patient[1]);
+  const name = patient[1];
   const [email, setEmail] = useState(patient[0]);
   const [genderValue, setGenderValue] = useState('');
   const [height, setHeightValue] = useState('');
@@ -49,7 +49,6 @@ const DemographicMedPage = (props) => {
   const [note, setNotes] = useState('');
   const inputs = [name, email, genderValue, height, heightinches, weight, DOB, history];
   const [complete, setComplete] = useState(false);
-  const [emailError, setEmailError] = useState('');
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -87,16 +86,6 @@ const DemographicMedPage = (props) => {
         console.log(error.response.headers)}
     })
   }, [props]);
-
-  const handleEmailChange = (e) => {
-    
-    setEmail(e.target.value);
-    if (!/^[a-zA-Z0-9._:$!%-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+$/.test(e.target.value)) {
-      setEmailError("Invalid email address");
-    } else {
-      setEmailError('');
-    }
-  }
 
   const handleGenderChange = (event) => {
     
@@ -234,6 +223,7 @@ const DemographicMedPage = (props) => {
       if (item === null | item === ''){
         return index;
       }
+      return null;
      }).filter(index => index !== undefined);
      if (nextInput.length > 0) {
       const currentRef = inputRefs[nextInput[0]]
@@ -263,10 +253,6 @@ const DemographicMedPage = (props) => {
             Authorization: 'Bearer ' + props.token
         }
     }).then((response) => {
-      const res = response.data
-    // Assuming the URL is nested within a 'data' property, modify this accordingly
-    const imageUrl = response.data && response.data.url;
-      
     }).catch((error)=>{
         if(error.response){
             console.log(error.response)

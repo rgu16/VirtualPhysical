@@ -1,7 +1,6 @@
 import React from "react";
 
-import { Button, Img, Line, List, Text, NavBar, TabNav } from "components";
-// import NavBar from "components/NavBar";
+import {Line,Text} from "components";
 
 const SummaryTab = (props) => {
 

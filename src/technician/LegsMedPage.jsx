@@ -1,22 +1,11 @@
 import React from "react";
-
-
-import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes, ToggleRadio } from "components";
-import { Link, Navigate } from 'react-router-dom';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
+import { Img, List, Text, NavBar, TabNav, MedTechNotes, ToggleRadio } from "components";
+import {  Navigate } from 'react-router-dom';
 import { useRef, useState, useEffect } from 'react';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import axios from 'axios';
 
 
 const LegsMedPage = (props) => {
- const [isHoveredOne, setIsHoveredOne] = useState(false);
- const [isHoveredTwo, setIsHoveredTwo] = useState(false);
  const [rightcalve, setRightCalfValue] = useState("none");
  const [leftcalve, setLeftCalfValue] = useState("none");
  const [note, setNotes] = useState();
@@ -56,17 +45,6 @@ const LegsMedPage = (props) => {
       }
   });
 }, [props]);
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
-
-  const handleCheckboxScaleChange = () => {
-    setIsCheckedScale(!isCheckedScale);
-  };
-
-  const handleCheckboxLegChange = () => {
-    setIsCheckedLeg(!isCheckedLeg);
-  };
 
 
  const handleRightCalfChange = (event) => {
@@ -103,13 +81,6 @@ const handleImageUpload = (e) => {
           Authorization: 'Bearer ' + props.token
       }
   }).then((response) => {
-    const res = response.data
-    console.log(res)
- 
-    console.log('Server response:', response);
-    console.log('Image uploaded:', imageUrl);
-   // Assuming the URL is nested within a 'data' property, modify this accordingly
-  const imageUrl = response.data && response.data.url;
    
   }).catch((error)=>{
       if(error.response){
@@ -162,7 +133,6 @@ const handleImageUpload = (e) => {
     }
   })
  };
-{/*test */}
 const [navigate, setNavigate] = useState();
 const [complete, setComplete] = useState(false);
 const [error, setError] = useState("");
@@ -176,6 +146,7 @@ const handleClick = () => {
     if (item === null | item === '' | item=== 'none'){
       return index;
     }
+    return null;
    }).filter(index => index !== undefined);
    console.log(nextInput)
    if (nextInput.length > 0) {

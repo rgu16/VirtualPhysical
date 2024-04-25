@@ -63,7 +63,7 @@ const PatientSearchPage = (props) => {
     const handleDateChange = (date) => {
       setNewUser({
         ...newUser,
-        ['date']: date.format('YYYY-MM-DD'),
+        date: date.format('YYYY-MM-DD'),
       });
     };
 

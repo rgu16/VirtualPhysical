@@ -1,7 +1,7 @@
 import React from "react";
 
-import { Img, Line, List, Text, NavBar, TabNav, MedTechNotes } from "components";
-import { Link, Navigate } from 'react-router-dom';
+import { Img, List, Text, NavBar, TabNav, MedTechNotes } from "components";
+import {Navigate } from 'react-router-dom';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -9,8 +9,6 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import { useRef, useState, useEffect } from 'react';
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Stack from '@mui/material/Stack';
 import axios from 'axios';
 import InputAdornment from '@mui/material/InputAdornment';
 
@@ -62,9 +60,6 @@ const HandsMedPage = (props) => {
     });
   }, [props]);
   const inputs = [cyanosis, pallor, capillaryrefill, pulseox];
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
   const handleCheckboxScaleChange = () => {
     setIsCheckedScale(!isCheckedScale);
   };
@@ -74,9 +69,6 @@ const HandsMedPage = (props) => {
   const handleCheckboxPulseOxChange = () => {
     setIsCheckedPulseOx(!isCheckedPulseOx);
   };
-  const handleNotes = (event) => {
-    setNotes(event.target.value);
-}
   
   const handleCyanosisChange = (event) => {
     setCyanosisValue(event.target.value)
@@ -210,6 +202,7 @@ const HandsMedPage = (props) => {
      if (item === null | item === '' | item=== 'none'){
        return index;
      }
+     return null;
     }).filter(index => index !== undefined);
     console.log(nextInput)
     if (nextInput.length > 0) {

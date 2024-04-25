@@ -1,7 +1,5 @@
 import React from "react";
 import "./style.css";
-import { useNavigate } from 'react-router-dom';
-
 import { List, Text, TabNav, NavBar } from "components";
 import { useState, useEffect } from 'react';
 import {  PhysicianNotes } from "components";
