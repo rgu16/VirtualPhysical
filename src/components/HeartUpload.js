@@ -97,7 +97,11 @@ export default function HeartUpload(props) {
   let popupbutton
   switch(props.letter) {
       case "A":
-        popupbutton = <Button aria-describedby={id} variant="contained" color="error" onClick={handleClick} style={{ padding: 1, minWidth: 25 }}> A
+        popupbutton = <Button aria-describedby={id} variant="contained" color="error" onClick={handleClick} 
+        style={{ 
+          backgroundColor: 'red',
+          color: 'white',  
+          padding: 1, minWidth: 25 }}> A
         </Button>
         break;
       case "M":
@@ -115,7 +119,8 @@ export default function HeartUpload(props) {
       aria-describedby={id} 
       variant="contained" 
       onClick={handleClick} 
-      style={{ padding: 1, minWidth: 25 }}> 
+      style={{  backgroundColor: 'blue',
+      color: 'white',  padding: 1, minWidth: 25 }}> 
     P
     </Button>
         break;
@@ -125,7 +130,8 @@ export default function HeartUpload(props) {
       variant="contained" 
       color="success"
       onClick={handleClick} 
-      style={{ padding: 1, minWidth: 25 }}> 
+      style={{  backgroundColor: 'green',
+      color: 'white',  padding: 1, minWidth: 25 }}> 
     T
     </Button>
           break;
