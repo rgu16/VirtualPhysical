@@ -26,7 +26,7 @@ export default function HeartUpload(props) {
 
  const fileInputRef = useRef(null);
  const fileInputRef2 = useRef(null);
- 
+
  const handleUploadClick = () => {
    fileInputRef.current.click();
  };
@@ -173,6 +173,8 @@ export default function HeartUpload(props) {
                       >
                       <Text className="font-semibold md:ml-[0] text-white-A700 text-xl">Upload audio</Text>
                   </button>
+                  <h2>(Headphones recommended)</h2>
+                            <br></br>
                           <Text
                               className="text-xl md:text-[22px] text-black-900 sm:text-xl mt-[10px]">
                              Stethoscope Recording - Diaphragm

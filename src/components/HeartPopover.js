@@ -82,6 +82,8 @@ export default function HeartUpload(props) {
                               size="txtCairoBold24">
                              {props.title}
                           </Text> 
+                          <h2>(Headphones recommended)</h2>
+                            <br></br>
                           <Text
                               className="text-xl md:text-[22px] text-black-900 sm:text-xl mt-[10px]">
                              Stethoscope Recording - Diaphragm
