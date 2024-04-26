@@ -108,9 +108,8 @@ export default function HeartUpload(props) {
                               className="text-xl md:text-[22px] text-black-900 sm:text-xl mt-[10px]">
                              Stethoscope Recording - Bell
                           </Text> 
-                  <audio controls>
+                  <audio controls ref={audioRef}>
                     {profilePic1 && <source src={profilePic1} type="audio/wav" />}
-                    
                   </audio>
                   <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-start w-full">
                           <Text
