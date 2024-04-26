@@ -55,14 +55,14 @@ const PulsesMedPage = (props) => {
       setBrachialValue(res.detail['brachial'])
       setCarotidValue(res.detail['carotid'])
       setPedisValue(res.detail['pedis'])
-      setSystolicValue(res.detail['systolic'])
-      checkSystolic(res.detail['systolic'])
-      setDiastolicValue(res.detail['diastolic'])
-      checkDiastolic(res.detail['diastolic'])
-      setJVPValue(res.detail['jvp'])
-      checkJVP(res.detail['jvp'])
-      setHeartRateValue(res.detail['heartrate'])
-      checkHR(res.detail['heartrate'])
+      setSystolicValue(parseInt(res.detail['systolic'],10))
+      checkSystolic(parseInt(res.detail['systolic'],10))
+      setDiastolicValue(parseInt(res.detail['diastolic'],10))
+      checkDiastolic(parseInt(res.detail['diastolic'],10))
+      setJVPValue(parseInt(res.detail['jvp'],10))
+      checkJVP(parseInt(res.detail['jvp'],10))
+      setHeartRateValue(parseInt(res.detail['heartrate'],10))
+      checkHR(parseInt(res.detail['heartrate'],10))
       setlt(res.carotidaudio)
   }).catch((error) => {
       if (error.response){
@@ -167,7 +167,6 @@ const handleCheckboxThrillsChange = () => {
    data['jvp'] = jvp;
    data['heartrate'] = heartrate;
 
-  //  console.log(data);
    axios({
     method:"POST",
     url: props.proxy + "/upload_json",
@@ -539,7 +538,7 @@ paddingTop: '50px',
                         <div className = "flex flex-row w-full">
                         <div className="flex flex-col w-[80%]">
                           <FormControl   
-                          error = {radial && radial !== "2"}
+                          error = {radial !== "2"}
                             className = "flex flex-col justify-start items-start w-full" 
                             >
                               <div className="flex flex-row gap-[13px] items-start justify-start w-full mt-[30px]" >
@@ -575,7 +574,7 @@ paddingTop: '50px',
                           </FormControl>
                           {/*ii. Brachial */}
                           <FormControl  
-                          error = {brachial && brachial !== '2'}
+                          error = {brachial !== '2'}
                           className = "flex flex-col justify-start items-start w-full" >
                               <div className="flex flex-row gap-[13px] items-start justify-start w-full mt-[30px]" >
                               <FormLabel style={{paddingBottom: '10px',color: 'black' , fontSize: '20px', fontWeight: 'bold'}} id="demo-row-radio-buttons-group-label">ii. Brachial</FormLabel>
@@ -610,7 +609,7 @@ paddingTop: '50px',
                           </FormControl>
                           {/*iii. Carotid */}
                           <FormControl 
-                          error = {carotid && carotid !== "2"}
+                          error = {carotid !== "2"}
                           className = "flex flex-col justify-start items-start w-full"  >
                               <div className="flex flex-row gap-[13px] items-start justify-start w-full mt-[30px]" >
                               <FormLabel style={{paddingBottom: '10px', color: 'black', fontSize: '20px', fontWeight: 'bold'}} id="demo-row-radio-buttons-group-label">iii. Carotid</FormLabel>
@@ -644,7 +643,7 @@ paddingTop: '50px',
                           </FormControl>
                           {/*iv. Right lumbar region */}
                           <FormControl   
-                          error = {pedis && pedis !== '2'}
+                          error = {pedis !== '2'}
                           className = "flex flex-col justify-start items-start w-full"  >
                             <div className="flex flex-row gap-[13px] items-start justify-start w-full mt-[30px]" >
                             <FormLabel style={{paddingBottom: '10px', color: 'black', fontSize: '20px', fontWeight: 'bold' }} id="demo-row-radio-buttons-group-label">iv. Dorsalis pedis pulse </FormLabel>
