@@ -73,7 +73,19 @@ export default function HeartUpload(props) {
     }
     const classname = props.position === "left top"? 'flex flex-col items-center p-2 justify-start text-center mt-[100px] ml-[115px] bg-white-A700 shadow-lg border-solid border-2 border-black':
     'flex flex-col items-center p-2 justify-start text-center mt-[100px] bg-white-A700 ml-[175px] shadow-lg border-solid border-2 border-black';
-  return (
+  
+    const audioRef = useRef(null);
+
+    useEffect(() => {
+      if (audioRef.current) {
+        audioRef.current.volume = 1.5;
+      }
+    }, []);
+  
+  
+  
+  
+    return (
     <div>
     <Popup trigger={popupbutton} >
       <div className={classname}>
@@ -88,9 +100,8 @@ export default function HeartUpload(props) {
                               className="text-xl md:text-[22px] text-black-900 sm:text-xl mt-[10px]">
                              Stethoscope Recording - Diaphragm
                           </Text> 
-                  <audio controls>
+                  <audio controls ref={audioRef}>
                     {profilePic && <source src={profilePic} type="audio/wav" />}
-                    
                   </audio>
                 
                           <Text
