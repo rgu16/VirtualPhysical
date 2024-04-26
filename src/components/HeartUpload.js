@@ -147,14 +147,10 @@ export default function HeartUpload(props) {
     'flex flex-col items-center p-2 justify-start text-center mt-[100px] bg-white-A700 ml-[175px] shadow-lg border-solid border-2 border-black';
   
     const audioRef = useRef(null);
-
-    useEffect(() => {
-      if (audioRef.current) {
-        audioRef.current.volume = 1.5;
-      }
-    }, []);
-  
-  
+   
+    const handleUploadClick = () => {
+      audioRef.current.volume = 1.5;
+    };
   
   
   
@@ -211,9 +207,8 @@ export default function HeartUpload(props) {
                               className="text-xl md:text-[22px] text-black-900 sm:text-xl mt-[10px]">
                              Stethoscope Recording - Bell
                           </Text> 
-                  <audio controls>
+                  <audio controls ref={audioRef}>
                     {profilePic1 && <source src={profilePic1} type="audio/wav" />}
-                    
                   </audio>
                 </div>
   </Popup>
