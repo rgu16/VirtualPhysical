@@ -5,8 +5,11 @@ const SummaryTab = (props) => {
 
   // Function to split the string into parts before and after asterisk(s)
     const splitString = (value) => {
+
         // Split the string by asterisks
+        // Input string value is split into an array of substrings using the asterisk (*) as the separator. The resulting array is stored in the parts variable.
         const parts = value.split('*');
+        console.log(parts)
 
         // Initialize an array to hold the elements
         const elements = [];
