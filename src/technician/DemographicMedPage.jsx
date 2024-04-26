@@ -75,7 +75,7 @@ const DemographicMedPage = (props) => {
         setWeightValue(res.detail['weight'])
         checkWeight(parseInt(res.detail['weight'],10))
         setDOBValue(dayjs(res.detail['DOB'], "MM/DD/YYYY"))
-        checkDOBValue(dayjs(res.detail['DOB'], "MM/DD/YYYY"))
+        checkDOB(dayjs(res.detail['DOB'], "MM/DD/YYYY"))
         setHistoryValue(res.detail['history'])
       
         if(res.hasOwnProperty("profile_pic")){
