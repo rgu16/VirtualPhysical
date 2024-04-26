@@ -50,9 +50,12 @@ const DemographicMedPage = (props) => {
   const inputs = [name, email, genderValue, height, heightinches, weight, DOB, history];
   const [complete, setComplete] = useState(false);
   const [error, setError] = useState("");
+  const [feetError, setFeetError] = useState('');
+  const [inchesError, setInchesError] = useState('');
+  const [dobError, setdobError] = useState('');
+  const [weightError, setWeightError] = useState('');
 
   useEffect(() => {
-    // console.log(jwtDecode(props.token).patient.split("/"))
     axios({
         method: "GET",
         url: props.proxy + "/download/demographic",
@@ -66,17 +69,19 @@ const DemographicMedPage = (props) => {
 
         setGenderValue(res.detail['gender'])
         setHeightValue(res.detail['height'])
+        checkHeight(parseInt(res.detail['height'],10))
         setHeightInchesValue(res.detail['heightInches'])
+        checkInches(parseInt(res.detail['heightInches'],10))
         setWeightValue(res.detail['weight'])
-        // console.log(dayjs(res.detail['DOB'], "MM/DD/YYYY"))
+        checkWeight(parseInt(res.detail['weight'],10))
         setDOBValue(dayjs(res.detail['DOB'], "MM/DD/YYYY"))
+        checkDOBValue(dayjs(res.detail['DOB'], "MM/DD/YYYY"))
         setHistoryValue(res.detail['history'])
       
         if(res.hasOwnProperty("profile_pic")){
           setProfilePic(res.profile_pic)
         }
         if (res.hasOwnProperty("med_note")){
-          // console.log(res.med_note)
           setNotes(res.med_note)
         }
     }).catch((error) => {
@@ -88,15 +93,10 @@ const DemographicMedPage = (props) => {
   }, [props]);
 
   const handleGenderChange = (event) => {
-    
     setGenderValue(event.target.value)
   }
 
-  const [feetError, setFeetError] = useState('');
-  const handleHeightChange = (e) => {
-    
-    const value = e.target.value.replace(/[^0-9]/g, '')
-    setHeightValue(value);
+  const checkHeight = (value) => {
     if (value===''){
       setFeetError('')
     } else if (value>8 | value <1) {
@@ -105,25 +105,28 @@ const DemographicMedPage = (props) => {
       setFeetError('');
     }
   }
+  const handleHeightChange = (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, '')
+    setHeightValue(value);
+    checkHeight(value)
+  }
 
-  const [inchesError, setInchesError] = useState('');
-  const handleHeightInchesChange = (e) => {
-    
-    setHeightInchesValue(e.target.value.replace(/[^0-9]/g, ''));
-    if (e.target.value===''){
+  const checkInches = (value) => {
+    if (value===''){
       setInchesError('')
-    } else if (e.target.value>12 | e.target.value <0) {
+    } else if (value>12 | value <0) {
       setInchesError("Invalid height");
     } else {
       setInchesError('');
     }
   }
-
-  const [weightError, setWeightError] = useState('');
-  const handleWeightChange = (e) => {
-    
+  const handleHeightInchesChange = (e) => {
     const value = e.target.value.replace(/[^0-9]/g, '')
-    setWeightValue(value);
+    setHeightInchesValue(value);
+    checkInches(value)
+  }
+
+  const checkWeight = (value) => {
     if (value===''){
       setWeightError('');
     } else if (value > 500 | value <2){
@@ -132,25 +135,30 @@ const DemographicMedPage = (props) => {
       setWeightError('');
     }
   }
+  const handleWeightChange = (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, '')
+    setWeightValue(value);
+    checkWeight(value)
+  }
 
-  const [dobError, setdobError] = useState('');
-  const handleDOBChange = (date) => {
-    
+  const checkDOB = (date) => {
     const currentDate = dayjs();
     const selectedDate = date;
-    // console.log(selectedDate.isBefore(currentDate.add(1, 'year')))
     const isWithin100Years = selectedDate.isAfter(currentDate.subtract(100, 'year')) && 
                              selectedDate.isBefore(currentDate.add(1, 'year'));
-    setDOBValue(date)
+    
     if (isWithin100Years) {
       setdobError('');
     } else {
       setdobError('Invalid age');
     }
   }
+  const handleDOBChange = (date) => {
+    setDOBValue(date)
+    checkDOB(date)
+  }
 
   const handleHistoryChange = (event) => {
-    
     setHistoryValue(event.target.value)
   }
   
@@ -176,7 +184,6 @@ const DemographicMedPage = (props) => {
         data['weight'] = weight;
         data['DOB'] = DOB.format("MM/DD/YYYY");
         data['history'] = history;
-        // console.log(data);
         axios({
           method:"POST",
           url: props.proxy + "/upload_json",
@@ -269,15 +276,12 @@ const DemographicMedPage = (props) => {
     <NavBar proxy={props.proxy} token={props.token}/>
       <div
         className="bg-cover bg-no-repeat bg-gray-50 flex flex-col font-dmsans items-center justify-start mx-auto pb-28 w-full"
-        style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}
-      >
+        style={{ backgroundImage: "url('images/img_demographicstab.svg')" }}>
         <div className="flex flex-col md:gap-10 gap-[50px] items-center justify-start w-full">
          <div></div>
           <div className="flex flex-col items-start justify-start max-w-[1700px] mx-auto md:px-5 w-full">
             <TabNav tab="demographic"></TabNav>
-            <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full"style={{
-    paddingTop: '50px',
-  }} >
+            <div className="bg-white-A700 flex flex-col font-cairo items-center justify-start p-10 sm:px-5 w-full"style={{paddingTop: '50px',}} >
               <div className="flex flex-col  justify-start w-[99%] md:w-full">
                 <div className="flex md:flex-col flex-row md:gap-10 items-start justify-start w-full">
                   <div className="md:h-[560px]  relative w-[50%] md:w-full">
@@ -307,10 +311,9 @@ const DemographicMedPage = (props) => {
                             <Text className="text-xl w-[63%] md:text-[22px] text-black-900 sm:text-xl">{email}</Text>                   
                           </div>
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-between w-full">
-                             <Text
+                            <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                              size="txtCairoBold24" 
-                            >
+                              size="txtCairoBold24" >
                               Gender:
                             </Text>
                             <TextField
@@ -321,12 +324,10 @@ const DemographicMedPage = (props) => {
                               id="outlined-select-currency-native"
                               select
                               label=""
-                              // defaultValue="no selection"
                               SelectProps={{
                                 native: true,
                               }}
-                              helperText=""
-                            >
+                              helperText="">
                               {gender.map((option) => (
                                 <option key={option.value} value={option.value}>
                                   {option.label}
@@ -365,11 +366,11 @@ const DemographicMedPage = (props) => {
                               onChange={handleHeightInchesChange}/>
                           </div>
                           <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-between w-full">
-                             <Text
-                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                               size="txtCairoBold24">
-                               Weight:
-                             </Text>
+                            <Text
+                              className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
+                              size="txtCairoBold24">
+                              Weight:
+                            </Text>
                             <TextField
                               className = "w-[63%]"
                               id="outlined-start-adornment"
@@ -385,11 +386,9 @@ const DemographicMedPage = (props) => {
                            <div className="flex flex-row gap-[13px] ml-[50px] items-center justify-between w-full">
                             <Text
                               className="text-2xl md:text-[22px] text-black-900 sm:text-xl"
-                              size="txtCairoBold24"
-                            >
+                              size="txtCairoBold24">
                               Birthday:{" "}
                             </Text>
-                            
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                               <DemoContainer  components={['DatePicker']}>
                                 <DatePicker inputRef={inputRefs[6]} value={DOB} error={dobError !== ''} label={dobError} onChange={handleDOBChange} />

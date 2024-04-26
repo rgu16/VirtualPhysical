@@ -29,6 +29,8 @@ const HandsMedPage = (props) => {
   const [navigate, setNavigate] = useState();
   const [complete, setComplete] = useState(false);
   const [error, setError] = useState("");
+  const [crtError, setCRTError] = useState('')
+  const [poError, setPoError] = useState('')
   useEffect(() => {
     axios({
         method: "GET",
@@ -43,7 +45,9 @@ const HandsMedPage = (props) => {
         setCyanosisValue(res.detail["cyanosis"]);
         setPallorValue(res.detail["pallor"]);
         setCRTValue(res.detail["capillaryrefill"]);
+        checkCRT(parseInt(res.detail["capillaryrefill"], 10))
         setPulseOxValue(res.detail["pulseox"]);
+        checkPO(parseInt(res.detail["pulseox"], 10))
         setProfilePic(res.Image)
         if(res.hasOwnProperty("med_note")){
             setNotes(res.med_note);
@@ -76,10 +80,7 @@ const HandsMedPage = (props) => {
   const handlePallorChange = (event) => {
     setPallorValue(event.target.value)
   }
-  const [crtError, setCRTError] = useState('')
-  const handleCRTChange = (e) => {
-    const value = e.target.value.replace(/[^0-9]/g, '')
-    setCRTValue(value);
+  const checkCRT = value =>{
     if (value === ''){
       setCRTError('');
     }
@@ -91,11 +92,14 @@ const HandsMedPage = (props) => {
       setCRTError('');
     }
   }
-
-  const [poError, setPoError] = useState('')
-  const handlePulseOxChange = (e) => {
+  const handleCRTChange = (e) => {
     const value = e.target.value.replace(/[^0-9]/g, '')
-    setPulseOxValue(value);
+    setCRTValue(value);
+    checkCRT(value)
+
+  }
+
+  const checkPO = (value) =>{
     if (value === ''){
       setPoError('');
     }
@@ -108,6 +112,11 @@ const HandsMedPage = (props) => {
     }else{
       setPoError('');
     }
+  }
+  const handlePulseOxChange = (e) => {
+    const value = e.target.value.replace(/[^0-9]/g, '')
+    setPulseOxValue(value);
+    checkPO(value)
   }
 
   const handleUploadClick = () => {

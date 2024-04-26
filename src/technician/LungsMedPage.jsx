@@ -71,6 +71,7 @@ const LungsMedPage = (props) => {
         setrb(res.bottomrightaudio)
         const breathingValue = parseInt(res.detail['breathingrate'], 10);
         setBreathingRateValue( breathingValue )
+        checkBR(breathingValue)
 
         const LaboredBreathing = res.detail['breathinglabor']
         setBreathingLaborValue(LaboredBreathing)
@@ -93,27 +94,29 @@ const LungsMedPage = (props) => {
   };
 
 
-
+const checkBR = (value) =>{
+  const numericValue = parseInt(value, 10);
+  
+  // Determine the breathing status based on the specified criteria
+  let status = '';
+  if (numericValue >= 12 && numericValue <= 18) {
+    status = '';
+  } else if (numericValue < 12 ) {
+    status = 'Abnormal low';
+  } else if (numericValue > 25) {
+    status = "Abnormal high"
+  } else {
+   status = ''
+  }
+ 
+  setBreathingStatus(status);
+}
 
 const handleBreathingRateChange = (e) => {
 
  const value = e.target.value.replace(/[^0-9]/g, '')
  setBreathingRateValue(value)
- const numericValue = parseInt(value, 10);
-  
- // Determine the breathing status based on the specified criteria
- let status = '';
- if (numericValue >= 12 && numericValue <= 18) {
-   status = '';
- } else if (numericValue < 12 ) {
-   status = 'Abnormal low';
- } else if (numericValue > 25) {
-   status = "Abnormal high"
- } else {
-  status = ''
- }
-
- setBreathingStatus(status);
+ checkBR(value)
 }
 const handleBreathingLaborChange = (event) => {
  setBreathingLaborValue(event.target.value)
