@@ -21,6 +21,10 @@ export default function CarotidUpload(props) {
    fileInputRef.current.click();
  };
 
+ useEffect(() => {
+  setProfilePic(props.audio);
+}, [props.audio]);
+
 
 
  const handleAudioUpload = (e) => {
