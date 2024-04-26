@@ -544,7 +544,7 @@ paddingTop: '50px',
                         <div className = "flex flex-row w-full">
                         <div className="flex flex-col w-[80%]">
                           <FormControl   
-                          error = {radialError}
+                          error = {radial && radial !== "2"}
                             className = "flex flex-col justify-start items-start w-full" 
                             >
                               <div className="flex flex-row gap-[13px] items-start justify-start w-full mt-[30px]" >
@@ -580,7 +580,7 @@ paddingTop: '50px',
                           </FormControl>
                           {/*ii. Brachial */}
                           <FormControl  
-                          error = {brachialError}
+                          error = {brachial && brachial !== '2'}
                           className = "flex flex-col justify-start items-start w-full" >
                               <div className="flex flex-row gap-[13px] items-start justify-start w-full mt-[30px]" >
                               <FormLabel style={{paddingBottom: '10px',color: 'black' , fontSize: '20px', fontWeight: 'bold'}} id="demo-row-radio-buttons-group-label">ii. Brachial</FormLabel>
@@ -615,7 +615,7 @@ paddingTop: '50px',
                           </FormControl>
                           {/*iii. Carotid */}
                           <FormControl 
-                          error = {carotidError}
+                          error = {carotid && carotid !== "2"}
                           className = "flex flex-col justify-start items-start w-full"  >
                               <div className="flex flex-row gap-[13px] items-start justify-start w-full mt-[30px]" >
                               <FormLabel style={{paddingBottom: '10px', color: 'black', fontSize: '20px', fontWeight: 'bold'}} id="demo-row-radio-buttons-group-label">iii. Carotid</FormLabel>
@@ -649,7 +649,7 @@ paddingTop: '50px',
                           </FormControl>
                           {/*iv. Right lumbar region */}
                           <FormControl   
-                          error = {pedisError}
+                          error = {pedis && pedis !== '2'}
                           className = "flex flex-col justify-start items-start w-full"  >
                             <div className="flex flex-row gap-[13px] items-start justify-start w-full mt-[30px]" >
                             <FormLabel style={{paddingBottom: '10px', color: 'black', fontSize: '20px', fontWeight: 'bold' }} id="demo-row-radio-buttons-group-label">iv. Dorsalis pedis pulse </FormLabel>
