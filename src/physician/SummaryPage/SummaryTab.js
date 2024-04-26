@@ -4,15 +4,37 @@ import { Line, Text } from "components";
 const SummaryTab = (props) => {
 
   // Function to split the string into parts before and after asterisk(s)
-  const splitString = (value) => {
-    const parts = value.split('*');
-    return parts.map((part, index) => (
-        <span key={index} className={index % 2 === 0 ? 'black-text' : 'red-text'}>
-            {part}
-            {index < parts.length - 1 && <span className="red-text">*</span>}
-        </span>
-    )); 
+//   const splitString = (value) => {
+//     const parts = value.split('*');
+//     return parts.map((part, index) => (
+//         <span key={index} className={index % 2 === 0 ? 'black-text' : 'red-text'}>
+//             {part}
+//             {index < parts.length - 1 && <span className="red-text">*</span>}
+//         </span>
+//     )); 
+//     };
+    const splitString = (value) => {
+        // Split the string by asterisks
+        const parts = value.split('*');
+
+        // Initialize an array to hold the JSX elements
+        const elements = [];
+
+        // Iterate over the parts array
+        parts.forEach((part, index) => {
+            // Push the part onto the array
+            elements.push(<span key={index * 2} className="black-text">{part}</span>);
+
+            // If this isn't the last part, add a red asterisk
+            if (index < parts.length - 1) {
+                elements.push(<span key={index * 2 + 1} className="red-text">*</span>);
+            }
+        });
+
+        // Return the array of JSX elements
+        return elements;
     };
+
 
   return (
     <>
