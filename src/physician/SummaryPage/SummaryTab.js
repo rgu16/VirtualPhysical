@@ -6,6 +6,8 @@ const SummaryTab = (props) => {
   // Function to split the string into parts before and after asterisk(s)
     const splitString = (value) => {
 
+        console.log("TESTING ASTERISK *")
+
         // Split the string by asterisks
         // Input string value is split into an array of substrings using the asterisk (*) as the separator. The resulting array is stored in the parts variable.
         const parts = value.split('*');
@@ -43,22 +45,26 @@ const SummaryTab = (props) => {
           <Line className="bg-black-900 h-px mt-1 w-full mr-6" />
         </div>
         <Text className="text-black-900 text-lg" size="txtCairoRegular18">
+
           <span className="text-black-900 font-cairo text-left font-normal">
             {typeof props.data === "string"
               ? splitString(props.data)
               : props.data}
             <br />
           </span>
+
           {props.med_notes && (
             <span className="text-black-900 font-cairo text-left font-bold">
               Med Tech Notes: {props.med_notes} <br />
             </span>
           )}
+
           {props.notes && (
             <span className="text-black-900 font-cairo text-left font-bold">
               Notes: {props.notes}
             </span>
           )}
+
         </Text>
       </div>
     </>
