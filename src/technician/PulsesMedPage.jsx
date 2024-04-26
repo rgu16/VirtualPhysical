@@ -29,6 +29,15 @@ const PulsesMedPage = (props) => {
  const [isCheckedDiastolic, setCheckedDiastolic] = useState(false);
  const inputs = [systolic, diastolic, heartrate, jvp, radial, brachial, carotid, pedis];
  const [lt, setlt] = useState(null);
+ const [sysError, setSysError] = useState('');
+ const [diaError, setDiaError] = useState('');
+ const [hrError, setHRError] = useState('');
+ const [jvpError, setJVPError] = useState('');
+ const [navigate, setNavigate] = useState();
+ const [complete, setComplete] = useState(false);
+ const [error, setError] = useState("");
+ const [note, setNotes] = useState("");
+
  useEffect(() => {
   axios({
       method: "GET",
@@ -39,9 +48,7 @@ const PulsesMedPage = (props) => {
   })
   .then((response) => {
       const res = response.data
-      console.log(res)
       if (res.hasOwnProperty("med_note")){
-        // console.log(res.med_note)
         setNotes(res.med_note)
       }
       setRadialValue(res.detail['radial'])
@@ -49,9 +56,13 @@ const PulsesMedPage = (props) => {
       setCarotidValue(res.detail['carotid'])
       setPedisValue(res.detail['pedis'])
       setSystolicValue(res.detail['systolic'])
+      checkSystolic(res.detail['systolic'])
       setDiastolicValue(res.detail['diastolic'])
+      checkDiastolic(res.detail['diastolic'])
       setJVPValue(res.detail['jvp'])
+      checkJVP(res.detail['jvp'])
       setHeartRateValue(res.detail['heartrate'])
+      checkHR(res.detail['heartrate'])
       setlt(res.carotidaudio)
   }).catch((error) => {
       if (error.response){
@@ -60,32 +71,8 @@ const PulsesMedPage = (props) => {
       console.log(error.response.headers)}
   })
 }, [props]);
- const [radialError, setRadialError] = useState(false)
- const handleRadialChange = (e) => {
-   setRadialValue(e.target.value)
-   console.log(e.target.value)
-   setRadialError(!(e.target.value === '2'))
- }
- const [brachialError, setBrachialError] = useState(false)
- const handleBrachialChange = (e) => {
-   setBrachialValue(e.target.value)
-   setBrachialError(!(e.target.value === '2'))
- }
- const [carotidError, setCarotidError] = useState(false)
- const handleCarotidChange = (e) => {
-   setCarotidValue(e.target.value)
-   setCarotidError(!(e.target.value === '2'))
- }
- const [pedisError, setPedisError] = useState(false)
- const handlePedisChange = (e) => {
-   setPedisValue(e.target.value)
-   setPedisError(!(e.target.value === '2'))
- }
 
-const [sysError, setSysError] = useState('');
- const handleSystolicChange = (e) => {
-  const value = e.target.value.replace(/[^0-9]/g, '')
-  setSystolicValue(value);
+const checkSystolic = (value) => {
   if (value === ''){
     setSysError('');
   }
@@ -96,12 +83,14 @@ const [sysError, setSysError] = useState('');
   } else {
     setSysError('');
   }
+ }
+ const handleSystolicChange = (e) => {
+  const value = e.target.value.replace(/[^0-9]/g, '')
+  setSystolicValue(value);
+  checkSystolic(value)
 }
 
-const [diaError, setDiaError] = useState('');
-const handleDiastolicChange = (e) => {
-  const value = e.target.value.replace(/[^0-9]/g, '')
-  setDiastolicValue(value);
+const checkDiastolic = (value) =>{
   if (value === ''){
     setDiaError('');
   }
@@ -113,11 +102,13 @@ const handleDiastolicChange = (e) => {
     setDiaError('');
   }
 }
-
-const [jvpError, setJVPError] = useState('');
-const handleJVPChange = (e) => {
+const handleDiastolicChange = (e) => {
   const value = e.target.value.replace(/[^0-9]/g, '')
-  setJVPValue(value);
+  setDiastolicValue(value);
+  checkDiastolic(value);
+}
+
+const checkJVP = (value) => {
   if (value === ''){
     setJVPError('');
   }
@@ -129,11 +120,13 @@ const handleJVPChange = (e) => {
     setJVPError('');
   }
 }
-
-const [hrError, setHRError] = useState('');
-const handleHeartRateChange = (e) => {
+const handleJVPChange = (e) => {
   const value = e.target.value.replace(/[^0-9]/g, '')
-  setHeartRateValue(value);
+  setJVPValue(value);
+  checkJVP(value);
+}
+
+const checkHR = (value) => {
   if (value === ''){
     setHRError('');
   }
@@ -145,6 +138,11 @@ const handleHeartRateChange = (e) => {
     setHRError('');
   }
 }
+const handleHeartRateChange = (e) => {
+  const value = e.target.value.replace(/[^0-9]/g, '')
+  setHeartRateValue(value);
+  checkHR(value);
+}
 
 const handleCheckboxCRTChange = () => {
   setIsCheckedCRT(!isCheckedCRT);
@@ -155,10 +153,7 @@ const handleCheckboxPulseOxChange = () => {
 const handleCheckboxThrillsChange = () => {
   setIsCheckedThrills(!isCheckedThrills);
 };
-const [navigate, setNavigate] = useState();
-const [complete, setComplete] = useState(false);
-const [error, setError] = useState("");
-const [note, setNotes] = useState("");
+
 
  const handleSave = (e) => {
    e.preventDefault();
@@ -563,7 +558,7 @@ paddingTop: '50px',
                             </div>
                               </div>
                           <RadioGroup value = {radial}
-                            onChange={handleRadialChange}
+                            onChange={(e) => setRadialValue(e.target.value)}
                             className = "flex flex-row justify-between w-full" >
                           <div className = {isCheckedPulse?"flex flex-row justify-between w-full":"flex flex-row justify-start"}>
                           {isCheckedPulse? <div></div> :
@@ -599,7 +594,7 @@ paddingTop: '50px',
                               </div>
 
                               <RadioGroup className = "flex flex-row justify-between w-full" value = {brachial}
-                            onChange={handleBrachialChange} >
+                            onChange={(e) => setBrachialValue(e.target.value)} >
                           <div className = {isCheckedPulse?"flex flex-row justify-between w-full":"flex flex-row justify-start"}>
                           {isCheckedPulse? <div></div> :
                           <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>}
@@ -633,7 +628,7 @@ paddingTop: '50px',
                               </div>
                                 </div>
                                 <RadioGroup className = "flex flex-row justify-between w-full" value = {carotid}
-                            onChange={handleCarotidChange}>
+                            onChange={(e) => setCarotidValue(e.target.value)}>
                           <div className = {isCheckedPulse?"flex flex-row justify-between w-full":"flex flex-row justify-start"}>
                           {isCheckedPulse? <div></div> :
                           <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>}
@@ -667,7 +662,7 @@ paddingTop: '50px',
                               </div>
                                 </div>
                           <RadioGroup className = "flex flex-row justify-between w-full" value = {pedis}
-                          onChange={handlePedisChange}>
+                          onChange={(e) => setPedisValue(e.target.value)}>
                           <div className = {isCheckedPulse?"flex flex-row justify-between w-full":"flex flex-row justify-start"}>
                           {isCheckedPulse? <div></div> :
                           <FormLabel style={{paddingTop: '10px' , fontSize: '20px'}} id="demo-row-radio-buttons-group-label">None</FormLabel>}
