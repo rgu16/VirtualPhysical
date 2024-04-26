@@ -46,13 +46,8 @@ export const PulsesPage = (props) => {
           const DiastolicPulseValue = parseInt(res.detail['diastolic'], 10);
           setDiastolicPulseValue(DiastolicPulseValue)
           setStatuslb(res.statuslt['status'])
-
-          const heartRateValue = parseInt(res.detail['heartrate'], 10);
-          setheartRateValue(heartRateValue)
-
-
-          const JugularValue = res.detail['jvp']
-          setJugularValue(JugularValue)
+          setheartRateValue(parseInt(res.detail['heartrate'], 10))
+          setJugularValue(res.detail['jvp'])
           setlt(res.carotidaudio)
     
           if(res.hasOwnProperty("note")){
