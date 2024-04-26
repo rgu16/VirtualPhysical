@@ -13,6 +13,7 @@ const SummaryTab = (props) => {
 //         </span>
 //     )); 
 //     };
+
     const splitString = (value) => {
         // Split the string by asterisks
         const parts = value.split('*');
