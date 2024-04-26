@@ -3,6 +3,8 @@ import { Line, Text } from "components";
 
 const SummaryTab = (props) => {
 
+    console.log("TESTING ASTERISK *1")
+
   // Function to split the string into parts before and after asterisk(s)
     const splitString = (value) => {
 
